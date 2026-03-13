@@ -3,415 +3,816 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carer Liaison — AI-Powered Support for Carers & NDIS Participants</title>
-  <meta name="description" content="Carer Liaison is an AI-powered personal operating system that helps carers and NDIS participants track health, adapt daily plans, and capture ideas — so the person you care for is fully seen by the world.">
+  <title>Carer Liaison — The world is about to receive them clearly</title>
+  <meta name="description" content="AI-powered personal operating system for carers. Monitors health, adapts daily plans, captures ideas — so the person you care for is fully seen by the world.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
   <style>
     :root {
       --teal: #008080;
-      --teal-dark: #006B6B;
-      --teal-light: #00A3A3;
-      --teal-bg: #F0F9F9;
-      --teal-10: rgba(0,128,128,0.1);
-      --white: #FFFFFF;
-      --bg: #FAFAFA;
-      --text: #1E293B;
-      --text-secondary: #64748B;
-      --text-light: #64748B;
-      --border: #E2E8F0;
-      --border-light: #F1F5F9;
-      --green: #10B981;
-      --green-bg: #ECFDF5;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
-      --shadow-lg: 0 10px 25px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
-      --radius: 12px;
-      --radius-sm: 8px;
+      --teal-dark: #006666;
+      --teal-light: #00a0a0;
+      --teal-pale: #e6f5f5;
+      --teal-mist: #f0fafa;
+      --offwhite: #F6F5EF;
+      --warm-gray: #4a4a48;
+      --dark: #1a1a1a;
+      --mid-gray: #6b6b68;
+      --light-border: #e0dfda;
+      --coral: #e07a5f;
+      --amber: #d4a853;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: var(--text);
-      background: var(--white);
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      color: var(--warm-gray);
+      background: var(--offwhite);
       line-height: 1.7;
+      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* NAV */
+    /* ── NAV ── */
     nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(246, 245, 239, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--light-border);
+      transition: box-shadow 0.3s ease;
     }
+    nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.06); }
     .nav-inner {
-      max-width: 1120px; margin: 0 auto; padding: 0.85rem 1.5rem;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .logo {
-      font-weight: 700; font-size: 1.2rem; color: var(--teal);
-      text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
-    }
-    .logo-icon {
-      width: 32px; height: 32px; background: var(--teal); border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .nav-links { display: flex; gap: 1.75rem; align-items: center; }
-    .nav-links a {
-      text-decoration: none; color: var(--text-secondary); font-size: 0.88rem;
-      font-weight: 500; transition: color 0.15s;
-    }
-    .nav-links a:hover { color: var(--teal); }
-    .btn {
-      display: inline-flex; align-items: center; gap: 0.4rem; font-family: inherit;
-      font-weight: 600; font-size: 0.88rem; border-radius: var(--radius-sm);
-      padding: 0.6rem 1.25rem; cursor: pointer; text-decoration: none;
-      transition: all 0.2s; border: none;
-    }
-    .btn-primary { background: var(--teal); color: white; }
-    .btn-primary:hover { background: var(--teal-dark); box-shadow: 0 4px 12px rgba(0,128,128,0.25); }
-    .btn-outline { background: transparent; color: var(--teal); border: 1.5px solid var(--teal); }
-    .btn-outline:hover { background: var(--teal-bg); }
-    .btn-lg { padding: 0.85rem 1.75rem; font-size: 0.95rem; border-radius: var(--radius); }
-    .btn-white { background: white; color: var(--teal); font-weight: 700; }
-    .btn-white:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.15); transform: translateY(-1px); }
-    .btn-nav-cta { background: white; color: var(--teal-dark); border: 1.5px solid var(--teal); font-weight: 700; }
-    .btn-nav-cta:hover { background: var(--teal-bg); box-shadow: 0 2px 10px rgba(0,128,128,0.15); }
-
-    /* Skip link */
-    .skip-link {
-      position: absolute; top: -100%; left: 1rem; z-index: 200;
-      background: var(--teal); color: white; padding: 0.5rem 1rem;
-      border-radius: 4px; font-size: 0.88rem; font-weight: 600;
-      text-decoration: none; transition: top 0.15s;
-    }
-    .skip-link:focus { top: 1rem; }
-
-    /* Focus styles */
-    :focus-visible {
-      outline: 2px solid var(--teal);
-      outline-offset: 3px;
-      border-radius: 4px;
-    }
-
-    /* SECTIONS */
-    .container { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
-    section { padding: 5rem 0; }
-    .section-label {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--teal-dark); background: var(--teal-bg);
-      padding: 0.35rem 0.85rem; border-radius: 100px; margin-bottom: 1rem;
-    }
-    .section-title {
-      font-size: clamp(1.6rem, 3vw, 2.25rem); font-weight: 800; color: var(--text);
-      line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 0.75rem;
-    }
-    .section-desc {
-      font-size: 1.05rem; color: var(--text-secondary); max-width: 600px; line-height: 1.7;
-    }
-    .section-header { text-align: center; margin-bottom: 3rem; }
-    .section-header .section-desc { margin: 0 auto; }
-
-    /* HERO */
-    .hero { padding: 5rem 0 4rem; background: var(--white); }
-    .hero-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center;
-    }
-    .hero h1 {
-      font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 800; line-height: 1.2;
-      letter-spacing: -0.025em; color: var(--text); margin-bottom: 1.25rem;
-    }
-    .hero h1 span { color: var(--teal); }
-    .hero-desc {
-      font-size: 1.1rem; color: var(--text-secondary); line-height: 1.75;
-      margin-bottom: 2rem; max-width: 500px;
-    }
-    .hero-actions { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .trust-row { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
-    .trust-item {
-      display: flex; align-items: center; gap: 0.35rem;
-      font-size: 0.82rem; color: var(--text-secondary);
-    }
-    .trust-item svg { color: var(--green); flex-shrink: 0; }
-
-    /* Hero card */
-    .hero-card {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: 16px; box-shadow: var(--shadow-lg); overflow: hidden;
-    }
-    .hero-card-top {
-      background: var(--teal); padding: 1.25rem 1.5rem;
-      display: flex; align-items: center; gap: 0.75rem;
-    }
-    .hero-card-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.3); }
-    .hero-card-dot.active { background: var(--green); }
-    .hero-card-title { color: white; font-weight: 600; font-size: 0.92rem; margin-left: 0.25rem; }
-    .hero-card-body { padding: 1.25rem 1.5rem; }
-    .brief-item {
-      display: flex; gap: 0.75rem; padding: 0.85rem 0;
-      border-bottom: 1px solid var(--border-light); align-items: flex-start;
-    }
-    .brief-item:last-child { border-bottom: none; }
-    .brief-icon {
-      width: 36px; height: 36px; border-radius: var(--radius-sm);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; font-size: 1.1rem;
-    }
-    .brief-icon.sleep { background: #EDE9FE; }
-    .brief-icon.body { background: #ECFDF5; }
-    .brief-icon.therapy { background: #FEF3C7; }
-    .brief-icon.meal { background: #FEE2E2; }
-    .brief-icon.idea { background: #DBEAFE; }
-    .brief-text strong { display: block; font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 0.1rem; }
-    .brief-text span { font-size: 0.8rem; color: var(--text-secondary); }
-
-    /* LOGO BAR */
-    .logo-bar {
-      padding: 2.5rem 0; border-top: 1px solid var(--border-light);
-      border-bottom: 1px solid var(--border-light); background: var(--bg);
-    }
-    .logo-bar-inner { text-align: center; }
-    .logo-bar p {
-      font-size: 0.82rem; color: var(--text-light); font-weight: 500;
-      text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.25rem;
-    }
-    .logo-bar-items { display: flex; justify-content: center; gap: 2.5rem; align-items: center; flex-wrap: wrap; }
-    .logo-bar-item {
-      font-weight: 700; font-size: 0.92rem; color: var(--text-light);
-      padding: 0.5rem 1rem; border: 1px solid var(--border);
-      border-radius: var(--radius-sm); background: var(--white);
-    }
-
-    /* PROBLEM */
-    .problem { background: var(--bg); }
-    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .stat-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; }
-    .stat-number { font-size: 1.75rem; font-weight: 800; color: var(--teal); line-height: 1.2; }
-    .stat-label { font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.25rem; line-height: 1.5; }
-    .problem-quote {
-      margin-top: 1.5rem; background: var(--white); border: 1px solid var(--border);
-      border-left: 3px solid var(--teal); border-radius: 0 var(--radius) var(--radius) 0;
-      padding: 1.25rem 1.5rem;
-    }
-    .problem-quote p { font-size: 1rem; font-style: italic; color: var(--text); line-height: 1.65; }
-    .problem-quote cite { display: block; font-style: normal; font-size: 0.82rem; color: var(--text-light); margin-top: 0.5rem; }
-
-    /* FEATURES */
-    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-    .feature-card {
-      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 1.75rem; transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .feature-card:hover { border-color: var(--teal); box-shadow: var(--shadow-md); }
-    .feature-icon {
-      width: 44px; height: 44px; border-radius: 10px; background: var(--teal-bg);
-      color: var(--teal); display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1rem;
-    }
-    .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
-    .feature-card p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; }
-
-    /* HOW IT WORKS */
-    .how { background: var(--bg); }
-    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-    .step { text-align: center; position: relative; }
-    .step-num {
-      width: 40px; height: 40px; border-radius: 50%; background: var(--teal);
-      color: white; font-weight: 700; font-size: 0.95rem;
-      display: inline-flex; align-items: center; justify-content: center;
-      margin-bottom: 0.85rem;
-    }
-    .step h4 { font-size: 0.92rem; font-weight: 700; margin-bottom: 0.35rem; }
-    .step p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.55; }
-    .step-connector {
-      display: none; position: absolute; right: -0.85rem; top: 20px;
-      color: var(--border); font-size: 1rem;
-    }
-    @media (min-width: 769px) { .step:not(:last-child) .step-connector { display: block; } }
-
-    /* AGENTS */
-    .agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-    .agent-card {
-      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 1.5rem; transition: border-color 0.2s;
-    }
-    .agent-card:hover { border-color: var(--teal); }
-    .agent-tag {
-      display: inline-block; font-size: 0.7rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal-dark);
-      background: var(--teal-bg); padding: 0.2rem 0.5rem; border-radius: 4px;
-      margin-bottom: 0.65rem;
-    }
-    .agent-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.35rem; }
-    .agent-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0.75rem; }
-    .agent-metric-bar {
-      display: flex; align-items: center; gap: 0.35rem;
-      font-size: 0.75rem; color: var(--text-light); background: var(--bg);
-      padding: 0.4rem 0.6rem; border-radius: 6px;
-    }
-    .agent-metric-bar svg { color: var(--teal); flex-shrink: 0; }
-
-    /* TESTIMONIALS */
-    .testimonials { background: var(--bg); }
-    .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-    .testimonial-card {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 1.75rem;
-    }
-    .testimonial-stars { color: #F59E0B; font-size: 0.85rem; margin-bottom: 0.75rem; letter-spacing: 2px; }
-    .testimonial-card blockquote {
-      font-size: 0.92rem; color: var(--text); line-height: 1.65;
-      font-style: italic; margin-bottom: 1rem;
-    }
-    .testimonial-author { display: flex; align-items: center; gap: 0.6rem; }
-    .testimonial-avatar {
-      width: 36px; height: 36px; border-radius: 50%; background: var(--teal-bg);
-      color: var(--teal); display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: 0.82rem;
-    }
-    .testimonial-name { font-size: 0.85rem; font-weight: 600; }
-    .testimonial-role { font-size: 0.75rem; color: var(--text-light); }
-
-    /* NDIS */
-    .ndis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; }
-    .ndis-badges { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
-    .ndis-badge {
-      display: flex; align-items: center; gap: 0.35rem;
-      font-size: 0.78rem; font-weight: 600; color: var(--teal-dark);
-      background: var(--teal-bg); padding: 0.4rem 0.75rem; border-radius: 6px;
-    }
-    .check-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
-    .check-list li { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.92rem; line-height: 1.6; }
-    .check-icon {
-      width: 22px; height: 22px; border-radius: 50%; background: var(--green-bg);
-      color: var(--green); display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; margin-top: 0.15rem;
-    }
-    .check-list li strong { color: var(--text); }
-
-    /* FAQ */
-    .faq { background: var(--bg); }
-    .faq-list { max-width: 720px; margin: 0 auto; }
-    .faq-item {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: var(--radius); margin-bottom: 0.75rem; overflow: hidden;
-    }
-    .faq-q {
-      width: 100%; background: none; border: none; padding: 1.15rem 1.5rem;
-      font-family: inherit; font-size: 0.95rem; font-weight: 600; color: var(--text);
-      text-align: left; cursor: pointer; display: flex; justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
     }
-    .faq-q:hover { color: var(--teal); }
-    .faq-chevron { transition: transform 0.2s; color: var(--text-light); }
-    .faq-item.open .faq-chevron { transform: rotate(180deg); }
-    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
-    .faq-item.open .faq-a { max-height: 300px; padding: 0 1.5rem 1.25rem; }
-    .faq-a p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; }
+    .nav-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.35rem;
+      color: var(--teal);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-brand span { color: var(--warm-gray); font-weight: 300; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--warm-gray);
+      font-size: 0.9rem;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+    .nav-cta {
+      background: var(--teal) !important;
+      color: white !important;
+      padding: 0.6rem 1.4rem !important;
+      border-radius: 6px;
+      font-weight: 500 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--teal-dark) !important; }
 
-    /* CTA */
-    .cta {
-      background: var(--teal); padding: 4.5rem 0; text-align: center;
-      position: relative; overflow: hidden;
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 2rem 6rem;
+      position: relative;
+      overflow: hidden;
     }
-    .cta::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at top right, rgba(255,255,255,0.08) 0%, transparent 60%);
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--teal-pale) 0%, transparent 70%);
+      opacity: 0.5;
+      pointer-events: none;
     }
-    .cta-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
-    .cta h2 {
-      font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: white;
-      line-height: 1.25; margin-bottom: 0.75rem;
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -10%;
+      left: -5%;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(224,122,95,0.08) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .cta p { color: rgba(255,255,255,0.8); font-size: 1rem; margin-bottom: 1.75rem; line-height: 1.7; }
-    .cta-sub { color: rgba(255,255,255,0.8) !important; font-size: 0.82rem !important; margin-top: 0.85rem !important; margin-bottom: 0 !important; }
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 2px;
+      background: var(--teal);
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      color: var(--dark);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em {
+      color: var(--teal);
+      font-style: italic;
+    }
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--mid-gray);
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+      max-width: 520px;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--teal);
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.25s ease;
+      font-family: inherit;
+    }
+    .btn-primary:hover {
+      background: var(--teal-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(0,128,128,0.25);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--teal);
+      padding: 1rem 2rem;
+      border: 1.5px solid var(--teal);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      font-family: inherit;
+    }
+    .btn-secondary:hover {
+      background: var(--teal-pale);
+    }
+    .hero-proof {
+      margin-top: 2.5rem;
+      font-size: 0.85rem;
+      color: var(--mid-gray);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .hero-proof svg { flex-shrink: 0; }
 
-    /* FOOTER */
-    footer { padding: 2.5rem 0; border-top: 1px solid var(--border); background: var(--white); }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-    .footer-brand { font-weight: 700; color: var(--teal); font-size: 1rem; }
-    .footer-links { display: flex; gap: 1.5rem; }
-    .footer-links a { font-size: 0.82rem; color: var(--text-secondary); text-decoration: none; }
+    /* hero right: visual card */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+      max-width: 420px;
+      width: 100%;
+      position: relative;
+    }
+    .hero-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .hero-card-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal), var(--teal-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-card-avatar svg { color: white; }
+    .hero-card-name {
+      font-weight: 600;
+      color: var(--dark);
+      font-size: 1rem;
+    }
+    .hero-card-role {
+      font-size: 0.82rem;
+      color: var(--mid-gray);
+    }
+    .hero-card-items { display: flex; flex-direction: column; gap: 1rem; }
+    .hero-card-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      background: var(--offwhite);
+      transition: transform 0.2s;
+    }
+    .hero-card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .icon-green { background: #e8f5e9; color: #2e7d32; }
+    .icon-blue { background: #e3f2fd; color: #1565c0; }
+    .icon-amber { background: #fff8e1; color: #f57f17; }
+    .icon-coral { background: #fce4ec; color: #c62828; }
+    .hero-card-item-text { font-size: 0.88rem; }
+    .hero-card-item-title { font-weight: 600; color: var(--dark); }
+    .hero-card-item-desc { color: var(--mid-gray); font-size: 0.82rem; margin-top: 0.15rem; }
+
+    .floating-badge {
+      position: absolute;
+      background: white;
+      border-radius: 12px;
+      padding: 0.7rem 1rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      font-size: 0.82rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      animation: float 4s ease-in-out infinite;
+    }
+    .badge-top { top: -16px; right: -24px; color: #2e7d32; animation-delay: 0s; }
+    .badge-bottom { bottom: -16px; left: -24px; color: var(--teal); animation-delay: 2s; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .section-eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 2px;
+      background: var(--teal);
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: var(--dark);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--mid-gray);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+
+    /* ── PROBLEM ── */
+    .problem { background: white; }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .problem-stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .problem-stat {
+      padding: 1.5rem;
+      border-radius: 14px;
+      background: var(--offwhite);
+    }
+    .problem-stat-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--teal);
+      margin-bottom: 0.3rem;
+    }
+    .problem-stat-label {
+      font-size: 0.85rem;
+      color: var(--mid-gray);
+      line-height: 1.5;
+    }
+    .problem-quote {
+      margin-top: 2rem;
+      padding: 1.5rem 2rem;
+      border-left: 3px solid var(--teal);
+      background: var(--teal-mist);
+      border-radius: 0 12px 12px 0;
+    }
+    .problem-quote p {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    .problem-quote cite {
+      display: block;
+      margin-top: 0.75rem;
+      font-family: 'DM Sans', sans-serif;
+      font-style: normal;
+      font-size: 0.85rem;
+      color: var(--mid-gray);
+    }
+
+    /* ── SOLUTION ── */
+    .solution-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .solution-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid var(--light-border);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .solution-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--teal);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    .solution-card:hover::before { transform: scaleX(1); }
+    .solution-card:hover {
+      box-shadow: 0 8px 32px rgba(0,128,128,0.08);
+      border-color: transparent;
+      transform: translateY(-2px);
+    }
+    .solution-card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: var(--teal-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+      color: var(--teal);
+    }
+    .solution-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--dark);
+      margin-bottom: 0.6rem;
+    }
+    .solution-card p {
+      font-size: 0.92rem;
+      color: var(--mid-gray);
+      line-height: 1.65;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how { background: white; }
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+    .how-step {
+      text-align: center;
+      padding: 1.5rem;
+      position: relative;
+    }
+    .how-step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      color: var(--light-border);
+      font-weight: 300;
+    }
+    .how-step-num {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--teal);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      margin: 0 auto 1rem;
+    }
+    .how-step h4 {
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+    }
+    .how-step p {
+      font-size: 0.85rem;
+      color: var(--mid-gray);
+      line-height: 1.55;
+    }
+
+    /* ── AGENTS ── */
+    .agents-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .agent-card {
+      background: white;
+      border: 1px solid var(--light-border);
+      border-radius: 16px;
+      padding: 1.8rem;
+      transition: all 0.3s ease;
+    }
+    .agent-card:hover {
+      border-color: var(--teal);
+      box-shadow: 0 4px 20px rgba(0,128,128,0.06);
+    }
+    .agent-phase {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: var(--teal-pale);
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 0.75rem;
+    }
+    .agent-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--dark);
+      margin-bottom: 0.4rem;
+    }
+    .agent-card p {
+      font-size: 0.87rem;
+      color: var(--mid-gray);
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+    .agent-metric {
+      font-size: 0.8rem;
+      padding: 0.5rem 0.75rem;
+      background: var(--offwhite);
+      border-radius: 8px;
+      color: var(--warm-gray);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .agent-metric svg { color: var(--teal); flex-shrink: 0; }
+
+    /* ── NDIS / TRUST ── */
+    .trust { background: white; }
+    .trust-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .trust-badge-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    .trust-badge {
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--light-border);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--warm-gray);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .trust-feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .trust-feature-list li {
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+    }
+    .trust-check {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--teal-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+      color: var(--teal);
+    }
+    .trust-feature-text { font-size: 0.95rem; }
+    .trust-feature-text strong { color: var(--dark); }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.08);
+      top: -200px;
+      right: -100px;
+    }
+    .cta-section::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.06);
+      bottom: -100px;
+      left: -50px;
+    }
+    .cta-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .cta-section p {
+      color: rgba(255,255,255,0.85);
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .btn-white {
+      background: white;
+      color: var(--teal);
+      padding: 1rem 2.2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.25s ease;
+      font-family: inherit;
+    }
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    .cta-note {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.82rem;
+      margin-top: 1rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--light-border);
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--teal);
+    }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--mid-gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
     .footer-links a:hover { color: var(--teal); }
-    .footer-copy { font-size: 0.78rem; color: var(--text-light); }
-
-    /* RESPONSIVE */
-    @media (max-width: 860px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .hero-card { max-width: 420px; }
-      .problem-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .features-grid, .agents-grid, .testimonial-grid { grid-template-columns: 1fr; }
-      .steps { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-      .ndis-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .footer-inner { flex-direction: column; text-align: center; }
-      .nav-links a:not(.btn) { display: none; }
+    .footer-copy {
+      font-size: 0.82rem;
+      color: var(--mid-gray);
     }
-    @media (max-width: 480px) {
-      .steps { grid-template-columns: 1fr; }
-      .stat-grid { grid-template-columns: 1fr; }
-      section { padding: 3.5rem 0; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-visual { order: -1; }
+      .hero-card { max-width: 360px; margin: 0 auto; }
+      .problem-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .solution-cards { grid-template-columns: 1fr; }
+      .how-steps { grid-template-columns: 1fr 1fr; }
+      .how-step:not(:last-child)::after { display: none; }
+      .agents-grid { grid-template-columns: 1fr; }
+      .trust-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      .floating-badge { display: none; }
+    }
+    @media (max-width: 640px) {
+      .how-steps { grid-template-columns: 1fr; }
+      .problem-stat-grid { grid-template-columns: 1fr; }
+      section { padding: 4rem 1.5rem; }
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
 
-<a href="#main-content" class="skip-link">Skip to main content</a>
-
-<nav>
-  <div class="nav-inner container">
-    <a href="#" class="logo" aria-label="Carer Liaison — home">
-      <div class="logo-icon" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      </div>
-      Carer Liaison
-    </a>
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">Carer Liaison</a>
     <div class="nav-links">
-      <a href="#features">Features</a>
-      <a href="#how">How It Works</a>
+      <a href="#problem">The Problem</a>
+      <a href="#solution">How It Works</a>
+      <a href="#agents">Capabilities</a>
       <a href="#ndis">NDIS Funding</a>
-      <a href="#faq">FAQ</a>
-      <a href="#cta" class="btn btn-nav-cta">Get Early Access</a>
+      <a href="#cta" class="nav-cta">Get Early Access</a>
     </div>
   </div>
 </nav>
 
-<main id="main-content">
+<!-- HERO -->
 <section class="hero">
-  <div class="container">
-    <div class="hero-grid">
-      <div>
-        <div class="section-label">For carers & NDIS participants</div>
-        <h1>Your person is fully here. <span>Help the world receive them.</span></h1>
-        <p class="hero-desc">Carer Liaison is an AI-powered system that tracks health, adapts daily plans, and captures ideas — so the person you care for gets the right support, and you get time back.</p>
-        <div class="hero-actions">
-          <a href="#cta" class="btn btn-primary btn-lg">Take the Carer Assessment <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-          <a href="#how" class="btn btn-outline btn-lg">See How It Works</a>
-        </div>
-        <div class="trust-row">
-          <div class="trust-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> CSIRO AI-AT Framework aligned</div>
-          <div class="trust-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> NDIS fundable components</div>
-          <div class="trust-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Free assessment</div>
-        </div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">For carers &amp; NDIS participants</div>
+      <h1>They're fully here.<br>The world just can't <em>receive</em> them yet.</h1>
+      <p class="hero-sub">Carer Liaison is an AI-powered personal operating system that closes the gap between what your person communicates and what the world is able to receive. Health monitoring. Adaptive daily plans. Idea capture. One system, built around them.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn-primary">
+          Take the Carer Assessment
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#solution" class="btn-secondary">See How It Works</a>
       </div>
-      <div>
-        <div class="hero-card">
-          <div class="hero-card-top">
-            <div class="hero-card-dot active"></div>
-            <div class="hero-card-dot"></div>
-            <div class="hero-card-dot"></div>
-            <span class="hero-card-title">Monday Morning Brief — 7:00 AM</span>
+      <p class="hero-proof">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Aligned with CSIRO's AI-enabled Assistive Technology framework (Feb 2026)
+      </p>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="floating-badge badge-top">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+          Pattern detected
+        </div>
+        <div class="floating-badge badge-bottom">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Plan adapted
+        </div>
+
+        <div class="hero-card-header">
+          <div class="hero-card-avatar">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </div>
-          <div class="hero-card-body">
-            <div class="brief-item"><div class="brief-icon sleep">🌙</div><div class="brief-text"><strong>Sleep score: 78/100 — Good night</strong><span>Deep sleep above baseline. Expect a calm day.</span></div></div>
-            <div class="brief-item"><div class="brief-icon body">💚</div><div class="brief-text"><strong>Body state: Calm (2/5)</strong><span>3rd calm day this week. Pattern emerging.</span></div></div>
-            <div class="brief-item"><div class="brief-icon therapy">🧘</div><div class="brief-text"><strong>Today's therapy: Gentle stretch — 20 min</strong><span>Matched to current ability tier. No equipment needed.</span></div></div>
-            <div class="brief-item"><div class="brief-icon meal">🍽️</div><div class="brief-text"><strong>Meal: Chicken & sweet potato</strong><span>Prep at 2pm. Shopping list sent to phone.</span></div></div>
-            <div class="brief-item"><div class="brief-icon idea">💡</div><div class="brief-text"><strong>New idea captured yesterday</strong><span>Research found 3 related concepts. View digest →</span></div></div>
+          <div>
+            <div class="hero-card-name">Monday Morning Brief</div>
+            <div class="hero-card-role">Carer Liaison · 7:00 AM</div>
+          </div>
+        </div>
+        <div class="hero-card-items">
+          <div class="hero-card-item">
+            <div class="hero-card-icon icon-green">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </div>
+            <div class="hero-card-item-text">
+              <div class="hero-card-item-title">Sleep: 78/100 — Good</div>
+              <div class="hero-card-item-desc">Deep sleep above baseline. Expect a calm day.</div>
+            </div>
+          </div>
+          <div class="hero-card-item">
+            <div class="hero-card-icon icon-blue">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+            </div>
+            <div class="hero-card-item-text">
+              <div class="hero-card-item-title">Today's therapy: Gentle stretch</div>
+              <div class="hero-card-item-desc">Matched to current body state. 20 min session.</div>
+            </div>
+          </div>
+          <div class="hero-card-item">
+            <div class="hero-card-icon icon-amber">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="hero-card-item-text">
+              <div class="hero-card-item-title">Meal: Chicken &amp; sweet potato</div>
+              <div class="hero-card-item-desc">Prep at 2pm. Shopping list sent to phone.</div>
+            </div>
           </div>
         </div>
       </div>
@@ -419,237 +820,285 @@
   </div>
 </section>
 
-<div class="logo-bar">
-  <div class="container logo-bar-inner">
-    <p>Aligned with Australian frameworks and standards</p>
-    <div class="logo-bar-items">
-      <div class="logo-bar-item">NDIS</div>
-      <div class="logo-bar-item">CSIRO</div>
-      <div class="logo-bar-item">HealthKit</div>
-      <div class="logo-bar-item">Apple Watch</div>
-      <div class="logo-bar-item">OpenClaw</div>
-    </div>
-  </div>
-</div>
-
+<!-- PROBLEM -->
 <section class="problem" id="problem">
-  <div class="container">
+  <div class="section-inner fade-up">
     <div class="problem-grid">
       <div>
-        <div class="section-label">The problem</div>
-        <h2 class="section-title">The carer is the operating system. That's not sustainable.</h2>
-        <p class="section-desc" style="margin-bottom:1.5rem">When someone has full cognitive capacity but their body is the barrier, one person becomes the sole bridge between them and the world. Every decision, every plan, every communication runs through the carer. Carer Liaison changes that.</p>
+        <div class="section-eyebrow">The problem</div>
+        <h2 class="section-title">The carer is the operating system. That's unsustainable.</h2>
+        <p class="section-subtitle" style="margin-bottom: 2rem;">When someone has full cognitive capacity but their body is the barrier, the primary carer becomes the sole bridge between them and the world. Every decision, every plan, every communication runs through one person. Carer Liaison changes that.</p>
         <div class="problem-quote">
-          <p>"It's not a care problem. It's a reception problem. Their mind transmits clearly. The gap is between what they transmit and what the world can receive."</p>
+          <p>"It's not a care problem. It's a reception problem. Their mind transmits clearly. The gap is between what they transmit and what the world is able to receive."</p>
           <cite>— The Carer Liaison frame</cite>
         </div>
       </div>
       <div>
-        <div class="stat-grid">
-          <div class="stat-card"><div class="stat-number">2.65M</div><div class="stat-label">Australians provide unpaid informal care</div></div>
-          <div class="stat-card"><div class="stat-number">1 in 3</div><div class="stat-label">Primary carers report high psychological distress</div></div>
-          <div class="stat-card"><div class="stat-number">40hrs+</div><div class="stat-label">Average weekly hours of care provided</div></div>
-          <div class="stat-card"><div class="stat-number">72%</div><div class="stat-label">Carers say existing tools don't meet their needs</div></div>
+        <div class="problem-stat-grid">
+          <div class="problem-stat">
+            <div class="problem-stat-number">2.65M</div>
+            <div class="problem-stat-label">Australians provide unpaid informal care</div>
+          </div>
+          <div class="problem-stat">
+            <div class="problem-stat-number">1 in 3</div>
+            <div class="problem-stat-label">Primary carers report high psychological distress</div>
+          </div>
+          <div class="problem-stat">
+            <div class="problem-stat-number">40hrs+</div>
+            <div class="problem-stat-label">Average weekly hours of care provided</div>
+          </div>
+          <div class="problem-stat">
+            <div class="problem-stat-number">72%</div>
+            <div class="problem-stat-label">Of carers say existing tools don't meet their needs</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="features">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">What it does</div>
-      <h2 class="section-title">Three layers. One system. Built around them.</h2>
-      <p class="section-desc">Carer Liaison works across health, planning, and purpose — so the person you care for gets the right support, the right plan, and a reason to look forward to tomorrow.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+<!-- SOLUTION -->
+<section class="solution" id="solution">
+  <div class="section-inner fade-up">
+    <div class="section-eyebrow">The solution</div>
+    <h2 class="section-title">Three layers, one system</h2>
+    <p class="section-subtitle">Carer Liaison works across three dimensions — so the person you care for gets the right support, the right plan, and a reason to look forward to tomorrow.</p>
+
+    <div class="solution-cards">
+      <div class="solution-card">
+        <div class="solution-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
         <h3>Health Intelligence</h3>
-        <p>Track body states with one button press. Monitor sleep quality via Apple Watch. The system learns what predicts a good day and adapts before you ask.</p>
+        <p>Track body states, sleep quality, and daily patterns. The system learns what predicts a good day — and adapts before you even ask. One button press. One voice note. Zero friction.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+      <div class="solution-card">
+        <div class="solution-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+        </div>
         <h3>Daily Planning</h3>
-        <p>Therapy matched to today's physical ability. Meal plans that balance nutrition and simplicity. Grocery lists generated automatically. The planning burden lifts.</p>
+        <p>Therapy recommendations matched to today's physical ability. Meal plans that balance nutrition and simplicity. Grocery lists on demand. The planning burden lifts off your shoulders.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></div>
-        <h3>Purpose & Ideas</h3>
-        <p>Every idea captured, researched, and stored. The system finds what to look forward to each week — outings, contributions, moments of meaning. They are seen.</p>
+      <div class="solution-card">
+        <div class="solution-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <h3>Purpose &amp; Ideas</h3>
+        <p>Every idea they have is captured, researched, and stored. The system finds what to look forward to each week — outings, contributions, moments of purpose. They are seen.</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- HOW IT WORKS -->
 <section class="how" id="how">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">How it works</div>
-      <h2 class="section-title">Simple for you. Intelligent underneath.</h2>
-      <p class="section-desc">Interact through tools you already use — a button press, a voice note, a message. The intelligence runs behind the scenes.</p>
-    </div>
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><span class="step-connector">→</span><h4>Log in one press</h4><p>Tap a physical button or your phone. Body state captured in 5 seconds. Add a voice note if you need to.</p></div>
-      <div class="step"><div class="step-num">2</div><span class="step-connector">→</span><h4>System learns patterns</h4><p>Sleep data, body states, therapy outcomes. Correlations emerge. The system starts predicting good days.</p></div>
-      <div class="step"><div class="step-num">3</div><span class="step-connector">→</span><h4>Plans arrive automatically</h4><p>Morning sleep brief. Weekly therapy plan. Daily meal prep. Grocery list. Delivered by message — no apps to open.</p></div>
-      <div class="step"><div class="step-num">4</div><h4>Purpose becomes visible</h4><p>Ideas captured and researched. The week ahead has things to look forward to. The world starts receiving them.</p></div>
+  <div class="section-inner fade-up">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-title">Simple for the carer. Intelligent underneath.</h2>
+    <p class="section-subtitle">The system is designed so carers interact through tools they already use — a button press, a voice note, a message. The intelligence runs quietly behind the scenes.</p>
+
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-step-num">1</div>
+        <h4>Log in one press</h4>
+        <p>Physical button or quick tap on a phone. Body state captured in under 5 seconds. Add a voice note if needed.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">2</div>
+        <h4>System learns patterns</h4>
+        <p>Sleep data, body states, therapy outcomes. Correlations emerge. The system starts predicting good days and adapting plans.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">3</div>
+        <h4>Plans arrive automatically</h4>
+        <p>Morning sleep brief. Weekly therapy plan. Daily meal prep. Grocery list. Delivered via message — no apps to open.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">4</div>
+        <h4>Purpose becomes visible</h4>
+        <p>Ideas are captured and researched. The week ahead has things to look forward to. The world starts receiving them clearly.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="agents">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">Under the hood</div>
-      <h2 class="section-title">Six agents. One unified system.</h2>
-      <p class="section-desc">Each agent has a clear job and a measurable outcome. They share data so the whole system gets smarter over time.</p>
-    </div>
+<!-- AGENTS -->
+<section class="agents" id="agents">
+  <div class="section-inner fade-up">
+    <div class="section-eyebrow">Capabilities</div>
+    <h2 class="section-title">Six intelligent agents, one unified system</h2>
+    <p class="section-subtitle">Each agent has a clear hypothesis and a measurable outcome. They work together — body state informs therapy plans, sleep quality predicts tomorrow, ideas build on each other.</p>
+
     <div class="agents-grid">
-      <div class="agent-card"><div class="agent-tag">Health</div><h3>Body State Tracker</h3><p>One-press logging with optional voice context. Detects 7-day patterns. Daily and weekly reports delivered automatically.</p><div class="agent-metric-bar"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> 7-day body state variance</div></div>
-      <div class="agent-card"><div class="agent-tag">Health</div><h3>Sleep Analysis</h3><p>Apple Watch data scored against personal baselines. Morning brief: one score, one insight, one action.</p><div class="agent-metric-bar"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Sleep–body state correlation</div></div>
-      <div class="agent-card"><div class="agent-tag">Planning</div><h3>Therapy Planner</h3><p>Weekly plans matched to ability tier. Adapts in real-time when body state drops. Monthly impact reports.</p><div class="agent-metric-bar"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Therapy completion by body state</div></div>
-      <div class="agent-card"><div class="agent-tag">Planning</div><h3>Meal Planner</h3><p>Balanced weekly menus avoiding repeats. Daily prep briefs at 8am. Grocery lists from the plan.</p><div class="agent-metric-bar"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Carer planning time saved</div></div>
-      <div class="agent-card"><div class="agent-tag">Purpose</div><h3>Idea Capture</h3><p>Voice notes transcribed, categorised, researched. Ideas stored and connected. Nothing gets lost.</p><div class="agent-metric-bar"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Ideas captured & researched per week</div></div>
-      <div class="agent-card"><div class="agent-tag">Purpose</div><h3>Purpose Engine</h3><p>Synthesises all agents to predict good days. Surfaces outings, contributions, and things to look forward to.</p><div class="agent-metric-bar"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Good days per week trend</div></div>
+      <div class="agent-card">
+        <div class="agent-phase">Health</div>
+        <h3>Body State Tracker</h3>
+        <p>One-press logging with voice note context. Detects patterns over 7-day windows. Daily and weekly reports delivered automatically.</p>
+        <div class="agent-metric">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          Measures: 7-day body state variance
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-phase">Health</div>
+        <h3>Sleep Analysis</h3>
+        <p>Apple Watch data scored against personal baselines. Morning brief with one score, one insight, one action. Correlates sleep with next-day body state.</p>
+        <div class="agent-metric">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          Measures: Sleep-body correlation
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-phase">Planning</div>
+        <h3>Therapy Planner</h3>
+        <p>Weekly plans matched to current ability tier. Adapts in real-time when body state drops. Monthly impact reports show what's working.</p>
+        <div class="agent-metric">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          Measures: Therapy completion rate by body state
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-phase">Planning</div>
+        <h3>Meal Planner</h3>
+        <p>Balanced weekly menus avoiding repeats. Daily prep briefs at 8am. Grocery lists generated from the plan. One less decision for the carer every day.</p>
+        <div class="agent-metric">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          Measures: Carer planning time saved
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-phase">Purpose</div>
+        <h3>Idea Capture</h3>
+        <p>Voice notes transcribed, categorised, and researched. Ideas are stored, connected to each other, and surfaced when relevant. Nothing gets lost.</p>
+        <div class="agent-metric">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          Measures: Ideas captured &amp; researched per week
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-phase">Purpose</div>
+        <h3>Purpose Engine</h3>
+        <p>Synthesises all agents to find good-day predictors. Surfaces outings, contributions, and meaningful moments for the week ahead.</p>
+        <div class="agent-metric">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          Measures: Good days per week trend
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="testimonials">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">From carers like you</div>
-      <h2 class="section-title">Why families are joining the waitlist</h2>
-    </div>
-    <div class="testimonial-grid">
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <blockquote>"I spend more time planning his week than living mine. If something could take the meal planning and therapy scheduling off my plate, I'd actually have energy left for him."</blockquote>
-        <div class="testimonial-author"><div class="testimonial-avatar">S</div><div><div class="testimonial-name">Sarah M.</div><div class="testimonial-role">Primary carer, NSW</div></div></div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <blockquote>"He has ideas all the time. They just disappear because nobody writes them down fast enough. A system that captures what he says and actually researches it — that would change everything."</blockquote>
-        <div class="testimonial-author"><div class="testimonial-avatar">R</div><div><div class="testimonial-name">Rachel K.</div><div class="testimonial-role">Mother & carer, VIC</div></div></div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <blockquote>"I've tried three different apps. They all wanted me to type data into a screen. I don't have time to type. I need something I can press once and walk away."</blockquote>
-        <div class="testimonial-author"><div class="testimonial-avatar">D</div><div><div class="testimonial-name">David L.</div><div class="testimonial-role">Father & carer, QLD</div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="ndis">
-  <div class="container">
-    <div class="ndis-grid">
+<!-- TRUST / NDIS -->
+<section class="trust" id="ndis">
+  <div class="section-inner fade-up">
+    <div class="trust-grid">
       <div>
-        <div class="section-label">NDIS aligned</div>
+        <div class="section-eyebrow">NDIS aligned</div>
         <h2 class="section-title">Built for how funding actually works</h2>
-        <p class="section-desc">Carer Liaison components fall within existing NDIS categories. We help you build the case — from the OT assessment to the plan review conversation.</p>
-        <div class="ndis-badges">
-          <div class="ndis-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> CSIRO AI-AT Framework</div>
-          <div class="ndis-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4"/></svg> Cat 05 — Assistive Technology</div>
-          <div class="ndis-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4"/></svg> Cat 07 — Capacity Building</div>
+        <p class="section-subtitle" style="margin-bottom: 2rem;">Carer Liaison components are designed to fall within existing NDIS categories. We help you build the case for funding — from the OT assessment to the plan review conversation.</p>
+        <div class="trust-badge-row">
+          <div class="trust-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            CSIRO AI-AT Framework
+          </div>
+          <div class="trust-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Cat 05 — Assistive Technology
+          </div>
+          <div class="trust-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Cat 07 — Capacity Building
+          </div>
         </div>
       </div>
       <div>
-        <ul class="check-list">
-          <li><div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div><div><strong>Devices fundable under AT.</strong> Apple Watch, iPad, Stream Deck, Smart Speaker — all map to established NDIS precedent.</div></li>
-          <li><div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div><div><strong>AI system setup under Capacity Building.</strong> Configuration and personalisation framed as Improved Daily Living supports.</div></li>
-          <li><div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div><div><strong>OT assessment pathway included.</strong> We guide you to an OT experienced with innovative AT funding to unlock your plan.</div></li>
-          <li><div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div><div><strong>Feb 2026 CSIRO framework compliant.</strong> The new AI-enabled AT framework directly supports this category of assistive technology.</div></li>
+        <ul class="trust-feature-list">
+          <li>
+            <div class="trust-check">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <div class="trust-feature-text"><strong>Devices fundable under AT.</strong> Apple Watch, iPad, Stream Deck, Smart Speaker — all map to established NDIS precedent.</div>
+          </li>
+          <li>
+            <div class="trust-check">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <div class="trust-feature-text"><strong>AI system setup under Capacity Building.</strong> Configuration and personalisation framed as Improved Daily Living supports.</div>
+          </li>
+          <li>
+            <div class="trust-check">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <div class="trust-feature-text"><strong>OT assessment pathway included.</strong> We guide you to an OT experienced with innovative AT funding to unlock your plan.</div>
+          </li>
+          <li>
+            <div class="trust-check">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <div class="trust-feature-text"><strong>Feb 2026 CSIRO framework compliant.</strong> The new AI-enabled AT framework directly supports this category of assistive technology.</div>
+          </li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section class="faq" id="faq">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">FAQ</div>
-      <h2 class="section-title">Common questions</h2>
-    </div>
-    <div class="faq-list">
-      <div class="faq-item open">
-        <button class="faq-q" aria-expanded="true" aria-controls="faq-1">Who is Carer Liaison for?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-a" id="faq-1" role="region"><p>Carer Liaison is for primary carers supporting someone with high cognitive capacity and physical barriers — particularly NDIS participants and their families. If you're the person who holds everything together, this is built to take weight off your shoulders.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="faq-2">Do I need to be tech-savvy to use it?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-a" id="faq-2" role="region"><p>No. The system runs through tools you already use — button presses, voice notes, and messages. You don't need to open an app or learn a new interface. If you can send a text, you can use Carer Liaison.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="faq-3">Can this be funded through the NDIS?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-a" id="faq-3" role="region"><p>Yes — the hardware components (Apple Watch, Stream Deck, iPad, Smart Speaker) fall under NDIS Assistive Technology funding. The system setup and configuration can be framed under Capacity Building. We guide you through the OT assessment process to build the case.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="faq-4">How does the assessment work?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-a" id="faq-4" role="region"><p>The carer assessment takes about 3 minutes. You answer questions about your caring situation, the person you support, and the gaps in your current setup. You get a personalised report showing where Carer Liaison would have the biggest impact for your family.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="faq-5">What data does it collect and is it private?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-a" id="faq-5" role="region"><p>The system collects body state logs, sleep data from Apple Watch, therapy completion, meal history, and voice notes. All data stays within the family's system — accessed securely via Tailscale. Nothing is shared with third parties.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="faq-6">When will it be available?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-a" id="faq-6" role="region"><p>We're currently building with our first family. Early access for additional families will open once the prototype is validated. Take the assessment to join the waitlist and be among the first to know.</p></div>
-      </div>
-    </div>
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="cta-inner fade-up">
+    <h2>Find out if Carer Liaison<br>is right for your family</h2>
+    <p>Take a 3-minute assessment. Answer questions about your caring situation, the person you support, and the gaps in your current setup. You'll get a personalised report — free, immediate, no obligation.</p>
+    <a href="#" class="btn-white">
+      Start the Carer Assessment
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <p class="cta-note">3 minutes · Free · Personalised results</p>
   </div>
 </section>
 
-<section class="cta" id="cta">
-  <div class="container">
-    <div class="cta-inner">
-      <h2>Find out if Carer Liaison is right for your family</h2>
-      <p>Take a 3-minute assessment. Get a personalised report on where the system would have the biggest impact. Free, immediate, no obligation.</p>
-      <a href="#" class="btn btn-white btn-lg">Start the Carer Assessment <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      <p class="cta-sub">3 minutes · Free · Personalised results</p>
-    </div>
-  </div>
-</section>
-
-</main>
-
+<!-- FOOTER -->
 <footer>
-  <div class="container footer-inner">
+  <div class="footer-inner">
     <div class="footer-brand">Carer Liaison</div>
     <div class="footer-links">
       <a href="#">About</a>
       <a href="#">Privacy</a>
       <a href="#">Contact</a>
-      <a href="mailto:hello@carerliaison.com">hello@carerliaison.com</a>
+      <a href="mailto:hello@carerliason.com">hello@carerliason.com</a>
     </div>
-    <div class="footer-copy">© 2026 Carer Liaison. All rights reserved.</div>
+    <div class="footer-copy">&copy; 2026 Carer Liaison. All rights reserved.</div>
   </div>
 </footer>
 
 <script>
-  document.querySelectorAll('.faq-q').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const item = btn.parentElement;
-      const wasOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => {
-        i.classList.remove('open');
-        i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
-      });
-      if (!wasOpen) {
-        item.classList.add('open');
-        btn.setAttribute('aria-expanded', 'true');
+  // Nav shadow on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Fade-up on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
       }
     });
-  });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const target = document.querySelector(a.getAttribute('href'));
-      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   });
 </script>
+
 </body>
 </html>

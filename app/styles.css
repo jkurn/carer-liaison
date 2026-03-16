@@ -1,0 +1,379 @@
+/* ═══════════════════════════════════════════════════════════════
+   Carer Liaison — Design System
+   Shared tokens, typography, layout primitives, and utilities.
+
+   Design principles (Interface Craft / Flo Guo):
+   - 2-3 dominant vertical alignment axes
+   - Typography tokens for status differentiation
+   - Progressive simplification (spacing > borders)
+   - "Show the work" — AI reasoning always visible
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── TOKENS ── */
+:root {
+  /* Brand */
+  --teal:         #008080;
+  --teal-dark:    #006666;
+  --teal-light:   #00a0a0;
+  --teal-pale:    #e6f5f5;
+  --teal-mist:    #f0fafa;
+
+  /* Neutrals */
+  --bg-page:      #FAF8F5;
+  --bg-card:      #ffffff;
+  --bg-surface:   #f5f4f0;
+  --dark:         #1a1a1a;
+  --warm-gray:    #4a4a48;
+  --mid-gray:     #6b6b68;
+  --text-muted:   #9b9b98;
+  --border:       #e0dfda;
+  --border-light: #edece8;
+
+  /* Semantic */
+  --green:        #2e7d32;
+  --green-bg:     #e8f5e9;
+  --amber:        #d4a853;
+  --amber-dark:   #a05c00;
+  --amber-bg:     #fff8e1;
+  --coral:        #e07a5f;
+  --coral-bg:     #fce4ec;
+  --red:          #c62828;
+  --red-bg:       #ffebee;
+  --blue:         #1565c0;
+  --blue-bg:      #e3f2fd;
+
+  /* Typography */
+  --font-serif:   'DM Serif Display', Georgia, serif;
+  --font-sans:    'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing scale (4px base) */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+
+  /* Radii */
+  --r-sm:  8px;
+  --r-md:  12px;
+  --r-lg:  16px;
+  --r-xl:  20px;
+  --r-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.04);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.06);
+  --shadow-lg:  0 4px 40px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-teal: 0 4px 14px rgba(0,128,128,0.2);
+
+  /* Layout */
+  --max-width:   1200px;
+  --nav-height:  60px;
+  --sidebar-w:   260px;
+}
+
+/* ── RESET ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  color: var(--warm-gray);
+  background: var(--bg-page);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── TYPOGRAPHY ── */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  color: var(--dark);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+h1 { font-size: clamp(1.8rem, 3vw, 2.4rem); }
+h2 { font-size: clamp(1.4rem, 2.5vw, 1.8rem); }
+h3 { font-size: 1.15rem; }
+h4 { font-size: 1rem; }
+
+.text-sm    { font-size: 0.85rem; }
+.text-xs    { font-size: 0.75rem; }
+.text-muted { color: var(--mid-gray); }
+.text-teal  { color: var(--teal); }
+
+/* ── LAYOUT PRIMITIVES ── */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+}
+
+.stack     { display: flex; flex-direction: column; }
+.stack-2   { gap: var(--sp-2); }
+.stack-3   { gap: var(--sp-3); }
+.stack-4   { gap: var(--sp-4); }
+.stack-6   { gap: var(--sp-6); }
+.stack-8   { gap: var(--sp-8); }
+
+.row       { display: flex; align-items: center; }
+.row-between { display: flex; align-items: center; justify-content: space-between; }
+.gap-2     { gap: var(--sp-2); }
+.gap-3     { gap: var(--sp-3); }
+.gap-4     { gap: var(--sp-4); }
+
+.grid-2    { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-4); }
+.grid-3    { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); }
+.grid-4    { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-4); }
+
+/* ── CARD ── */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--r-lg);
+  padding: var(--sp-6);
+  box-shadow: var(--shadow-lg);
+}
+.card-flat {
+  background: var(--bg-card);
+  border-radius: var(--r-md);
+  padding: var(--sp-5);
+  border: 1px solid var(--border-light);
+}
+.card-surface {
+  background: var(--bg-surface);
+  border-radius: var(--r-md);
+  padding: var(--sp-5);
+}
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-5);
+  border: none;
+  border-radius: var(--r-sm);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  line-height: 1;
+}
+.btn-primary {
+  background: var(--teal);
+  color: white;
+}
+.btn-primary:hover {
+  background: var(--teal-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-teal);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--teal);
+  border: 1.5px solid var(--teal);
+}
+.btn-secondary:hover {
+  background: var(--teal-pale);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--mid-gray);
+  padding: var(--sp-2) var(--sp-3);
+}
+.btn-ghost:hover {
+  color: var(--teal);
+  background: var(--teal-mist);
+}
+.btn-sm {
+  padding: var(--sp-2) var(--sp-3);
+  font-size: 0.82rem;
+}
+.btn-lg {
+  padding: var(--sp-4) var(--sp-8);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* ── FORM INPUTS ── */
+.input {
+  width: 100%;
+  padding: var(--sp-3) var(--sp-4);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--dark);
+  background: var(--bg-card);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(0,128,128,0.08);
+}
+.input::placeholder { color: var(--text-muted); }
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--dark);
+  margin-bottom: var(--sp-1);
+}
+
+/* ── BADGES / STATUS TOKENS ──
+   Typography tokenization (Interface Craft):
+   status labels styled as visual tokens to reduce visual weight */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  padding: 3px 10px;
+  border-radius: var(--r-full);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.badge-green  { background: var(--green-bg);  color: var(--green); }
+.badge-amber  { background: var(--amber-bg);  color: var(--amber-dark); }
+.badge-coral  { background: var(--coral-bg);  color: var(--coral); }
+.badge-red    { background: var(--red-bg);    color: var(--red); }
+.badge-teal   { background: var(--teal-pale); color: var(--teal); }
+.badge-muted  { background: var(--bg-surface); color: var(--mid-gray); }
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ── EYEBROW (section label) ── */
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.eyebrow::before {
+  content: '';
+  width: 20px;
+  height: 2px;
+  background: var(--teal);
+}
+
+/* ── METRIC DISPLAY ── */
+.metric {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: var(--teal);
+  line-height: 1;
+}
+.metric-label {
+  font-size: 0.82rem;
+  color: var(--mid-gray);
+  margin-top: var(--sp-1);
+}
+
+/* ── DIVIDER ── */
+.divider {
+  height: 1px;
+  background: var(--border-light);
+  border: none;
+  margin: var(--sp-4) 0;
+}
+
+/* ── AVATAR ── */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal), var(--teal-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.avatar-sm { width: 32px; height: 32px; font-size: 0.75rem; }
+.avatar-lg { width: 56px; height: 56px; font-size: 1.2rem; }
+
+/* ── ICON CONTAINER ── */
+.icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.icon-box-green { background: var(--green-bg); color: var(--green); }
+.icon-box-blue  { background: var(--blue-bg);  color: var(--blue); }
+.icon-box-amber { background: var(--amber-bg); color: var(--amber-dark); }
+.icon-box-coral { background: var(--coral-bg); color: var(--coral); }
+.icon-box-teal  { background: var(--teal-pale); color: var(--teal); }
+
+/* ── SHIMMER LOADING (extracted from Magic UI) ── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--bg-surface) 25%,
+    var(--border-light) 50%,
+    var(--bg-surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--r-sm);
+}
+
+/* ── FOCUS ── */
+:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── SCREEN READER ONLY ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .container { padding: 0 var(--sp-4); }
+  :root { --sidebar-w: 0px; }
+}
+@media (max-width: 480px) {
+  .grid-4 { grid-template-columns: 1fr; }
+}

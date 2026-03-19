@@ -1,20 +1,32 @@
 /* ═══════════════════════════════════════════════════════════════
-   Hash-based SPA Router
+   Hash-based SPA Router (with auth guard)
 
    Route flow:
-   ┌──────────┐   hashchange   ┌──────────┐   dynamic    ┌──────────┐
-   │  URL     │ ──────────────▶│  Router  │ ──import()──▶│  View    │
-   │ #/path   │                │  match   │              │  module  │
-   └──────────┘                └──────────┘              └────┬─────┘
-                                                              │
-                                                         .render(el)
-                                                              │
-                                                              ▼
-                                                        ┌──────────┐
-                                                        │  #app    │
-                                                        │  (DOM)   │
-                                                        └──────────┘
+   ┌──────────┐   hashchange   ┌──────────┐   auth     ┌──────────┐
+   │  URL     │ ──────────────▶│  Router  │ ──check──▶│ Guard    │
+   │ #/path   │                │  match   │           │ pass?    │
+   └──────────┘                └──────────┘           └────┬─────┘
+                                                           │
+                                              yes ─────────┼──────── no
+                                                           │         │
+                                                      import()   redirect
+                                                           │      #/login
+                                                           ▼
+                                                     ┌──────────┐
+                                                     │  View    │
+                                                     │ .render()│
+                                                     └────┬─────┘
+                                                          │
+                                                     await render
+                                                          │
+                                                          ▼
+                                                     ┌──────────┐
+                                                     │  #app    │
+                                                     │  (DOM)   │
+                                                     └──────────┘
    ═══════════════════════════════════════════════════════════════ */
+
+import { getUser, getProfile } from './lib/supabase.js';
 
 const routes = {
   '/':           () => import('./views/dashboard.js'),
@@ -34,6 +46,9 @@ const titles = {
   '/login':      'Sign In',
   '/settings':   'Settings',
 };
+
+// Routes that don't require authentication
+const PUBLIC_ROUTES = ['/login'];
 
 let currentView = null;
 
@@ -63,6 +78,36 @@ async function navigate() {
   const app = document.getElementById('app');
   const pageTitle = document.getElementById('pageTitle');
 
+  // ── Auth guard ──
+  if (!PUBLIC_ROUTES.includes(path)) {
+    const user = await getUser();
+    if (!user) {
+      location.hash = '#/login';
+      return;
+    }
+
+    // Check if profile exists — redirect to onboarding if not
+    if (path !== '/onboarding') {
+      const profile = await getProfile();
+      if (!profile) {
+        location.hash = '#/onboarding';
+        return;
+      }
+      // Update sidebar user name
+      const userName = document.getElementById('userName');
+      if (userName) userName.textContent = profile.name;
+    }
+  }
+
+  // If logged in and hitting /login, redirect to dashboard
+  if (path === '/login') {
+    const user = await getUser();
+    if (user) {
+      location.hash = '#/';
+      return;
+    }
+  }
+
   // Update page title
   if (pageTitle) {
     pageTitle.textContent = titles[path] || 'Carer Liaison';
@@ -74,6 +119,16 @@ async function navigate() {
     const route = link.dataset.route;
     link.classList.toggle('active', route === path);
   });
+
+  // Show/hide sidebar based on auth state (hide on login/onboarding)
+  const sidebar = document.getElementById('sidebar');
+  if (sidebar) {
+    sidebar.style.display = (path === '/login' || path === '/onboarding') ? 'none' : '';
+  }
+  const mainContent = document.querySelector('.main-content');
+  if (mainContent) {
+    mainContent.style.marginLeft = (path === '/login' || path === '/onboarding') ? '0' : '';
+  }
 
   // Teardown previous view if it has a cleanup method
   if (currentView && typeof currentView.teardown === 'function') {
@@ -87,12 +142,11 @@ async function navigate() {
 
     // Re-trigger enter animation
     app.classList.remove('view-enter');
-    // Force reflow to restart animation
-    void app.offsetWidth;
+    void app.offsetWidth; // force reflow
     app.classList.add('view-enter');
 
     if (typeof mod.render === 'function') {
-      mod.render(app);
+      await mod.render(app);
     }
   } catch (err) {
     console.error(`[router] Failed to load view for ${path}:`, err);

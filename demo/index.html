@@ -442,7 +442,10 @@
       text-align: center; padding: 40px 20px 8px;
       animation: fadeUp 0.6s ease-out;
     }
-    .intro-emoji { font-size: 40px; margin-bottom: 12px; }
+    .intro-emoji {
+      width: 48px; height: 4px; border-radius: 2px;
+      background: var(--teal); margin: 0 auto 16px; opacity: 0.6;
+    }
     .intro-audience {
       font-size: 13px; font-weight: 600; text-transform: uppercase;
       letter-spacing: 0.08em; color: var(--teal);
@@ -550,7 +553,7 @@
     <!-- Warm intro -->
     <div class="intro-hero" id="introHero">
       <p class="intro-audience">For families &amp; carers of people with disability</p>
-      <div class="intro-emoji">💛</div>
+      <div class="intro-emoji" aria-hidden="true"></div>
       <h1 class="intro-title">Your caring matters.<br>So does how you feel.</h1>
       <p class="intro-sub">A private journal that listens, reflects back what you might not see yourself, and reminds you that what you're going through has a name — and you're not alone in it.</p>
       <div class="intro-features">

@@ -428,12 +428,86 @@
 
     /* Demo trigger */
     .demo-trigger {
-      font-family: var(--sans); font-size: 13px; font-weight: 500;
-      color: var(--teal); background: none; border: none;
-      cursor: pointer; padding: 4px 0; text-align: left;
-      transition: color 0.15s;
+      font-family: var(--sans); font-size: 14px; font-weight: 600;
+      color: var(--white); background: var(--teal); border: none;
+      cursor: pointer; padding: 12px 24px; text-align: center;
+      border-radius: var(--r-xl); transition: all 0.2s;
+      width: 100%; margin-top: 4px;
     }
-    .demo-trigger:hover { color: var(--teal-dark); text-decoration: underline; }
+    .demo-trigger:hover { background: var(--teal-dark); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+    /* Warm intro hero */
+    .intro-hero {
+      text-align: center; padding: 40px 20px 8px;
+      animation: fadeUp 0.6s ease-out;
+    }
+    .intro-emoji { font-size: 40px; margin-bottom: 12px; }
+    .intro-title {
+      font-family: var(--serif); font-size: 26px; color: var(--dark);
+      margin-bottom: 8px; line-height: 1.25;
+    }
+    .intro-sub {
+      font-size: 15px; color: var(--warm-gray); line-height: 1.55;
+      max-width: 440px; margin: 0 auto 20px;
+    }
+    .intro-features {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+      margin-bottom: 8px;
+    }
+    .intro-feature {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; color: var(--mid-gray); padding: 6px 12px;
+      background: var(--white); border: 1px solid var(--light-gray);
+      border-radius: 999px;
+    }
+    .intro-feature-icon { font-size: 14px; }
+    .intro-divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 20px 0 16px; color: var(--mid-gray); font-size: 12px;
+    }
+    .intro-divider::before, .intro-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--light-gray);
+    }
+
+    /* Setup row — compact inline version */
+    .setup-compact {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px; background: var(--white);
+      border: 1px solid var(--light-gray); border-radius: var(--r-lg);
+      margin-bottom: 6px;
+    }
+    .setup-compact .setup-label {
+      font-size: 12px; color: var(--mid-gray); white-space: nowrap; flex-shrink: 0;
+    }
+    .setup-compact .key-input {
+      flex: 1; font-family: var(--sans); font-size: 13px;
+      padding: 8px 12px; border: 1px solid var(--light-gray);
+      border-radius: var(--r-sm); outline: none; min-width: 0;
+    }
+    .setup-compact .key-input:focus { border-color: var(--teal); }
+    .setup-compact .key-save {
+      font-family: var(--sans); font-size: 12px; font-weight: 600;
+      padding: 8px 14px; background: var(--teal); color: white;
+      border: none; border-radius: var(--r-sm); cursor: pointer; white-space: nowrap;
+    }
+    .setup-compact .key-save:hover { background: var(--teal-dark); }
+
+    /* Progressive reveal for demo */
+    .demo-reveal { opacity: 0; transform: translateY(12px); }
+    .demo-reveal.visible {
+      animation: demoFadeUp 0.5s ease-out forwards;
+    }
+    @keyframes demoFadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .demo-label {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--mid-gray);
+      margin-bottom: 16px; padding: 4px 10px;
+      background: var(--off-white); border: 1px solid var(--light-gray);
+      border-radius: 999px;
+    }
 
     /* Footer */
     .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--mid-gray); }
@@ -463,15 +537,27 @@
   </nav>
 
   <main class="main">
-    <!-- API Key Setup -->
-    <div class="setup-banner" id="setupBanner" style="margin-top:24px">
-      <h3>Connect your Gemini API key to try it live</h3>
-      <p>Get a free key from <a href="https://aistudio.google.com/apikey" target="_blank">Google AI Studio</a> (30 seconds). Your key stays in your browser.</p>
-      <div class="key-row">
-        <input type="password" class="key-input" id="apiKeyInput" placeholder="Paste your Gemini API key...">
-        <button class="key-save" id="saveKeyBtn">Save</button>
+    <!-- Warm intro -->
+    <div class="intro-hero" id="introHero">
+      <div class="intro-emoji">💛</div>
+      <h1 class="intro-title">Your caring matters.<br>So does how you feel.</h1>
+      <p class="intro-sub">A private journal that listens, reflects back what you might not see yourself, and reminds you that what you're going through has a name — and you're not alone in it.</p>
+      <div class="intro-features">
+        <span class="intro-feature"><span class="intro-feature-icon">🌹</span> Rose, Bud &amp; Thorn reflection</span>
+        <span class="intro-feature"><span class="intro-feature-icon">🧠</span> Psychology-backed insights</span>
+        <span class="intro-feature"><span class="intro-feature-icon">🎙️</span> Voice or text</span>
+        <span class="intro-feature"><span class="intro-feature-icon">🔒</span> Completely private</span>
       </div>
-      <button class="demo-trigger" id="demoTrigger">or see a demo of Sarah's day →</button>
+
+      <button class="demo-trigger" id="demoTrigger">See how it works — Sarah's day →</button>
+
+      <div class="intro-divider"><span>or try it yourself</span></div>
+
+      <div class="setup-compact" id="setupBanner">
+        <span class="setup-label">API key</span>
+        <input type="password" class="key-input" id="apiKeyInput" placeholder="Paste Gemini key from aistudio.google.com">
+        <button class="key-save" id="saveKeyBtn">Connect</button>
+      </div>
     </div>
 
     <!-- Chat -->
@@ -501,6 +587,9 @@
         <button class="prompt-chip" data-text="It was such a long day. Tom had a meltdown at school pickup and I had to carry him to the car while everyone stared. Then his OT cancelled last minute. I managed to get him to eat dinner though which felt like a win.">Hard day at school pickup</button>
         <button class="prompt-chip" data-text="Actually today was pretty good. Tom's teacher said he sat through circle time for the first time in weeks. I even had 20 minutes to myself while he played independently. Small wins but I'll take them.">Small wins today</button>
         <button class="prompt-chip" data-text="I'm so frustrated with the NDIA. They rejected our plan review request saying there's no change in circumstances. But Tom clearly needs more speech therapy — his therapist Sarah wrote a letter supporting it. I don't know what to do next.">NDIA frustration</button>
+        <button class="prompt-chip" data-text="I haven't slept properly in weeks. She wakes up three or four times a night and I'm the only one who can settle her. My partner tries but she just screams louder. I feel like I'm disappearing.">Can't sleep anymore</button>
+        <button class="prompt-chip" data-text="Had coffee with my sister today and she asked how I was doing — not about Mia, about ME. I almost cried. I don't think anyone's asked me that in months. It felt strange to even think about what I need.">Someone finally asked about me</button>
+        <button class="prompt-chip" data-text="I feel guilty saying this but sometimes I resent how much of my life revolves around appointments, therapies, and paperwork. I love him so much but I grieve the life I thought we'd have. Is that terrible?">Feeling guilty about my feelings</button>
       </div>
     </div>
   </main>
@@ -541,8 +630,12 @@
     let voiceSeconds = 0;
 
     // ───────── INIT ─────────
-    if (apiKey) setupBanner.classList.add('hidden');
-    addAIMessage("Hey there. I'm here whenever you're ready.\n\nHow was your day?");
+    const introHero = $('introHero');
+    if (apiKey) {
+      setupBanner.style.display = 'none';
+      introHero.style.display = 'none';
+      addAIMessage("Hey. No rush — whenever you're ready.\n\nWhat's been on your mind today? Could be something that happened, something you're feeling, or just how the day went. There's no wrong way to start.");
+    }
     updateSendBtn();
 
     // ───────── API KEY ─────────
@@ -551,7 +644,8 @@
       if (!key) return;
       apiKey = key;
       localStorage.setItem('gemini_api_key', key);
-      setupBanner.classList.add('hidden');
+      introHero.style.display = 'none';
+      addAIMessage("Hey. No rush — whenever you're ready.\n\nWhat's been on your mind today? Could be something that happened, something you're feeling, or just how the day went. There's no wrong way to start.");
       updateSendBtn();
       journalInput.focus();
     });
@@ -1132,22 +1226,65 @@ Rules:
     }
 
     function runDemo() {
-      // Hide setup banner
-      setupBanner.classList.add('hidden');
+      // Hide intro hero
+      introHero.style.display = 'none';
       // Hide prompts
       prompts.style.display = 'none';
 
-      // Show user journal entry
-      addUserMessage(DEMO_JOURNAL);
+      // Step 1: Demo label
+      const label = document.createElement('div');
+      label.className = 'demo-label';
+      label.innerHTML = '✨ Demo — Sarah\'s journal entry';
+      label.style.textAlign = 'center';
+      chat.appendChild(label);
 
-      // Show AI response
-      addAIMessage(DEMO_AI_RESPONSE);
+      // Step 2: AI greeting (immediate)
+      const greeting = addAIMessage("Hey Sarah. I'm here. Tell me about today — whatever's on your mind.");
 
-      // Render the full reflection card
-      renderReflection(DEMO_DATA);
+      // Step 3: User journal entry (staggered)
+      setTimeout(() => {
+        const userMsg = document.createElement('div');
+        userMsg.className = 'message message-user demo-reveal';
+        userMsg.innerHTML = `
+          <div class="bubble bubble-user">${escapeHtml(DEMO_JOURNAL)}</div>
+          <div class="avatar avatar-user">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+        `;
+        chat.appendChild(userMsg);
+        requestAnimationFrame(() => userMsg.classList.add('visible'));
+        scrollToBottom();
+
+        // Step 4: Typing indicator then AI response
+        setTimeout(() => {
+          const typingEl = addTypingIndicator();
+
+          setTimeout(() => {
+            typingEl.remove();
+            const aiMsg = document.createElement('div');
+            aiMsg.className = 'message message-ai demo-reveal';
+            aiMsg.innerHTML = `
+              <div class="avatar avatar-ai">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              </div>
+              <div class="bubble bubble-ai">${escapeHtml(DEMO_AI_RESPONSE)}</div>
+            `;
+            chat.appendChild(aiMsg);
+            requestAnimationFrame(() => aiMsg.classList.add('visible'));
+            scrollToBottom();
+
+            // Step 5: Reflection card
+            setTimeout(() => {
+              renderReflection(DEMO_DATA);
+            }, 800);
+
+          }, 1500);
+        }, 600);
+
+      }, 800);
 
       // Disable input (demo mode)
-      journalInput.placeholder = 'This is a demo — enter an API key above to try it yourself';
+      journalInput.placeholder = 'This is a demo — connect an API key above to try it yourself';
       journalInput.disabled = true;
       sendBtn.disabled = true;
     }

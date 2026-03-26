@@ -609,8 +609,7 @@
 
   <script>
     // ───────── CONFIG ─────────
-    const GEMINI_KEY = 'AIzaSyCOC_Z9O418bTrq_7ORvWEh4clcmyQe0AI';
-    const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`;
+    const EDGE_FN_URL = 'https://tozcptfyxigqvsomzkmp.supabase.co/functions/v1/journal-ai';
 
     // ───────── ELEMENTS ─────────
     const $ = id => document.getElementById(id);
@@ -902,35 +901,27 @@ Rules:
 - Return ONLY the JSON object`;
     }
 
-    // ───────── CONVERSATION RESPONSE (via Gemini) ─────────
-    async function geminiCall(systemPrompt, messages, maxTokens = 400) {
-      const contents = messages.map(m => ({
-        role: m.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: m.content }]
-      }));
-
-      const body = {
-        contents,
-        generationConfig: { maxOutputTokens: maxTokens },
-      };
-      if (systemPrompt) {
-        body.systemInstruction = { parts: [{ text: systemPrompt }] };
-      }
-
-      const response = await fetch(GEMINI_URL, {
+    // ───────── API CALL (via Supabase Edge Function) ─────────
+    async function aiCall(systemPrompt, messages, maxTokens = 400) {
+      const response = await fetch(EDGE_FN_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
+        body: JSON.stringify({
+          system: systemPrompt,
+          messages,
+          max_tokens: maxTokens,
+          stream: false
+        })
       });
 
       if (!response.ok) {
         const err = await response.text();
-        console.error('Gemini API error:', err);
+        console.error('API error:', err);
         throw new Error(`API error ${response.status}`);
       }
 
       const data = await response.json();
-      return data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+      return data?.content?.[0]?.text || '';
     }
 
     async function getConversationResponse(userText) {
@@ -938,15 +929,15 @@ Rules:
         ...conversationHistory.slice(-6),
         { role: 'user', content: userText }
       ];
-      const text = await geminiCall(getConversationSystemPrompt(), messages, 300);
+      const text = await aiCall(getConversationSystemPrompt(), messages, 300);
       return text || "I'm here. Tell me more.";
     }
 
-    // ───────── EXTRACTION (via Gemini, non-streamed) ─────────
+    // ───────── EXTRACTION (via Edge Function) ─────────
     async function extractRosebudAndEntities(journalText) {
       try {
         const system = 'You are a reflective journaling coach for carers of people with disabilities. You ONLY return valid JSON. Never include markdown fences or any text outside the JSON object.';
-        let text = await geminiCall(system, [{ role: 'user', content: getExtractionPrompt(journalText) }], 1200);
+        let text = await aiCall(system, [{ role: 'user', content: getExtractionPrompt(journalText) }], 1200);
 
         // Clean markdown code fences if present
         text = text.replace(/^```json?\s*/i, '').replace(/\s*```$/i, '').trim();

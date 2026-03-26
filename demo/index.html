@@ -200,93 +200,152 @@
       border-color: var(--teal-light); background: var(--teal-mist); color: var(--teal-dark);
     }
 
-    /* ───────── Rosebud Cards ───────── */
-    .rosebud-section {
-      margin-top: 8px; margin-bottom: 24px;
-      animation: fadeUp 0.4s ease-out;
+    /* ───────── Journal Reflection ───────── */
+    .reflection-section {
+      margin-top: 8px; margin-bottom: 28px; padding-left: 48px;
+      animation: fadeUp 0.5s ease-out;
     }
-    .rosebud-header {
+    .reflection-wrapper {
+      background: var(--white); border: 1px solid var(--light-gray);
+      border-radius: var(--r-xl); box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+    .reflection-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px; background: linear-gradient(135deg, var(--teal-mist), #f5f0ff);
+      border-bottom: 1px solid var(--light-gray);
+    }
+    .reflection-header-left {
       display: flex; align-items: center; gap: 8px;
-      margin-bottom: 12px; padding-left: 48px;
     }
-    .rosebud-header-icon { font-size: 14px; }
-    .rosebud-header-text {
-      font-size: 12px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.06em; color: var(--teal);
+    .reflection-header-icon { font-size: 18px; }
+    .reflection-header-title {
+      font-family: var(--serif); font-size: 16px; color: var(--dark);
+    }
+    .reflection-header-date {
+      font-size: 11px; color: var(--mid-gray); font-weight: 500;
     }
 
-    .rosebud-cards {
-      display: flex; flex-direction: column; gap: 10px;
-      padding-left: 48px;
+    /* Mood bar */
+    .mood-bar {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 20px; background: var(--off-white);
+      border-bottom: 1px solid var(--light-gray);
     }
+    .mood-emoji { font-size: 24px; }
+    .mood-info { flex: 1; }
+    .mood-label { font-size: 12px; color: var(--mid-gray); }
+    .mood-text { font-size: 14px; font-weight: 600; color: var(--dark); }
+    .mood-track {
+      width: 80px; height: 6px; background: var(--light-gray);
+      border-radius: 3px; overflow: hidden;
+    }
+    .mood-fill {
+      height: 100%; border-radius: 3px;
+      transition: width 0.8s ease-out;
+    }
+
+    /* RBT cards */
+    .rbt-cards { padding: 16px 20px; display: flex; flex-direction: column; gap: 14px; }
+
     .rbt-card {
-      padding: 14px 16px; border-radius: var(--r-lg);
-      border-left: 3px solid; font-size: 14px; line-height: 1.5;
+      padding: 16px; border-radius: var(--r-lg);
+      border-left: 4px solid; position: relative;
     }
-    .rbt-card-header {
-      display: flex; align-items: center; gap: 6px;
-      margin-bottom: 6px; font-weight: 600; font-size: 13px;
+    .rbt-card-top {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
     }
-    .rbt-card-body { color: var(--warm-gray); }
-
-    .rbt-rose { background: var(--rose-bg); border-color: var(--rose); }
-    .rbt-rose .rbt-card-header { color: var(--rose); }
-    .rbt-bud { background: var(--bud-bg); border-color: var(--bud); }
-    .rbt-bud .rbt-card-header { color: var(--bud); }
-    .rbt-thorn { background: var(--thorn-bg); border-color: var(--thorn); }
-    .rbt-thorn .rbt-card-header { color: var(--thorn); }
-
-    /* ───────── Entity Extraction ───────── */
-    .entities-section {
-      margin-bottom: 24px; padding-left: 48px;
-      animation: fadeUp 0.4s ease-out 0.15s both;
+    .rbt-card-emoji { font-size: 20px; }
+    .rbt-card-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
-    .entities-header {
-      font-size: 12px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.06em; color: var(--mid-gray); margin-bottom: 10px;
+    .rbt-card-title {
+      font-size: 15px; font-weight: 600; color: var(--dark);
+      margin-bottom: 6px; line-height: 1.3;
     }
-    .entity-groups {
-      display: flex; flex-wrap: wrap; gap: 8px;
+    .rbt-card-body {
+      font-size: 13px; color: var(--warm-gray); line-height: 1.5;
+      margin-bottom: 8px;
     }
-    .entity-group {
-      display: flex; flex-direction: column; gap: 4px;
+    .rbt-card-quote {
+      font-size: 12px; font-style: italic; color: var(--mid-gray);
+      padding-left: 10px; border-left: 2px solid; margin-bottom: 8px;
+      line-height: 1.4;
     }
-    .entity-group-label {
-      font-size: 10px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.06em; color: var(--mid-gray);
-    }
-    .entity-tags { display: flex; flex-wrap: wrap; gap: 4px; }
-    .entity-tag {
-      font-size: 12px; font-weight: 500; padding: 3px 10px;
+    .rbt-card-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .rbt-tag {
+      font-size: 11px; font-weight: 500; padding: 2px 8px;
       border-radius: 999px; border: 1px solid;
     }
-    .tag-people { background: #eff6ff; border-color: #bfdbfe; color: #1d4ed8; }
-    .tag-emotion { background: #fdf2f8; border-color: #f9a8d4; color: #be185d; }
-    .tag-service { background: #ecfdf5; border-color: #6ee7b7; color: #047857; }
-    .tag-action { background: #fffbeb; border-color: #fcd34d; color: #92400e; }
-    .tag-ndis { background: #f5f3ff; border-color: #c4b5fd; color: #5b21b6; }
 
-    /* ───────── Insights Panel ───────── */
-    .insights-panel {
-      margin-bottom: 24px; padding-left: 48px;
-      animation: fadeUp 0.4s ease-out 0.3s both;
+    .rbt-rose { background: var(--rose-bg); border-color: var(--rose); }
+    .rbt-rose .rbt-card-label { color: var(--rose); }
+    .rbt-rose .rbt-card-quote { border-color: var(--rose-border); }
+    .rbt-rose .rbt-tag { background: #fff; border-color: var(--rose-border); color: var(--rose); }
+
+    .rbt-bud { background: var(--bud-bg); border-color: var(--bud); }
+    .rbt-bud .rbt-card-label { color: var(--bud); }
+    .rbt-bud .rbt-card-quote { border-color: var(--bud-border); }
+    .rbt-bud .rbt-tag { background: #fff; border-color: var(--bud-border); color: var(--bud); }
+
+    .rbt-thorn { background: var(--thorn-bg); border-color: var(--thorn); }
+    .rbt-thorn .rbt-card-label { color: var(--thorn); }
+    .rbt-thorn .rbt-card-quote { border-color: var(--thorn-border); }
+    .rbt-thorn .rbt-tag { background: #fff; border-color: var(--thorn-border); color: var(--thorn); }
+
+    /* Action items */
+    .actions-section {
+      padding: 0 20px 16px; display: flex; flex-direction: column; gap: 6px;
     }
-    .insight-card {
-      background: var(--white); border: 1px solid var(--light-gray);
-      border-radius: var(--r-lg); padding: 16px; box-shadow: var(--shadow-sm);
+    .actions-label {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--mid-gray); margin-bottom: 4px;
     }
-    .insight-row {
-      display: flex; align-items: center; gap: 10px;
-      padding: 8px 0;
+    .action-item {
+      display: flex; align-items: flex-start; gap: 8px;
+      padding: 8px 10px; background: var(--off-white);
+      border-radius: var(--r-sm); font-size: 13px; color: var(--warm-gray);
     }
-    .insight-row + .insight-row { border-top: 1px solid var(--light-gray); }
-    .insight-icon {
-      width: 28px; height: 28px; border-radius: 8px;
+    .action-check {
+      width: 16px; height: 16px; border: 1.5px solid var(--teal);
+      border-radius: 4px; flex-shrink: 0; margin-top: 1px;
+      cursor: pointer; transition: all 0.15s;
       display: flex; align-items: center; justify-content: center;
-      font-size: 14px; flex-shrink: 0;
     }
-    .insight-label { font-size: 12px; color: var(--mid-gray); }
-    .insight-value { font-size: 14px; font-weight: 600; color: var(--dark); }
+    .action-check.checked {
+      background: var(--teal); border-color: var(--teal);
+    }
+    .action-check.checked::after {
+      content: ''; width: 6px; height: 3px;
+      border-left: 1.5px solid white; border-bottom: 1.5px solid white;
+      transform: rotate(-45deg); margin-top: -1px;
+    }
+    .action-text.done { text-decoration: line-through; color: var(--mid-gray); }
+
+    /* Reflection footer */
+    .reflection-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 20px; border-top: 1px solid var(--light-gray);
+      background: var(--off-white);
+    }
+    .reflection-footer-left {
+      display: flex; gap: 4px;
+    }
+    .footer-tag {
+      font-size: 10px; font-weight: 600; padding: 2px 8px;
+      border-radius: 999px; background: var(--light-gray); color: var(--mid-gray);
+    }
+    .footer-tag.people { background: #eff6ff; color: #1d4ed8; }
+    .footer-tag.emotion { background: #fdf2f8; color: #be185d; }
+    .footer-tag.service { background: #ecfdf5; color: #047857; }
+    .footer-tag.ndis { background: #f5f3ff; color: #5b21b6; }
+    .reflection-save {
+      font-family: var(--sans); font-size: 12px; font-weight: 600;
+      color: var(--teal); background: none; border: none;
+      cursor: pointer; display: flex; align-items: center; gap: 4px;
+    }
+    .reflection-save:hover { color: var(--teal-dark); }
 
     /* API key */
     .setup-banner {
@@ -590,12 +649,10 @@
         addAIMessage(responseText);
         conversationHistory.push({ role: 'model', parts: [{ text: responseText }] });
 
-        // Then: extract rosebud + entities (non-streamed, parallel)
+        // Then: extract rosebud reflection (non-streamed)
         const extractionData = await extractRosebudAndEntities(text);
         if (extractionData) {
-          renderRosebud(extractionData);
-          renderEntities(extractionData);
-          renderInsights(extractionData);
+          renderReflection(extractionData);
         }
 
       } catch (err) {
@@ -629,45 +686,51 @@ This is message ${messageCount + 1} in today's journal conversation.`;
     }
 
     function getExtractionPrompt(journalText) {
-      return `Analyze this carer's journal entry and extract structured data. Return ONLY valid JSON, no markdown, no explanation.
+      return `You are a reflective journaling coach for carers of people with disabilities. Analyze this journal entry deeply and extract a rich Rosebud reflection. Return ONLY valid JSON.
 
 Journal entry:
 "${journalText}"
 
-Return this exact JSON structure:
 {
   "rose": {
     "title": "short 3-5 word title of what went well",
-    "body": "1-2 sentence description of the positive moment"
+    "body": "2-3 sentences reflecting WHY this matters — help the carer see the significance of this win, even if they downplayed it",
+    "quote": "exact short phrase from their entry that shows this rose",
+    "tags": ["relevant people or concepts, e.g. Tom, resilience, connection"]
   },
   "bud": {
-    "title": "short 3-5 word title of what's emerging",
-    "body": "1-2 sentence description of opportunity or development"
+    "title": "short 3-5 word title of what's emerging or growing",
+    "body": "2-3 sentences about the opportunity or growth you see — things the carer might not have noticed yet. Be specific about what could develop.",
+    "quote": "exact short phrase from their entry that hints at this bud",
+    "tags": ["relevant concepts, e.g. independence, routine, advocacy"]
   },
   "thorn": {
     "title": "short 3-5 word title of what was hard",
-    "body": "1-2 sentence description of the challenge"
+    "body": "2-3 sentences that validate the difficulty WITHOUT offering solutions. Name the emotion. Acknowledge the weight.",
+    "quote": "exact short phrase from their entry that shows this thorn",
+    "tags": ["relevant concepts, e.g. isolation, system failure, burnout"]
   },
-  "entities": {
-    "people": ["names or roles mentioned, e.g. Tom, Ms Chen, OT therapist"],
-    "emotions": ["specific emotions detected, e.g. frustrated, proud, exhausted"],
-    "services": ["NDIS services or providers mentioned, e.g. OT, speech therapy, NDIA"],
-    "actions": ["potential next steps implied, e.g. Call OT to reschedule, Follow up on plan review"],
-    "ndis_terms": ["NDIS-specific terms used, e.g. plan review, core supports, capacity building"]
-  },
+  "actions": [
+    {"text": "specific actionable next step implied by the entry", "category": "self-care|admin|advocacy|provider|school"},
+    {"text": "another action", "category": "..."}
+  ],
+  "people": ["Name (relationship)", "Name (role)"],
+  "emotions": ["specific emotions detected — not generic, use precise words like 'defeated' not 'sad'"],
+  "services": ["NDIS services or providers mentioned"],
   "mood_score": 65,
-  "energy_label": "Running on fumes",
-  "carer_load": "High"
+  "mood_label": "a single evocative phrase that captures today's emotional tone, e.g. 'Exhausted but holding it together' or 'Small light in a heavy week'",
+  "energy_label": "one of: Thriving, Steady, Stretched thin, Running on fumes, At breaking point"
 }
 
 Rules:
-- mood_score: 0-100 (0 = crisis, 100 = thriving)
-- energy_label: one of "Thriving", "Steady", "Stretched thin", "Running on fumes", "At breaking point"
-- carer_load: one of "Light", "Moderate", "High", "Overwhelming"
-- If no rose/bud/thorn can be extracted, still provide your best interpretation
-- People array should include relationship context if clear (e.g. "Tom (son)")
-- Actions should be specific and actionable
-- Return ONLY the JSON object, nothing else`;
+- mood_score: 0-100 (0=crisis, 100=thriving)
+- The quote fields must be SHORT (under 15 words) phrases taken from or closely paraphrasing the journal entry
+- Rose: find it even in dark entries — small wins, moments of strength, acts of love
+- Bud: look for growth edges — new skills forming, patterns shifting, seeds of change
+- Thorn: name the hard thing directly — don't minimise, don't solve
+- Actions: 2-4 concrete next steps. Each must be specific enough to do tomorrow.
+- Emotions: use precise, specific words (e.g. "overwhelmed and unseen" not just "stressed")
+- Return ONLY the JSON object`;
     }
 
     // ───────── STREAMING RESPONSE ─────────
@@ -797,108 +860,107 @@ Rules:
       return div;
     }
 
-    function renderRosebud(data) {
+    function renderReflection(data) {
       if (!data.rose && !data.bud && !data.thorn) return;
-
-      const section = document.createElement('div');
-      section.className = 'rosebud-section';
-      section.innerHTML = `
-        <div class="rosebud-header">
-          <span class="rosebud-header-icon">🌱</span>
-          <span class="rosebud-header-text">Today's Rosebud</span>
-        </div>
-        <div class="rosebud-cards">
-          ${data.rose ? `
-          <div class="rbt-card rbt-rose">
-            <div class="rbt-card-header">🌹 Rose — ${esc(data.rose.title)}</div>
-            <div class="rbt-card-body">${esc(data.rose.body)}</div>
-          </div>` : ''}
-          ${data.bud ? `
-          <div class="rbt-card rbt-bud">
-            <div class="rbt-card-header">🌱 Bud — ${esc(data.bud.title)}</div>
-            <div class="rbt-card-body">${esc(data.bud.body)}</div>
-          </div>` : ''}
-          ${data.thorn ? `
-          <div class="rbt-card rbt-thorn">
-            <div class="rbt-card-header">🥀 Thorn — ${esc(data.thorn.title)}</div>
-            <div class="rbt-card-body">${esc(data.thorn.body)}</div>
-          </div>` : ''}
-        </div>
-      `;
-      chat.appendChild(section);
-      scrollToBottom();
-    }
-
-    function renderEntities(data) {
-      if (!data.entities) return;
-      const e = data.entities;
-      const hasAny = (e.people?.length || e.emotions?.length || e.services?.length || e.actions?.length || e.ndis_terms?.length);
-      if (!hasAny) return;
-
-      const section = document.createElement('div');
-      section.className = 'entities-section';
-
-      let html = '<div class="entities-header">Extracted from your entry</div><div class="entity-tags">';
-
-      const tagMap = [
-        ['people', 'tag-people', '👤'],
-        ['emotions', 'tag-emotion', '💭'],
-        ['services', 'tag-service', '🏥'],
-        ['actions', 'tag-action', '⚡'],
-        ['ndis_terms', 'tag-ndis', '📋']
-      ];
-
-      for (const [key, cls, icon] of tagMap) {
-        if (e[key]?.length) {
-          for (const item of e[key]) {
-            html += `<span class="entity-tag ${cls}">${icon} ${esc(item)}</span>`;
-          }
-        }
-      }
-
-      html += '</div>';
-      section.innerHTML = html;
-      chat.appendChild(section);
-      scrollToBottom();
-    }
-
-    function renderInsights(data) {
-      if (!data.mood_score && !data.energy_label && !data.carer_load) return;
 
       const moodColor = data.mood_score >= 70 ? 'var(--bud)' :
                          data.mood_score >= 40 ? 'var(--entity-amber)' : 'var(--thorn)';
+      const moodEmoji = data.mood_score >= 70 ? '😊' : data.mood_score >= 40 ? '😐' : '😔';
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('en-AU', { hour: 'numeric', minute: '2-digit' });
+
+      function renderCard(type, emoji, label, cardData) {
+        if (!cardData) return '';
+        const tags = (cardData.tags || []).map(t => `<span class="rbt-tag">${esc(t)}</span>`).join('');
+        return `
+          <div class="rbt-card rbt-${type}">
+            <div class="rbt-card-top">
+              <span class="rbt-card-emoji">${emoji}</span>
+              <span class="rbt-card-label">${label}</span>
+            </div>
+            <div class="rbt-card-title">${esc(cardData.title)}</div>
+            ${cardData.quote ? `<div class="rbt-card-quote">"${esc(cardData.quote)}"</div>` : ''}
+            <div class="rbt-card-body">${esc(cardData.body)}</div>
+            ${tags ? `<div class="rbt-card-tags">${tags}</div>` : ''}
+          </div>`;
+      }
+
+      // Actions HTML
+      let actionsHtml = '';
+      if (data.actions?.length) {
+        const items = data.actions.map(a => {
+          const actionObj = typeof a === 'string' ? { text: a, category: 'admin' } : a;
+          return `
+            <div class="action-item">
+              <div class="action-check" onclick="this.classList.toggle('checked'); this.nextElementSibling.classList.toggle('done')"></div>
+              <span class="action-text">${esc(actionObj.text)}</span>
+            </div>`;
+        }).join('');
+        actionsHtml = `
+          <div class="actions-section">
+            <div class="actions-label">Next steps</div>
+            ${items}
+          </div>`;
+      }
+
+      // Footer tags
+      const footerTags = [];
+      (data.people || []).forEach(p => footerTags.push(`<span class="footer-tag people">${esc(p)}</span>`));
+      (data.emotions || []).forEach(e => footerTags.push(`<span class="footer-tag emotion">${esc(e)}</span>`));
+      (data.services || []).forEach(s => footerTags.push(`<span class="footer-tag service">${esc(s)}</span>`));
 
       const section = document.createElement('div');
-      section.className = 'insights-panel';
+      section.className = 'reflection-section';
       section.innerHTML = `
-        <div class="insight-card">
-          <div class="insight-row">
-            <div class="insight-icon" style="background:${moodColor}15; color:${moodColor}">
-              ${data.mood_score >= 70 ? '😊' : data.mood_score >= 40 ? '😐' : '😔'}
+        <div class="reflection-wrapper">
+          <div class="reflection-header">
+            <div class="reflection-header-left">
+              <span class="reflection-header-icon">🌱</span>
+              <span class="reflection-header-title">Today's Reflection</span>
+            </div>
+            <span class="reflection-header-date">${timeStr}</span>
+          </div>
+
+          <div class="mood-bar">
+            <span class="mood-emoji">${moodEmoji}</span>
+            <div class="mood-info">
+              <div class="mood-label">${esc(data.energy_label || '')}</div>
+              <div class="mood-text">${esc(data.mood_label || '')}</div>
             </div>
             <div>
-              <div class="insight-label">Mood</div>
-              <div class="insight-value" style="color:${moodColor}">${data.mood_score}/100</div>
+              <div class="mood-track">
+                <div class="mood-fill" style="width:${data.mood_score || 50}%; background:${moodColor}"></div>
+              </div>
             </div>
           </div>
-          <div class="insight-row">
-            <div class="insight-icon" style="background: var(--teal-pale); color: var(--teal);">⚡</div>
-            <div>
-              <div class="insight-label">Energy</div>
-              <div class="insight-value">${esc(data.energy_label || 'Unknown')}</div>
-            </div>
+
+          <div class="rbt-cards">
+            ${renderCard('rose', '🌹', 'Rose', data.rose)}
+            ${renderCard('bud', '🌱', 'Bud', data.bud)}
+            ${renderCard('thorn', '🥀', 'Thorn', data.thorn)}
           </div>
-          <div class="insight-row">
-            <div class="insight-icon" style="background: #f5f3ff; color: var(--entity-purple);">📊</div>
-            <div>
-              <div class="insight-label">Carer Load</div>
-              <div class="insight-value">${esc(data.carer_load || 'Unknown')}</div>
+
+          ${actionsHtml}
+
+          <div class="reflection-footer">
+            <div class="reflection-footer-left">
+              ${footerTags.slice(0, 6).join('')}
             </div>
+            <button class="reflection-save" onclick="saveReflection(this)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save entry
+            </button>
           </div>
         </div>
       `;
       chat.appendChild(section);
       scrollToBottom();
+    }
+
+    function saveReflection(btn) {
+      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Saved';
+      btn.style.color = 'var(--bud)';
+      showToast('Journal entry saved');
     }
 
     // ───────── HELPERS ─────────

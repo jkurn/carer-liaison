@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Letter Generator — Carer Liaison Demo</title>
+  <title>Carer Journal — Carer Liaison Demo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
   <style>
@@ -21,18 +21,28 @@
       --light-gray: #e8e8e6;
       --off-white: #f8f8f6;
       --white: #ffffff;
-      --red: #dc3545;
-      --red-bg: #fef2f2;
-      --green: #059669;
-      --amber: #d97706;
+      --rose: #e84393;
+      --rose-bg: #fdf2f8;
+      --rose-border: #f9a8d4;
+      --bud: #00b894;
+      --bud-bg: #ecfdf5;
+      --bud-border: #6ee7b7;
+      --thorn: #e17055;
+      --thorn-bg: #fef3ee;
+      --thorn-border: #fdba74;
+      --entity-blue: #3b82f6;
+      --entity-purple: #8b5cf6;
+      --entity-amber: #f59e0b;
+      --entity-green: #10b981;
+      --entity-pink: #ec4899;
       --serif: 'DM Serif Display', Georgia, serif;
       --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --r-sm: 8px;
       --r-md: 12px;
       --r-lg: 16px;
       --r-xl: 20px;
       --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
       --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-      --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
     }
 
     body {
@@ -46,454 +56,245 @@
 
     /* Nav */
     .nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      position: sticky; top: 0; z-index: 100;
       background: rgba(255,255,255,0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--light-gray);
-      padding: 0 24px;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      padding: 0 24px; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
     }
-    .nav-brand {
-      font-family: var(--serif);
-      font-size: 20px;
-      color: var(--teal);
-      text-decoration: none;
-    }
+    .nav-brand { font-family: var(--serif); font-size: 20px; color: var(--teal); text-decoration: none; }
     .nav-badge {
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--teal);
-      background: var(--teal-pale);
-      padding: 4px 10px;
-      border-radius: 999px;
+      font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--teal); background: var(--teal-pale); padding: 4px 10px; border-radius: 999px;
     }
 
-    /* Hero */
-    .hero {
-      text-align: center;
-      padding: 48px 24px 32px;
-      max-width: 640px;
-      margin: 0 auto;
-    }
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--teal);
-      margin-bottom: 16px;
-    }
-    .hero-eyebrow svg {
-      width: 16px;
-      height: 16px;
-    }
-    .hero h1 {
-      font-family: var(--serif);
-      font-size: clamp(28px, 5vw, 40px);
-      color: var(--dark);
-      line-height: 1.15;
-      margin-bottom: 12px;
-    }
-    .hero p {
-      font-size: 16px;
-      color: var(--warm-gray);
-      line-height: 1.5;
-      max-width: 480px;
-      margin: 0 auto;
-    }
-
-    /* Main container */
+    /* Main */
     .main {
-      flex: 1;
-      max-width: 720px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 0 24px 48px;
+      flex: 1; max-width: 680px; width: 100%; margin: 0 auto; padding: 0 24px 48px;
     }
 
-    /* Input section */
-    .input-section {
-      margin-bottom: 24px;
+    /* Chat area */
+    .chat { padding-top: 32px; }
+    .message {
+      display: flex; gap: 12px; margin-bottom: 24px;
+      animation: fadeUp 0.3s ease-out;
     }
-    .input-label {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--dark);
-      margin-bottom: 8px;
-      display: block;
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .input-hint {
-      font-size: 13px;
-      color: var(--mid-gray);
-      margin-bottom: 12px;
+    .avatar {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
     }
-    .textarea-wrap {
-      position: relative;
+    .avatar-ai { background: var(--teal); color: white; }
+    .avatar-user { background: var(--light-gray); color: var(--warm-gray); }
+    .bubble {
+      padding: 14px 18px; border-radius: 18px; font-size: 15px; line-height: 1.55;
+      max-width: 520px;
     }
-    textarea {
-      width: 100%;
-      min-height: 120px;
-      padding: 16px;
-      font-family: var(--sans);
-      font-size: 15px;
-      line-height: 1.5;
-      color: var(--dark);
-      background: var(--white);
-      border: 1.5px solid var(--light-gray);
-      border-radius: var(--r-lg);
-      resize: vertical;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      outline: none;
+    .bubble-ai {
+      background: var(--white); border: 1px solid var(--light-gray);
+      border-top-left-radius: 4px;
     }
-    textarea:focus {
-      border-color: var(--teal);
-      box-shadow: 0 0 0 3px rgba(0,128,128,0.1);
+    .bubble-user {
+      background: var(--teal); color: white;
+      border-top-right-radius: 4px; margin-left: auto;
     }
-    textarea::placeholder {
-      color: #b0b0ae;
+    .message-user { flex-direction: row-reverse; }
+
+    /* Typing indicator */
+    .typing { display: flex; gap: 4px; padding: 8px 0; }
+    .typing span {
+      width: 7px; height: 7px; background: var(--mid-gray); border-radius: 50%;
+      animation: bounce 1.4s ease-in-out infinite;
+    }
+    .typing span:nth-child(2) { animation-delay: 0.2s; }
+    .typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-6px); }
     }
 
-    /* Document type selector */
-    .doc-types {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-    .doc-type {
-      font-family: var(--sans);
-      font-size: 13px;
-      font-weight: 500;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1.5px solid var(--light-gray);
-      background: var(--white);
-      color: var(--warm-gray);
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .doc-type:hover {
-      border-color: var(--teal-light);
-      color: var(--teal-dark);
-    }
-    .doc-type.active {
-      border-color: var(--teal);
-      background: var(--teal-pale);
-      color: var(--teal-dark);
-    }
-
-    /* Generate button */
-    .btn-generate {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--sans);
-      font-size: 15px;
-      font-weight: 600;
-      padding: 14px 28px;
-      border-radius: var(--r-md);
-      border: none;
-      background: var(--teal);
-      color: var(--white);
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-      width: 100%;
-      justify-content: center;
-    }
-    .btn-generate:hover:not(:disabled) {
-      background: var(--teal-dark);
-    }
-    .btn-generate:active:not(:disabled) {
-      transform: scale(0.98);
-    }
-    .btn-generate:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-    .btn-generate svg {
-      width: 18px;
-      height: 18px;
-    }
-
-    /* Streaming indicator */
-    .streaming-bar {
-      display: none;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 16px;
-      background: var(--teal-mist);
-      border-radius: var(--r-md);
-      margin-bottom: 16px;
-      font-size: 13px;
-      color: var(--teal-dark);
-      font-weight: 500;
-    }
-    .streaming-bar.visible {
-      display: flex;
-    }
-    .streaming-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--teal);
-      border-radius: 50%;
-      animation: pulse 1s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.8); }
-    }
-
-    /* Output section */
-    .output-section {
-      display: none;
-    }
-    .output-section.visible {
-      display: block;
-    }
-    .output-card {
-      background: var(--white);
-      border: 1px solid var(--light-gray);
-      border-radius: var(--r-xl);
-      box-shadow: var(--shadow-md);
-      overflow: hidden;
-    }
-    .output-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--light-gray);
+    /* Input area */
+    .input-area {
+      position: sticky; bottom: 0;
       background: var(--off-white);
-    }
-    .output-header-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .output-header-left svg {
-      width: 18px;
-      height: 18px;
-      color: var(--teal);
-    }
-    .output-header-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--dark);
-    }
-    .output-header-badge {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: var(--teal-pale);
-      color: var(--teal-dark);
-    }
-    .output-body {
-      padding: 24px;
-      font-size: 14px;
-      line-height: 1.7;
-      color: var(--dark);
-      white-space: pre-wrap;
-      min-height: 200px;
-    }
-    .output-body .cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1em;
-      background: var(--teal);
-      animation: blink 0.8s step-end infinite;
-      vertical-align: text-bottom;
-      margin-left: 1px;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-    .output-actions {
-      display: flex;
-      gap: 8px;
-      padding: 16px 20px;
+      padding: 16px 0 24px;
       border-top: 1px solid var(--light-gray);
     }
-    .btn-action {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--sans);
-      font-size: 13px;
-      font-weight: 600;
-      padding: 10px 16px;
-      border-radius: var(--r-md);
-      border: 1.5px solid var(--light-gray);
-      background: var(--white);
-      color: var(--warm-gray);
-      cursor: pointer;
-      transition: all 0.15s;
+    .input-row {
+      display: flex; gap: 8px; align-items: flex-end;
     }
-    .btn-action:hover {
-      border-color: var(--teal);
-      color: var(--teal-dark);
+    .input-wrap {
+      flex: 1; position: relative;
     }
-    .btn-action svg {
-      width: 16px;
-      height: 16px;
+    textarea.journal-input {
+      width: 100%; min-height: 52px; max-height: 160px;
+      padding: 14px 16px; font-family: var(--sans); font-size: 15px; line-height: 1.4;
+      color: var(--dark); background: var(--white);
+      border: 1.5px solid var(--light-gray); border-radius: var(--r-xl);
+      resize: none; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .btn-action.primary {
-      background: var(--teal);
-      color: var(--white);
-      border-color: var(--teal);
+    textarea.journal-input:focus {
+      border-color: var(--teal); box-shadow: 0 0 0 3px rgba(0,128,128,0.1);
     }
-    .btn-action.primary:hover {
-      background: var(--teal-dark);
+    textarea.journal-input::placeholder { color: #b0b0ae; }
+    .btn-send {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--teal); border: none; color: white;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, transform 0.1s; flex-shrink: 0;
+    }
+    .btn-send:hover:not(:disabled) { background: var(--teal-dark); }
+    .btn-send:active:not(:disabled) { transform: scale(0.94); }
+    .btn-send:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-send svg { width: 20px; height: 20px; }
+
+    /* Prompt chips */
+    .prompts {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;
+    }
+    .prompt-chip {
+      font-family: var(--sans); font-size: 12px; font-weight: 500;
+      padding: 6px 12px; border-radius: 999px;
+      border: 1px solid var(--light-gray); background: var(--white);
+      color: var(--warm-gray); cursor: pointer; transition: all 0.15s;
+    }
+    .prompt-chip:hover {
+      border-color: var(--teal-light); background: var(--teal-mist); color: var(--teal-dark);
     }
 
-    /* Copied toast */
-    .toast {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      background: var(--dark);
-      color: var(--white);
-      padding: 10px 20px;
-      border-radius: var(--r-md);
-      font-size: 13px;
-      font-weight: 500;
-      opacity: 0;
-      transition: all 0.3s;
-      pointer-events: none;
+    /* ───────── Rosebud Cards ───────── */
+    .rosebud-section {
+      margin-top: 8px; margin-bottom: 24px;
+      animation: fadeUp 0.4s ease-out;
     }
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
+    .rosebud-header {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 12px; padding-left: 48px;
+    }
+    .rosebud-header-icon { font-size: 14px; }
+    .rosebud-header-text {
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--teal);
     }
 
-    /* Examples */
-    .examples {
-      margin-top: 12px;
+    .rosebud-cards {
+      display: flex; flex-direction: column; gap: 10px;
+      padding-left: 48px;
     }
-    .examples-label {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--mid-gray);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 8px;
+    .rbt-card {
+      padding: 14px 16px; border-radius: var(--r-lg);
+      border-left: 3px solid; font-size: 14px; line-height: 1.5;
     }
-    .example-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
+    .rbt-card-header {
+      display: flex; align-items: center; gap: 6px;
+      margin-bottom: 6px; font-weight: 600; font-size: 13px;
     }
-    .example-chip {
-      font-family: var(--sans);
-      font-size: 12px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--light-gray);
-      background: var(--white);
-      color: var(--warm-gray);
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .example-chip:hover {
-      border-color: var(--teal-light);
-      background: var(--teal-mist);
-      color: var(--teal-dark);
-    }
+    .rbt-card-body { color: var(--warm-gray); }
 
-    /* API key setup */
+    .rbt-rose { background: var(--rose-bg); border-color: var(--rose); }
+    .rbt-rose .rbt-card-header { color: var(--rose); }
+    .rbt-bud { background: var(--bud-bg); border-color: var(--bud); }
+    .rbt-bud .rbt-card-header { color: var(--bud); }
+    .rbt-thorn { background: var(--thorn-bg); border-color: var(--thorn); }
+    .rbt-thorn .rbt-card-header { color: var(--thorn); }
+
+    /* ───────── Entity Extraction ───────── */
+    .entities-section {
+      margin-bottom: 24px; padding-left: 48px;
+      animation: fadeUp 0.4s ease-out 0.15s both;
+    }
+    .entities-header {
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--mid-gray); margin-bottom: 10px;
+    }
+    .entity-groups {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .entity-group {
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .entity-group-label {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--mid-gray);
+    }
+    .entity-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .entity-tag {
+      font-size: 12px; font-weight: 500; padding: 3px 10px;
+      border-radius: 999px; border: 1px solid;
+    }
+    .tag-people { background: #eff6ff; border-color: #bfdbfe; color: #1d4ed8; }
+    .tag-emotion { background: #fdf2f8; border-color: #f9a8d4; color: #be185d; }
+    .tag-service { background: #ecfdf5; border-color: #6ee7b7; color: #047857; }
+    .tag-action { background: #fffbeb; border-color: #fcd34d; color: #92400e; }
+    .tag-ndis { background: #f5f3ff; border-color: #c4b5fd; color: #5b21b6; }
+
+    /* ───────── Insights Panel ───────── */
+    .insights-panel {
+      margin-bottom: 24px; padding-left: 48px;
+      animation: fadeUp 0.4s ease-out 0.3s both;
+    }
+    .insight-card {
+      background: var(--white); border: 1px solid var(--light-gray);
+      border-radius: var(--r-lg); padding: 16px; box-shadow: var(--shadow-sm);
+    }
+    .insight-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 0;
+    }
+    .insight-row + .insight-row { border-top: 1px solid var(--light-gray); }
+    .insight-icon {
+      width: 28px; height: 28px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0;
+    }
+    .insight-label { font-size: 12px; color: var(--mid-gray); }
+    .insight-value { font-size: 14px; font-weight: 600; color: var(--dark); }
+
+    /* API key */
     .setup-banner {
-      background: var(--teal-mist);
-      border: 1.5px solid var(--teal-pale);
-      border-radius: var(--r-lg);
-      padding: 16px 20px;
-      margin-bottom: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+      background: var(--teal-mist); border: 1.5px solid var(--teal-pale);
+      border-radius: var(--r-lg); padding: 16px 20px; margin-bottom: 20px;
+      display: flex; flex-direction: column; gap: 10px;
     }
-    .setup-banner h3 {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--teal-dark);
-    }
-    .setup-banner p {
-      font-size: 13px;
-      color: var(--warm-gray);
-      line-height: 1.4;
-    }
-    .setup-banner a {
-      color: var(--teal);
-    }
-    .key-row {
-      display: flex;
-      gap: 8px;
-    }
+    .setup-banner h3 { font-size: 14px; font-weight: 600; color: var(--teal-dark); }
+    .setup-banner p { font-size: 13px; color: var(--warm-gray); line-height: 1.4; }
+    .setup-banner a { color: var(--teal); }
+    .key-row { display: flex; gap: 8px; }
     .key-input {
-      flex: 1;
-      font-family: var(--sans);
-      font-size: 13px;
-      padding: 10px 14px;
-      border: 1.5px solid var(--light-gray);
-      border-radius: var(--r-md);
-      outline: none;
-      transition: border-color 0.2s;
+      flex: 1; font-family: var(--sans); font-size: 13px;
+      padding: 10px 14px; border: 1.5px solid var(--light-gray);
+      border-radius: var(--r-md); outline: none;
     }
-    .key-input:focus {
-      border-color: var(--teal);
-    }
+    .key-input:focus { border-color: var(--teal); }
     .key-save {
-      font-family: var(--sans);
-      font-size: 13px;
-      font-weight: 600;
-      padding: 10px 16px;
-      background: var(--teal);
-      color: var(--white);
-      border: none;
-      border-radius: var(--r-md);
-      cursor: pointer;
+      font-family: var(--sans); font-size: 13px; font-weight: 600;
+      padding: 10px 16px; background: var(--teal); color: white;
+      border: none; border-radius: var(--r-md); cursor: pointer;
     }
     .setup-banner.hidden { display: none; }
 
-    /* Error */
-    .error-msg {
-      background: var(--red-bg);
-      border: 1px solid #fecaca;
-      border-radius: var(--r-md);
-      padding: 12px 16px;
-      color: var(--red);
-      font-size: 13px;
-      margin-bottom: 16px;
-      display: none;
-    }
-    .error-msg.visible { display: block; }
-
     /* Footer */
-    .footer {
-      text-align: center;
-      padding: 24px;
-      font-size: 12px;
-      color: var(--mid-gray);
-    }
+    .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--mid-gray); }
     .footer a { color: var(--teal); text-decoration: none; }
 
-    /* Responsive */
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--dark); color: white; padding: 10px 20px;
+      border-radius: var(--r-md); font-size: 13px; font-weight: 500;
+      opacity: 0; transition: all 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
     @media (max-width: 480px) {
-      .hero { padding: 32px 16px 24px; }
       .main { padding: 0 16px 32px; }
-      .output-body { padding: 16px; }
-      .doc-types { gap: 6px; }
+      .rosebud-cards, .rosebud-header, .entities-section, .insights-panel { padding-left: 0; }
     }
   </style>
 </head>
@@ -501,359 +302,478 @@
 
   <nav class="nav">
     <a href="/" class="nav-brand">Carer Liaison</a>
-    <span class="nav-badge">AI Demo</span>
+    <span class="nav-badge">AI Journal</span>
   </nav>
 
-  <section class="hero">
-    <div class="hero-eyebrow">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/></svg>
-      Powered by Google Gemini
-    </div>
-    <h1>Tell me what's happening. I'll write the letter.</h1>
-    <p>Describe your situation in your own words. The AI generates a ready-to-send NDIS document in seconds.</p>
-  </section>
-
   <main class="main">
-
     <!-- API Key Setup -->
-    <div class="setup-banner" id="setupBanner">
-      <h3>First: connect your Gemini API key</h3>
-      <p>Get a free key from <a href="https://aistudio.google.com/apikey" target="_blank">Google AI Studio</a> (takes 30 seconds). Your key stays in your browser — never sent to our servers.</p>
+    <div class="setup-banner" id="setupBanner" style="margin-top:24px">
+      <h3>Connect your Gemini API key to start</h3>
+      <p>Get a free key from <a href="https://aistudio.google.com/apikey" target="_blank">Google AI Studio</a> (30 seconds). Your key stays in your browser.</p>
       <div class="key-row">
         <input type="password" class="key-input" id="apiKeyInput" placeholder="Paste your Gemini API key...">
         <button class="key-save" id="saveKeyBtn">Save</button>
       </div>
     </div>
 
-    <!-- Error -->
-    <div class="error-msg" id="errorMsg"></div>
+    <!-- Chat -->
+    <div class="chat" id="chat"></div>
 
-    <!-- Document Type -->
-    <div class="input-section">
-      <label class="input-label">What kind of document?</label>
-      <div class="doc-types" id="docTypes">
-        <button class="doc-type active" data-type="plan-review">Plan Review Letter</button>
-        <button class="doc-type" data-type="school-letter">School Letter</button>
-        <button class="doc-type" data-type="provider-complaint">Provider Complaint</button>
-        <button class="doc-type" data-type="funding-request">Funding Request</button>
+    <!-- Input -->
+    <div class="input-area" id="inputArea">
+      <div class="input-row">
+        <div class="input-wrap">
+          <textarea class="journal-input" id="journalInput" rows="1"
+            placeholder="Tell me about your day..."></textarea>
+        </div>
+        <button class="btn-send" id="sendBtn" disabled>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+        </button>
       </div>
-    </div>
-
-    <!-- Situation Input -->
-    <div class="input-section">
-      <label class="input-label">What's going on?</label>
-      <p class="input-hint">Be as messy or detailed as you want. The AI will structure it for you.</p>
-      <div class="textarea-wrap">
-        <textarea id="situationInput" placeholder="e.g. My son needs more OT sessions and the school says he needs a 1:1 aide but it's not in our NDIS plan. His plan review is coming up and I don't know what to write..."></textarea>
-      </div>
-      <div class="examples">
-        <div class="examples-label">Try an example</div>
-        <div class="example-chips">
-          <button class="example-chip" data-text="My daughter's school wants to reduce her aide hours but she still has meltdowns every day without support. Her NDIS plan hasn't changed. I need to write to the school to explain why the hours need to stay.">School aide hours</button>
-          <button class="example-chip" data-text="Our support coordinator hasn't responded to my emails in 3 weeks and I need to request a plan review urgently because my son's OT says he needs hydrotherapy which isn't in the current plan.">Unresponsive coordinator</button>
-          <button class="example-chip" data-text="I'm a single mum caring for my 8 year old with autism. I've been doing this alone for 4 years and I'm burning out. My body state has been low for weeks. I want to request respite funding in our plan review.">Carer burnout + respite</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Generate -->
-    <button class="btn-generate" id="generateBtn" disabled>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
-      Generate my letter
-    </button>
-
-    <!-- Streaming indicator -->
-    <div class="streaming-bar" id="streamingBar">
-      <span class="streaming-dot"></span>
-      <span id="streamingLabel">Writing your letter...</span>
-    </div>
-
-    <!-- Output -->
-    <div class="output-section" id="outputSection">
-      <div class="output-card">
-        <div class="output-header">
-          <div class="output-header-left">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-            <span class="output-header-title" id="outputTitle">NDIS Plan Review Letter</span>
-          </div>
-          <span class="output-header-badge" id="outputBadge">Generating...</span>
-        </div>
-        <div class="output-body" id="outputBody">
-          <span class="cursor"></span>
-        </div>
-        <div class="output-actions" id="outputActions" style="display:none">
-          <button class="btn-action primary" id="copyBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            Copy to clipboard
-          </button>
-          <button class="btn-action" id="newBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
-            New letter
-          </button>
-        </div>
+      <div class="prompts" id="prompts">
+        <button class="prompt-chip" data-text="It was such a long day. Tom had a meltdown at school pickup and I had to carry him to the car while everyone stared. Then his OT cancelled last minute. I managed to get him to eat dinner though which felt like a win.">Hard day at school pickup</button>
+        <button class="prompt-chip" data-text="Actually today was pretty good. Tom's teacher said he sat through circle time for the first time in weeks. I even had 20 minutes to myself while he played independently. Small wins but I'll take them.">Small wins today</button>
+        <button class="prompt-chip" data-text="I'm so frustrated with the NDIA. They rejected our plan review request saying there's no change in circumstances. But Tom clearly needs more speech therapy — his therapist Sarah wrote a letter supporting it. I don't know what to do next.">NDIA frustration</button>
       </div>
     </div>
   </main>
 
   <footer class="footer">
-    <p>Built by <a href="https://carerliaison.com">Carer Liaison</a>. AI-generated content should be reviewed before sending.</p>
+    <p>Built by <a href="https://carerliaison.com">Carer Liaison</a>. Your journal stays private.</p>
   </footer>
 
-  <div class="toast" id="toast">Copied to clipboard</div>
+  <div class="toast" id="toast"></div>
 
   <script>
-    // -------------------------------------------------------
-    // CONFIG
-    // -------------------------------------------------------
+    // ───────── CONFIG ─────────
     const GEMINI_MODEL = 'gemini-2.0-flash';
     const API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
 
-    // -------------------------------------------------------
-    // ELEMENTS
-    // -------------------------------------------------------
+    // ───────── ELEMENTS ─────────
     const $ = id => document.getElementById(id);
-    const setupBanner  = $('setupBanner');
-    const apiKeyInput  = $('apiKeyInput');
-    const saveKeyBtn   = $('saveKeyBtn');
-    const errorMsg     = $('errorMsg');
-    const docTypes     = $('docTypes');
-    const textarea     = $('situationInput');
-    const generateBtn  = $('generateBtn');
-    const streamingBar = $('streamingBar');
-    const streamLabel  = $('streamingLabel');
-    const outputSection= $('outputSection');
-    const outputBody   = $('outputBody');
-    const outputTitle  = $('outputTitle');
-    const outputBadge  = $('outputBadge');
-    const outputActions= $('outputActions');
-    const copyBtn      = $('copyBtn');
-    const newBtn       = $('newBtn');
-    const toast        = $('toast');
+    const chat = $('chat');
+    const journalInput = $('journalInput');
+    const sendBtn = $('sendBtn');
+    const setupBanner = $('setupBanner');
+    const apiKeyInput = $('apiKeyInput');
+    const saveKeyBtn = $('saveKeyBtn');
+    const prompts = $('prompts');
+    const toast = $('toast');
 
-    // -------------------------------------------------------
-    // STATE
-    // -------------------------------------------------------
+    // ───────── STATE ─────────
     let apiKey = localStorage.getItem('gemini_api_key') || '';
-    let selectedDocType = 'plan-review';
+    let conversationHistory = [];
     let isStreaming = false;
+    let messageCount = 0;
 
-    // -------------------------------------------------------
-    // INIT
-    // -------------------------------------------------------
-    if (apiKey) {
-      setupBanner.classList.add('hidden');
-    }
-    updateGenerateBtn();
+    // ───────── INIT ─────────
+    if (apiKey) setupBanner.classList.add('hidden');
+    addAIMessage("Hey there. I'm here whenever you're ready.\n\nHow was your day?");
+    updateSendBtn();
 
-    // -------------------------------------------------------
-    // API KEY
-    // -------------------------------------------------------
+    // ───────── API KEY ─────────
     saveKeyBtn.addEventListener('click', () => {
       const key = apiKeyInput.value.trim();
       if (!key) return;
       apiKey = key;
       localStorage.setItem('gemini_api_key', key);
       setupBanner.classList.add('hidden');
-      updateGenerateBtn();
+      updateSendBtn();
+      journalInput.focus();
     });
 
-    // -------------------------------------------------------
-    // DOC TYPE SELECTOR
-    // -------------------------------------------------------
-    docTypes.addEventListener('click', e => {
-      const btn = e.target.closest('.doc-type');
-      if (!btn) return;
-      docTypes.querySelectorAll('.doc-type').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      selectedDocType = btn.dataset.type;
+    // ───────── INPUT ─────────
+    journalInput.addEventListener('input', () => {
+      journalInput.style.height = 'auto';
+      journalInput.style.height = Math.min(journalInput.scrollHeight, 160) + 'px';
+      updateSendBtn();
     });
-
-    // -------------------------------------------------------
-    // EXAMPLE CHIPS
-    // -------------------------------------------------------
-    document.querySelectorAll('.example-chip').forEach(chip => {
-      chip.addEventListener('click', () => {
-        textarea.value = chip.dataset.text;
-        textarea.focus();
-        updateGenerateBtn();
-      });
+    journalInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
     });
-
-    // -------------------------------------------------------
-    // TEXTAREA → ENABLE BUTTON
-    // -------------------------------------------------------
-    textarea.addEventListener('input', updateGenerateBtn);
-    function updateGenerateBtn() {
-      generateBtn.disabled = !textarea.value.trim() || !apiKey || isStreaming;
+    function updateSendBtn() {
+      sendBtn.disabled = !journalInput.value.trim() || !apiKey || isStreaming;
     }
 
-    // -------------------------------------------------------
-    // SYSTEM PROMPT
-    // -------------------------------------------------------
-    const DOC_TYPE_LABELS = {
-      'plan-review': 'NDIS Plan Review Letter',
-      'school-letter': 'Letter to School',
-      'provider-complaint': 'Provider Complaint Letter',
-      'funding-request': 'Funding Request Letter'
-    };
+    // ───────── PROMPT CHIPS ─────────
+    prompts.addEventListener('click', e => {
+      const chip = e.target.closest('.prompt-chip');
+      if (!chip) return;
+      journalInput.value = chip.dataset.text;
+      journalInput.style.height = 'auto';
+      journalInput.style.height = Math.min(journalInput.scrollHeight, 160) + 'px';
+      updateSendBtn();
+      journalInput.focus();
+    });
 
-    function getSystemPrompt(docType) {
-      return `You are an expert NDIS advocate and letter-writing assistant for Carer Liaison, an Australian app that supports unpaid carers of people with disabilities.
+    // ───────── SEND ─────────
+    sendBtn.addEventListener('click', handleSend);
 
-Your role: Take a carer's messy, emotional description of their situation and transform it into a polished, professional ${DOC_TYPE_LABELS[docType]}.
+    async function handleSend() {
+      const text = journalInput.value.trim();
+      if (!text || !apiKey || isStreaming) return;
 
-Rules:
-- Write in first person from the carer's perspective
-- Use formal but warm tone — professional, not cold
-- Reference specific NDIS legislation, funding categories, and processes where relevant
-- Include the correct NDIS terminology (e.g., "Core Supports", "Capacity Building", "Stated Supports", "Plan Review", "Change of Circumstances")
-- Structure with proper letter formatting: addressee, date, subject line, body paragraphs, sign-off
-- Include specific, actionable requests (not vague asks)
-- Reference the Disability Standards for Education 2005 if it's a school letter
-- Reference the NDIS Act 2013 and NDIS Rules where appropriate
-- Keep the letter to 1 page (300-500 words)
-- Use today's date: ${new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' })}
-- Use placeholder [YOUR NAME] and [YOUR CONTACT] for the carer's details
-- Use placeholder [PARTICIPANT NAME] and [NDIS NUMBER] if not provided
+      // Add user message
+      addUserMessage(text);
+      journalInput.value = '';
+      journalInput.style.height = 'auto';
+      messageCount++;
 
-Do NOT add any commentary or explanation before or after the letter. Output ONLY the letter text.`;
-    }
+      // Hide prompts after first message
+      prompts.style.display = 'none';
 
-    // -------------------------------------------------------
-    // GENERATE (STREAMING)
-    // -------------------------------------------------------
-    generateBtn.addEventListener('click', handleGenerate);
-
-    async function handleGenerate() {
-      const situation = textarea.value.trim();
-      if (!situation || !apiKey) return;
-
-      // Reset UI
-      errorMsg.classList.remove('visible');
+      // Show typing
+      const typingEl = addTypingIndicator();
       isStreaming = true;
-      updateGenerateBtn();
-      generateBtn.textContent = 'Generating...';
-      streamingBar.classList.add('visible');
-      outputSection.classList.add('visible');
-      outputBody.innerHTML = '<span class="cursor"></span>';
-      outputActions.style.display = 'none';
-      outputTitle.textContent = DOC_TYPE_LABELS[selectedDocType];
-      outputBadge.textContent = 'Generating...';
+      updateSendBtn();
 
-      // Scroll to output
-      setTimeout(() => outputSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+      // Add to history
+      conversationHistory.push({ role: 'user', parts: [{ text }] });
 
       try {
-        const url = `${API_BASE}/${GEMINI_MODEL}:streamGenerateContent?key=${apiKey}&alt=sse`;
+        // First: get the empathetic response (streamed)
+        const responseText = await streamResponse(text, typingEl);
 
+        // Remove typing, show AI response
+        typingEl.remove();
+        addAIMessage(responseText);
+        conversationHistory.push({ role: 'model', parts: [{ text: responseText }] });
+
+        // Then: extract rosebud + entities (non-streamed, parallel)
+        const extractionData = await extractRosebudAndEntities(text);
+        if (extractionData) {
+          renderRosebud(extractionData);
+          renderEntities(extractionData);
+          renderInsights(extractionData);
+        }
+
+      } catch (err) {
+        typingEl.remove();
+        addAIMessage("I'm sorry, something went wrong. Can you try again?");
+        console.error(err);
+      } finally {
+        isStreaming = false;
+        updateSendBtn();
+        journalInput.focus();
+      }
+    }
+
+    // ───────── SYSTEM PROMPTS ─────────
+    function getConversationSystemPrompt() {
+      return `You are a compassionate, experienced carer support companion for Carer Liaison — an Australian app for unpaid carers of people with disabilities (especially NDIS participants).
+
+Your personality:
+- Warm, grounded, and real — like a trusted friend who also happens to understand NDIS inside out
+- You validate emotions first, always. Never jump to solutions.
+- You notice the small wins the carer might overlook
+- You speak like a real person, not a therapist or chatbot. Australian English.
+- Short responses (2-4 sentences max). No bullet points. No lists. Just human conversation.
+- Ask gentle follow-up questions to keep the conversation going
+- If they mention something hard, acknowledge it specifically before anything else
+- Never say "I understand" — show understanding through specificity
+
+You are NOT a therapist, not a crisis line, not giving medical advice. You're a knowledgeable mate who gets it.
+
+This is message ${messageCount + 1} in today's journal conversation.`;
+    }
+
+    function getExtractionPrompt(journalText) {
+      return `Analyze this carer's journal entry and extract structured data. Return ONLY valid JSON, no markdown, no explanation.
+
+Journal entry:
+"${journalText}"
+
+Return this exact JSON structure:
+{
+  "rose": {
+    "title": "short 3-5 word title of what went well",
+    "body": "1-2 sentence description of the positive moment"
+  },
+  "bud": {
+    "title": "short 3-5 word title of what's emerging",
+    "body": "1-2 sentence description of opportunity or development"
+  },
+  "thorn": {
+    "title": "short 3-5 word title of what was hard",
+    "body": "1-2 sentence description of the challenge"
+  },
+  "entities": {
+    "people": ["names or roles mentioned, e.g. Tom, Ms Chen, OT therapist"],
+    "emotions": ["specific emotions detected, e.g. frustrated, proud, exhausted"],
+    "services": ["NDIS services or providers mentioned, e.g. OT, speech therapy, NDIA"],
+    "actions": ["potential next steps implied, e.g. Call OT to reschedule, Follow up on plan review"],
+    "ndis_terms": ["NDIS-specific terms used, e.g. plan review, core supports, capacity building"]
+  },
+  "mood_score": 65,
+  "energy_label": "Running on fumes",
+  "carer_load": "High"
+}
+
+Rules:
+- mood_score: 0-100 (0 = crisis, 100 = thriving)
+- energy_label: one of "Thriving", "Steady", "Stretched thin", "Running on fumes", "At breaking point"
+- carer_load: one of "Light", "Moderate", "High", "Overwhelming"
+- If no rose/bud/thorn can be extracted, still provide your best interpretation
+- People array should include relationship context if clear (e.g. "Tom (son)")
+- Actions should be specific and actionable
+- Return ONLY the JSON object, nothing else`;
+    }
+
+    // ───────── STREAMING RESPONSE ─────────
+    async function streamResponse(userText, typingEl) {
+      const url = `${API_BASE}/${GEMINI_MODEL}:streamGenerateContent?key=${apiKey}&alt=sse`;
+
+      const messages = [
+        ...conversationHistory.slice(-6), // keep last 3 exchanges for context
+        { role: 'user', parts: [{ text: userText }] }
+      ];
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          system_instruction: { parts: [{ text: getConversationSystemPrompt() }] },
+          contents: messages,
+          generationConfig: { temperature: 0.85, maxOutputTokens: 300 }
+        })
+      });
+
+      if (!response.ok) throw new Error(`API error ${response.status}`);
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let fullText = '';
+      let buffer = '';
+
+      // Replace typing indicator with streaming bubble
+      typingEl.remove();
+      const streamMsg = addAIMessage('', true);
+      const bubbleEl = streamMsg.querySelector('.bubble');
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue;
+          const data = line.slice(6).trim();
+          if (data === '[DONE]') continue;
+          try {
+            const parsed = JSON.parse(data);
+            const text = parsed?.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (text) {
+              fullText += text;
+              bubbleEl.innerHTML = escapeHtml(fullText) + '<span class="cursor-blink"></span>';
+            }
+          } catch (e) {}
+        }
+      }
+
+      bubbleEl.innerHTML = escapeHtml(fullText);
+      return fullText;
+    }
+
+    // ───────── EXTRACTION (non-streamed) ─────────
+    async function extractRosebudAndEntities(journalText) {
+      const url = `${API_BASE}/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
+
+      try {
         const response = await fetch(url, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            system_instruction: {
-              parts: [{ text: getSystemPrompt(selectedDocType) }]
-            },
-            contents: [{
-              role: 'user',
-              parts: [{ text: situation }]
-            }],
-            generationConfig: {
-              temperature: 0.7,
-              maxOutputTokens: 2048
-            }
+            contents: [{ role: 'user', parts: [{ text: getExtractionPrompt(journalText) }] }],
+            generationConfig: { temperature: 0.3, maxOutputTokens: 800 }
           })
         });
 
-        if (!response.ok) {
-          const errText = await response.text();
-          throw new Error(`API error ${response.status}: ${errText.slice(0, 200)}`);
-        }
+        if (!response.ok) return null;
+        const data = await response.json();
+        let text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
 
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let fullText = '';
-        let buffer = '';
+        // Clean markdown code fences if present
+        text = text.replace(/^```json?\s*/i, '').replace(/\s*```$/i, '').trim();
 
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-
-          buffer += decoder.decode(value, { stream: true });
-          const lines = buffer.split('\n');
-          buffer = lines.pop() || '';
-
-          for (const line of lines) {
-            if (!line.startsWith('data: ')) continue;
-            const data = line.slice(6).trim();
-            if (data === '[DONE]') continue;
-
-            try {
-              const parsed = JSON.parse(data);
-              const text = parsed?.candidates?.[0]?.content?.parts?.[0]?.text;
-              if (text) {
-                fullText += text;
-                outputBody.innerHTML = escapeHtml(fullText) + '<span class="cursor"></span>';
-              }
-            } catch (e) {
-              // Skip malformed chunks
-            }
-          }
-        }
-
-        // Done
-        outputBody.innerHTML = escapeHtml(fullText);
-        outputBadge.textContent = 'Complete';
-        outputActions.style.display = 'flex';
-        streamLabel.textContent = 'Done!';
-        setTimeout(() => streamingBar.classList.remove('visible'), 1500);
-
-      } catch (err) {
-        showError(err.message);
-        streamingBar.classList.remove('visible');
-        if (!outputBody.textContent.trim()) {
-          outputSection.classList.remove('visible');
-        }
-      } finally {
-        isStreaming = false;
-        generateBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg> Generate my letter`;
-        updateGenerateBtn();
+        return JSON.parse(text);
+      } catch (e) {
+        console.error('Extraction failed:', e);
+        return null;
       }
     }
 
-    // -------------------------------------------------------
-    // COPY
-    // -------------------------------------------------------
-    copyBtn.addEventListener('click', () => {
-      const text = outputBody.textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2000);
-      });
-    });
+    // ───────── RENDER FUNCTIONS ─────────
+    function addAIMessage(text, isStreaming = false) {
+      const div = document.createElement('div');
+      div.className = 'message message-ai';
+      div.innerHTML = `
+        <div class="avatar avatar-ai">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </div>
+        <div class="bubble bubble-ai">${text ? escapeHtml(text) : (isStreaming ? '<span class="cursor-blink"></span>' : '')}</div>
+      `;
+      chat.appendChild(div);
+      scrollToBottom();
+      return div;
+    }
 
-    // -------------------------------------------------------
-    // NEW LETTER
-    // -------------------------------------------------------
-    newBtn.addEventListener('click', () => {
-      textarea.value = '';
-      outputSection.classList.remove('visible');
-      outputBody.innerHTML = '';
-      textarea.focus();
-      updateGenerateBtn();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    function addUserMessage(text) {
+      const div = document.createElement('div');
+      div.className = 'message message-user';
+      div.innerHTML = `
+        <div class="bubble bubble-user">${escapeHtml(text)}</div>
+        <div class="avatar avatar-user">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+      `;
+      chat.appendChild(div);
+      scrollToBottom();
+    }
 
-    // -------------------------------------------------------
-    // HELPERS
-    // -------------------------------------------------------
+    function addTypingIndicator() {
+      const div = document.createElement('div');
+      div.className = 'message message-ai';
+      div.innerHTML = `
+        <div class="avatar avatar-ai">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </div>
+        <div class="bubble bubble-ai"><div class="typing"><span></span><span></span><span></span></div></div>
+      `;
+      chat.appendChild(div);
+      scrollToBottom();
+      return div;
+    }
+
+    function renderRosebud(data) {
+      if (!data.rose && !data.bud && !data.thorn) return;
+
+      const section = document.createElement('div');
+      section.className = 'rosebud-section';
+      section.innerHTML = `
+        <div class="rosebud-header">
+          <span class="rosebud-header-icon">🌱</span>
+          <span class="rosebud-header-text">Today's Rosebud</span>
+        </div>
+        <div class="rosebud-cards">
+          ${data.rose ? `
+          <div class="rbt-card rbt-rose">
+            <div class="rbt-card-header">🌹 Rose — ${esc(data.rose.title)}</div>
+            <div class="rbt-card-body">${esc(data.rose.body)}</div>
+          </div>` : ''}
+          ${data.bud ? `
+          <div class="rbt-card rbt-bud">
+            <div class="rbt-card-header">🌱 Bud — ${esc(data.bud.title)}</div>
+            <div class="rbt-card-body">${esc(data.bud.body)}</div>
+          </div>` : ''}
+          ${data.thorn ? `
+          <div class="rbt-card rbt-thorn">
+            <div class="rbt-card-header">🥀 Thorn — ${esc(data.thorn.title)}</div>
+            <div class="rbt-card-body">${esc(data.thorn.body)}</div>
+          </div>` : ''}
+        </div>
+      `;
+      chat.appendChild(section);
+      scrollToBottom();
+    }
+
+    function renderEntities(data) {
+      if (!data.entities) return;
+      const e = data.entities;
+      const hasAny = (e.people?.length || e.emotions?.length || e.services?.length || e.actions?.length || e.ndis_terms?.length);
+      if (!hasAny) return;
+
+      const section = document.createElement('div');
+      section.className = 'entities-section';
+
+      let html = '<div class="entities-header">Extracted from your entry</div><div class="entity-tags">';
+
+      const tagMap = [
+        ['people', 'tag-people', '👤'],
+        ['emotions', 'tag-emotion', '💭'],
+        ['services', 'tag-service', '🏥'],
+        ['actions', 'tag-action', '⚡'],
+        ['ndis_terms', 'tag-ndis', '📋']
+      ];
+
+      for (const [key, cls, icon] of tagMap) {
+        if (e[key]?.length) {
+          for (const item of e[key]) {
+            html += `<span class="entity-tag ${cls}">${icon} ${esc(item)}</span>`;
+          }
+        }
+      }
+
+      html += '</div>';
+      section.innerHTML = html;
+      chat.appendChild(section);
+      scrollToBottom();
+    }
+
+    function renderInsights(data) {
+      if (!data.mood_score && !data.energy_label && !data.carer_load) return;
+
+      const moodColor = data.mood_score >= 70 ? 'var(--bud)' :
+                         data.mood_score >= 40 ? 'var(--entity-amber)' : 'var(--thorn)';
+
+      const section = document.createElement('div');
+      section.className = 'insights-panel';
+      section.innerHTML = `
+        <div class="insight-card">
+          <div class="insight-row">
+            <div class="insight-icon" style="background:${moodColor}15; color:${moodColor}">
+              ${data.mood_score >= 70 ? '😊' : data.mood_score >= 40 ? '😐' : '😔'}
+            </div>
+            <div>
+              <div class="insight-label">Mood</div>
+              <div class="insight-value" style="color:${moodColor}">${data.mood_score}/100</div>
+            </div>
+          </div>
+          <div class="insight-row">
+            <div class="insight-icon" style="background: var(--teal-pale); color: var(--teal);">⚡</div>
+            <div>
+              <div class="insight-label">Energy</div>
+              <div class="insight-value">${esc(data.energy_label || 'Unknown')}</div>
+            </div>
+          </div>
+          <div class="insight-row">
+            <div class="insight-icon" style="background: #f5f3ff; color: var(--entity-purple);">📊</div>
+            <div>
+              <div class="insight-label">Carer Load</div>
+              <div class="insight-value">${esc(data.carer_load || 'Unknown')}</div>
+            </div>
+          </div>
+        </div>
+      `;
+      chat.appendChild(section);
+      scrollToBottom();
+    }
+
+    // ───────── HELPERS ─────────
     function escapeHtml(str) {
       return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
     }
+    const esc = s => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-    function showError(msg) {
-      errorMsg.textContent = msg;
-      errorMsg.classList.add('visible');
+    function scrollToBottom() {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
     }
   </script>
+
+  <style>
+    .cursor-blink {
+      display: inline-block; width: 2px; height: 1em;
+      background: var(--teal); animation: blink 0.8s step-end infinite;
+      vertical-align: text-bottom; margin-left: 1px;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  </style>
 </body>
 </html>

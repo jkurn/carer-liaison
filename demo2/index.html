@@ -88,12 +88,12 @@
     body.mobile-mode .main-content { margin-left: 0; }
     body.mobile-mode .phone-wrapper { display: flex; }
     body.mobile-mode .web-screen { display: none; }
-    body.mobile-mode .bottom-nav-mobile { display: flex; }
+    body.mobile-mode .journey-nav { display: block; }
 
     /* === WEB MODE === */
     body.web-mode .phone-wrapper { display: none; }
     body.web-mode .web-screen-container { display: block; }
-    body.web-mode .bottom-nav-mobile { display: none; }
+    body.web-mode .journey-nav { display: none; }
 
     /* Phone wrapper for mobile mode */
     .phone-wrapper {
@@ -117,7 +117,7 @@
     /* Mobile screens */
     .m-screen {
       position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      overflow-y: auto; padding-top: 54px;
+      overflow-y: auto; padding-top: 54px; padding-bottom: 20px;
       opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
       background: var(--gray-50);
     }
@@ -125,21 +125,48 @@
     .m-screen.active { opacity: 1; pointer-events: auto; z-index: 10; }
     .m-body { padding: 0 20px 100px; }
 
-    /* Bottom nav (mobile) */
-    .bottom-nav-mobile {
+    /* Journey nav (mobile) */
+    .journey-nav {
       display: none; position: fixed; bottom: 0; left: 0; right: 0;
-      height: 72px; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(16px);
       border-top: 1px solid var(--gray-200); z-index: 90;
-      align-items: center; justify-content: space-around; padding: 0 8px;
+      padding: 0;
     }
-    .bnav-item {
-      display: flex; flex-direction: column; align-items: center; gap: 2px;
-      font-size: 10px; font-weight: 500; color: var(--gray-400);
-      cursor: pointer; border: none; background: none; padding: 6px 10px;
-      font-family: var(--sans); transition: color 0.15s;
+    .journey-progress {
+      height: 3px; background: var(--gray-200); width: 100%;
     }
-    .bnav-item .material-symbols-rounded { font-size: 22px; }
-    .bnav-item.active { color: var(--teal); }
+    .journey-progress-fill {
+      height: 100%; background: var(--teal); transition: width 0.4s ease;
+    }
+    .journey-controls {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 16px 14px;
+    }
+    .journey-btn {
+      display: flex; align-items: center; gap: 4px;
+      padding: 8px 16px; border-radius: var(--r-full); font-size: 13px; font-weight: 600;
+      border: none; cursor: pointer; font-family: var(--sans); transition: all 0.15s;
+      background: var(--gray-100); color: var(--gray-600);
+    }
+    .journey-btn:hover { background: var(--gray-200); }
+    .journey-btn.next { background: var(--teal); color: white; }
+    .journey-btn.next:hover { background: var(--teal-dark); }
+    .journey-btn:disabled { opacity: 0.3; cursor: default; }
+    .journey-btn .material-symbols-rounded { font-size: 18px; }
+    .journey-info {
+      text-align: center; flex: 1; min-width: 0;
+    }
+    .journey-screen-name {
+      font-size: 13px; font-weight: 600; color: var(--dark);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .journey-step {
+      font-size: 11px; color: var(--gray-400); margin-top: 1px;
+    }
+    .journey-section-label {
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--teal); margin-top: 1px;
+    }
 
     /* Web screens */
     .web-screen-container { display: none; }
@@ -859,18 +886,92 @@
 </div><!-- /app-shell -->
 
 <!-- Bottom nav (mobile mode) -->
-<div class="bottom-nav-mobile" id="bottomNav">
-  <button class="bnav-item active" data-screen="home" onclick="go('home')"><span class="material-symbols-rounded">home</span>Home</button>
-  <button class="bnav-item" data-screen="myday" onclick="go('myday')"><span class="material-symbols-rounded">wb_sunny</span>My Day</button>
-  <button class="bnav-item" data-screen="journal-chat" onclick="go('journal-chat')"><span class="material-symbols-rounded">edit_note</span>Journal</button>
-  <button class="bnav-item" data-screen="goals" onclick="go('goals')"><span class="material-symbols-rounded">flag</span>Goals</button>
-  <button class="bnav-item" data-screen="participant" onclick="go('participant')"><span class="material-symbols-rounded">person</span>Profile</button>
+<div class="journey-nav" id="journeyNav">
+  <div class="journey-progress"><div class="journey-progress-fill" id="journeyProgress"></div></div>
+  <div class="journey-controls">
+    <button class="journey-btn" id="journeyPrev" onclick="goPrev()">
+      <span class="material-symbols-rounded">arrow_back</span> Back
+    </button>
+    <div class="journey-info">
+      <div class="journey-section-label" id="journeySectionLabel"></div>
+      <div class="journey-screen-name" id="journeyScreenName"></div>
+      <div class="journey-step" id="journeyStep"></div>
+    </div>
+    <button class="journey-btn next" id="journeyNext" onclick="goNext()">
+      Next <span class="material-symbols-rounded">arrow_forward</span>
+    </button>
+  </div>
 </div>
 
 <script>
+  // Journey flow — ordered screens with labels and sections
+  const journey = [
+    { id: 'onboarding', name: 'Welcome & Setup', section: 'Getting Started' },
+    { id: 'home', name: 'Home Dashboard', section: 'Daily Overview' },
+    { id: 'myday', name: 'My Day', section: 'Daily Overview' },
+    { id: 'participant', name: 'Participant Profile', section: 'Daily Overview' },
+    { id: 'bodystate', name: 'Body State Tracker', section: 'Daily Overview' },
+    { id: 'dailylog', name: 'Daily Log', section: 'Daily Overview' },
+    { id: 'journal-chat', name: 'Journal — Chat with Lia', section: 'Journaling' },
+    { id: 'journal-entry', name: 'Journal — Reflection Card', section: 'Journaling' },
+    { id: 'journal-feed', name: 'Journal — Feed', section: 'Journaling' },
+    { id: 'journal-insights', name: 'Journal — Insights', section: 'Journaling' },
+    { id: 'goals', name: 'Goals Tracker', section: 'Planning & Funding' },
+    { id: 'careplan', name: 'Care Plan', section: 'Planning & Funding' },
+    { id: 'budget', name: 'Budget & Funding', section: 'Planning & Funding' },
+    { id: 'wellness', name: 'Carer Wellness', section: 'Support & Safety' },
+    { id: 'team', name: 'Team & Communication', section: 'Support & Safety' },
+    { id: 'incidents', name: 'Incidents & Alerts', section: 'Support & Safety' },
+    { id: 'crisis', name: 'Crisis Mode', section: 'Support & Safety' },
+    { id: 'services', name: 'Service Search', section: 'Tools' },
+    { id: 'documents', name: 'Document Generator', section: 'Tools' },
+    { id: 'planreview', name: 'Plan Review Prep', section: 'Tools' },
+  ];
+
   let currentMode = 'mobile';
   let currentScreen = 'home';
   let toastTimeout;
+
+  function getJourneyIndex(screen) {
+    return journey.findIndex(s => s.id === screen);
+  }
+
+  function updateJourneyNav() {
+    const idx = getJourneyIndex(currentScreen);
+    const total = journey.length;
+    const step = journey[idx];
+
+    // Progress bar
+    const pct = ((idx + 1) / total) * 100;
+    document.getElementById('journeyProgress').style.width = pct + '%';
+
+    // Labels
+    document.getElementById('journeyScreenName').textContent = step ? step.name : '';
+    document.getElementById('journeySectionLabel').textContent = step ? step.section : '';
+    document.getElementById('journeyStep').textContent = (idx + 1) + ' of ' + total;
+
+    // Disable prev/next at bounds
+    document.getElementById('journeyPrev').disabled = idx <= 0;
+    document.getElementById('journeyNext').disabled = idx >= total - 1;
+
+    // Change last button text
+    const nextBtn = document.getElementById('journeyNext');
+    if (idx >= total - 1) {
+      nextBtn.innerHTML = 'Done <span class="material-symbols-rounded">check</span>';
+    } else {
+      nextBtn.innerHTML = 'Next <span class="material-symbols-rounded">arrow_forward</span>';
+    }
+  }
+
+  function goPrev() {
+    const idx = getJourneyIndex(currentScreen);
+    if (idx > 0) go(journey[idx - 1].id);
+  }
+
+  function goNext() {
+    const idx = getJourneyIndex(currentScreen);
+    if (idx < journey.length - 1) go(journey[idx + 1].id);
+  }
 
   function setMode(mode) {
     currentMode = mode;
@@ -898,10 +999,8 @@
     const sidebarItem = document.querySelector(`.sidebar-item[data-screen="${screen}"]`);
     if (sidebarItem) sidebarItem.classList.add('active');
 
-    // Update bottom nav
-    document.querySelectorAll('.bnav-item').forEach(n => n.classList.remove('active'));
-    const bnavItem = document.querySelector(`.bnav-item[data-screen="${screen}"]`);
-    if (bnavItem) bnavItem.classList.add('active');
+    // Update journey nav
+    updateJourneyNav();
 
     // Crisis mode status bar
     const phoneStatus = document.getElementById('phoneStatus');
@@ -925,6 +1024,16 @@
     btn.classList.add('active');
     showToast('Mood logged: ' + btn.textContent.trim());
   }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (currentMode !== 'mobile') return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); goNext(); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); goPrev(); }
+  });
+
+  // Initialize journey nav
+  updateJourneyNav();
 </script>
 
 </body>

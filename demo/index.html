@@ -52,6 +52,7 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      font-size: 16px;
     }
 
     /* Nav */
@@ -92,7 +93,7 @@
     .avatar-ai { background: var(--teal); color: white; }
     .avatar-user { background: var(--light-gray); color: var(--warm-gray); }
     .bubble {
-      padding: 14px 18px; border-radius: 18px; font-size: 15px; line-height: 1.55;
+      padding: 16px 20px; border-radius: 18px; font-size: 16px; line-height: 1.6;
       max-width: 520px;
     }
     .bubble-ai {
@@ -133,7 +134,7 @@
     }
     textarea.journal-input {
       width: 100%; min-height: 52px; max-height: 160px;
-      padding: 14px 16px; font-family: var(--sans); font-size: 15px; line-height: 1.4;
+      padding: 14px 16px; font-family: var(--sans); font-size: 16px; line-height: 1.5;
       color: var(--dark); background: var(--white);
       border: 1.5px solid var(--light-gray); border-radius: var(--r-xl);
       resize: none; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
@@ -191,7 +192,7 @@
       display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;
     }
     .prompt-chip {
-      font-family: var(--sans); font-size: 12px; font-weight: 500;
+      font-family: var(--sans); font-size: 14px; font-weight: 500;
       padding: 6px 12px; border-radius: 999px;
       border: 1px solid var(--light-gray); background: var(--white);
       color: var(--warm-gray); cursor: pointer; transition: all 0.15s;
@@ -261,21 +262,21 @@
       letter-spacing: 0.08em;
     }
     .rbt-card-title {
-      font-size: 15px; font-weight: 600; color: var(--dark);
+      font-size: 16px; font-weight: 600; color: var(--dark);
       margin-bottom: 6px; line-height: 1.3;
     }
     .rbt-card-body {
-      font-size: 13px; color: var(--warm-gray); line-height: 1.5;
+      font-size: 14px; color: var(--warm-gray); line-height: 1.55;
       margin-bottom: 8px;
     }
     .rbt-card-quote {
-      font-size: 12px; font-style: italic; color: var(--mid-gray);
+      font-size: 13px; font-style: italic; color: var(--mid-gray);
       padding-left: 10px; border-left: 2px solid; margin-bottom: 8px;
       line-height: 1.4;
     }
     .rbt-card-tags { display: flex; flex-wrap: wrap; gap: 4px; }
     .rbt-tag {
-      font-size: 11px; font-weight: 500; padding: 2px 8px;
+      font-size: 12px; font-weight: 500; padding: 3px 9px;
       border-radius: 999px; border: 1px solid;
     }
 
@@ -304,8 +305,8 @@
     }
     .action-item {
       display: flex; align-items: flex-start; gap: 8px;
-      padding: 8px 10px; background: var(--off-white);
-      border-radius: var(--r-sm); font-size: 13px; color: var(--warm-gray);
+      padding: 10px 12px; background: var(--off-white);
+      border-radius: var(--r-sm); font-size: 14px; color: var(--warm-gray);
     }
     .action-check {
       width: 16px; height: 16px; border: 1.5px solid var(--teal);
@@ -349,13 +350,13 @@
       margin-bottom: 8px;
     }
     .psych-body {
-      font-size: 13px; color: var(--warm-gray); line-height: 1.55;
+      font-size: 14px; color: var(--warm-gray); line-height: 1.55;
       margin-bottom: 10px;
     }
     .psych-stat {
       display: flex; align-items: flex-start; gap: 8px;
       padding: 10px 12px; background: rgba(255,255,255,0.7);
-      border-radius: var(--r-sm); font-size: 12px; color: var(--warm-gray);
+      border-radius: var(--r-sm); font-size: 13px; color: var(--warm-gray);
       line-height: 1.4;
     }
     .psych-stat-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
@@ -375,7 +376,7 @@
     }
     .journey-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
     .journey-text {
-      font-size: 13px; color: var(--teal-dark); line-height: 1.5;
+      font-size: 14px; color: var(--teal-dark); line-height: 1.55;
       font-style: italic;
     }
 
@@ -442,13 +443,22 @@
       animation: fadeUp 0.6s ease-out;
     }
     .intro-emoji { font-size: 40px; margin-bottom: 12px; }
+    .intro-audience {
+      font-size: 13px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--teal);
+      margin-bottom: 12px;
+    }
     .intro-title {
-      font-family: var(--serif); font-size: 26px; color: var(--dark);
-      margin-bottom: 8px; line-height: 1.25;
+      font-family: var(--serif); font-size: 30px; color: var(--dark);
+      margin-bottom: 12px; line-height: 1.25;
     }
     .intro-sub {
-      font-size: 15px; color: var(--warm-gray); line-height: 1.55;
-      max-width: 440px; margin: 0 auto 20px;
+      font-size: 17px; color: var(--warm-gray); line-height: 1.6;
+      max-width: 480px; margin: 0 auto 10px;
+    }
+    .intro-context {
+      font-size: 15px; color: var(--mid-gray); line-height: 1.55;
+      max-width: 460px; margin: 0 auto 20px;
     }
     .intro-features {
       display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
@@ -456,7 +466,7 @@
     }
     .intro-feature {
       display: flex; align-items: center; gap: 6px;
-      font-size: 13px; color: var(--mid-gray); padding: 6px 12px;
+      font-size: 14px; color: var(--mid-gray); padding: 7px 14px;
       background: var(--white); border: 1px solid var(--light-gray);
       border-radius: 999px;
     }
@@ -539,9 +549,11 @@
   <main class="main">
     <!-- Warm intro -->
     <div class="intro-hero" id="introHero">
+      <p class="intro-audience">For families &amp; carers of people with disability</p>
       <div class="intro-emoji">💛</div>
       <h1 class="intro-title">Your caring matters.<br>So does how you feel.</h1>
-      <p class="intro-sub">A private journal that listens, reflects back what you might not see yourself, and reminds you that what you're going through has a name — and you're not alone in it.</p>
+      <p class="intro-sub">An AI journal built for unpaid carers — parents, partners, siblings, and families supporting someone with a disability.</p>
+      <p class="intro-context">Talk about your day in your own words, by voice or text. We'll reflect back the wins you might miss, name the hard parts without judgement, and show you that what you're feeling is real, researched, and shared by thousands of carers like you.</p>
       <div class="intro-features">
         <span class="intro-feature"><span class="intro-feature-icon">🌹</span> Rose, Bud &amp; Thorn reflection</span>
         <span class="intro-feature"><span class="intro-feature-icon">🧠</span> Psychology-backed insights</span>
@@ -551,13 +563,9 @@
 
       <button class="demo-trigger" id="demoTrigger">See how it works — Sarah's day →</button>
 
-      <div class="intro-divider"><span>or try it yourself</span></div>
+      <div class="intro-divider"><span>or start journaling now</span></div>
 
-      <div class="setup-compact" id="setupBanner">
-        <span class="setup-label">API key</span>
-        <input type="password" class="key-input" id="apiKeyInput" placeholder="Paste Gemini key from aistudio.google.com">
-        <button class="key-save" id="saveKeyBtn">Connect</button>
-      </div>
+      <button class="demo-trigger" id="startJournal" style="background:var(--white);color:var(--teal);border:1.5px solid var(--teal)">Start my journal →</button>
     </div>
 
     <!-- Chat -->
@@ -595,7 +603,7 @@
   </main>
 
   <footer class="footer">
-    <p>Built by <a href="https://carerliaison.com">Carer Liaison</a>. Your journal stays private.</p>
+    <p>Built by <a href="https://carerliaison.com">Carer Liaison</a>. Powered by Gemini Flash. Your journal stays private.</p>
   </footer>
 
   <div class="toast" id="toast"></div>
@@ -620,7 +628,7 @@
     const voiceTimer = $('voiceTimer');
 
     // ───────── STATE ─────────
-    let apiKey = localStorage.getItem('gemini_api_key') || '';
+    let apiKey = localStorage.getItem('gemini_api_key') || 'AIzaSyBr4eoO9MNfq7LUBc_cqPlb7tU-L0bxJ4Y';
     let conversationHistory = [];
     let isStreaming = false;
     let messageCount = 0;
@@ -631,24 +639,18 @@
 
     // ───────── INIT ─────────
     const introHero = $('introHero');
-    if (apiKey) {
-      setupBanner.style.display = 'none';
-      introHero.style.display = 'none';
-      addAIMessage("Hey. No rush — whenever you're ready.\n\nWhat's been on your mind today? Could be something that happened, something you're feeling, or just how the day went. There's no wrong way to start.");
-    }
     updateSendBtn();
 
-    // ───────── API KEY ─────────
-    saveKeyBtn.addEventListener('click', () => {
-      const key = apiKeyInput.value.trim();
-      if (!key) return;
-      apiKey = key;
-      localStorage.setItem('gemini_api_key', key);
-      introHero.style.display = 'none';
-      addAIMessage("Hey. No rush — whenever you're ready.\n\nWhat's been on your mind today? Could be something that happened, something you're feeling, or just how the day went. There's no wrong way to start.");
-      updateSendBtn();
-      journalInput.focus();
-    });
+    // ───────── START JOURNAL ─────────
+    const startJournalBtn = $('startJournal');
+    if (startJournalBtn) {
+      startJournalBtn.addEventListener('click', () => {
+        introHero.style.display = 'none';
+        addAIMessage("Hey. No rush — whenever you're ready.\n\nWhat's been on your mind today? Could be something that happened, something you're feeling, or just how the day went. There's no wrong way to start.");
+        updateSendBtn();
+        journalInput.focus();
+      });
+    }
 
     // ───────── INPUT ─────────
     journalInput.addEventListener('input', () => {
@@ -660,7 +662,7 @@
       if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
     });
     function updateSendBtn() {
-      sendBtn.disabled = !journalInput.value.trim() || !apiKey || isStreaming;
+      sendBtn.disabled = !journalInput.value.trim() || isStreaming;
     }
 
     // ───────── VOICE INPUT ─────────
@@ -778,7 +780,10 @@
 
     async function handleSend() {
       const text = journalInput.value.trim();
-      if (!text || !apiKey || isStreaming) return;
+      if (!text || isStreaming) return;
+
+      // Hide intro if still showing
+      if (introHero) introHero.style.display = 'none';
 
       // Stop voice if recording
       if (isRecording) stopVoice();
@@ -1169,10 +1174,10 @@ Rules:
       window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
 
-    function showToast(msg) {
+    function showToast(msg, duration = 2000) {
       toast.textContent = msg;
       toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2000);
+      setTimeout(() => toast.classList.remove('show'), duration);
     }
 
     // ───────── PREDEFINED DEMO ─────────

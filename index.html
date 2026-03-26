@@ -543,6 +543,50 @@
     }
     .agent-metric svg { color: var(--teal); flex-shrink: 0; }
 
+    /* ── TO-DONE FLOW ── */
+    .todone-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2.5rem 0 3rem;
+      flex-wrap: wrap;
+    }
+    .todone-flow-step {
+      text-align: center;
+      flex: 0 1 200px;
+    }
+    .todone-flow-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--teal-pale);
+      color: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.6rem;
+    }
+    .todone-flow-label {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.05rem;
+      color: var(--dark);
+      margin-bottom: 0.2rem;
+    }
+    .todone-flow-desc {
+      font-size: 0.82rem;
+      color: var(--mid-gray);
+    }
+    .todone-flow-arrow {
+      flex-shrink: 0;
+      opacity: 0.5;
+    }
+    @media (max-width: 640px) {
+      .todone-flow-arrow { display: none; }
+      .todone-flow { gap: 1.5rem; }
+      .todone-flow-step { flex: 0 1 100%; }
+    }
+
     /* ── NDIS / TRUST ── */
     .trust { background: white; }
     .trust-grid {
@@ -739,7 +783,7 @@
     <div class="nav-links">
       <a href="#reality">The Reality</a>
       <a href="#journal">The Journal</a>
-      <a href="#vision">The Vision</a>
+      <a href="#vision">To-Done</a>
       <a href="#ndis">NDIS Funding</a>
       <a href="demo2/" class="nav-cta">Try the Journal</a>
     </div>
@@ -931,66 +975,96 @@
   </div>
 </section>
 
-<!-- THE VISION -->
+<!-- THE VISION: TO-DONE -->
 <section class="agents" id="vision">
   <div class="section-inner fade-up">
     <div class="section-eyebrow">The vision</div>
-    <h2 class="section-title">Your todone list. Things handled, not things to do.</h2>
-    <p class="section-subtitle">The journal is where it starts. Where it goes is a companion that quietly handles the daily work — so the day flows instead of fights. Not more tasks for you. Things already taken care of.</p>
+    <h2 class="section-title">From journal to To-Done.</h2>
+    <p class="section-subtitle">You talk about your day. The AI listens — and quietly captures everything a support worker would need to help. Sleep patterns, meal constraints, therapy notes, body state, ideas. Then it turns those into a ready-made task list. Hand it to a support agent, and watch to-dos become to-dones.</p>
+
+    <div class="todone-flow">
+      <div class="todone-flow-step">
+        <div class="todone-flow-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div class="todone-flow-label">You journal</div>
+        <div class="todone-flow-desc">Talk about your day — voice or text</div>
+      </div>
+      <div class="todone-flow-arrow">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+      <div class="todone-flow-step">
+        <div class="todone-flow-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="todone-flow-label">AI captures</div>
+        <div class="todone-flow-desc">Extracts tasks, patterns, and context</div>
+      </div>
+      <div class="todone-flow-arrow">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+      <div class="todone-flow-step">
+        <div class="todone-flow-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="todone-flow-label">Agent acts</div>
+        <div class="todone-flow-desc">Support worker gets a ready-made brief</div>
+      </div>
+    </div>
 
     <div class="agents-grid">
       <div class="agent-card">
-        <div class="agent-phase">Todone</div>
-        <h3>Sleep Tracked</h3>
-        <p>Last night's sleep scored and connected to today's plan. You don't check a dashboard — the insight comes to you. Bad night? The day adjusts automatically.</p>
+        <div class="agent-phase">Captured</div>
+        <h3>Sleep &amp; Body State</h3>
+        <p>"He was up three times last night, and his left side is stiff this morning." The AI logs sleep quality, body observations, and flags what matters for today's plan.</p>
         <div class="agent-metric">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-          Handled: Sleep-body connection tracked
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          To-Done: Support worker adjusts the day's schedule
         </div>
       </div>
       <div class="agent-card">
-        <div class="agent-phase">Todone</div>
-        <h3>Meals Planned</h3>
-        <p>Weekly menus that account for chewing constraints, nutrition, and what's in the fridge. Grocery list generated. Prep brief sent at 8am.</p>
+        <div class="agent-phase">Captured</div>
+        <h3>Meal Needs &amp; Preferences</h3>
+        <p>"He's refusing anything chewy again, but loved the soup yesterday." Dietary constraints, texture needs, what worked — all extracted and ready for meal prep.</p>
         <div class="agent-metric">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-          Handled: One less decision every day
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          To-Done: Support worker preps meals that actually work
         </div>
       </div>
       <div class="agent-card">
-        <div class="agent-phase">Todone</div>
-        <h3>Therapy Matched</h3>
-        <p>Weekly therapy plan adjusted to how they're actually doing today. Body state drops? The plan shifts. No guesswork from you.</p>
+        <div class="agent-phase">Captured</div>
+        <h3>Therapy Observations</h3>
+        <p>"The OT exercise seemed to hurt his shoulder. But he really engaged with the music session." Real-time therapy feedback that would otherwise be lost by the next appointment.</p>
         <div class="agent-metric">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-          Handled: Right therapy on the right day
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          To-Done: Therapist gets notes before the next session
         </div>
       </div>
       <div class="agent-card">
-        <div class="agent-phase">Todone</div>
-        <h3>Patterns Spotted</h3>
-        <p>The system notices what you've been tracking in your head for years — and writes it down. Correlations between sleep, meals, mood, and good days surface over time.</p>
+        <div class="agent-phase">Captured</div>
+        <h3>Patterns &amp; Correlations</h3>
+        <p>You've noticed bad sleeps follow loud afternoons. The AI spots it too — and starts connecting sleep, meals, mood, and environment across weeks.</p>
         <div class="agent-metric">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-          Handled: Knowledge made visible
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          To-Done: Team sees what triggers good and bad days
         </div>
       </div>
       <div class="agent-card">
-        <div class="agent-phase">Todone</div>
-        <h3>Ideas Captured</h3>
-        <p>Every idea — theirs or yours — gets saved, researched, and surfaced when it's relevant. Voice note in the car. Followed up by morning.</p>
+        <div class="agent-phase">Captured</div>
+        <h3>Ideas &amp; Requests</h3>
+        <p>"I wonder if a weighted blanket would help" — said once in a voice note, never followed up. Now it's captured, researched, and flagged for the next plan review.</p>
         <div class="agent-metric">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-          Handled: Nothing gets lost
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          To-Done: Support coordinator researches and follows up
         </div>
       </div>
       <div class="agent-card">
-        <div class="agent-phase">Todone</div>
-        <h3>Morning Brief Sent</h3>
-        <p>One message before the day starts. How they slept, what to expect, what's planned, what to watch for. The day flows because you started it informed.</p>
+        <div class="agent-phase">Captured</div>
+        <h3>Daily Handover Brief</h3>
+        <p>Everything from the journal — distilled into one page. How they slept, what to watch for, what's planned, what worked yesterday. Ready before the support worker arrives.</p>
         <div class="agent-metric">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-          Handled: Mise en place for your day
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          To-Done: Support worker starts informed, not guessing
         </div>
       </div>
     </div>

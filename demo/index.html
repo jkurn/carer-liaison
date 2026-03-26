@@ -800,18 +800,15 @@
       conversationHistory.push({ role: 'user', content: text });
 
       try {
-        // First: get the empathetic response (non-streamed for reliability)
-        const responseText = await getConversationResponse(text);
+        // Single combined call: conversation response + structured extraction
+        const result = await getCombinedResponse(text);
 
-        // Remove typing, show AI response
         typingEl.remove();
-        addAIMessage(responseText);
-        conversationHistory.push({ role: 'assistant', content: responseText });
+        addAIMessage(result.response);
+        conversationHistory.push({ role: 'assistant', content: result.response });
 
-        // Then: extract rosebud reflection (non-streamed)
-        const extractionData = await extractRosebudAndEntities(text);
-        if (extractionData) {
-          renderReflection(extractionData);
+        if (result.reflection) {
+          renderReflection(result.reflection);
         }
 
       } catch (err) {
@@ -826,6 +823,27 @@
     }
 
     // ───────── SYSTEM PROMPTS ─────────
+    function getCombinedSystemPrompt() {
+      return `You are a compassionate carer support companion for Carer Liaison — an Australian app for unpaid carers of people with disabilities (NDIS participants).
+
+Your task: respond to the carer's journal entry in TWO parts.
+
+PART 1 — CONVERSATION (write this first, as plain text):
+- 2-4 sentences max. Warm, grounded, real. Australian English.
+- Validate emotions first. Notice small wins they might overlook.
+- Ask a gentle follow-up question.
+- No bullet points. No lists. Just human conversation.
+- Never say "I understand" — show understanding through specificity.
+
+PART 2 — REFLECTION JSON (write this immediately after, as a JSON object):
+Return a JSON object with this exact structure:
+{"rose":{"title":"3-5 words","body":"2-3 sentences on why this win matters","quote":"short phrase from entry","tags":["tag1"]},"bud":{"title":"3-5 words","body":"2-3 sentences on growth/opportunity","quote":"short phrase","tags":["tag1"]},"thorn":{"title":"3-5 words","body":"2-3 sentences validating the difficulty","quote":"short phrase","tags":["tag1"]},"actions":[{"text":"specific next step","category":"self-care|admin|advocacy|provider|school"}],"psychology":{"concept":"Research-backed name e.g. Caregiver Hypervigilance","explanation":"2-3 plain language sentences connecting to their experience. Normalizing.","stat":"Specific statistic from Australian carer research","source_hint":"e.g. Carers Australia 2023"},"journey_context":"1-2 warm sentences placing today in the bigger caring picture","people":["Name (role)"],"emotions":["precise emotion words"],"services":["services mentioned"],"mood_score":50,"mood_label":"evocative phrase for today's tone","energy_label":"one of: Thriving|Steady|Stretched thin|Running on fumes|At breaking point"}
+
+Rules: mood_score 0-100. Quotes under 15 words. Rose even in dark entries. Thorn without solutions. Emotions precise (not generic). Do NOT wrap JSON in markdown fences. The JSON must be the LAST thing in your response.
+
+This is message ${messageCount + 1} in today's journal.`;
+    }
+
     function getConversationSystemPrompt() {
       return `You are a compassionate, experienced carer support companion for Carer Liaison — an Australian app for unpaid carers of people with disabilities (especially NDIS participants).
 
@@ -924,29 +942,34 @@ Rules:
       return data?.content?.[0]?.text || '';
     }
 
-    async function getConversationResponse(userText) {
+    // ───────── COMBINED RESPONSE + EXTRACTION (single API call) ─────────
+    async function getCombinedResponse(userText) {
+      const systemPrompt = getCombinedSystemPrompt();
       const messages = [
         ...conversationHistory.slice(-6),
         { role: 'user', content: userText }
       ];
-      const text = await aiCall(getConversationSystemPrompt(), messages, 300);
-      return text || "I'm here. Tell me more.";
-    }
 
-    // ───────── EXTRACTION (via Edge Function) ─────────
-    async function extractRosebudAndEntities(journalText) {
+      const text = await aiCall(systemPrompt, messages, 1500);
+
+      // Parse the combined response: conversation text above the JSON, reflection JSON below
       try {
-        const system = 'You are a reflective journaling coach for carers of people with disabilities. You ONLY return valid JSON. Never include markdown fences or any text outside the JSON object.';
-        let text = await aiCall(system, [{ role: 'user', content: getExtractionPrompt(journalText) }], 1200);
-
-        // Clean markdown code fences if present
-        text = text.replace(/^```json?\s*/i, '').replace(/\s*```$/i, '').trim();
-
-        return JSON.parse(text);
+        const jsonMatch = text.match(/\{[\s\S]*\}$/);
+        if (jsonMatch) {
+          const conversationPart = text.slice(0, jsonMatch.index).trim();
+          let jsonStr = jsonMatch[0].replace(/^```json?\s*/i, '').replace(/\s*```$/i, '').trim();
+          const reflection = JSON.parse(jsonStr);
+          return {
+            response: conversationPart || "I'm here. Tell me more.",
+            reflection
+          };
+        }
       } catch (e) {
-        console.error('Extraction failed:', e);
-        return null;
+        console.error('Extraction parse failed:', e);
       }
+
+      // Fallback: treat entire response as conversation, no reflection
+      return { response: text || "I'm here. Tell me more.", reflection: null };
     }
 
     // ───────── RENDER FUNCTIONS ─────────

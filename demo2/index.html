@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carer Liaison — Interactive Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Rounded" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal: #008080;
+      --teal-dark: #006666;
+      --teal-light: #00a0a0;
+      --teal-pale: #e6f5f5;
+      --coral: #e07a5f;
+      --coral-light: #fef0ec;
+      --coral-dark: #c4583d;
+      --amber: #d4a853;
+      --amber-light: #fef9ee;
+      --blue: #3b82f6;
+      --blue-light: #eff6ff;
+      --purple: #7c3aed;
+      --purple-light: #f5f3ff;
+      --red: #dc2626;
+      --red-light: #fef2f2;
+      --green: #10b981;
+      --green-light: #ecfdf5;
+      --dark: #1a1a1a;
+      --warm-gray: #4a4a48;
+      --mid-gray: #6b6b68;
+      --light-gray: #e8e8e6;
+      --off-white: #f8f8f6;
+      --white: #ffffff;
+      --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --r-sm: 8px;
+      --r-md: 12px;
+      --r-lg: 16px;
+      --r-xl: 20px;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: #f0f0ed;
+      color: var(--dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .demo-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .demo-header h1 {
+      font-family: var(--serif);
+      font-size: 28px;
+      color: var(--teal-dark);
+      margin-bottom: 8px;
+    }
+    .demo-header p {
+      color: var(--mid-gray);
+      font-size: 15px;
+      max-width: 480px;
+    }
+
+    /* Phone frame */
+    .phone-frame {
+      width: 390px;
+      height: 844px;
+      background: var(--white);
+      border-radius: 44px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.05);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Status bar */
+    .status-bar {
+      height: 54px;
+      padding: 14px 28px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 15px;
+      font-weight: 600;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+    }
+    .status-bar .time { font-weight: 600; }
+    .status-bar .icons { display: flex; gap: 6px; align-items: center; font-size: 13px; }
+    .status-bar .icons span { font-size: 18px; }
+
+    /* Screen container */
+    .screens-wrapper {
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    .screen {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+      padding: 54px 0 0;
+      -webkit-overflow-scrolling: touch;
+    }
+    .screen::-webkit-scrollbar { display: none; }
+    .screen.active { transform: translateX(0); opacity: 1; z-index: 10; }
+    .screen.left { transform: translateX(-100%); opacity: 0; z-index: 5; }
+    .screen.right { transform: translateX(100%); opacity: 0; z-index: 5; }
+
+    /* Bottom nav */
+    .bottom-nav {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 82px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--light-gray);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-around;
+      padding-top: 10px;
+      z-index: 40;
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--mid-gray);
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 4px 12px;
+      transition: color 0.2s;
+    }
+    .nav-item.active { color: var(--teal); }
+    .nav-item .material-symbols-rounded { font-size: 24px; }
+
+    /* Screen content styles */
+    .screen-content { padding: 0 24px 100px; }
+
+    .greeting {
+      font-family: var(--serif);
+      font-size: 26px;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .date-line {
+      color: var(--mid-gray);
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+    .ai-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: var(--teal);
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    /* Body state */
+    .body-state {
+      background: var(--off-white);
+      border-radius: var(--r-lg);
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+    .body-state-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--mid-gray);
+      margin-bottom: 8px;
+    }
+    .body-state-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    .body-state-score {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .body-state-score span { font-size: 20px; color: var(--mid-gray); font-weight: 400; }
+    .body-state-score.low { color: var(--coral); }
+    .body-state-score.critical { color: var(--red); }
+    .body-state-heart {
+      width: 36px; height: 36px;
+      background: var(--coral-light);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .body-state-heart .material-symbols-rounded { color: var(--coral); font-size: 20px; }
+    .body-state-warning {
+      font-size: 13px;
+      color: var(--coral);
+      font-weight: 500;
+      margin-top: 6px;
+    }
+
+    /* Task cards */
+    .task-card {
+      border-radius: var(--r-lg);
+      padding: 18px 20px;
+      margin-bottom: 14px;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .task-card:active { transform: scale(0.98); }
+    .task-card.coral { background: var(--coral-light); border-left: 4px solid var(--coral); }
+    .task-card.blue { background: var(--blue-light); border-left: 4px solid var(--blue); }
+    .task-card.teal { background: var(--teal-pale); border-left: 4px solid var(--teal); }
+    .task-card.amber { background: var(--amber-light); border-left: 4px solid var(--amber); }
+    .task-card.purple { background: var(--purple-light); border-left: 4px solid var(--purple); }
+    .task-card.green { background: var(--green-light); border-left: 4px solid var(--green); }
+    .task-card-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .task-card.coral .task-card-label { color: var(--coral-dark); }
+    .task-card.blue .task-card-label { color: var(--blue); }
+    .task-card.teal .task-card-label { color: var(--teal); }
+    .task-card.amber .task-card-label { color: var(--amber); }
+    .task-card.purple .task-card-label { color: var(--purple); }
+    .task-card.green .task-card-label { color: var(--green); }
+    .task-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .task-card p {
+      font-size: 13px;
+      color: var(--warm-gray);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .task-card-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .task-card-btn:hover { opacity: 0.85; }
+    .task-card-btn.coral { background: var(--coral); color: white; }
+    .task-card-btn.blue { background: var(--blue); color: white; }
+    .task-card-btn.teal { background: var(--teal); color: white; }
+
+    .checklist { margin-bottom: 10px; }
+    .checklist-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--warm-gray);
+      padding: 3px 0;
+    }
+    .checklist-item .material-symbols-rounded { font-size: 18px; }
+    .checklist-item.checked .material-symbols-rounded { color: var(--teal); }
+    .checklist-item.unchecked .material-symbols-rounded { color: var(--light-gray); }
+
+    /* Evening screen */
+    .checkin-card {
+      background: var(--teal-pale);
+      border-radius: var(--r-lg);
+      padding: 18px 20px;
+      margin-bottom: 14px;
+    }
+    .checkin-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+    .checkin-question {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 14px;
+    }
+    .mood-options {
+      display: flex;
+      gap: 0;
+      justify-content: space-between;
+    }
+    .mood-btn {
+      flex: 1;
+      padding: 10px 4px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--warm-gray);
+      background: var(--white);
+      border: 1px solid var(--light-gray);
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: var(--sans);
+    }
+    .mood-btn:first-child { border-radius: 8px 0 0 8px; }
+    .mood-btn:last-child { border-radius: 0 8px 8px 0; }
+    .mood-btn:hover, .mood-btn.selected {
+      background: var(--teal);
+      color: white;
+      border-color: var(--teal);
+    }
+
+    .school-card {
+      background: var(--amber-light);
+      border-left: 4px solid var(--amber);
+      border-radius: var(--r-lg);
+      padding: 18px 20px;
+      margin-bottom: 14px;
+    }
+    .school-card .task-card-label { color: var(--amber); }
+    .school-card h3 { font-size: 16px; font-weight: 600; color: var(--dark); margin-bottom: 10px; }
+    .school-quote {
+      font-style: italic;
+      color: var(--warm-gray);
+      font-size: 14px;
+      line-height: 1.55;
+      margin-bottom: 8px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.6);
+      border-radius: var(--r-sm);
+    }
+    .school-attribution {
+      font-size: 12px;
+      color: var(--mid-gray);
+    }
+
+    .respite-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: var(--white);
+      border: 1px solid var(--light-gray);
+      border-radius: var(--r-md);
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .respite-item:hover { border-color: var(--teal); }
+    .respite-item h4 { font-size: 14px; font-weight: 600; color: var(--dark); }
+    .respite-item p { font-size: 12px; color: var(--mid-gray); }
+    .respite-item .material-symbols-rounded { color: var(--mid-gray); font-size: 20px; }
+
+    /* Document generator screen */
+    .doc-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .doc-header .back-btn {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      border: none; background: var(--off-white); border-radius: 8px;
+      cursor: pointer;
+      color: var(--teal);
+    }
+    .doc-header h2 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .progress-bar-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .progress-text {
+      font-size: 13px;
+      color: var(--teal);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .progress-bar {
+      flex: 1;
+      height: 4px;
+      background: var(--light-gray);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--teal);
+      border-radius: 2px;
+      transition: width 2s ease;
+    }
+    .progress-pct {
+      font-size: 13px;
+      color: var(--mid-gray);
+      font-weight: 500;
+    }
+
+    .doc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: var(--off-white);
+      border-radius: var(--r-md);
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    .doc-badge .material-symbols-rounded { color: var(--teal); font-size: 22px; }
+    .doc-badge-text h4 { font-size: 14px; font-weight: 600; color: var(--dark); }
+    .doc-badge-text span { font-size: 12px; color: var(--mid-gray); }
+
+    .letter-content {
+      background: var(--white);
+      border: 1px solid var(--light-gray);
+      border-radius: var(--r-lg);
+      padding: 24px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--warm-gray);
+      margin-bottom: 20px;
+    }
+    .letter-content .to-line { font-weight: 600; color: var(--dark); margin-bottom: 2px; }
+    .letter-content .re-line { font-size: 13px; color: var(--mid-gray); margin-bottom: 16px; }
+    .letter-content .salutation { margin-bottom: 12px; }
+    .letter-content .letter-body p { margin-bottom: 12px; }
+    .letter-content ul { margin: 8px 0 12px 20px; }
+    .letter-content li { margin-bottom: 6px; font-size: 13px; }
+
+    .doc-actions {
+      display: flex;
+      gap: 12px;
+      position: sticky;
+      bottom: 90px;
+      padding: 12px 0;
+    }
+    .doc-actions button {
+      flex: 1;
+      padding: 14px;
+      border-radius: var(--r-md);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--sans);
+      transition: opacity 0.15s;
+    }
+    .doc-actions button:hover { opacity: 0.85; }
+    .doc-actions .btn-primary { background: var(--teal); color: white; border: none; }
+    .doc-actions .btn-secondary { background: var(--white); color: var(--dark); border: 1px solid var(--light-gray); }
+
+    /* Crisis screen */
+    .crisis-banner {
+      background: var(--red);
+      margin: -54px -24px 0;
+      padding: 74px 24px 28px;
+      color: white;
+    }
+    .crisis-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+    .crisis-badge .dot {
+      width: 10px; height: 10px;
+      background: white;
+      border-radius: 50%;
+      animation: pulse-dot 1.5s infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .crisis-banner h2 {
+      font-family: var(--serif);
+      font-size: 28px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .crisis-banner p {
+      font-size: 14px;
+      opacity: 0.85;
+      line-height: 1.5;
+    }
+    .crisis-score {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      margin-top: 20px;
+    }
+    .crisis-score .number { font-size: 56px; font-weight: 700; line-height: 1; }
+    .crisis-score .total { font-size: 22px; opacity: 0.7; }
+    .crisis-label { font-size: 13px; opacity: 0.7; margin-top: 2px; }
+
+    .crisis-content { padding: 24px 0 100px; }
+    .crisis-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      background: var(--white);
+      border: 1px solid var(--light-gray);
+      border-radius: var(--r-lg);
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .crisis-card:hover { border-color: var(--teal); box-shadow: 0 2px 8px rgba(0,128,128,0.1); }
+    .crisis-card:first-child { border-color: var(--red); }
+    .crisis-card:first-child:hover { box-shadow: 0 2px 8px rgba(220,38,38,0.15); }
+    .crisis-icon {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .crisis-icon.red { background: var(--red-light); }
+    .crisis-icon.red .material-symbols-rounded { color: var(--red); }
+    .crisis-icon.teal { background: var(--teal-pale); }
+    .crisis-icon.teal .material-symbols-rounded { color: var(--teal); }
+    .crisis-icon.purple { background: var(--purple-light); }
+    .crisis-icon.purple .material-symbols-rounded { color: var(--purple); }
+    .crisis-card-text h4 { font-size: 15px; font-weight: 600; color: var(--dark); }
+    .crisis-card-text p { font-size: 12px; color: var(--mid-gray); margin-top: 2px; }
+    .crisis-card .material-symbols-rounded.arrow { color: var(--mid-gray); font-size: 20px; margin-left: auto; flex-shrink: 0; }
+
+    .crisis-note {
+      font-size: 12px;
+      color: var(--mid-gray);
+      text-align: center;
+      padding: 16px;
+      line-height: 1.5;
+      background: var(--off-white);
+      border-radius: var(--r-md);
+      margin-top: 10px;
+    }
+    .privacy-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--mid-gray);
+      margin-top: 16px;
+    }
+    .privacy-note .material-symbols-rounded { font-size: 16px; }
+
+    /* Toast notification */
+    .toast {
+      position: absolute;
+      top: 70px;
+      left: 24px;
+      right: 24px;
+      background: var(--dark);
+      color: white;
+      padding: 14px 18px;
+      border-radius: var(--r-md);
+      font-size: 13px;
+      font-weight: 500;
+      z-index: 60;
+      transform: translateY(-20px);
+      opacity: 0;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast .material-symbols-rounded { font-size: 18px; color: var(--green); }
+
+    /* Flow guide at bottom of page */
+    .flow-guide {
+      margin-top: 32px;
+      text-align: center;
+    }
+    .flow-dots {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+    .flow-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--light-gray);
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+    }
+    .flow-dot.active { background: var(--teal); width: 28px; border-radius: 5px; }
+    .flow-label {
+      font-size: 13px;
+      color: var(--mid-gray);
+      font-weight: 500;
+    }
+
+    @media (max-width: 440px) {
+      body { padding: 0; }
+      .phone-frame {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .demo-header, .flow-guide { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="demo-header">
+  <h1>Carer Liaison</h1>
+  <p>An AI personal operating system for carers. Tap through Sarah's day to see how it works.</p>
+</div>
+
+<div class="phone-frame">
+  <div class="status-bar" id="statusBar">
+    <span class="time">9:41</span>
+    <div class="icons">
+      <span class="material-symbols-rounded" style="font-size:16px">signal_cellular_alt</span>
+      <span class="material-symbols-rounded" style="font-size:16px">wifi</span>
+      <span class="material-symbols-rounded" style="font-size:16px">battery_full</span>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">
+    <span class="material-symbols-rounded">check_circle</span>
+    <span id="toastText"></span>
+  </div>
+
+  <div class="screens-wrapper">
+
+    <!-- SCREEN 1: My Day — Morning -->
+    <div class="screen active" id="screen-morning" data-index="0">
+      <div class="screen-content">
+        <h1 class="greeting">Good morning, Sarah</h1>
+        <p class="date-line">Wednesday, 26 March</p>
+        <div class="ai-badge">
+          <span class="material-symbols-rounded" style="font-size:16px">auto_awesome</span>
+          Generated for you this morning
+        </div>
+
+        <div class="body-state">
+          <div class="body-state-label">Body State</div>
+          <div class="body-state-row">
+            <div class="body-state-score low">35 <span>/100</span></div>
+            <div class="body-state-heart">
+              <span class="material-symbols-rounded">favorite</span>
+            </div>
+          </div>
+          <div class="body-state-warning">Running on Empty — 4 days below 40</div>
+        </div>
+
+        <div class="task-card coral" onclick="showToast('Breathing exercise started')">
+          <div class="task-card-label">Do this first</div>
+          <h3>2-min breathing reset before school run</h3>
+          <p>You've been below 40 for 4 days. A short breathing exercise before the morning rush can lower cortisol by 23%.</p>
+          <button class="task-card-btn coral">
+            <span class="material-symbols-rounded" style="font-size:16px">play_arrow</span>
+            Start breathing
+          </button>
+        </div>
+
+        <div class="task-card blue" onclick="navigateTo(2)">
+          <div class="task-card-label">Before 10:30 AM</div>
+          <h3>Tom's OT session — what to bring</h3>
+          <p>Session with Melissa at Ability First, Parramatta. Bring the communication book and last week's home exercises log.</p>
+          <div class="checklist">
+            <div class="checklist-item checked">
+              <span class="material-symbols-rounded">check_box</span>
+              Communication book
+            </div>
+            <div class="checklist-item unchecked">
+              <span class="material-symbols-rounded">check_box_outline_blank</span>
+              Home exercises log
+            </div>
+            <div class="checklist-item unchecked">
+              <span class="material-symbols-rounded">check_box_outline_blank</span>
+              Sensory toolkit
+            </div>
+          </div>
+        </div>
+
+        <div class="task-card teal" onclick="navigateTo(2)">
+          <div class="task-card-label">This week</div>
+          <h3>NDIS plan review letter — draft ready</h3>
+          <p>Your plan review is in 14 days. I've drafted a supporting letter based on Tom's therapy progress and your body state trends.</p>
+          <button class="task-card-btn teal" onclick="event.stopPropagation(); navigateTo(2)">
+            <span class="material-symbols-rounded" style="font-size:16px">description</span>
+            Review letter
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: My Day — Evening -->
+    <div class="screen right" id="screen-evening" data-index="1">
+      <div class="screen-content">
+        <h1 class="greeting">Good evening, Sarah</h1>
+        <p class="date-line">Wednesday, 26 March</p>
+        <div class="ai-badge">
+          <span class="material-symbols-rounded" style="font-size:16px">update</span>
+          Updated for tonight
+        </div>
+
+        <div class="checkin-card">
+          <div class="checkin-label">Check in</div>
+          <div class="checkin-question">How was today?</div>
+          <div class="mood-options">
+            <button class="mood-btn" onclick="selectMood(this)">Rough</button>
+            <button class="mood-btn" onclick="selectMood(this)">Okay</button>
+            <button class="mood-btn" onclick="selectMood(this)">Good</button>
+            <button class="mood-btn" onclick="selectMood(this)">Great</button>
+          </div>
+        </div>
+
+        <div class="school-card">
+          <div class="task-card-label">School update</div>
+          <h3>Tom's teacher sent a note</h3>
+          <div class="school-quote">
+            "Tom had a great day today! He participated in group reading and shared his drawing with the class. No incidents."
+          </div>
+          <div class="school-attribution">— Ms. Chen, Year 2 Teacher</div>
+        </div>
+
+        <div class="task-card green">
+          <div class="task-card-label">Proactive</div>
+          <h3>4 tough days in a row — respite options</h3>
+          <p>You've been under pressure all week. Here are respite providers near Parramatta with availability this weekend.</p>
+
+          <div class="respite-item" onclick="showToast('Opening Sunnyfield Respite details')">
+            <div>
+              <h4>Sunnyfield Respite</h4>
+              <p>2.4 km · Sat-Sun slots available</p>
+            </div>
+            <span class="material-symbols-rounded">chevron_right</span>
+          </div>
+          <div class="respite-item" onclick="showToast('Opening CareSide Parramatta details')">
+            <div>
+              <h4>CareSide Parramatta</h4>
+              <p>3.1 km · Weekend day program</p>
+            </div>
+            <span class="material-symbols-rounded">chevron_right</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: Document Generator -->
+    <div class="screen right" id="screen-document" data-index="2">
+      <div class="screen-content">
+        <div class="doc-header">
+          <button class="back-btn" onclick="navigateTo(0)">
+            <span class="material-symbols-rounded">arrow_back</span>
+          </button>
+          <h2>Document Generator</h2>
+        </div>
+
+        <div class="progress-bar-container">
+          <span class="progress-text">Generating your letter...</span>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+          </div>
+          <span class="progress-pct" id="progressPct">0%</span>
+        </div>
+
+        <div class="doc-badge">
+          <span class="material-symbols-rounded">description</span>
+          <div class="doc-badge-text">
+            <h4>NDIS Plan Review Letter</h4>
+            <span>Draft</span>
+          </div>
+        </div>
+
+        <div class="letter-content">
+          <div class="to-line">To: National Disability Insurance Agency</div>
+          <div class="re-line">Re: Plan Review Request — Tom Chen (NDIS #4829103)</div>
+
+          <div class="salutation">Dear NDIA Planning Team,</div>
+
+          <div class="letter-body">
+            <p>I am writing to request a plan review for my son, Tom Chen. Since our last plan was approved 11 months ago, Tom's support needs have changed significantly.</p>
+
+            <p>Key changes:</p>
+            <ul>
+              <li>Occupational therapy sessions have increased from fortnightly to weekly due to sensory processing challenges at school</li>
+              <li>Tom now requires a 1:1 aide for classroom participation, as recommended by his school</li>
+              <li>My own capacity as his primary carer has been impacted — my body state has averaged 38/100 over the past 30 days, indicating I am operating at unsustainable levels</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="doc-actions">
+          <button class="btn-primary" onclick="showToast('Letter copied to clipboard')">
+            <span class="material-symbols-rounded" style="font-size:18px">content_copy</span>
+            Copy
+          </button>
+          <button class="btn-secondary" onclick="showToast('PDF generated')">
+            <span class="material-symbols-rounded" style="font-size:18px">picture_as_pdf</span>
+            PDF
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 4: Crisis Support -->
+    <div class="screen right" id="screen-crisis" data-index="3">
+      <div class="screen-content" style="padding: 0 24px 100px;">
+        <div class="crisis-banner">
+          <div class="crisis-badge">
+            <span class="dot"></span>
+            Crisis support activated
+          </div>
+          <h2>Sarah, you need support right now</h2>
+          <p>Your body state has been below 20 for 3 consecutive days. This is a pattern we take seriously.</p>
+          <div class="crisis-score">
+            <span class="number">14</span>
+            <span class="total">/100</span>
+          </div>
+          <div class="crisis-label">At Crisis Point</div>
+        </div>
+
+        <div class="crisis-content">
+          <div class="crisis-card" onclick="showToast('Calling Carer Gateway...')">
+            <div class="crisis-icon red">
+              <span class="material-symbols-rounded">call</span>
+            </div>
+            <div class="crisis-card-text">
+              <h4>Carer Gateway</h4>
+              <p>1800 422 737 — Free, 24/7 crisis support</p>
+            </div>
+            <span class="material-symbols-rounded arrow">chevron_right</span>
+          </div>
+
+          <div class="crisis-card" onclick="showToast('Connecting to peer carer...')">
+            <div class="crisis-icon teal">
+              <span class="material-symbols-rounded">forum</span>
+            </div>
+            <div class="crisis-card-text">
+              <h4>Talk to someone now</h4>
+              <p>Connect with a peer carer who understands</p>
+            </div>
+            <span class="material-symbols-rounded arrow">chevron_right</span>
+          </div>
+
+          <div class="crisis-card" onclick="showToast('Finding emergency respite...')">
+            <div class="crisis-icon purple">
+              <span class="material-symbols-rounded">emergency</span>
+            </div>
+            <div class="crisis-card-text">
+              <h4>Emergency respite</h4>
+              <p>3 providers near you with same-day slots</p>
+            </div>
+            <span class="material-symbols-rounded arrow">chevron_right</span>
+          </div>
+
+          <div class="crisis-note">
+            This screen was generated because your body state data shows a sustained pattern. You are not alone — 1 in 4 Australians are carers.
+          </div>
+
+          <div class="privacy-note">
+            <span class="material-symbols-rounded">lock</span>
+            Your data stays private. Only you see this screen.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom navigation -->
+  <div class="bottom-nav">
+    <button class="nav-item active" id="nav-myday" onclick="navigateTo(0)">
+      <span class="material-symbols-rounded">wb_sunny</span>
+      My Day
+    </button>
+    <button class="nav-item" id="nav-body" onclick="showToast('Body tracking coming soon')">
+      <span class="material-symbols-rounded">monitor_heart</span>
+      Body
+    </button>
+    <button class="nav-item" id="nav-services" onclick="showToast('Services directory coming soon')">
+      <span class="material-symbols-rounded">location_on</span>
+      Services
+    </button>
+    <button class="nav-item" id="nav-profile" onclick="showToast('Profile screen coming soon')">
+      <span class="material-symbols-rounded">person</span>
+      Profile
+    </button>
+  </div>
+</div>
+
+<div class="flow-guide">
+  <div class="flow-dots">
+    <button class="flow-dot active" onclick="navigateTo(0)" data-dot="0"></button>
+    <button class="flow-dot" onclick="navigateTo(1)" data-dot="1"></button>
+    <button class="flow-dot" onclick="navigateTo(2)" data-dot="2"></button>
+    <button class="flow-dot" onclick="navigateTo(3)" data-dot="3"></button>
+  </div>
+  <div class="flow-label" id="flowLabel">Morning — Sarah starts her day</div>
+</div>
+
+<script>
+  const screens = ['morning', 'evening', 'document', 'crisis'];
+  const labels = [
+    'Morning — Sarah starts her day',
+    'Evening — Check-in & school updates',
+    'Document Generator — NDIS letter',
+    'Crisis Support — When it matters most'
+  ];
+  let currentScreen = 0;
+  let toastTimeout;
+
+  function navigateTo(index) {
+    if (index === currentScreen) return;
+    const direction = index > currentScreen ? 1 : -1;
+
+    screens.forEach((name, i) => {
+      const el = document.getElementById(`screen-${name}`);
+      if (i === index) {
+        el.className = 'screen active';
+        el.scrollTop = 0;
+      } else if (i < index) {
+        el.className = 'screen left';
+      } else {
+        el.className = 'screen right';
+      }
+    });
+
+    currentScreen = index;
+
+    // Update status bar color for crisis screen
+    const statusBar = document.getElementById('statusBar');
+    if (index === 3) {
+      statusBar.style.color = 'white';
+    } else {
+      statusBar.style.color = '';
+    }
+
+    // Update flow dots
+    document.querySelectorAll('.flow-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+    document.getElementById('flowLabel').textContent = labels[index];
+
+    // Update bottom nav
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    document.getElementById('nav-myday').classList.add('active');
+
+    // Trigger progress animation on document screen
+    if (index === 2) {
+      animateProgress();
+    }
+  }
+
+  function showToast(text) {
+    const toast = document.getElementById('toast');
+    document.getElementById('toastText').textContent = text;
+    toast.classList.add('show');
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+
+  function selectMood(btn) {
+    document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    showToast(`Mood logged: ${btn.textContent}`);
+  }
+
+  function animateProgress() {
+    const fill = document.getElementById('progressFill');
+    const pct = document.getElementById('progressPct');
+    fill.style.width = '0%';
+    pct.textContent = '0%';
+
+    setTimeout(() => {
+      fill.style.width = '85%';
+      let current = 0;
+      const interval = setInterval(() => {
+        current += 1;
+        if (current > 85) {
+          clearInterval(interval);
+          return;
+        }
+        pct.textContent = current + '%';
+      }, 23);
+    }, 300);
+  }
+
+  // Swipe support
+  let touchStartX = 0;
+  let touchEndX = 0;
+  const phoneFrame = document.querySelector('.phone-frame');
+
+  phoneFrame.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  phoneFrame.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 60) {
+      if (diff > 0 && currentScreen < screens.length - 1) {
+        navigateTo(currentScreen + 1);
+      } else if (diff < 0 && currentScreen > 0) {
+        navigateTo(currentScreen - 1);
+      }
+    }
+  }, { passive: true });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' && currentScreen < screens.length - 1) {
+      navigateTo(currentScreen + 1);
+    } else if (e.key === 'ArrowLeft' && currentScreen > 0) {
+      navigateTo(currentScreen - 1);
+    }
+  });
+</script>
+
+</body>
+</html>

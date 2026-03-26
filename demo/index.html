@@ -159,7 +159,7 @@
       width: 48px; height: 48px; border-radius: 50%;
       background: var(--white); border: 1.5px solid var(--light-gray); color: var(--warm-gray);
       cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s; flex-shrink: 0;
+      transition: border-color 0.2s, color 0.2s; flex-shrink: 0;
     }
     .btn-mic:hover { border-color: var(--teal); color: var(--teal); }
     .btn-mic svg { width: 20px; height: 20px; }
@@ -195,7 +195,7 @@
       font-family: var(--sans); font-size: 14px; font-weight: 500;
       padding: 6px 12px; border-radius: 999px;
       border: 1px solid var(--light-gray); background: var(--white);
-      color: var(--warm-gray); cursor: pointer; transition: all 0.15s;
+      color: var(--warm-gray); cursor: pointer; transition: border-color 0.15s, background 0.15s, color 0.15s;
     }
     .prompt-chip:hover {
       border-color: var(--teal-light); background: var(--teal-mist); color: var(--teal-dark);
@@ -432,7 +432,7 @@
       font-family: var(--sans); font-size: 14px; font-weight: 600;
       color: var(--white); background: var(--teal); border: none;
       cursor: pointer; padding: 12px 24px; text-align: center;
-      border-radius: var(--r-xl); transition: all 0.2s;
+      border-radius: var(--r-xl); transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
       width: 100%; margin-top: 4px;
     }
     .demo-trigger:hover { background: var(--teal-dark); transform: translateY(-1px); box-shadow: var(--shadow-md); }

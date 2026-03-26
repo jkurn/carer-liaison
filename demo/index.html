@@ -549,23 +549,23 @@
   <main class="main">
     <!-- Warm intro -->
     <div class="intro-hero" id="introHero">
-      <p class="intro-audience">For families &amp; carers of people with disability</p>
+      <p class="intro-audience">For unpaid carers of people with disability</p>
       <div class="intro-emoji">💛</div>
-      <h1 class="intro-title">Your caring matters.<br>So does how you feel.</h1>
-      <p class="intro-sub">An AI journal built for unpaid carers — parents, partners, siblings, and families supporting someone with a disability.</p>
-      <p class="intro-context">Talk about your day in your own words, by voice or text. We'll reflect back the wins you might miss, name the hard parts without judgement, and show you that what you're feeling is real, researched, and shared by thousands of carers like you.</p>
+      <h1 class="intro-title">Nobody asks how<br>the carer is doing.</h1>
+      <p class="intro-sub">This does. An AI journal that listens to your day, finds the wins you missed, names what you're feeling, and shows you it's backed by research — not just you, not just in your head.</p>
+      <p class="intro-context">Speak or type about your day. We reflect it back as a structured Rose, Bud &amp; Thorn journal — with psychology-backed insights that help you understand your own caring experience.</p>
       <div class="intro-features">
-        <span class="intro-feature"><span class="intro-feature-icon">🌹</span> Rose, Bud &amp; Thorn reflection</span>
-        <span class="intro-feature"><span class="intro-feature-icon">🧠</span> Psychology-backed insights</span>
-        <span class="intro-feature"><span class="intro-feature-icon">🎙️</span> Voice or text</span>
-        <span class="intro-feature"><span class="intro-feature-icon">🔒</span> Completely private</span>
+        <span class="intro-feature"><span class="intro-feature-icon">🌹</span> Finds your wins, growth &amp; hard parts</span>
+        <span class="intro-feature"><span class="intro-feature-icon">🧠</span> Names what you're feeling (with research)</span>
+        <span class="intro-feature"><span class="intro-feature-icon">🎙️</span> Voice or text — your choice</span>
+        <span class="intro-feature"><span class="intro-feature-icon">🔒</span> Private. Always.</span>
       </div>
 
-      <button class="demo-trigger" id="demoTrigger">See how it works — Sarah's day →</button>
+      <button class="demo-trigger" id="demoTrigger">See Sarah's journal entry →</button>
 
-      <div class="intro-divider"><span>or start journaling now</span></div>
+      <div class="intro-divider"><span>or try it with your own day</span></div>
 
-      <button class="demo-trigger" id="startJournal" style="background:var(--white);color:var(--teal);border:1.5px solid var(--teal)">Start my journal →</button>
+      <button class="demo-trigger" id="startJournal" style="background:var(--white);color:var(--teal);border:1.5px solid var(--teal)">Start journaling →</button>
     </div>
 
     <!-- Chat -->
@@ -592,35 +592,31 @@
         </button>
       </div>
       <div class="prompts" id="prompts">
-        <button class="prompt-chip" data-text="It was such a long day. Tom had a meltdown at school pickup and I had to carry him to the car while everyone stared. Then his OT cancelled last minute. I managed to get him to eat dinner though which felt like a win.">Hard day at school pickup</button>
-        <button class="prompt-chip" data-text="Actually today was pretty good. Tom's teacher said he sat through circle time for the first time in weeks. I even had 20 minutes to myself while he played independently. Small wins but I'll take them.">Small wins today</button>
-        <button class="prompt-chip" data-text="I'm so frustrated with the NDIA. They rejected our plan review request saying there's no change in circumstances. But Tom clearly needs more speech therapy — his therapist Sarah wrote a letter supporting it. I don't know what to do next.">NDIA frustration</button>
-        <button class="prompt-chip" data-text="I haven't slept properly in weeks. She wakes up three or four times a night and I'm the only one who can settle her. My partner tries but she just screams louder. I feel like I'm disappearing.">Can't sleep anymore</button>
-        <button class="prompt-chip" data-text="Had coffee with my sister today and she asked how I was doing — not about Mia, about ME. I almost cried. I don't think anyone's asked me that in months. It felt strange to even think about what I need.">Someone finally asked about me</button>
-        <button class="prompt-chip" data-text="I feel guilty saying this but sometimes I resent how much of my life revolves around appointments, therapies, and paperwork. I love him so much but I grieve the life I thought we'd have. Is that terrible?">Feeling guilty about my feelings</button>
+        <button class="prompt-chip" data-text="It was such a long day. Tom had a meltdown at school pickup and I had to carry him to the car while everyone stared. Then his OT cancelled last minute. I managed to get him to eat dinner though which felt like a win.">Meltdown at pickup, but dinner was a win</button>
+        <button class="prompt-chip" data-text="Actually today was pretty good. Tom's teacher said he sat through circle time for the first time in weeks. I even had 20 minutes to myself while he played independently. Small wins but I'll take them.">He sat through circle time today</button>
+        <button class="prompt-chip" data-text="I'm so frustrated with the NDIA. They rejected our plan review request saying there's no change in circumstances. But Tom clearly needs more speech therapy — his therapist Sarah wrote a letter supporting it. I don't know what to do next.">Plan review got rejected again</button>
+        <button class="prompt-chip" data-text="I haven't slept properly in weeks. She wakes up three or four times a night and I'm the only one who can settle her. My partner tries but she just screams louder. I feel like I'm disappearing.">I haven't slept in weeks</button>
+        <button class="prompt-chip" data-text="Had coffee with my sister today and she asked how I was doing — not about Mia, about ME. I almost cried. I don't think anyone's asked me that in months. It felt strange to even think about what I need.">Someone asked how I was doing</button>
+        <button class="prompt-chip" data-text="I feel guilty saying this but sometimes I resent how much of my life revolves around appointments, therapies, and paperwork. I love him so much but I grieve the life I thought we'd have. Is that terrible?">I feel guilty for feeling this way</button>
       </div>
     </div>
   </main>
 
   <footer class="footer">
-    <p>Built by <a href="https://carerliaison.com">Carer Liaison</a>. Powered by Gemini Flash. Your journal stays private.</p>
+    <p>Built by <a href="https://carerliaison.com">Carer Liaison</a>. Powered by Claude. Your journal stays private.</p>
   </footer>
 
   <div class="toast" id="toast"></div>
 
   <script>
     // ───────── CONFIG ─────────
-    const GEMINI_MODEL = 'gemini-2.0-flash';
-    const API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
+    const EDGE_FN_URL = 'https://tozcptfyxigqvsomzkmp.supabase.co/functions/v1/journal-ai';
 
     // ───────── ELEMENTS ─────────
     const $ = id => document.getElementById(id);
     const chat = $('chat');
     const journalInput = $('journalInput');
     const sendBtn = $('sendBtn');
-    const setupBanner = $('setupBanner');
-    const apiKeyInput = $('apiKeyInput');
-    const saveKeyBtn = $('saveKeyBtn');
     const prompts = $('prompts');
     const toast = $('toast');
     const micBtn = $('micBtn');
@@ -628,7 +624,6 @@
     const voiceTimer = $('voiceTimer');
 
     // ───────── STATE ─────────
-    let apiKey = localStorage.getItem('gemini_api_key') || 'AIzaSyBr4eoO9MNfq7LUBc_cqPlb7tU-L0bxJ4Y';
     let conversationHistory = [];
     let isStreaming = false;
     let messageCount = 0;
@@ -646,7 +641,7 @@
     if (startJournalBtn) {
       startJournalBtn.addEventListener('click', () => {
         introHero.style.display = 'none';
-        addAIMessage("Hey. No rush — whenever you're ready.\n\nWhat's been on your mind today? Could be something that happened, something you're feeling, or just how the day went. There's no wrong way to start.");
+        addAIMessage("Hey. How was today?\n\nCould be one moment, a whole saga, or just a feeling you can't shake. Whatever it is — I'm listening.");
         updateSendBtn();
         journalInput.focus();
       });
@@ -803,16 +798,16 @@
       updateSendBtn();
 
       // Add to history
-      conversationHistory.push({ role: 'user', parts: [{ text }] });
+      conversationHistory.push({ role: 'user', content: text });
 
       try {
-        // First: get the empathetic response (streamed)
-        const responseText = await streamResponse(text, typingEl);
+        // First: get the empathetic response (non-streamed for reliability)
+        const responseText = await getConversationResponse(text);
 
         // Remove typing, show AI response
         typingEl.remove();
         addAIMessage(responseText);
-        conversationHistory.push({ role: 'model', parts: [{ text: responseText }] });
+        conversationHistory.push({ role: 'assistant', content: responseText });
 
         // Then: extract rosebud reflection (non-streamed)
         const extractionData = await extractRosebudAndEntities(text);
@@ -907,80 +902,51 @@ Rules:
 - Return ONLY the JSON object`;
     }
 
-    // ───────── STREAMING RESPONSE ─────────
-    async function streamResponse(userText, typingEl) {
-      const url = `${API_BASE}/${GEMINI_MODEL}:streamGenerateContent?key=${apiKey}&alt=sse`;
-
+    // ───────── CONVERSATION RESPONSE (via Claude) ─────────
+    async function getConversationResponse(userText) {
       const messages = [
-        ...conversationHistory.slice(-6), // keep last 3 exchanges for context
-        { role: 'user', parts: [{ text: userText }] }
+        ...conversationHistory.slice(-6),
+        { role: 'user', content: userText }
       ];
 
-      const response = await fetch(url, {
+      const response = await fetch(EDGE_FN_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          system_instruction: { parts: [{ text: getConversationSystemPrompt() }] },
-          contents: messages,
-          generationConfig: { temperature: 0.85, maxOutputTokens: 300 }
+          system: getConversationSystemPrompt(),
+          messages,
+          max_tokens: 300,
+          stream: false
         })
       });
 
-      if (!response.ok) throw new Error(`API error ${response.status}`);
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let fullText = '';
-      let buffer = '';
-
-      // Replace typing indicator with streaming bubble
-      typingEl.remove();
-      const streamMsg = addAIMessage('', true);
-      const bubbleEl = streamMsg.querySelector('.bubble');
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buffer += decoder.decode(value, { stream: true });
-        const lines = buffer.split('\n');
-        buffer = lines.pop() || '';
-
-        for (const line of lines) {
-          if (!line.startsWith('data: ')) continue;
-          const data = line.slice(6).trim();
-          if (data === '[DONE]') continue;
-          try {
-            const parsed = JSON.parse(data);
-            const text = parsed?.candidates?.[0]?.content?.parts?.[0]?.text;
-            if (text) {
-              fullText += text;
-              bubbleEl.innerHTML = escapeHtml(fullText) + '<span class="cursor-blink"></span>';
-            }
-          } catch (e) {}
-        }
+      if (!response.ok) {
+        const err = await response.text();
+        console.error('Conversation API error:', err);
+        throw new Error(`API error ${response.status}`);
       }
 
-      bubbleEl.innerHTML = escapeHtml(fullText);
-      return fullText;
+      const data = await response.json();
+      return data?.content?.[0]?.text || "I'm here. Tell me more.";
     }
 
-    // ───────── EXTRACTION (non-streamed) ─────────
+    // ───────── EXTRACTION (via Claude, non-streamed) ─────────
     async function extractRosebudAndEntities(journalText) {
-      const url = `${API_BASE}/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
-
       try {
-        const response = await fetch(url, {
+        const response = await fetch(EDGE_FN_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            contents: [{ role: 'user', parts: [{ text: getExtractionPrompt(journalText) }] }],
-            generationConfig: { temperature: 0.3, maxOutputTokens: 800 }
+            system: 'You are a reflective journaling coach for carers of people with disabilities. You ONLY return valid JSON. Never include markdown fences or any text outside the JSON object.',
+            messages: [{ role: 'user', content: getExtractionPrompt(journalText) }],
+            max_tokens: 1200,
+            stream: false
           })
         });
 
         if (!response.ok) return null;
         const data = await response.json();
-        let text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        let text = data?.content?.[0]?.text || '';
 
         // Clean markdown code fences if present
         text = text.replace(/^```json?\s*/i, '').replace(/\s*```$/i, '').trim();

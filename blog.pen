@@ -1,0 +1,1136 @@
+{
+  "version": "2.9",
+  "children": [
+    {
+      "type": "frame",
+      "id": "bi8Au",
+      "x": 0,
+      "y": 0,
+      "name": "Frame",
+      "clip": true,
+      "width": 800,
+      "height": 600,
+      "fill": "#FFFFFF",
+      "layout": "none"
+    },
+    {
+      "type": "frame",
+      "id": "YMKdS",
+      "x": 0,
+      "y": 0,
+      "name": "Landing Page",
+      "width": 1440,
+      "fill": "$bg-white",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "rScTe",
+          "name": "Header",
+          "width": "fill_container",
+          "padding": [
+            24,
+            80
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "YzaqQ",
+              "name": "Logo",
+              "fill": "$primary-text",
+              "content": "Verdant",
+              "fontFamily": "Newsreader",
+              "fontSize": 28,
+              "fontWeight": "500"
+            },
+            {
+              "type": "frame",
+              "id": "XyjuA",
+              "name": "Nav Links",
+              "gap": 40,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "yv1iC",
+                  "name": "link1",
+                  "fill": "$secondary-text",
+                  "content": "FEATURES",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 1.5
+                },
+                {
+                  "type": "text",
+                  "id": "bPFLB",
+                  "name": "link2",
+                  "fill": "$secondary-text",
+                  "content": "PROCESS",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 1.5
+                },
+                {
+                  "type": "text",
+                  "id": "qm3qY",
+                  "name": "link3",
+                  "fill": "$secondary-text",
+                  "content": "PRICING",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 1.5
+                },
+                {
+                  "type": "text",
+                  "id": "PO2Ct",
+                  "name": "link4",
+                  "fill": "$secondary-text",
+                  "content": "JOURNAL",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 1.5
+                },
+                {
+                  "type": "text",
+                  "id": "LawOr",
+                  "name": "CTA",
+                  "fill": "$accent-text",
+                  "content": "Start Writing",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "ZQh2J",
+          "name": "Hero Section",
+          "width": "fill_container",
+          "fill": "$bg-white",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": 80,
+          "children": [
+            {
+              "type": "text",
+              "id": "vp08V",
+              "name": "headline",
+              "fill": "$primary-text",
+              "content": "Words deserve a quieter space.",
+              "lineHeight": 1.12,
+              "fontFamily": "Newsreader",
+              "fontSize": 60
+            },
+            {
+              "type": "text",
+              "id": "m4Krf",
+              "name": "subline",
+              "fill": "$secondary-text",
+              "textGrowth": "fixed-width",
+              "width": 640,
+              "content": "Verdant is a distraction-free writing environment built for authors, essayists, and anyone who believes good writing needs room to breathe.",
+              "lineHeight": 1.6,
+              "fontFamily": "Inter",
+              "fontSize": 18
+            },
+            {
+              "type": "frame",
+              "id": "CxzjG",
+              "name": "ctaRow",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "oJ9ov",
+                  "name": "dot",
+                  "fill": "$dot-green",
+                  "width": 14,
+                  "height": 14
+                },
+                {
+                  "type": "text",
+                  "id": "FKupe",
+                  "name": "ctaText",
+                  "fill": "$accent-text",
+                  "content": "Begin your first draft",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "q25AR",
+                  "name": "secondaryText",
+                  "fill": "$secondary-text",
+                  "content": "No account required",
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "cEfc6",
+          "name": "Features Section",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 28,
+          "padding": 80,
+          "children": [
+            {
+              "type": "text",
+              "id": "YWRhZ",
+              "name": "label",
+              "fill": "$secondary-text",
+              "content": "WHAT YOU GET",
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "500",
+              "letterSpacing": 1.5
+            },
+            {
+              "type": "frame",
+              "id": "F5zkv",
+              "name": "rowsContainer",
+              "width": "fill_container",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "XHFp7",
+                  "name": "row1",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "bottom": 1
+                    },
+                    "fill": "$divider"
+                  },
+                  "gap": 16,
+                  "padding": [
+                    20,
+                    0
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Ee3jW",
+                      "name": "r1name",
+                      "fill": "$primary-text",
+                      "textGrowth": "fixed-width",
+                      "width": 220,
+                      "content": "Focused Editor",
+                      "fontFamily": "Newsreader",
+                      "fontSize": 26
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "ICCCz",
+                      "name": "r1dot",
+                      "fill": "$dot-green",
+                      "width": 14,
+                      "height": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "911is",
+                      "name": "r1desc",
+                      "fill": "$secondary-text",
+                      "textGrowth": "fixed-width",
+                      "width": 500,
+                      "content": "A clean canvas that strips away every toolbar and panel until you ask for them.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "TCClw",
+                  "name": "row2",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "bottom": 1
+                    },
+                    "fill": "$divider"
+                  },
+                  "gap": 16,
+                  "padding": [
+                    20,
+                    0
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "wMmrG",
+                      "name": "r2name",
+                      "fill": "$primary-text",
+                      "textGrowth": "fixed-width",
+                      "width": 220,
+                      "content": "Gentle Structure",
+                      "fontFamily": "Newsreader",
+                      "fontSize": 26
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "IkvzS",
+                      "name": "r2dot",
+                      "fill": "$dot-sand",
+                      "width": 14,
+                      "height": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "LGKUA",
+                      "name": "r2desc",
+                      "fill": "$secondary-text",
+                      "textGrowth": "fixed-width",
+                      "width": 500,
+                      "content": "Organize chapters, sections, and notes without rigid outlines or complex hierarchies.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "JTgN3",
+                  "name": "row3",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "bottom": 1
+                    },
+                    "fill": "$divider"
+                  },
+                  "gap": 16,
+                  "padding": [
+                    20,
+                    0
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "M05wQ",
+                      "name": "r3name",
+                      "fill": "$primary-text",
+                      "textGrowth": "fixed-width",
+                      "width": 220,
+                      "content": "Reading Rhythm",
+                      "fontFamily": "Newsreader",
+                      "fontSize": 26
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "J2yKA",
+                      "name": "r3dot",
+                      "fill": "$dot-coral",
+                      "width": 14,
+                      "height": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "8aGs9",
+                      "name": "r3desc",
+                      "fill": "$secondary-text",
+                      "textGrowth": "fixed-width",
+                      "width": 500,
+                      "content": "Built-in pacing tools that help you feel the cadence of your sentences as you write.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "G0EBn",
+                  "name": "row4",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "bottom": 1
+                    },
+                    "fill": "$divider"
+                  },
+                  "gap": 16,
+                  "padding": [
+                    20,
+                    0
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "gWBYK",
+                      "name": "r4name",
+                      "fill": "$primary-text",
+                      "textGrowth": "fixed-width",
+                      "width": 220,
+                      "content": "Quiet Publishing",
+                      "fontFamily": "Newsreader",
+                      "fontSize": 26
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "OIhfj",
+                      "name": "r4dot",
+                      "fill": "$dot-gold",
+                      "width": 14,
+                      "height": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "Javvo",
+                      "name": "r4desc",
+                      "fill": "$secondary-text",
+                      "textGrowth": "fixed-width",
+                      "width": 500,
+                      "content": "Share your work as a simple, beautiful page — no blog templates, no feeds.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "MBG7O",
+                  "name": "row5",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "padding": [
+                    20,
+                    0
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "9iNIu",
+                      "name": "r5name",
+                      "fill": "$primary-text",
+                      "textGrowth": "fixed-width",
+                      "width": 220,
+                      "content": "Version Memory",
+                      "fontFamily": "Newsreader",
+                      "fontSize": 26
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "A0sxO",
+                      "name": "r5dot",
+                      "fill": "$dot-stone",
+                      "width": 14,
+                      "height": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "p048L",
+                      "name": "r5desc",
+                      "fill": "$secondary-text",
+                      "textGrowth": "fixed-width",
+                      "width": 500,
+                      "content": "Every draft is preserved. Return to any moment in your writing history.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "GMVnj",
+          "name": "Social Proof Section",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 28,
+          "padding": 80,
+          "children": [
+            {
+              "type": "text",
+              "id": "nNKAb",
+              "name": "label",
+              "fill": "$secondary-text",
+              "content": "WHAT WRITERS SAY",
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "500",
+              "letterSpacing": 1.5
+            },
+            {
+              "type": "frame",
+              "id": "49XTI",
+              "name": "testimonials",
+              "width": "fill_container",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "jXfeW",
+                  "name": "row1",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "bottom": 1
+                    },
+                    "fill": "$divider"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": [
+                    20,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "2lD9Q",
+                      "name": "q1",
+                      "fill": "$primary-text",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "'I stopped fighting my tools and started writing again. Verdant feels like a private notebook that happens to be digital.'",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Newsreader",
+                      "fontSize": 22,
+                      "fontWeight": "normal",
+                      "fontStyle": "italic"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jzoBY",
+                      "name": "a1",
+                      "fill": "$secondary-text",
+                      "content": "Elena Marsh, essayist",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "mqojo",
+                  "name": "row2",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "bottom": 1
+                    },
+                    "fill": "$divider"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": [
+                    20,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ENfhN",
+                      "name": "q2",
+                      "fill": "$primary-text",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "'The simplicity is not a limitation — it is the entire point. My best chapters were written here.'",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Newsreader",
+                      "fontSize": 22,
+                      "fontWeight": "normal",
+                      "fontStyle": "italic"
+                    },
+                    {
+                      "type": "text",
+                      "id": "qV0QG",
+                      "name": "a2",
+                      "fill": "$secondary-text",
+                      "content": "David Okoye, novelist",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "94uzk",
+                  "name": "row3",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": [
+                    20,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "VBI3t",
+                      "name": "q3",
+                      "fill": "$primary-text",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "'No notifications. No analytics dashboard. Just words on a page. Exactly what I needed.'",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Newsreader",
+                      "fontSize": 22,
+                      "fontWeight": "normal",
+                      "fontStyle": "italic"
+                    },
+                    {
+                      "type": "text",
+                      "id": "4o0Js",
+                      "name": "a3",
+                      "fill": "$secondary-text",
+                      "content": "Suki Tanaka, journalist",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "P1k2p",
+          "name": "How It Works Section",
+          "width": "fill_container",
+          "layout": "vertical",
+          "padding": 80,
+          "children": [
+            {
+              "type": "text",
+              "id": "HnWor",
+              "name": "label",
+              "fill": "$secondary-text",
+              "content": "THE PROCESS",
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "500",
+              "letterSpacing": 1.5
+            },
+            {
+              "type": "frame",
+              "id": "B2JR9",
+              "name": "spacer1",
+              "width": "fill_container",
+              "height": 28
+            },
+            {
+              "type": "frame",
+              "id": "NXG3a",
+              "name": "row1",
+              "width": "fill_container",
+              "stroke": {
+                "align": "inside",
+                "thickness": {
+                  "bottom": 1
+                },
+                "fill": "$divider"
+              },
+              "gap": 24,
+              "padding": [
+                20,
+                0
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "xSyN0",
+                  "name": "num1",
+                  "fill": "$primary-text",
+                  "content": "01",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 26
+                },
+                {
+                  "type": "text",
+                  "id": "mJtv0",
+                  "name": "title1",
+                  "fill": "$primary-text",
+                  "content": "Open a blank page",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 26
+                },
+                {
+                  "type": "text",
+                  "id": "rs00U",
+                  "name": "desc1",
+                  "fill": "$secondary-text",
+                  "textGrowth": "fixed-width",
+                  "width": 500,
+                  "content": "No templates, no setup wizard. Just a cursor waiting for your first sentence.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "QCkPb",
+              "name": "row2",
+              "width": "fill_container",
+              "stroke": {
+                "align": "inside",
+                "thickness": {
+                  "bottom": 1
+                },
+                "fill": "$divider"
+              },
+              "gap": 24,
+              "padding": [
+                20,
+                0
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "sHkri",
+                  "name": "num2",
+                  "fill": "$primary-text",
+                  "content": "02",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 26
+                },
+                {
+                  "type": "text",
+                  "id": "WOkrC",
+                  "name": "title2",
+                  "fill": "$primary-text",
+                  "content": "Write without interruption",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 26
+                },
+                {
+                  "type": "text",
+                  "id": "zaaSH",
+                  "name": "desc2",
+                  "fill": "$secondary-text",
+                  "textGrowth": "fixed-width",
+                  "width": 500,
+                  "content": "The interface recedes as you type. Tools appear only when you reach for them.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "7ImD8",
+              "name": "row3",
+              "width": "fill_container",
+              "gap": 24,
+              "padding": [
+                20,
+                0
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "4RezL",
+                  "name": "num3",
+                  "fill": "$primary-text",
+                  "content": "03",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 26
+                },
+                {
+                  "type": "text",
+                  "id": "3Kog2",
+                  "name": "title3",
+                  "fill": "$primary-text",
+                  "content": "Share when you are ready",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 26
+                },
+                {
+                  "type": "text",
+                  "id": "czO8r",
+                  "name": "desc3",
+                  "fill": "$secondary-text",
+                  "textGrowth": "fixed-width",
+                  "width": 500,
+                  "content": "One click turns your draft into a clean, readable page you can send to anyone.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "waCf5",
+          "name": "CTA and Footer",
+          "width": "fill_container",
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "frame",
+              "id": "kkbB5",
+              "name": "Final CTA",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 24,
+              "padding": 80,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Cd7TL",
+                  "name": "ctaHeadline",
+                  "fill": "$primary-text",
+                  "content": "Start with a blank page.",
+                  "lineHeight": 1.12,
+                  "fontFamily": "Newsreader",
+                  "fontSize": 60
+                },
+                {
+                  "type": "text",
+                  "id": "EuVaD",
+                  "name": "ctaSub",
+                  "fill": "$secondary-text",
+                  "textGrowth": "fixed-width",
+                  "width": 640,
+                  "content": "No trial period. No feature gates. Just open Verdant and write. Your words will thank you for the quiet.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Inter",
+                  "fontSize": 18
+                },
+                {
+                  "type": "frame",
+                  "id": "FGeMe",
+                  "name": "ctaRow",
+                  "gap": 12,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "XEGFI",
+                      "name": "ctaDot",
+                      "fill": "$dot-green",
+                      "width": 14,
+                      "height": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "AdkTf",
+                      "name": "ctaLink",
+                      "fill": "$accent-text",
+                      "content": "Begin writing now",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "KN8Y2",
+                      "name": "ctaSecondary",
+                      "fill": "$secondary-text",
+                      "content": "Free forever for personal use",
+                      "fontFamily": "Inter",
+                      "fontSize": 16
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "kjvlF",
+              "name": "divider",
+              "fill": "$divider",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "frame",
+              "id": "n4sVn",
+              "name": "Footer",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 48,
+              "padding": [
+                60,
+                80
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "4CjQe",
+                  "name": "Footer Top",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "FfbGv",
+                      "name": "footerBrand",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "JTZy7",
+                          "name": "footerLogo",
+                          "fill": "$primary-text",
+                          "content": "Verdant",
+                          "fontFamily": "Newsreader",
+                          "fontSize": 28,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Uw11m",
+                          "name": "footerTagline",
+                          "fill": "$secondary-text",
+                          "content": "A quieter place to write.",
+                          "fontFamily": "Inter",
+                          "fontSize": 14
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "xgkzt",
+                      "name": "footerLinks",
+                      "gap": 80,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "JyAJh",
+                          "name": "col1",
+                          "layout": "vertical",
+                          "gap": 16,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "bMpG1",
+                              "name": "col1Title",
+                              "fill": "$primary-text",
+                              "content": "PRODUCT",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 1.5
+                            },
+                            {
+                              "type": "text",
+                              "id": "4hWWT",
+                              "name": "col1L1",
+                              "fill": "$secondary-text",
+                              "content": "Features",
+                              "fontFamily": "Inter",
+                              "fontSize": 14
+                            },
+                            {
+                              "type": "text",
+                              "id": "zoHbn",
+                              "name": "col1L2",
+                              "fill": "$secondary-text",
+                              "content": "Pricing",
+                              "fontFamily": "Inter",
+                              "fontSize": 14
+                            },
+                            {
+                              "type": "text",
+                              "id": "nINuF",
+                              "name": "col1L3",
+                              "fill": "$secondary-text",
+                              "content": "Changelog",
+                              "fontFamily": "Inter",
+                              "fontSize": 14
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "YIhJz",
+                          "name": "col2",
+                          "layout": "vertical",
+                          "gap": 16,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "ohmNk",
+                              "name": "col2Title",
+                              "fill": "$primary-text",
+                              "content": "COMPANY",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 1.5
+                            },
+                            {
+                              "type": "text",
+                              "id": "qFJPa",
+                              "name": "col2L1",
+                              "fill": "$secondary-text",
+                              "content": "About",
+                              "fontFamily": "Inter",
+                              "fontSize": 14
+                            },
+                            {
+                              "type": "text",
+                              "id": "aXatd",
+                              "name": "col2L2",
+                              "fill": "$secondary-text",
+                              "content": "Journal",
+                              "fontFamily": "Inter",
+                              "fontSize": 14
+                            },
+                            {
+                              "type": "text",
+                              "id": "aLaTe",
+                              "name": "col2L3",
+                              "fill": "$secondary-text",
+                              "content": "Contact",
+                              "fontFamily": "Inter",
+                              "fontSize": 14
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "lZnO1",
+                          "name": "col3",
+                          "layout": "vertical",
+                          "gap": 16,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "H6oAd",
+                              "name": "col3Title",
+                              "fill": "$primary-text",
+                              "content": "LEGAL",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 1.5
+                            },
+                            {
+                              "type": "text",
+                              "id": "oyeb4",
+                              "name": "col3L1",
+                              "fill": "$secondary-text",
+                              "content": "Privacy",
+                              "fontFamily": "Inter",
+                              "fontSize": 14
+                            },
+                            {
+                              "type": "text",
+                              "id": "2yomD",
+                              "name": "col3L2",
+                              "fill": "$secondary-text",
+                              "content": "Terms",
+                              "fontFamily": "Inter",
+                              "fontSize": 14
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "rectangle",
+                  "id": "UbHyG",
+                  "name": "footerDivider",
+                  "fill": "$divider",
+                  "width": "fill_container",
+                  "height": 1
+                },
+                {
+                  "type": "text",
+                  "id": "vRMhf",
+                  "name": "copyright",
+                  "fill": "$secondary-text",
+                  "content": "© 2026 Verdant. All rights reserved.",
+                  "fontFamily": "Inter",
+                  "fontSize": 14
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "accent-text": {
+      "type": "color",
+      "value": "#2D6B3F"
+    },
+    "bg-white": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "divider": {
+      "type": "color",
+      "value": "#F4F5F5"
+    },
+    "dot-coral": {
+      "type": "color",
+      "value": "#E85D45"
+    },
+    "dot-gold": {
+      "type": "color",
+      "value": "#D4A020"
+    },
+    "dot-green": {
+      "type": "color",
+      "value": "#2D6B3F"
+    },
+    "dot-sand": {
+      "type": "color",
+      "value": "#C8C0AD"
+    },
+    "dot-stone": {
+      "type": "color",
+      "value": "#808A80"
+    },
+    "primary-text": {
+      "type": "color",
+      "value": "#1E3322"
+    },
+    "secondary-text": {
+      "type": "color",
+      "value": "#6B7B6B"
+    }
+  }
+}

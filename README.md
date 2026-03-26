@@ -1,81 +1,82 @@
 # Carer Liaison
 
-**AI-powered personal operating system for carers and NDIS participants.**
+**Caring was never meant to be done alone.**
 
-> They're fully here. The world just can't *receive* them yet.
+Carer Liaison is an AI companion for unpaid family carers — the parents, partners, and siblings who carry everything in their heads: sleep patterns, medication schedules, what he can chew, when she napped, what kind of day it's going to be. Knowledge built over years, held by one person, with no system underneath it.
 
-Carer Liaison closes the gap between what the person you care for communicates and what the world is able to receive — through health monitoring, adaptive daily plans, and idea capture.
+We're building the system. Starting with an AI journal that lets carers talk about their day and get something back that actually sees them.
 
-🔗 **Live site:** [jkurn.github.io/carer-liaison](https://jkurn.github.io/carer-liaison/)
+Live site: [jkurn.github.io/carer-liaison](https://jkurn.github.io/carer-liaison/)
 
 ---
 
-## The Problem
+## Why This Exists
 
-When someone has full cognitive capacity but their body is the barrier, the primary carer becomes the sole operating system — every decision, every plan, every communication runs through one person. That's unsustainable.
+2.65 million Australians provide unpaid care. They track, plan, coordinate, and make dozens of decisions a day — all from memory and notebooks and WhatsApp screenshots. This work is invisible to the system. It's rarely funded, rarely measured, and rarely acknowledged. But without it, nothing else works.
 
-- **2.65M** Australians provide unpaid informal care
 - **1 in 3** primary carers report high psychological distress
 - **40+ hours** average weekly care provided
 - **72%** of carers say existing tools don't meet their needs
 
-## Three Layers, One System
+## The Wedge: AI Carer Journal
 
-| Layer | What It Does |
+The entry point is a journal — talk about your day by voice or text, and get back a structured, psychology-backed reflection. It validates what you're doing, names what you're feeling, and starts capturing the knowledge that currently lives only in your head.
+
+From there, the system grows: health tracking, daily planning, service discovery, NDIS navigation. But it starts with being seen.
+
+## The Vision
+
+Mise en place for caring. Everything in its right place so the day flows instead of fights. Not an app to check — a companion that walks alongside you.
+
+## What's Built
+
+| Component | Status |
 |---|---|
-| **Health Intelligence** | Track body states, sleep quality, and daily patterns. The system learns what predicts a good day and adapts automatically. |
-| **Daily Planning** | Therapy recommendations matched to today's physical ability. Meal plans, grocery lists, and prep briefs — delivered, not searched for. |
-| **Purpose & Ideas** | Every idea captured, researched, and stored. The system surfaces outings, contributions, and meaningful moments for the week ahead. |
-
-## Six Intelligent Agents
-
-| Agent | Phase | What It Measures |
-|---|---|---|
-| Body State Tracker | Health | 7-day body state variance |
-| Sleep Analysis | Health | Sleep-body correlation |
-| Therapy Planner | Planning | Therapy completion rate by body state |
-| Meal Planner | Planning | Carer planning time saved |
-| Idea Capture | Purpose | Ideas captured & researched per week |
-| Purpose Engine | Purpose | Good days per week trend |
+| Landing page | Live (GitHub Pages) |
+| Carer assessment quiz | Live |
+| AI carer journal (demo) | Live |
+| Dashboard app (Supabase) | Functional — auth, onboarding, body state tracking |
+| AI Morning Brief | Planned |
+| Service search (real data) | Planned |
 
 ## NDIS Alignment
 
-Components are designed to fall within existing NDIS funding categories:
+Components map to existing NDIS funding categories:
 
 - **Category 05 — Assistive Technology:** Apple Watch, iPad, Stream Deck, Smart Speaker
 - **Category 07 — Capacity Building:** AI system setup framed as Improved Daily Living
-- **CSIRO AI-AT Framework (Feb 2026):** Compliant with the new AI-enabled assistive technology framework
-- Includes OT assessment pathway guidance for funding applications
+- **CSIRO AI-AT Framework (Feb 2026):** Compliant with AI-enabled assistive technology framework
+- Includes OT assessment pathway guidance
 
 ## Tech Stack
 
-- Single-page static site (HTML/CSS/JS)
-- Google Fonts (DM Serif Display + DM Sans)
-- Scroll-driven animations (IntersectionObserver)
-- Hosted on GitHub Pages
+- Landing page: Static HTML/CSS/JS, Google Fonts (DM Serif Display + DM Sans), GitHub Pages
+- App: Vanilla JS SPA with Supabase (auth, PostgreSQL, Edge Functions)
+- Components: Custom Web Components (cl-gauge, cl-sparkline)
+- Journal demo: Web Speech API, Gemini Flash via Supabase Edge Function
 
 ## Local Development
 
 ```bash
-# Clone the repo
 git clone https://github.com/jkurn/carer-liaison.git
 cd carer-liaison
-
-# Open in browser
-open index.html
+npx serve . -l 3457
 ```
-
-No build tools required — it's a single HTML file.
 
 ## File Structure
 
 ```
 carer-liaison/
-├── index.html        ← Current landing page (v2 — DM Serif Display)
-├── index_v1.html     ← Earlier version (v1 — Plus Jakarta Sans)
+├── index.html          Landing page
+├── assessment.html     Carer assessment quiz
+├── app/                Dashboard SPA (Supabase)
+├── demo/               AI journal demo v1
+├── demo2/              AI journal demo v2
+├── BRAND-VOICE.md      Positioning & voice guide
+├── TODOS.md            Deferred work
 └── README.md
 ```
 
 ## License
 
-All rights reserved © 2026 Carer Liaison.
+All rights reserved 2026 Carer Liaison.

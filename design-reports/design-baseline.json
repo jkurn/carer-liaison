@@ -1,0 +1,36 @@
+{
+  "date": "2026-03-27",
+  "url": "carerliaison.com/demo/",
+  "designScore": "C+",
+  "aiSlopScore": "D",
+  "categoryGrades": {
+    "hierarchy": "C",
+    "typography": "B",
+    "spacing": "B",
+    "color": "B",
+    "interaction": "C",
+    "responsive": "C",
+    "content": "A",
+    "aiSlop": "D",
+    "motion": "D",
+    "performance": "A"
+  },
+  "findings": [
+    {"id": "FINDING-001", "title": "Emoji as primary visual anchor", "impact": "high", "category": "ai-slop"},
+    {"id": "FINDING-002", "title": "Centered-everything layout", "impact": "high", "category": "ai-slop"},
+    {"id": "FINDING-003", "title": "Feature pills with emoji icons", "impact": "medium", "category": "ai-slop"},
+    {"id": "FINDING-004", "title": "Colored left-border on RBT cards", "impact": "medium", "category": "ai-slop"},
+    {"id": "FINDING-005", "title": "transition:all on 137 elements", "impact": "high", "category": "motion"},
+    {"id": "FINDING-006", "title": "No prefers-reduced-motion", "impact": "medium", "category": "motion"},
+    {"id": "FINDING-007", "title": "Prompt chips below 44px touch target", "impact": "medium", "category": "interaction"},
+    {"id": "FINDING-008", "title": "Save entry button below 44px", "impact": "medium", "category": "interaction"},
+    {"id": "FINDING-009", "title": "Footer links below 44px", "impact": "polish", "category": "interaction"},
+    {"id": "FINDING-010", "title": "Subtle focus ring on textarea", "impact": "medium", "category": "interaction"},
+    {"id": "FINDING-011", "title": "Mobile layout is stacked desktop", "impact": "medium", "category": "responsive"},
+    {"id": "FINDING-012", "title": "No mobile media query for reflection", "impact": "medium", "category": "responsive"},
+    {"id": "FINDING-013", "title": "Send button disabled state unclear", "impact": "polish", "category": "interaction"},
+    {"id": "FINDING-014", "title": "H1 undersized at 30px for hero", "impact": "medium", "category": "typography"},
+    {"id": "FINDING-015", "title": "Body line-height is normal not explicit", "impact": "polish", "category": "typography"},
+    {"id": "FINDING-016", "title": "Entity tag contrast at 10px", "impact": "polish", "category": "color"}
+  ]
+}

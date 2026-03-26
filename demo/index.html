@@ -549,23 +549,22 @@
   <main class="main">
     <!-- Warm intro -->
     <div class="intro-hero" id="introHero">
-      <p class="intro-audience">For unpaid carers of people with disability</p>
+      <p class="intro-audience">For families &amp; carers of people with disability</p>
       <div class="intro-emoji">💛</div>
-      <h1 class="intro-title">Nobody asks how<br>the carer is doing.</h1>
-      <p class="intro-sub">This does. An AI journal that listens to your day, finds the wins you missed, names what you're feeling, and shows you it's backed by research — not just you, not just in your head.</p>
-      <p class="intro-context">Speak or type about your day. We reflect it back as a structured Rose, Bud &amp; Thorn journal — with psychology-backed insights that help you understand your own caring experience.</p>
+      <h1 class="intro-title">Your caring matters.<br>So does how you feel.</h1>
+      <p class="intro-sub">A private journal that listens, reflects back what you might not see yourself, and reminds you that what you're going through has a name — and you're not alone in it.</p>
       <div class="intro-features">
-        <span class="intro-feature"><span class="intro-feature-icon">🌹</span> Finds your wins, growth &amp; hard parts</span>
-        <span class="intro-feature"><span class="intro-feature-icon">🧠</span> Names what you're feeling (with research)</span>
-        <span class="intro-feature"><span class="intro-feature-icon">🎙️</span> Voice or text — your choice</span>
-        <span class="intro-feature"><span class="intro-feature-icon">🔒</span> Private. Always.</span>
+        <span class="intro-feature"><span class="intro-feature-icon">🌹</span> Rose, Bud &amp; Thorn reflection</span>
+        <span class="intro-feature"><span class="intro-feature-icon">🧠</span> Psychology-backed insights</span>
+        <span class="intro-feature"><span class="intro-feature-icon">🎙️</span> Voice or text</span>
+        <span class="intro-feature"><span class="intro-feature-icon">🔒</span> Completely private</span>
       </div>
 
-      <button class="demo-trigger" id="demoTrigger">See Sarah's journal entry →</button>
+      <button class="demo-trigger" id="demoTrigger">See how it works — Sarah's day →</button>
 
-      <div class="intro-divider"><span>or try it with your own day</span></div>
+      <div class="intro-divider"><span>or start journaling now</span></div>
 
-      <button class="demo-trigger" id="startJournal" style="background:var(--white);color:var(--teal);border:1.5px solid var(--teal)">Start journaling →</button>
+      <button class="demo-trigger" id="startJournal" style="background:var(--white);color:var(--teal);border:1.5px solid var(--teal)">Start my journal →</button>
     </div>
 
     <!-- Chat -->
@@ -603,14 +602,15 @@
   </main>
 
   <footer class="footer">
-    <p>Built by <a href="https://carerliaison.com">Carer Liaison</a>. Powered by Claude. Your journal stays private.</p>
+    <p>Built by <a href="https://carerliaison.com">Carer Liaison</a>. Powered by Gemini Flash. Your journal stays private.</p>
   </footer>
 
   <div class="toast" id="toast"></div>
 
   <script>
     // ───────── CONFIG ─────────
-    const EDGE_FN_URL = 'https://tozcptfyxigqvsomzkmp.supabase.co/functions/v1/journal-ai';
+    const GEMINI_KEY = 'AIzaSyCOC_Z9O418bTrq_7ORvWEh4clcmyQe0AI';
+    const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`;
 
     // ───────── ELEMENTS ─────────
     const $ = id => document.getElementById(id);
@@ -902,51 +902,51 @@ Rules:
 - Return ONLY the JSON object`;
     }
 
-    // ───────── CONVERSATION RESPONSE (via Claude) ─────────
+    // ───────── CONVERSATION RESPONSE (via Gemini) ─────────
+    async function geminiCall(systemPrompt, messages, maxTokens = 400) {
+      const contents = messages.map(m => ({
+        role: m.role === 'assistant' ? 'model' : 'user',
+        parts: [{ text: m.content }]
+      }));
+
+      const body = {
+        contents,
+        generationConfig: { maxOutputTokens: maxTokens },
+      };
+      if (systemPrompt) {
+        body.systemInstruction = { parts: [{ text: systemPrompt }] };
+      }
+
+      const response = await fetch(GEMINI_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+
+      if (!response.ok) {
+        const err = await response.text();
+        console.error('Gemini API error:', err);
+        throw new Error(`API error ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    }
+
     async function getConversationResponse(userText) {
       const messages = [
         ...conversationHistory.slice(-6),
         { role: 'user', content: userText }
       ];
-
-      const response = await fetch(EDGE_FN_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          system: getConversationSystemPrompt(),
-          messages,
-          max_tokens: 300,
-          stream: false
-        })
-      });
-
-      if (!response.ok) {
-        const err = await response.text();
-        console.error('Conversation API error:', err);
-        throw new Error(`API error ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data?.content?.[0]?.text || "I'm here. Tell me more.";
+      const text = await geminiCall(getConversationSystemPrompt(), messages, 300);
+      return text || "I'm here. Tell me more.";
     }
 
-    // ───────── EXTRACTION (via Claude, non-streamed) ─────────
+    // ───────── EXTRACTION (via Gemini, non-streamed) ─────────
     async function extractRosebudAndEntities(journalText) {
       try {
-        const response = await fetch(EDGE_FN_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            system: 'You are a reflective journaling coach for carers of people with disabilities. You ONLY return valid JSON. Never include markdown fences or any text outside the JSON object.',
-            messages: [{ role: 'user', content: getExtractionPrompt(journalText) }],
-            max_tokens: 1200,
-            stream: false
-          })
-        });
-
-        if (!response.ok) return null;
-        const data = await response.json();
-        let text = data?.content?.[0]?.text || '';
+        const system = 'You are a reflective journaling coach for carers of people with disabilities. You ONLY return valid JSON. Never include markdown fences or any text outside the JSON object.';
+        let text = await geminiCall(system, [{ role: 'user', content: getExtractionPrompt(journalText) }], 1200);
 
         // Clean markdown code fences if present
         text = text.replace(/^```json?\s*/i, '').replace(/\s*```$/i, '').trim();

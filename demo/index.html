@@ -426,6 +426,15 @@
     }
     .setup-banner.hidden { display: none; }
 
+    /* Demo trigger */
+    .demo-trigger {
+      font-family: var(--sans); font-size: 13px; font-weight: 500;
+      color: var(--teal); background: none; border: none;
+      cursor: pointer; padding: 4px 0; text-align: left;
+      transition: color 0.15s;
+    }
+    .demo-trigger:hover { color: var(--teal-dark); text-decoration: underline; }
+
     /* Footer */
     .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--mid-gray); }
     .footer a { color: var(--teal); text-decoration: none; }
@@ -456,12 +465,13 @@
   <main class="main">
     <!-- API Key Setup -->
     <div class="setup-banner" id="setupBanner" style="margin-top:24px">
-      <h3>Connect your Gemini API key to start</h3>
+      <h3>Connect your Gemini API key to try it live</h3>
       <p>Get a free key from <a href="https://aistudio.google.com/apikey" target="_blank">Google AI Studio</a> (30 seconds). Your key stays in your browser.</p>
       <div class="key-row">
         <input type="password" class="key-input" id="apiKeyInput" placeholder="Paste your Gemini API key...">
         <button class="key-save" id="saveKeyBtn">Save</button>
       </div>
+      <button class="demo-trigger" id="demoTrigger">or see a demo of Sarah's day →</button>
     </div>
 
     <!-- Chat -->
@@ -1069,6 +1079,77 @@ Rules:
       toast.textContent = msg;
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    // ───────── PREDEFINED DEMO ─────────
+    const DEMO_JOURNAL = `It was such a long day. Tom had a meltdown at school pickup — he was completely overwhelmed and I had to carry him to the car while all the other parents watched. I could feel them staring. Then Sarah from OT cancelled last minute, no explanation, just a text 20 minutes before. I'd rearranged my whole afternoon for that appointment. I spent an hour on hold with NDIA trying to sort out his plan review and got nowhere. But you know what — I managed to get Tom to eat his dinner tonight, the pasta he usually refuses. He even said "yum mum." That was everything.`;
+
+    const DEMO_AI_RESPONSE = `Carrying him out while people watch — that takes grit, not just love. And then losing Sarah's session on top of it? No wonder you're worn thin.\n\nBut "yum mum" — hold onto that one tonight. Those two words carry more weight than anyone watching in that car park could ever understand.`;
+
+    const DEMO_DATA = {
+      rose: {
+        title: "Dinner breakthrough with Tom",
+        body: "This is bigger than it sounds. Food refusal is one of the most exhausting daily battles carers face — and you didn't just get him to eat, you got him to enjoy it. \"Yum mum\" is a connection moment. It tells you he felt safe, regulated, and present with you tonight.",
+        quote: "He even said yum mum",
+        tags: ["Tom", "connection", "sensory win", "regulation"]
+      },
+      bud: {
+        title: "Building Tom's food flexibility",
+        body: "The fact that Tom tried pasta he usually refuses suggests his sensory window is expanding. These micro-shifts often go unnoticed but they compound over time. This could be the start of a pattern worth tracking with his OT.",
+        quote: "the pasta he usually refuses",
+        tags: ["sensory development", "routine", "progress tracking"]
+      },
+      thorn: {
+        title: "Carrying the weight alone",
+        body: "School pickup meltdowns in public hit differently — it's not just managing Tom's distress, it's managing the perceived judgment of every other parent. And then a cancelled OT session with no real explanation? The system asked you to show up and then didn't show up for you.",
+        quote: "I could feel them staring",
+        tags: ["public judgment", "system failure", "isolation"]
+      },
+      actions: [
+        { text: "Text Sarah's OT clinic to reschedule and ask for earlier notice policy", category: "provider" },
+        { text: "Note today's dinner win in Tom's food log for his next OT session", category: "admin" },
+        { text: "Take 10 minutes tonight that's just yours — tea, music, nothing", category: "self-care" },
+        { text: "Request a callback from NDIA rather than waiting on hold next time", category: "advocacy" }
+      ],
+      psychology: {
+        concept: "Caregiver Hypervigilance",
+        explanation: "What you experienced at school pickup — the heightened awareness of everyone watching, the need to simultaneously manage Tom's meltdown and the social environment — is called hypervigilance. Carers of children with complex needs develop a constant state of alertness that's physically and emotionally exhausting. It's your nervous system doing exactly what it needs to do to protect Tom, but the cost to you is real. This is one of the most commonly reported experiences among NDIS carers.",
+        stat: "67% of primary carers of children with disability report high or very high levels of psychological distress — more than three times the rate of the general population.",
+        source_hint: "Australian Bureau of Statistics, Survey of Disability, Ageing and Carers 2022"
+      },
+      journey_context: "Days like this — the public meltdowns, the cancelled appointments, the hours on hold — are achingly common in the early years of navigating NDIS. None of this means you're failing. It means the system wasn't built for the intensity of what you do every single day. And that moment at dinner tonight? That's the real work paying off.",
+      people: ["Tom (son)", "Sarah (OT)"],
+      emotions: ["exhausted", "unseen", "frustrated", "quietly proud"],
+      services: ["OT", "NDIA plan review"],
+      mood_score: 38,
+      mood_label: "Worn thin, but holding onto a small light",
+      energy_label: "Running on fumes"
+    };
+
+    const demoTrigger = $('demoTrigger');
+    if (demoTrigger) {
+      demoTrigger.addEventListener('click', runDemo);
+    }
+
+    function runDemo() {
+      // Hide setup banner
+      setupBanner.classList.add('hidden');
+      // Hide prompts
+      prompts.style.display = 'none';
+
+      // Show user journal entry
+      addUserMessage(DEMO_JOURNAL);
+
+      // Show AI response
+      addAIMessage(DEMO_AI_RESPONSE);
+
+      // Render the full reflection card
+      renderReflection(DEMO_DATA);
+
+      // Disable input (demo mode)
+      journalInput.placeholder = 'This is a demo — enter an API key above to try it yourself';
+      journalInput.disabled = true;
+      sendBtn.disabled = true;
     }
   </script>
 

@@ -323,6 +323,62 @@
     }
     .action-text.done { text-decoration: line-through; color: var(--mid-gray); }
 
+    /* Psychology insight */
+    .psych-section {
+      padding: 0 20px 16px;
+    }
+    .psych-card {
+      background: linear-gradient(135deg, #f8f6ff, #f0f7ff);
+      border: 1px solid #e0d8f0;
+      border-radius: var(--r-lg); padding: 16px; position: relative;
+    }
+    .psych-top {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+    }
+    .psych-icon {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: #ede9fe; display: flex; align-items: center;
+      justify-content: center; font-size: 14px; flex-shrink: 0;
+    }
+    .psych-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: #7c3aed;
+    }
+    .psych-concept {
+      font-family: var(--serif); font-size: 16px; color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .psych-body {
+      font-size: 13px; color: var(--warm-gray); line-height: 1.55;
+      margin-bottom: 10px;
+    }
+    .psych-stat {
+      display: flex; align-items: flex-start; gap: 8px;
+      padding: 10px 12px; background: rgba(255,255,255,0.7);
+      border-radius: var(--r-sm); font-size: 12px; color: var(--warm-gray);
+      line-height: 1.4;
+    }
+    .psych-stat-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+    .psych-source {
+      font-size: 11px; color: var(--mid-gray); margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* Journey context */
+    .journey-section {
+      padding: 0 20px 16px;
+    }
+    .journey-card {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 12px 14px; background: var(--teal-mist);
+      border: 1px solid var(--teal-pale); border-radius: var(--r-lg);
+    }
+    .journey-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .journey-text {
+      font-size: 13px; color: var(--teal-dark); line-height: 1.5;
+      font-style: italic;
+    }
+
     /* Reflection footer */
     .reflection-footer {
       display: flex; align-items: center; justify-content: space-between;
@@ -714,6 +770,13 @@ Journal entry:
     {"text": "specific actionable next step implied by the entry", "category": "self-care|admin|advocacy|provider|school"},
     {"text": "another action", "category": "..."}
   ],
+  "psychology": {
+    "concept": "The clinical or research-backed name for what they're experiencing, e.g. 'Caregiver Hyperarousal', 'Compassion Fatigue', 'Ambiguous Loss', 'Chronic Sorrow', 'Emotional Labour'",
+    "explanation": "2-3 sentences explaining this concept in plain language. Make it feel validating — this is not a diagnosis, it's a mirror. Connect it to what they specifically described. End with a normalizing statement about how common this is among carers.",
+    "stat": "A specific statistic or research finding, e.g. '72% of unpaid carers report this pattern' or 'A 2023 Carers Australia study found...' — use real published findings where possible, or clearly grounded estimates",
+    "source_hint": "Brief attribution like 'Carers Australia 2023' or 'Journal of Family Psychology' or 'Beyond Blue carer research'"
+  },
+  "journey_context": "1-2 sentences placing today in the bigger picture of the caring journey. E.g. 'Days like this are common in the early years of navigating NDIS. The system wasn't designed for you — your frustration is rational.' or 'What you did today — showing up despite exhaustion — is an act of profound love that often goes unrecognised.'",
   "people": ["Name (relationship)", "Name (role)"],
   "emotions": ["specific emotions detected — not generic, use precise words like 'defeated' not 'sad'"],
   "services": ["NDIS services or providers mentioned"],
@@ -730,6 +793,8 @@ Rules:
 - Thorn: name the hard thing directly — don't minimise, don't solve
 - Actions: 2-4 concrete next steps. Each must be specific enough to do tomorrow.
 - Emotions: use precise, specific words (e.g. "overwhelmed and unseen" not just "stressed")
+- Psychology: draw from real carer psychology research. Key frameworks: caregiver burden (Zarit), compassion fatigue (Figley), ambiguous loss (Boss), chronic sorrow (Olshansky), emotional labour (Hochschild), hypervigilance, anticipatory grief, system-induced trauma. Use Australian carer statistics where possible (Carers Australia, ABS, AIHW, Beyond Blue).
+- journey_context: make this feel like a wise friend who has seen many carers walk this path. Not clinical. Warm. Grounding.
 - Return ONLY the JSON object`;
     }
 
@@ -941,6 +1006,33 @@ Rules:
           </div>
 
           ${actionsHtml}
+
+          ${data.psychology ? `
+          <div class="psych-section">
+            <div class="psych-card">
+              <div class="psych-top">
+                <div class="psych-icon">🧠</div>
+                <span class="psych-label">What the research says</span>
+              </div>
+              <div class="psych-concept">${esc(data.psychology.concept)}</div>
+              <div class="psych-body">${esc(data.psychology.explanation)}</div>
+              ${data.psychology.stat ? `
+              <div class="psych-stat">
+                <span class="psych-stat-icon">📊</span>
+                <span>${esc(data.psychology.stat)}</span>
+              </div>` : ''}
+              ${data.psychology.source_hint ? `
+              <div class="psych-source">— ${esc(data.psychology.source_hint)}</div>` : ''}
+            </div>
+          </div>` : ''}
+
+          ${data.journey_context ? `
+          <div class="journey-section">
+            <div class="journey-card">
+              <span class="journey-icon">🫶</span>
+              <div class="journey-text">${esc(data.journey_context)}</div>
+            </div>
+          </div>` : ''}
 
           <div class="reflection-footer">
             <div class="reflection-footer-left">

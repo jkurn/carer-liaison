@@ -153,6 +153,39 @@
     .btn-send:disabled { opacity: 0.4; cursor: not-allowed; }
     .btn-send svg { width: 20px; height: 20px; }
 
+    /* Mic button */
+    .btn-mic {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--white); border: 1.5px solid var(--light-gray); color: var(--warm-gray);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; flex-shrink: 0;
+    }
+    .btn-mic:hover { border-color: var(--teal); color: var(--teal); }
+    .btn-mic svg { width: 20px; height: 20px; }
+    .btn-mic.recording {
+      background: #fee2e2; border-color: #ef4444; color: #ef4444;
+      animation: mic-pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes mic-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.3); }
+      50% { box-shadow: 0 0 0 10px rgba(239,68,68,0); }
+    }
+
+    /* Voice recording banner */
+    .voice-banner {
+      display: none; align-items: center; gap: 10px;
+      padding: 10px 16px; margin-bottom: 8px;
+      background: #fef2f2; border: 1px solid #fecaca;
+      border-radius: var(--r-md); font-size: 13px; color: #dc2626;
+    }
+    .voice-banner.visible { display: flex; }
+    .voice-banner .rec-dot {
+      width: 8px; height: 8px; background: #ef4444; border-radius: 50%;
+      animation: pulse 1s ease-in-out infinite;
+    }
+    .voice-banner .voice-timer { font-weight: 600; font-variant-numeric: tabular-nums; }
+    .voice-banner .voice-hint { color: var(--mid-gray); margin-left: auto; font-size: 12px; }
+
     /* Prompt chips */
     .prompts {
       display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;
@@ -321,7 +354,16 @@
 
     <!-- Input -->
     <div class="input-area" id="inputArea">
+      <div class="voice-banner" id="voiceBanner">
+        <span class="rec-dot"></span>
+        <span>Listening...</span>
+        <span class="voice-timer" id="voiceTimer">0:00</span>
+        <span class="voice-hint">Tap mic to stop</span>
+      </div>
       <div class="input-row">
+        <button class="btn-mic" id="micBtn" title="Voice journal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+        </button>
         <div class="input-wrap">
           <textarea class="journal-input" id="journalInput" rows="1"
             placeholder="Tell me about your day..."></textarea>
@@ -359,12 +401,19 @@
     const saveKeyBtn = $('saveKeyBtn');
     const prompts = $('prompts');
     const toast = $('toast');
+    const micBtn = $('micBtn');
+    const voiceBanner = $('voiceBanner');
+    const voiceTimer = $('voiceTimer');
 
     // ───────── STATE ─────────
     let apiKey = localStorage.getItem('gemini_api_key') || '';
     let conversationHistory = [];
     let isStreaming = false;
     let messageCount = 0;
+    let isRecording = false;
+    let recognition = null;
+    let voiceTimerInterval = null;
+    let voiceSeconds = 0;
 
     // ───────── INIT ─────────
     if (apiKey) setupBanner.classList.add('hidden');
@@ -395,6 +444,105 @@
       sendBtn.disabled = !journalInput.value.trim() || !apiKey || isStreaming;
     }
 
+    // ───────── VOICE INPUT ─────────
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      micBtn.style.display = 'none'; // hide mic if browser doesn't support it
+    }
+
+    micBtn.addEventListener('click', toggleVoice);
+
+    function toggleVoice() {
+      if (isRecording) {
+        stopVoice();
+      } else {
+        startVoice();
+      }
+    }
+
+    function startVoice() {
+      if (!SpeechRecognition) {
+        showToast('Voice not supported in this browser. Try Chrome.');
+        return;
+      }
+
+      recognition = new SpeechRecognition();
+      recognition.lang = 'en-AU';
+      recognition.interimResults = true;
+      recognition.continuous = true;
+      recognition.maxAlternatives = 1;
+
+      let finalTranscript = journalInput.value;
+      let lastInterim = '';
+
+      recognition.onstart = () => {
+        isRecording = true;
+        micBtn.classList.add('recording');
+        voiceBanner.classList.add('visible');
+        voiceSeconds = 0;
+        voiceTimer.textContent = '0:00';
+        voiceTimerInterval = setInterval(() => {
+          voiceSeconds++;
+          const m = Math.floor(voiceSeconds / 60);
+          const s = String(voiceSeconds % 60).padStart(2, '0');
+          voiceTimer.textContent = `${m}:${s}`;
+        }, 1000);
+        journalInput.placeholder = 'Listening... speak naturally';
+      };
+
+      recognition.onresult = (event) => {
+        let interim = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          const transcript = event.results[i][0].transcript;
+          if (event.results[i].isFinal) {
+            finalTranscript += (finalTranscript ? ' ' : '') + transcript;
+          } else {
+            interim = transcript;
+          }
+        }
+        journalInput.value = finalTranscript + (interim ? ' ' + interim : '');
+        journalInput.style.height = 'auto';
+        journalInput.style.height = Math.min(journalInput.scrollHeight, 160) + 'px';
+        updateSendBtn();
+      };
+
+      recognition.onerror = (event) => {
+        if (event.error !== 'no-speech') {
+          console.error('Speech recognition error:', event.error);
+          showToast('Mic error: ' + event.error);
+        }
+        stopVoice();
+      };
+
+      recognition.onend = () => {
+        // If still recording, restart (browser can stop after silence)
+        if (isRecording) {
+          try { recognition.start(); } catch(e) { stopVoice(); }
+        }
+      };
+
+      try {
+        recognition.start();
+      } catch(e) {
+        showToast('Could not start microphone');
+      }
+    }
+
+    function stopVoice() {
+      isRecording = false;
+      micBtn.classList.remove('recording');
+      voiceBanner.classList.remove('visible');
+      clearInterval(voiceTimerInterval);
+      journalInput.placeholder = 'Tell me about your day...';
+      if (recognition) {
+        try { recognition.stop(); } catch(e) {}
+        recognition = null;
+      }
+      updateSendBtn();
+      journalInput.focus();
+    }
+
     // ───────── PROMPT CHIPS ─────────
     prompts.addEventListener('click', e => {
       const chip = e.target.closest('.prompt-chip');
@@ -412,6 +560,9 @@
     async function handleSend() {
       const text = journalInput.value.trim();
       if (!text || !apiKey || isStreaming) return;
+
+      // Stop voice if recording
+      if (isRecording) stopVoice();
 
       // Add user message
       addUserMessage(text);

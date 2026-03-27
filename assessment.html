@@ -551,7 +551,7 @@
             <span id="tierName">Assessment complete</span>
           </div>
           <div class="score-big" id="scoreBig">0<span>/24</span></div>
-          <div class="score-label">Overall carer load score</div>
+          <div class="score-label">Carer wellbeing score</div>
         </div>
 
         <!-- Radar chart -->
@@ -735,21 +735,26 @@ const tierDescriptions = {
   'At Crisis Point': 'Immediate, free support is available right now. Please contact the Carer Gateway on 1800 422 737 today — they can arrange emergency respite, financial assistance, and connect you with a carer support worker.'
 };
 
-function scoreColor(score) {
-  if (score <= 1) return '#2e7d32';
-  if (score <= 2) return '#a05c00';
-  if (score <= 3) return '#b53a1f';
+// Wellbeing display: invert raw load score so higher = better
+function toWellbeing(rawScore) { return 5 - rawScore; } // per-question: 1→4, 2→3, 3→2, 4→1
+function toWellbeingTotal(rawTotal) { return 30 - rawTotal; } // overall: 6→24, 24→6
+
+function scoreColor(wellbeing) {
+  if (wellbeing >= 4) return '#2e7d32';
+  if (wellbeing >= 3) return '#a05c00';
+  if (wellbeing >= 2) return '#b53a1f';
   return '#c62828';
 }
 
-function scoreBg(score) {
-  if (score <= 1) return '#e8f5e9';
-  if (score <= 2) return '#fff8e1';
-  if (score <= 3) return '#fce4ec';
+function scoreBg(wellbeing) {
+  if (wellbeing >= 4) return '#e8f5e9';
+  if (wellbeing >= 3) return '#fff8e1';
+  if (wellbeing >= 2) return '#fce4ec';
   return '#ffebee';
 }
 
-function drawRadarChart(scores) {
+function drawRadarChart(rawScores) {
+  const scores = rawScores.map(s => toWellbeing(s)); // Invert for display
   const canvas = document.getElementById('radarChart');
   const ctx = canvas.getContext('2d');
   const dpr = window.devicePixelRatio || 1;
@@ -839,14 +844,15 @@ function drawRadarChart(scores) {
   }
 }
 
-function renderBreakdown(scores) {
+function renderBreakdown(rawScores) {
   const list = document.getElementById('breakdownList');
   list.innerHTML = '';
   for (let i = 0; i < TOTAL; i++) {
     const a = answers[i];
-    const s = a ? a.score : 0;
-    const col = scoreColor(s);
-    const bg = scoreBg(s);
+    const raw = a ? a.score : 0;
+    const wb = toWellbeing(raw); // Invert: 1→4, 4→1
+    const col = scoreColor(wb);
+    const bg = scoreBg(wb);
     const li = document.createElement('li');
     li.className = 'breakdown-item';
     li.innerHTML = `
@@ -856,9 +862,9 @@ function renderBreakdown(scores) {
         <div class="breakdown-answer">${a ? a.text : '—'}</div>
       </div>
       <div class="breakdown-score-bar">
-        <div class="breakdown-score-fill" style="width:${(s/4)*100}%;background:${col}"></div>
+        <div class="breakdown-score-fill" style="width:${(wb/4)*100}%;background:${col}"></div>
       </div>
-      <div class="breakdown-score-num" style="color:${col}">${s}/4</div>
+      <div class="breakdown-score-num" style="color:${col}">${wb}/4</div>
     `;
     list.appendChild(li);
   }
@@ -879,8 +885,9 @@ function showGate() {
   badge.style.color = tier.color;
   name.textContent = tier.name;
 
-  // Score display
-  document.getElementById('scoreBig').innerHTML = `${score}<span>/24</span>`;
+  // Score display (inverted: higher = better wellbeing)
+  const wellbeing = toWellbeingTotal(score);
+  document.getElementById('scoreBig').innerHTML = `${wellbeing}<span>/24</span>`;
 
   // Tier summary box
   const summaryBox = document.getElementById('tierSummary');

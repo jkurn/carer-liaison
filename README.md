@@ -2,7 +2,7 @@
 
 **Caring was never meant to be done alone.**
 
-Carer Liaison is an AI companion for unpaid family carers — the parents, partners, and siblings who carry everything in their heads: sleep patterns, medication schedules, what he can chew, when she napped, what kind of day it's going to be. Knowledge built over years, held by one person, with no system underneath it.
+Carer Liaison is an AI companion for unpaid family carers — the parents, partners, and siblings who carry everything in their heads: sleep patterns, medication schedules, what they can eat, what sets them off, what kind of day it's going to be. Knowledge built over years, held by one person, with no system underneath it.
 
 We're building the system. Starting with an AI journal that lets carers talk about their day and get something back that actually sees them.
 
@@ -33,8 +33,9 @@ Mise en place for caring. Everything in its right place so the day flows instead
 | Component | Status |
 |---|---|
 | Landing page | Live (GitHub Pages) |
-| Carer assessment quiz | Live |
-| AI carer journal (demo) | Live |
+| Carer assessment + email | Live — primary conversion path |
+| AI carer journal (demo) | Built — not publicly linked (needs design polish) |
+| AI carer journal v2 (demo2) | Built — not publicly linked |
 | Dashboard app (Supabase) | Functional — auth, onboarding, body state tracking |
 | AI Morning Brief | Planned |
 | Service search (real data) | Planned |
@@ -67,12 +68,13 @@ npx serve . -l 3457
 
 ```
 carer-liaison/
-├── index.html          Landing page
-├── assessment.html     Carer assessment quiz
+├── index.html          Landing page (all CTAs → assessment)
+├── assessment.html     Carer Check-In quiz + email capture
 ├── app/                Dashboard SPA (Supabase)
-├── demo/               AI journal demo v1
-├── demo2/              AI journal demo v2
-├── BRAND-VOICE.md      Positioning & voice guide
+├── demo/               AI journal demo v1 (unlisted — not linked from landing)
+├── demo2/              AI journal demo v2 (unlisted — not linked from landing)
+├── BRAND-VOICE.md      Positioning, voice guide, user flow
+├── DESIGN.md           Design system (colors, typography, components)
 ├── TODOS.md            Deferred work
 └── README.md
 ```

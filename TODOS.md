@@ -1,6 +1,14 @@
 # Carer Liaison — Deferred Work
 
-Items deferred during eng review (2026-03-19). Pick up when ready.
+Items deferred during eng review (2026-03-19) and ongoing sessions. Pick up when ready.
+
+## Recently Completed (2026-03-27)
+
+- [x] Landing page: All CTAs now point to assessment (removed demo/demo2 links)
+- [x] Copywriting: Generalised from autobiography to archetype (they/them, removed "28 years", universal examples)
+- [x] Assessment email: Supabase Edge Function deployed with Resend integration
+- [x] Assessment email: Personalised HTML email with tier-specific content, pressure points, resources
+- [x] Leads table: Stores assessment submissions (email, name, score, tier, answers)
 
 ## Security
 
@@ -26,6 +34,18 @@ Items deferred during eng review (2026-03-19). Pick up when ready.
 - **What:** The app imports supabase-js from `esm.sh`. If that CDN is down, the entire app fails to load.
 - **Why:** Single point of failure for the whole SPA.
 - **Options:** (a) Vendor the file locally, (b) add `<script>` fallback tag, (c) accept the risk
+
+## Email / Assessment
+
+### 9. Resend Domain Verification
+- **What:** Verify `carerliaison.com` domain in Resend so emails send from `hello@carerliaison.com` instead of being rejected or going to spam.
+- **Why:** Current send-assessment Edge Function returns 500 — Resend rejects the `from` address because the domain isn't verified.
+- **Status:** RESEND_API_KEY is set in Supabase secrets. Domain verification pending.
+- **Priority:** P0 — assessment flow is broken without this
+
+### 10. Assessment Email: Admin Notification
+- **What:** The Edge Function sends a fire-and-forget admin notification to `hello@carerliaison.com` on each submission. Verify this works once domain is verified.
+- **Why:** Jonathan needs to see leads as they come in.
 
 ## Features (Phase 2)
 

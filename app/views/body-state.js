@@ -155,14 +155,14 @@ export async function render(el) {
     <!-- LOG TABLE -->
     <div class="card">
       <div class="eyebrow" style="margin-bottom: var(--sp-4);">Recent Logs</div>
-      <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.92rem;">
         <thead>
           <tr style="border-bottom: 1px solid var(--border);">
-            <th style="text-align: left; padding: var(--sp-3) var(--sp-2); color: var(--mid-gray); font-weight: 500; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em;">Date</th>
-            <th style="text-align: left; padding: var(--sp-3) var(--sp-2); color: var(--mid-gray); font-weight: 500; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em;">Score</th>
-            <th style="text-align: left; padding: var(--sp-3) var(--sp-2); color: var(--mid-gray); font-weight: 500; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em;">Status</th>
-            <th style="text-align: left; padding: var(--sp-3) var(--sp-2); color: var(--mid-gray); font-weight: 500; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em;">Notes</th>
-            <th style="text-align: right; padding: var(--sp-3) var(--sp-2); color: var(--mid-gray); font-weight: 500; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em;">Trend</th>
+            <th style="text-align: left; padding: var(--sp-3) var(--sp-2); color: var(--mid-gray); font-weight: 500; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em;">Date</th>
+            <th style="text-align: left; padding: var(--sp-3) var(--sp-2); color: var(--mid-gray); font-weight: 500; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em;">Score</th>
+            <th style="text-align: left; padding: var(--sp-3) var(--sp-2); color: var(--mid-gray); font-weight: 500; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em;">Status</th>
+            <th style="text-align: left; padding: var(--sp-3) var(--sp-2); color: var(--mid-gray); font-weight: 500; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em;">Notes</th>
+            <th style="text-align: right; padding: var(--sp-3) var(--sp-2); color: var(--mid-gray); font-weight: 500; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em;">Trend</th>
           </tr>
         </thead>
         <tbody>
@@ -175,7 +175,7 @@ export async function render(el) {
                 <td style="padding: var(--sp-3) var(--sp-2); font-weight: 600; color: var(--dark);">${l.score}</td>
                 <td style="padding: var(--sp-3) var(--sp-2);"><span class="badge ${tier.cls}">${tier.label}</span></td>
                 <td style="padding: var(--sp-3) var(--sp-2); color: var(--mid-gray);">${l.notes || '—'}</td>
-                <td style="padding: var(--sp-3) var(--sp-2); text-align: right; font-size: 0.82rem;">${trendArrow(l.score, prev ? prev.score : null)}</td>
+                <td style="padding: var(--sp-3) var(--sp-2); text-align: right; font-size: 0.88rem;">${trendArrow(l.score, prev ? prev.score : null)}</td>
               </tr>
             `;
           }).join('')}

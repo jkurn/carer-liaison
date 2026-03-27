@@ -19,8 +19,8 @@
       --border-strong: #CBD5E1;
       --border-subtle: #E2E8F0;
       --text-primary: #0F172A;
-      --text-secondary: #475569;
-      --text-tertiary: #94A3B8;
+      --text-secondary: #3D4A5C;
+      --text-tertiary: #6B7A8D;
       --success: #059669;
       --crisis-red: #DC2626;
       --body-great: #059669;
@@ -36,7 +36,7 @@
       --serif: 'DM Serif Display', Georgia, serif;
       --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 20px; --r-full: 999px;
     }
-    body { font-family: var(--sans); background: #F0F1F3; color: var(--text-primary); min-height: 100vh; }
+    body { font-family: var(--sans); background: #F0F1F3; color: var(--text-primary); min-height: 100vh; font-size: 15px; line-height: 1.5; }
 
     /* === TOP BAR === */
     .top-bar {
@@ -126,7 +126,7 @@
     /* Screen content area */
     .screen-content {
       padding: 0 20px 100px; overflow-y: auto; min-height: 700px;
-      background: var(--bg-page);
+      background: var(--bg-page); line-height: 1.5;
     }
     .screen-content.white-bg { background: var(--bg-elevated); }
 
@@ -137,9 +137,9 @@
       display: flex; justify-content: space-around; padding: 8px 12px 28px; z-index: 10;
     }
     .tab-item {
-      display: flex; flex-direction: column; align-items: center; gap: 2px;
-      font-size: 10px; font-weight: 600; color: var(--text-tertiary); cursor: pointer;
-      padding: 4px 10px; border-radius: var(--r-lg); transition: all 0.2s;
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      font-size: 11px; font-weight: 600; color: var(--text-tertiary); cursor: pointer;
+      padding: 5px 10px; border-radius: var(--r-lg); transition: all 0.2s;
       background: none; border: none; font-family: var(--sans);
     }
     .tab-item.active {
@@ -176,20 +176,20 @@
     .screen.active { display: block; }
 
     .card {
-      background: var(--bg-elevated); border-radius: var(--r-lg); padding: 16px;
-      margin-bottom: 12px; border: 1px solid var(--border-subtle);
+      background: var(--bg-elevated); border-radius: var(--r-lg); padding: 20px;
+      margin-bottom: 16px; border: 1px solid var(--border-subtle);
     }
     .card-accent {
       background: linear-gradient(135deg, var(--accent), var(--accent-end));
       color: #fff; border: none;
     }
-    .card-title { font-family: var(--serif); font-size: 17px; margin-bottom: 8px; }
-    .card-subtitle { font-size: 13px; color: var(--text-secondary); }
-    .card-subtitle-white { font-size: 13px; color: rgba(255,255,255,0.8); }
+    .card-title { font-family: var(--serif); font-size: 18px; margin-bottom: 10px; }
+    .card-subtitle { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+    .card-subtitle-white { font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.5; }
 
     .section-title {
       font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
-      color: var(--text-tertiary); margin: 20px 0 10px;
+      color: var(--text-tertiary); margin: 24px 0 12px;
     }
 
     .nav-header {
@@ -209,12 +209,12 @@
     .progress-bar-fill { height: 100%; border-radius: var(--r-full); }
 
     .emoji-btn {
-      display: flex; flex-direction: column; align-items: center; gap: 4px;
-      padding: 8px 10px; border-radius: var(--r-md); border: 1.5px solid var(--border-subtle);
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+      padding: 10px 10px; border-radius: var(--r-md); border: 1.5px solid var(--border-subtle);
       background: var(--bg-elevated); cursor: pointer; font-family: var(--sans);
-      font-size: 11px; color: var(--text-secondary); font-weight: 500; flex: 1;
+      font-size: 12px; color: var(--text-secondary); font-weight: 500; flex: 1;
     }
-    .emoji-btn .em { font-size: 22px; }
+    .emoji-btn .em { font-size: 24px; }
     .emoji-btn.active-great { border-color: var(--body-great); background: #ECFDF5; }
     .emoji-btn.active-calm { border-color: var(--body-calm); background: #ECFEFF; }
     .emoji-btn.active-neutral { border-color: var(--body-neutral); background: #F8FAFC; }
@@ -247,31 +247,31 @@
 
     .quick-action {
       flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px;
-      padding: 12px 8px; border-radius: var(--r-md); background: var(--bg-card);
-      font-size: 11px; font-weight: 600; color: var(--text-secondary); text-align: center;
+      padding: 14px 8px; border-radius: var(--r-md); background: var(--bg-card);
+      font-size: 12px; font-weight: 600; color: var(--text-secondary); text-align: center;
       cursor: pointer; border: none; font-family: var(--sans);
     }
     .quick-action .material-symbols-rounded { font-size: 22px; color: var(--accent); }
 
     .schedule-item {
-      display: flex; gap: 12px; padding: 12px 0;
+      display: flex; gap: 12px; padding: 14px 0;
       border-bottom: 1px solid var(--border-subtle);
     }
     .schedule-item:last-child { border-bottom: none; }
-    .schedule-time { font-size: 13px; font-weight: 600; color: var(--accent); min-width: 55px; }
-    .schedule-title { font-size: 14px; font-weight: 600; color: var(--text-primary); }
-    .schedule-desc { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+    .schedule-time { font-size: 14px; font-weight: 600; color: var(--accent); min-width: 55px; }
+    .schedule-title { font-size: 15px; font-weight: 600; color: var(--text-primary); }
+    .schedule-desc { font-size: 13px; color: var(--text-secondary); margin-top: 3px; line-height: 1.5; }
 
     .log-entry {
-      display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--border-subtle);
+      display: flex; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--border-subtle);
     }
     .log-entry:last-child { border-bottom: none; }
-    .log-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
-    .log-time { font-size: 11px; color: var(--text-tertiary); font-weight: 500; }
-    .log-category { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: var(--r-sm); }
+    .log-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+    .log-time { font-size: 12px; color: var(--text-tertiary); font-weight: 500; }
+    .log-category { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: var(--r-sm); }
 
     .team-member {
-      display: flex; align-items: center; gap: 12px; padding: 12px 0;
+      display: flex; align-items: center; gap: 12px; padding: 14px 0;
       border-bottom: 1px solid var(--border-subtle);
     }
     .team-member:last-child { border-bottom: none; }
@@ -285,12 +285,12 @@
 
     /* Chat bubbles */
     .chat-bubble {
-      max-width: 85%; padding: 12px 16px; border-radius: 18px; margin-bottom: 4px;
-      font-size: 14px; line-height: 1.5;
+      max-width: 85%; padding: 14px 18px; border-radius: 18px; margin-bottom: 4px;
+      font-size: 15px; line-height: 1.6;
     }
     .chat-lia { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-bottom-left-radius: 4px; align-self: flex-start; }
     .chat-user { background: var(--accent); color: #fff; border-bottom-right-radius: 4px; align-self: flex-end; }
-    .chat-meta { font-size: 11px; color: var(--text-tertiary); margin-bottom: 10px; }
+    .chat-meta { font-size: 12px; color: var(--text-tertiary); margin-bottom: 12px; }
     .chat-meta-right { text-align: right; }
 
     /* Web screen */
@@ -300,13 +300,13 @@
     .web-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .web-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
     .web-card {
-      background: var(--bg-elevated); border-radius: var(--r-xl); padding: 24px;
+      background: var(--bg-elevated); border-radius: var(--r-xl); padding: 28px;
       border: 1px solid var(--border-subtle); box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
     .web-card-full { grid-column: 1 / -1; }
     .web-header { margin-bottom: 24px; }
     .web-header h1 { font-family: var(--serif); font-size: 28px; }
-    .web-header p { font-size: 15px; color: var(--text-secondary); margin-top: 4px; }
+    .web-header p { font-size: 15px; color: var(--text-secondary); margin-top: 6px; line-height: 1.5; }
 
     /* Onboarding special */
     .onboard-logo {
@@ -361,14 +361,14 @@
     }
     .doc-option:hover { border-color: var(--accent); }
 
-    .checklist-item { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 14px; }
+    .checklist-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 14px; line-height: 1.5; }
     .check-done { color: var(--success); }
     .check-pending { color: var(--text-tertiary); }
 
     /* Compare stat */
     .compare-stat {
-      display: flex; align-items: center; gap: 8px; padding: 8px 0;
-      border-bottom: 1px solid var(--border-subtle); font-size: 14px;
+      display: flex; align-items: center; gap: 8px; padding: 10px 0;
+      border-bottom: 1px solid var(--border-subtle); font-size: 14px; line-height: 1.5;
     }
     .compare-stat:last-child { border-bottom: none; }
     .stat-up { color: var(--success); font-weight: 600; }
@@ -388,7 +388,7 @@
     /* Filter pills */
     .filter-row { display: flex; gap: 6px; margin-bottom: 14px; overflow-x: auto; }
     .filter-pill {
-      padding: 6px 14px; border-radius: var(--r-full); font-size: 12px; font-weight: 600;
+      padding: 7px 14px; border-radius: var(--r-full); font-size: 13px; font-weight: 600;
       border: 1px solid var(--border-subtle); background: var(--bg-elevated); color: var(--text-secondary);
       white-space: nowrap; cursor: pointer; font-family: var(--sans);
     }
@@ -426,15 +426,15 @@
 
     /* Insight chip */
     .insight-chip {
-      display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px;
-      border-radius: var(--r-full); font-size: 12px; font-weight: 500;
+      display: inline-flex; align-items: center; gap: 4px; padding: 5px 12px;
+      border-radius: var(--r-full); font-size: 13px; font-weight: 500;
       margin: 2px 4px 2px 0; background: var(--bg-card); color: var(--text-secondary);
     }
 
     /* Journal entry card */
     .journal-card {
       background: var(--bg-elevated); border: 1px solid var(--border-subtle);
-      border-radius: var(--r-lg); padding: 14px; margin-bottom: 10px; cursor: pointer;
+      border-radius: var(--r-lg); padding: 16px; margin-bottom: 12px; cursor: pointer;
     }
     .journal-card:hover { border-color: var(--accent); }
   </style>
@@ -514,36 +514,36 @@
                 <div class="onboard-dot" style="background:var(--border-subtle);"></div>
                 <div class="onboard-dot" style="background:var(--border-subtle);"></div>
               </div>
-              <p style="font-size:12px; color:var(--text-tertiary); margin-bottom:20px;">Step 1 of 6</p>
+              <p style="font-size:14px; color:var(--text-tertiary); margin-bottom:20px;">Step 1 of 6</p>
               <div style="text-align:left; padding:0 4px;">
                 <div class="onboard-step active-step">
                   <div class="step-num">1</div>
-                  <div><div style="font-size:14px; font-weight:600;">Add Participant</div><div style="font-size:12px; color:var(--text-secondary);">Name, NDIS number, plan dates</div></div>
+                  <div><div style="font-size:14px; font-weight:600;">Add Participant</div><div style="font-size:14px; color:var(--text-secondary);">Name, NDIS number, plan dates</div></div>
                 </div>
                 <div class="onboard-step">
                   <div class="step-num">2</div>
-                  <div><div style="font-size:14px; font-weight:600;">Import Goals</div><div style="font-size:12px; color:var(--text-secondary);">Set up NDIS plan goals</div></div>
+                  <div><div style="font-size:14px; font-weight:600;">Import Goals</div><div style="font-size:14px; color:var(--text-secondary);">Set up NDIS plan goals</div></div>
                 </div>
                 <div class="onboard-step">
                   <div class="step-num">3</div>
-                  <div><div style="font-size:14px; font-weight:600;">Add Support Team</div><div style="font-size:12px; color:var(--text-secondary);">OT, physio, support workers</div></div>
+                  <div><div style="font-size:14px; font-weight:600;">Add Support Team</div><div style="font-size:14px; color:var(--text-secondary);">OT, physio, support workers</div></div>
                 </div>
                 <div class="onboard-step">
                   <div class="step-num">4</div>
-                  <div><div style="font-size:14px; font-weight:600;">Connect WhatsApp</div><div style="font-size:12px; color:var(--text-secondary);">Link Lia to your conversations</div></div>
+                  <div><div style="font-size:14px; font-weight:600;">Connect WhatsApp</div><div style="font-size:14px; color:var(--text-secondary);">Link Lia to your conversations</div></div>
                 </div>
                 <div class="onboard-step">
                   <div class="step-num">5</div>
-                  <div><div style="font-size:14px; font-weight:600;">Carer Profile</div><div style="font-size:12px; color:var(--text-secondary);">Your details & health needs</div></div>
+                  <div><div style="font-size:14px; font-weight:600;">Carer Profile</div><div style="font-size:14px; color:var(--text-secondary);">Your details & health needs</div></div>
                 </div>
                 <div class="onboard-step">
                   <div class="step-num">6</div>
-                  <div><div style="font-size:14px; font-weight:600;">Notifications</div><div style="font-size:12px; color:var(--text-secondary);">Choose what alerts you receive</div></div>
+                  <div><div style="font-size:14px; font-weight:600;">Notifications</div><div style="font-size:14px; color:var(--text-secondary);">Choose what alerts you receive</div></div>
                 </div>
               </div>
               <div style="padding:20px 4px 0;">
                 <button class="btn-primary">Get Started</button>
-                <p style="font-size:13px; color:var(--text-tertiary); margin-top:12px; cursor:pointer;">I'll set up later</p>
+                <p style="font-size:14px; color:var(--text-tertiary); margin-top:12px; cursor:pointer;">I'll set up later</p>
               </div>
             </div>
           </div>
@@ -553,7 +553,7 @@
             <div class="screen-content">
               <div style="padding-top:8px;">
                 <h1 style="font-family:var(--serif); font-size:22px;">Good morning, Sarah</h1>
-                <p style="font-size:13px; color:var(--text-secondary); margin-bottom:16px;">Here's how Maison is doing today</p>
+                <p style="font-size:14px; color:var(--text-secondary); margin-bottom:16px;">Here's how Maison is doing today</p>
               </div>
               <!-- Maison Status -->
               <div class="card card-accent" style="text-align:center;">
@@ -565,13 +565,13 @@
               <!-- Self-Care Nudge -->
               <div class="card" style="background:#FFF7ED; border-color:#FED7AA;">
                 <div style="font-size:14px; font-weight:600; color:#9A3412;">Time for a walk, Sarah</div>
-                <div style="font-size:13px; color:#C2410C; margin-top:4px;">You haven't walked in 3 days. Take 20 minutes today.</div>
+                <div style="font-size:14px; color:#C2410C; margin-top:4px;">You haven't walked in 3 days. Take 20 minutes today.</div>
               </div>
               <!-- Today's Schedule -->
               <div class="card">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                   <div class="card-title">Today's Schedule</div>
-                  <span style="font-size:13px; color:var(--accent); font-weight:600; cursor:pointer;">See all</span>
+                  <span style="font-size:14px; color:var(--accent); font-weight:600; cursor:pointer;">See all</span>
                 </div>
                 <div class="schedule-item">
                   <div class="schedule-time">10:00</div>
@@ -593,7 +593,7 @@
                   <span style="font-size:14px; font-weight:700; color:var(--accent);">57% used</span>
                 </div>
                 <div class="progress-bar-track"><div class="progress-bar-fill" style="width:57%; background:var(--accent);"></div></div>
-                <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-secondary); margin-top:4px;">
+                <div style="display:flex; justify-content:space-between; font-size:14px; color:var(--text-secondary); margin-top:4px;">
                   <span>$18,400 used</span><span>$32,000 total</span>
                 </div>
               </div>
@@ -630,7 +630,7 @@
                 <div style="font-size:28px;">🔴</div>
                 <div style="flex:1;">
                   <p style="font-size:14px; color:var(--text-primary); line-height:1.5;">Lighter day ahead. Here's a 2-min breathing reset before the school run.</p>
-                  <button style="margin-top:8px; padding:8px 20px; border-radius:var(--r-full); background:var(--accent); color:#fff; border:none; font-size:13px; font-weight:600; font-family:var(--sans); cursor:pointer;">Start breathing</button>
+                  <button style="margin-top:8px; padding:8px 20px; border-radius:var(--r-full); background:var(--accent); color:#fff; border:none; font-size:14px; font-weight:600; font-family:var(--sans); cursor:pointer;">Start breathing</button>
                 </div>
               </div>
               <!-- Coming up -->
@@ -651,7 +651,7 @@
                   <span class="badge-tag" style="background:#FFFBEB; color:var(--body-resistant);">Action needed</span>
                 </div>
                 <p style="font-size:14px; font-weight:600; margin-top:8px;">NDIS plan review in 14 days — draft letter ready for review</p>
-                <p style="font-size:13px; color:var(--accent); font-weight:600; margin-top:6px; cursor:pointer;">Review draft →</p>
+                <p style="font-size:14px; color:var(--accent); font-weight:600; margin-top:6px; cursor:pointer;">Review draft →</p>
               </div>
               <!-- How is Maison feeling -->
               <div class="card">
@@ -685,22 +685,22 @@
               <div class="card" style="text-align:center;">
                 <div class="avatar-circle" style="width:64px; height:64px; font-size:24px; background:var(--accent); margin:0 auto 10px;">M</div>
                 <div style="font-family:var(--serif); font-size:20px;">Maison</div>
-                <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">NDIS #: 4312 8876 5521</div>
-                <div style="font-size:13px; color:var(--text-secondary);">Plan: 1 Jul 2025 – 30 Jun 2026</div>
+                <div style="font-size:14px; color:var(--text-secondary); margin-top:4px;">NDIS #: 4312 8876 5521</div>
+                <div style="font-size:14px; color:var(--text-secondary);">Plan: 1 Jul 2025 – 30 Jun 2026</div>
               </div>
               <!-- Goals Progress -->
               <div class="card">
                 <div class="card-title">Goals Progress</div>
                 <div style="margin-top:10px;">
-                  <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:600;"><span>Independent cooking</span><span>40%</span></div>
+                  <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:600;"><span>Independent cooking</span><span>40%</span></div>
                   <div class="progress-bar-track"><div class="progress-bar-fill" style="width:40%; background:var(--accent);"></div></div>
                 </div>
                 <div style="margin-top:10px;">
-                  <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:600;"><span>Community access</span><span>65%</span></div>
+                  <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:600;"><span>Community access</span><span>65%</span></div>
                   <div class="progress-bar-track"><div class="progress-bar-fill" style="width:65%; background:var(--success);"></div></div>
                 </div>
                 <div style="margin-top:10px;">
-                  <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:600;"><span>Communication skills</span><span>30%</span></div>
+                  <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:600;"><span>Communication skills</span><span>30%</span></div>
                   <div class="progress-bar-track"><div class="progress-bar-fill" style="width:30%; background:var(--body-resistant);"></div></div>
                 </div>
               </div>
@@ -709,40 +709,40 @@
                 <div class="card-title">Support Team</div>
                 <div class="team-member">
                   <div class="avatar-circle" style="background:#7C3AED;">EC</div>
-                  <div><div style="font-size:14px; font-weight:600;">Emma Chen</div><div style="font-size:12px; color:var(--text-secondary);">Occupational Therapist</div></div>
+                  <div><div style="font-size:14px; font-weight:600;">Emma Chen</div><div style="font-size:14px; color:var(--text-secondary);">Occupational Therapist</div></div>
                 </div>
                 <div class="team-member">
                   <div class="avatar-circle" style="background:#0891B2;">JL</div>
-                  <div><div style="font-size:14px; font-weight:600;">Dr. James Liu</div><div style="font-size:12px; color:var(--text-secondary);">Physiotherapist</div></div>
+                  <div><div style="font-size:14px; font-weight:600;">Dr. James Liu</div><div style="font-size:14px; color:var(--text-secondary);">Physiotherapist</div></div>
                 </div>
                 <div class="team-member">
                   <div class="avatar-circle" style="background:#059669;">JM</div>
-                  <div><div style="font-size:14px; font-weight:600;">Jake Morrison</div><div style="font-size:12px; color:var(--text-secondary);">Support Worker</div></div>
+                  <div><div style="font-size:14px; font-weight:600;">Jake Morrison</div><div style="font-size:14px; color:var(--text-secondary);">Support Worker</div></div>
                 </div>
                 <div class="team-member">
                   <div class="avatar-circle" style="background:#F59E0B;">SW</div>
-                  <div><div style="font-size:14px; font-weight:600;">Sarah Williams</div><div style="font-size:12px; color:var(--text-secondary);">Support Coordinator</div></div>
+                  <div><div style="font-size:14px; font-weight:600;">Sarah Williams</div><div style="font-size:14px; color:var(--text-secondary);">Support Coordinator</div></div>
                 </div>
                 <div class="team-member">
                   <div class="avatar-circle" style="background:#F43F5E;">AP</div>
-                  <div><div style="font-size:14px; font-weight:600;">Dr. Anika Patel</div><div style="font-size:12px; color:var(--text-secondary);">Speech Pathologist</div></div>
+                  <div><div style="font-size:14px; font-weight:600;">Dr. Anika Patel</div><div style="font-size:14px; color:var(--text-secondary);">Speech Pathologist</div></div>
                 </div>
               </div>
               <!-- Medical Info -->
               <div class="card">
                 <div class="card-title">Medical Information</div>
                 <div class="section-title" style="margin-top:8px;">Medications</div>
-                <p style="font-size:13px; color:var(--text-secondary);">Risperidone 1mg (morning)<br>Melatonin 3mg (evening)</p>
+                <p style="font-size:14px; color:var(--text-secondary);">Risperidone 1mg (morning)<br>Melatonin 3mg (evening)</p>
                 <div class="section-title">Allergies</div>
-                <p style="font-size:13px; color:var(--text-secondary);">Penicillin, Tree nuts</p>
+                <p style="font-size:14px; color:var(--text-secondary);">Penicillin, Tree nuts</p>
                 <div class="section-title">GP</div>
-                <p style="font-size:13px; color:var(--text-secondary);">Dr. Rebecca Thompson — Northside Medical</p>
+                <p style="font-size:14px; color:var(--text-secondary);">Dr. Rebecca Thompson — Northside Medical</p>
               </div>
               <!-- Communication Preferences -->
               <div class="card">
                 <div class="card-title">Communication Preferences</div>
-                <p style="font-size:13px; color:var(--text-secondary); margin-top:8px;">Uses simple sentences, responds to visual cues</p>
-                <p style="font-size:13px; color:var(--text-secondary); margin-top:4px;">Picture cards for daily routines and transitions</p>
+                <p style="font-size:14px; color:var(--text-secondary); margin-top:8px;">Uses simple sentences, responds to visual cues</p>
+                <p style="font-size:14px; color:var(--text-secondary); margin-top:4px;">Picture cards for daily routines and transitions</p>
               </div>
             </div>
           </div>
@@ -753,14 +753,14 @@
               <div class="nav-header"><h1>Body State</h1></div>
               <!-- Today's State -->
               <div class="card" style="text-align:center;">
-                <div style="font-size:13px; color:var(--text-secondary); margin-bottom:4px;">Today's Body State</div>
+                <div style="font-size:14px; color:var(--text-secondary); margin-bottom:4px;">Today's Body State</div>
                 <div style="font-size:42px; font-weight:800; color:var(--body-resistant);">35</div>
                 <div style="font-size:16px; font-weight:700; color:var(--body-resistant);">Resistant</div>
-                <div style="font-size:12px; color:var(--text-tertiary); margin-top:4px;">Logged at 8:14 am</div>
+                <div style="font-size:14px; color:var(--text-tertiary); margin-top:4px;">Logged at 8:14 am</div>
               </div>
               <!-- One-Tap Logging -->
               <div class="card">
-                <div style="font-size:13px; font-weight:600; margin-bottom:10px;">One-Tap Logging</div>
+                <div style="font-size:14px; font-weight:600; margin-bottom:10px;">One-Tap Logging</div>
                 <div style="display:flex; gap:6px;">
                   <button class="emoji-btn"><span class="em">😊</span>Great</button>
                   <button class="emoji-btn"><span class="em">😌</span>Calm</button>
@@ -785,7 +785,7 @@
                   <div style="flex:1; background:var(--body-resistant); border-radius:2px; height:35%;"></div>
                   <div style="flex:1; background:var(--body-calm); border-radius:2px; height:50%;"></div>
                 </div>
-                <div style="display:flex; justify-content:space-between; font-size:10px; color:var(--text-tertiary);">
+                <div style="display:flex; justify-content:space-between; font-size:14px; color:var(--text-tertiary);">
                   <span>Feb 24</span><span>Mar 3</span><span>Mar 10</span><span>Mar 17</span><span>Mar 24</span>
                 </div>
               </div>
@@ -793,30 +793,30 @@
               <div class="card">
                 <div class="card-title">Weekly Patterns</div>
                 <div style="display:flex; justify-content:space-between; margin-top:10px;">
-                  <div style="text-align:center;"><div style="font-size:11px; color:var(--text-tertiary);">Mon</div><div style="width:24px; height:24px; border-radius:50%; background:var(--body-great); margin:4px auto;"></div></div>
-                  <div style="text-align:center;"><div style="font-size:11px; color:var(--text-tertiary);">Tue</div><div style="width:24px; height:24px; border-radius:50%; background:var(--body-calm); margin:4px auto;"></div></div>
-                  <div style="text-align:center;"><div style="font-size:11px; color:var(--text-tertiary);">Wed</div><div style="width:24px; height:24px; border-radius:50%; background:var(--body-resistant); margin:4px auto;"></div></div>
-                  <div style="text-align:center;"><div style="font-size:11px; color:var(--text-tertiary);">Thu</div><div style="width:24px; height:24px; border-radius:50%; background:var(--body-great); margin:4px auto;"></div></div>
-                  <div style="text-align:center;"><div style="font-size:11px; color:var(--text-tertiary);">Fri</div><div style="width:24px; height:24px; border-radius:50%; background:var(--body-calm); margin:4px auto;"></div></div>
-                  <div style="text-align:center;"><div style="font-size:11px; color:var(--text-tertiary);">Sat</div><div style="width:24px; height:24px; border-radius:50%; background:var(--body-neutral); margin:4px auto;"></div></div>
-                  <div style="text-align:center;"><div style="font-size:11px; color:var(--text-tertiary);">Sun</div><div style="width:24px; height:24px; border-radius:50%; background:var(--body-difficult); margin:4px auto;"></div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Mon</div><div style="width:24px; height:24px; border-radius:50%; background:var(--body-great); margin:4px auto;"></div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Tue</div><div style="width:24px; height:24px; border-radius:50%; background:var(--body-calm); margin:4px auto;"></div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Wed</div><div style="width:24px; height:24px; border-radius:50%; background:var(--body-resistant); margin:4px auto;"></div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Thu</div><div style="width:24px; height:24px; border-radius:50%; background:var(--body-great); margin:4px auto;"></div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Fri</div><div style="width:24px; height:24px; border-radius:50%; background:var(--body-calm); margin:4px auto;"></div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Sat</div><div style="width:24px; height:24px; border-radius:50%; background:var(--body-neutral); margin:4px auto;"></div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Sun</div><div style="width:24px; height:24px; border-radius:50%; background:var(--body-difficult); margin:4px auto;"></div></div>
                 </div>
               </div>
               <!-- Sleep Correlation -->
               <div class="card">
                 <div class="card-title">Sleep Correlation</div>
-                <div style="font-size:12px; color:var(--text-secondary); margin-bottom:10px;">Apple Watch sleep vs next-day body state</div>
+                <div style="font-size:14px; color:var(--text-secondary); margin-bottom:10px;">Apple Watch sleep vs next-day body state</div>
                 <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--border-subtle);">
                   <span style="font-size:14px; font-weight:600;">8.2 hrs</span>
-                  <span style="font-size:13px; font-weight:600; color:var(--body-great);">→ Great</span>
+                  <span style="font-size:14px; font-weight:600; color:var(--body-great);">→ Great</span>
                 </div>
                 <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--border-subtle);">
                   <span style="font-size:14px; font-weight:600;">6.5 hrs</span>
-                  <span style="font-size:13px; font-weight:600; color:var(--body-resistant);">→ Resistant</span>
+                  <span style="font-size:14px; font-weight:600; color:var(--body-resistant);">→ Resistant</span>
                 </div>
                 <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0;">
                   <span style="font-size:14px; font-weight:600;">5.1 hrs</span>
-                  <span style="font-size:13px; font-weight:600; color:var(--body-difficult);">→ Difficult</span>
+                  <span style="font-size:14px; font-weight:600; color:var(--body-difficult);">→ Difficult</span>
                 </div>
               </div>
             </div>
@@ -836,7 +836,7 @@
                 <h1>Daily Log</h1>
                 <span class="material-symbols-rounded">filter_list</span>
               </div>
-              <div style="font-size:13px; color:var(--text-secondary); margin-bottom:12px;">Wednesday, 26 March 2026</div>
+              <div style="font-size:14px; color:var(--text-secondary); margin-bottom:12px;">Wednesday, 26 March 2026</div>
               <div class="filter-row">
                 <span class="filter-pill">Yesterday</span>
                 <span class="filter-pill active">Today</span>
@@ -852,8 +852,8 @@
                       <span class="log-category" style="background:#EFF6FF; color:#3B82F6;">Support Worker</span>
                     </div>
                     <div style="font-size:14px; font-weight:600; margin-top:4px;">Shift started — Anna</div>
-                    <div style="font-size:13px; color:var(--text-secondary); margin-top:2px;">Anna arrived, Maison in good mood. Morning routine completed.</div>
-                    <div style="font-size:11px; color:var(--text-tertiary); margin-top:4px; font-style:italic;">Auto-captured from WhatsApp</div>
+                    <div style="font-size:14px; color:var(--text-secondary); margin-top:2px;">Anna arrived, Maison in good mood. Morning routine completed.</div>
+                    <div style="font-size:14px; color:var(--text-tertiary); margin-top:4px; font-style:italic;">Auto-captured from WhatsApp</div>
                   </div>
                 </div>
                 <div class="log-entry">
@@ -864,7 +864,7 @@
                       <span class="log-category" style="background:#F5F3FF; color:#8B5CF6;">Medication</span>
                     </div>
                     <div style="font-size:14px; font-weight:600; margin-top:4px;">Risperidone 0.5mg — given</div>
-                    <div style="font-size:13px; color:var(--text-secondary); margin-top:2px;">Administered at 8:00 AM. No adverse reactions noted.</div>
+                    <div style="font-size:14px; color:var(--text-secondary); margin-top:2px;">Administered at 8:00 AM. No adverse reactions noted.</div>
                   </div>
                 </div>
                 <div class="log-entry">
@@ -875,7 +875,7 @@
                       <span class="log-category" style="background:#ECFDF5; color:#059669;">Meal</span>
                     </div>
                     <div style="font-size:14px; font-weight:600; margin-top:4px;">Lunch: Pasta with vegetables</div>
-                    <div style="font-size:13px; color:var(--text-secondary); margin-top:2px;">Ate well, finished most of the plate. Drank water.</div>
+                    <div style="font-size:14px; color:var(--text-secondary); margin-top:2px;">Ate well, finished most of the plate. Drank water.</div>
                   </div>
                 </div>
                 <div class="log-entry">
@@ -886,7 +886,7 @@
                       <span class="log-category" style="background:#ECFEFF; color:#0891B2;">Activity</span>
                     </div>
                     <div style="font-size:14px; font-weight:600; margin-top:4px;">Morning walk — 20 min</div>
-                    <div style="font-size:13px; color:var(--text-secondary); margin-top:2px;">Walked around the block with Anna. Maison was engaged and happy.</div>
+                    <div style="font-size:14px; color:var(--text-secondary); margin-top:2px;">Walked around the block with Anna. Maison was engaged and happy.</div>
                   </div>
                 </div>
                 <div class="log-entry">
@@ -897,7 +897,7 @@
                       <span class="log-category" style="background:#FFFBEB; color:#F59E0B;">Mood Check-in</span>
                     </div>
                     <div style="font-size:14px; font-weight:600; margin-top:4px;">Calm 😌</div>
-                    <div style="font-size:13px; color:var(--text-secondary); margin-top:2px;">Relaxed after morning walk. Engaged with toys independently.</div>
+                    <div style="font-size:14px; color:var(--text-secondary); margin-top:2px;">Relaxed after morning walk. Engaged with toys independently.</div>
                   </div>
                 </div>
                 <div class="log-entry">
@@ -908,7 +908,7 @@
                       <span class="log-category" style="background:#FEF2F2; color:#DC2626;">Incident</span>
                     </div>
                     <div style="font-size:14px; font-weight:600; margin-top:4px;">Minor behavioural incident</div>
-                    <div style="font-size:13px; color:var(--text-secondary); margin-top:2px;">Brief agitation during transition. De-escalated within 5 minutes using visual schedule.</div>
+                    <div style="font-size:14px; color:var(--text-secondary); margin-top:2px;">Brief agitation during transition. De-escalated within 5 minutes using visual schedule.</div>
                   </div>
                 </div>
                 <div class="log-entry">
@@ -919,7 +919,7 @@
                       <span class="log-category" style="background:#ECFDF5; color:#059669;">Meal</span>
                     </div>
                     <div style="font-size:14px; font-weight:600; margin-top:4px;">Dinner: Chicken & rice</div>
-                    <div style="font-size:13px; color:var(--text-secondary); margin-top:2px;">Ate half portion. Preferred the rice, left most chicken.</div>
+                    <div style="font-size:14px; color:var(--text-secondary); margin-top:2px;">Ate half portion. Preferred the rice, left most chicken.</div>
                   </div>
                 </div>
               </div>
@@ -938,7 +938,7 @@
             <div class="screen-content white-bg" style="padding-bottom:160px;">
               <div class="nav-header">
                 <h1>Journal</h1>
-                <span style="font-size:13px; color:var(--text-secondary);">Thursday, March 26</span>
+                <span style="font-size:14px; color:var(--text-secondary);">Thursday, March 26</span>
               </div>
               <!-- Chat -->
               <div style="display:flex; flex-direction:column; gap:2px;">
@@ -966,7 +966,7 @@
 
                 <!-- Entity Extraction -->
                 <div style="background:var(--journal-purple-light); border-radius:var(--r-lg); padding:14px; margin-top:8px;">
-                  <div style="font-size:12px; font-weight:600; color:var(--journal-purple); margin-bottom:8px;">Auto-detected from conversation</div>
+                  <div style="font-size:14px; font-weight:600; color:var(--journal-purple); margin-bottom:8px;">Auto-detected from conversation</div>
                   <div style="display:flex; flex-wrap:wrap; gap:6px;">
                     <span class="insight-chip" style="background:rgba(139,92,246,0.1); color:var(--journal-purple);">😊 Tired but proud</span>
                     <span class="insight-chip" style="background:rgba(139,92,246,0.1); color:var(--journal-purple);">👤 Maison, OT</span>
@@ -1004,39 +1004,39 @@
               <!-- Rose -->
               <div class="card" style="border-left:3px solid var(--rose);">
                 <div style="font-size:15px; font-weight:700; color:var(--rose); margin-bottom:6px;">🌹 Rose — What went well</div>
-                <p style="font-size:13px; color:var(--text-secondary); line-height:1.6;">OT session was productive. Maison practiced using utensils independently. He also responded well to the visual schedule today.</p>
+                <p style="font-size:14px; color:var(--text-secondary); line-height:1.6;">OT session was productive. Maison practiced using utensils independently. He also responded well to the visual schedule today.</p>
               </div>
               <!-- Bud -->
               <div class="card" style="border-left:3px solid var(--bud);">
                 <div style="font-size:15px; font-weight:700; color:var(--bud); margin-bottom:6px;">🌱 Bud — Looking forward to</div>
-                <p style="font-size:13px; color:var(--text-secondary); line-height:1.6;">Speech therapy tomorrow — Maison has been making good progress with two-word phrases. Also looking forward to Saturday respite — I need the break.</p>
+                <p style="font-size:14px; color:var(--text-secondary); line-height:1.6;">Speech therapy tomorrow — Maison has been making good progress with two-word phrases. Also looking forward to Saturday respite — I need the break.</p>
               </div>
               <!-- Thorn -->
               <div class="card" style="border-left:3px solid var(--thorn);">
                 <div style="font-size:15px; font-weight:700; color:var(--thorn); margin-bottom:6px;">🌵 Thorn — What was challenging</div>
-                <p style="font-size:13px; color:var(--text-secondary); line-height:1.6;">Post-lunch meltdown lasted about 20 minutes. Trigger was a schedule change. I stayed calm but it was exhausting.</p>
+                <p style="font-size:14px; color:var(--text-secondary); line-height:1.6;">Post-lunch meltdown lasted about 20 minutes. Trigger was a schedule change. I stayed calm but it was exhausting.</p>
               </div>
               <!-- Insights -->
               <div class="card">
                 <div class="card-title">Insights</div>
                 <div style="margin-top:10px;">
-                  <div style="font-size:12px; font-weight:600; color:var(--text-tertiary); margin-bottom:6px;">👤 People</div>
+                  <div style="font-size:14px; font-weight:600; color:var(--text-tertiary); margin-bottom:6px;">👤 People</div>
                   <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:10px;">
                     <span class="insight-chip">Maison</span><span class="insight-chip">OT Therapist</span><span class="insight-chip">Speech Therapist</span>
                   </div>
-                  <div style="font-size:12px; font-weight:600; color:var(--text-tertiary); margin-bottom:6px;">💪 Wins</div>
+                  <div style="font-size:14px; font-weight:600; color:var(--text-tertiary); margin-bottom:6px;">💪 Wins</div>
                   <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:10px;">
                     <span class="insight-chip">Stayed calm during meltdown</span><span class="insight-chip">Used breathing technique</span>
                   </div>
-                  <div style="font-size:12px; font-weight:600; color:var(--text-tertiary); margin-bottom:6px;">⚡ Triggers</div>
+                  <div style="font-size:14px; font-weight:600; color:var(--text-tertiary); margin-bottom:6px;">⚡ Triggers</div>
                   <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:10px;">
                     <span class="insight-chip">Schedule change</span><span class="insight-chip">Post-lunch transition</span>
                   </div>
-                  <div style="font-size:12px; font-weight:600; color:var(--text-tertiary); margin-bottom:6px;">🎯 Goals</div>
+                  <div style="font-size:14px; font-weight:600; color:var(--text-tertiary); margin-bottom:6px;">🎯 Goals</div>
                   <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:10px;">
                     <span class="insight-chip">Independent eating (utensils)</span><span class="insight-chip">Two-word phrases</span>
                   </div>
-                  <div style="font-size:12px; font-weight:600; color:var(--text-tertiary); margin-bottom:6px;">🏥 Services</div>
+                  <div style="font-size:14px; font-weight:600; color:var(--text-tertiary); margin-bottom:6px;">🏥 Services</div>
                   <div style="display:flex; flex-wrap:wrap; gap:4px;">
                     <span class="insight-chip">OT Session</span><span class="insight-chip">Speech Therapy (tomorrow)</span>
                   </div>
@@ -1047,8 +1047,8 @@
                 <div style="display:flex; gap:10px; align-items:flex-start;">
                   <div class="avatar-circle" style="background:var(--accent); width:32px; height:32px; font-size:14px;">L</div>
                   <div>
-                    <div style="font-size:13px; font-weight:700; color:var(--accent);">Lia</div>
-                    <p style="font-size:13px; color:var(--text-secondary); line-height:1.6; margin-top:4px;">You showed incredible resilience today, Sarah. The fact that you used your coping technique during a tough moment shows real growth — for both you and Maison.</p>
+                    <div style="font-size:14px; font-weight:700; color:var(--accent);">Lia</div>
+                    <p style="font-size:14px; color:var(--text-secondary); line-height:1.6; margin-top:4px;">You showed incredible resilience today, Sarah. The fact that you used your coping technique during a tough moment shows real growth — for both you and Maison.</p>
                   </div>
                 </div>
               </div>
@@ -1062,7 +1062,7 @@
                 <h1>Journal</h1>
                 <span class="material-symbols-rounded">add</span>
               </div>
-              <p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px;">12 entries this month</p>
+              <p style="font-size:14px; color:var(--text-secondary); margin-bottom:12px;">12 entries this month</p>
               <!-- Streak -->
               <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px;">
                 <div class="streak-dots">
@@ -1072,7 +1072,7 @@
                   <div class="streak-dot" style="background:var(--accent);">✓</div>
                   <div class="streak-dot" style="background:var(--accent);">✓</div>
                 </div>
-                <span style="font-size:13px; font-weight:600; color:var(--text-primary);">5 day streak 🔥</span>
+                <span style="font-size:14px; font-weight:600; color:var(--text-primary);">5 day streak 🔥</span>
               </div>
               <!-- Tabs -->
               <div class="filter-row">
@@ -1084,61 +1084,61 @@
               <!-- Entry Cards -->
               <div class="journal-card">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <span style="font-size:12px; color:var(--text-tertiary);">Thu, Mar 26</span>
-                  <span style="font-size:12px; color:var(--text-tertiary);">😌 2:30 PM</span>
+                  <span style="font-size:14px; color:var(--text-tertiary);">Thu, Mar 26</span>
+                  <span style="font-size:14px; color:var(--text-tertiary);">😌 2:30 PM</span>
                 </div>
                 <div style="font-size:14px; font-weight:600; margin-top:6px;">Tired but proud</div>
-                <p style="font-size:13px; color:var(--text-secondary); margin-top:4px; line-height:1.4;">Managed two community visits today despite exhaustion. Sarah responded well to the new routine...</p>
-                <div style="font-size:11px; color:var(--text-tertiary); margin-top:6px;">4 insights extracted</div>
+                <p style="font-size:14px; color:var(--text-secondary); margin-top:4px; line-height:1.4;">Managed two community visits today despite exhaustion. Sarah responded well to the new routine...</p>
+                <div style="font-size:14px; color:var(--text-tertiary); margin-top:6px;">4 insights extracted</div>
               </div>
               <div class="journal-card">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <span style="font-size:12px; color:var(--text-tertiary);">Wed, Mar 25</span>
-                  <span style="font-size:12px; color:var(--text-tertiary);">😊 4:15 PM</span>
+                  <span style="font-size:14px; color:var(--text-tertiary);">Wed, Mar 25</span>
+                  <span style="font-size:14px; color:var(--text-tertiary);">😊 4:15 PM</span>
                 </div>
                 <div style="font-size:14px; font-weight:600; margin-top:6px;">Good energy day</div>
-                <p style="font-size:13px; color:var(--text-secondary); margin-top:4px; line-height:1.4;">Community access went smoothly today. Made progress on the new communication board...</p>
+                <p style="font-size:14px; color:var(--text-secondary); margin-top:4px; line-height:1.4;">Community access went smoothly today. Made progress on the new communication board...</p>
                 <div style="display:flex; gap:4px; margin-top:6px;">
                   <span class="badge-tag" style="background:var(--bud-light); color:var(--bud);">Wellness</span>
                   <span class="badge-tag" style="background:#ECFEFF; color:var(--accent);">Activity</span>
                 </div>
-                <div style="font-size:11px; color:var(--text-tertiary); margin-top:4px;">3 insights</div>
+                <div style="font-size:14px; color:var(--text-tertiary); margin-top:4px;">3 insights</div>
               </div>
               <div class="journal-card">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <span style="font-size:12px; color:var(--text-tertiary);">Mon, Mar 24</span>
-                  <span style="font-size:12px; color:var(--text-tertiary);">😟 11:00 AM</span>
+                  <span style="font-size:14px; color:var(--text-tertiary);">Mon, Mar 24</span>
+                  <span style="font-size:14px; color:var(--text-tertiary);">😟 11:00 AM</span>
                 </div>
                 <div style="font-size:14px; font-weight:600; margin-top:6px;">Rough morning</div>
-                <p style="font-size:13px; color:var(--text-secondary); margin-top:4px; line-height:1.4;">Medication refusal again this morning. Had to adjust the whole schedule...</p>
+                <p style="font-size:14px; color:var(--text-secondary); margin-top:4px; line-height:1.4;">Medication refusal again this morning. Had to adjust the whole schedule...</p>
                 <div style="display:flex; gap:4px; margin-top:6px;">
                   <span class="badge-tag" style="background:#FEF2F2; color:var(--body-difficult);">⚠ Difficult</span>
                 </div>
-                <div style="font-size:11px; color:var(--text-tertiary); margin-top:4px;">5 insights</div>
+                <div style="font-size:14px; color:var(--text-tertiary); margin-top:4px;">5 insights</div>
               </div>
               <div class="journal-card">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <span style="font-size:12px; color:var(--text-tertiary);">Sun, Mar 23</span>
-                  <span style="font-size:12px; color:var(--text-tertiary);">😊 8:00 PM</span>
+                  <span style="font-size:14px; color:var(--text-tertiary);">Sun, Mar 23</span>
+                  <span style="font-size:14px; color:var(--text-tertiary);">😊 8:00 PM</span>
                 </div>
                 <div style="font-size:14px; font-weight:600; margin-top:6px;">Respite day reflection</div>
-                <p style="font-size:13px; color:var(--text-secondary); margin-top:4px; line-height:1.4;">Had a full day to myself for the first time in weeks. Used it to recharge...</p>
+                <p style="font-size:14px; color:var(--text-secondary); margin-top:4px; line-height:1.4;">Had a full day to myself for the first time in weeks. Used it to recharge...</p>
                 <div style="display:flex; gap:4px; margin-top:6px;">
                   <span class="badge-tag" style="background:var(--rose-light); color:var(--rose);">Self-care</span>
                 </div>
-                <div style="font-size:11px; color:var(--text-tertiary); margin-top:4px;">2 insights</div>
+                <div style="font-size:14px; color:var(--text-tertiary); margin-top:4px;">2 insights</div>
               </div>
               <div class="journal-card">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <span style="font-size:12px; color:var(--text-tertiary);">Sat, Mar 22</span>
-                  <span style="font-size:12px; color:var(--text-tertiary);">😊 6:30 PM</span>
+                  <span style="font-size:14px; color:var(--text-tertiary);">Sat, Mar 22</span>
+                  <span style="font-size:14px; color:var(--text-tertiary);">😊 6:30 PM</span>
                 </div>
                 <div style="font-size:14px; font-weight:600; margin-top:6px;">Weekend routine</div>
-                <p style="font-size:13px; color:var(--text-secondary); margin-top:4px; line-height:1.4;">Settled into a nice weekend pattern. Morning walk, afternoon activities...</p>
+                <p style="font-size:14px; color:var(--text-secondary); margin-top:4px; line-height:1.4;">Settled into a nice weekend pattern. Morning walk, afternoon activities...</p>
                 <div style="display:flex; gap:4px; margin-top:6px;">
                   <span class="badge-tag" style="background:#ECFEFF; color:var(--accent);">Routine</span>
                 </div>
-                <div style="font-size:11px; color:var(--text-tertiary); margin-top:4px;">3 insights</div>
+                <div style="font-size:14px; color:var(--text-tertiary); margin-top:4px;">3 insights</div>
               </div>
             </div>
             <div class="tab-bar">
@@ -1154,7 +1154,7 @@
           <div class="screen" id="screen-10">
             <div class="screen-content">
               <div class="nav-header"><h1>Insights</h1></div>
-              <p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px;">From 12 journal entries</p>
+              <p style="font-size:14px; color:var(--text-secondary); margin-bottom:12px;">From 12 journal entries</p>
               <div class="filter-row">
                 <span class="filter-pill">This Week</span>
                 <span class="filter-pill active">This Month</span>
@@ -1164,40 +1164,40 @@
               <div class="card">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                   <div class="card-title">Mood This Week</div>
-                  <span style="font-size:13px; font-weight:600;">5 day streak 🔥</span>
+                  <span style="font-size:14px; font-weight:600;">5 day streak 🔥</span>
                 </div>
                 <div style="display:flex; justify-content:space-between;">
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">Mon</div><div style="font-size:18px; margin-top:2px;">😊</div></div>
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">Tue</div><div style="font-size:18px; margin-top:2px;">😌</div></div>
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">Wed</div><div style="font-size:18px; margin-top:2px;">😟</div></div>
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">Thu</div><div style="font-size:18px; margin-top:2px;">😊</div></div>
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">Fri</div><div style="font-size:18px; margin-top:2px;">😌</div></div>
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">Sat</div><div style="font-size:18px; margin-top:2px;">—</div></div>
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">Sun</div><div style="font-size:18px; margin-top:2px;">—</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Mon</div><div style="font-size:18px; margin-top:2px;">😊</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Tue</div><div style="font-size:18px; margin-top:2px;">😌</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Wed</div><div style="font-size:18px; margin-top:2px;">😟</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Thu</div><div style="font-size:18px; margin-top:2px;">😊</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Fri</div><div style="font-size:18px; margin-top:2px;">😌</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Sat</div><div style="font-size:18px; margin-top:2px;">—</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Sun</div><div style="font-size:18px; margin-top:2px;">—</div></div>
                 </div>
               </div>
               <!-- What Lia noticed -->
               <div class="card">
                 <div class="card-title">What Lia noticed</div>
                 <div style="margin-top:10px;">
-                  <div style="font-size:13px; font-weight:600; margin-bottom:4px;">People mentioned</div>
-                  <p style="font-size:13px; color:var(--text-secondary); margin-bottom:10px;">Maison (12x), OT (8x), Anna (6x)</p>
-                  <div style="font-size:13px; font-weight:600; margin-bottom:4px;">Recurring wins</div>
-                  <p style="font-size:13px; color:var(--text-secondary); margin-bottom:10px;">Staying calm (5x), Breathing (4x)</p>
-                  <div style="font-size:13px; font-weight:600; margin-bottom:4px;">Common triggers</div>
-                  <p style="font-size:13px; color:var(--text-secondary);">Schedule changes (4x), Transitions (3x)</p>
+                  <div style="font-size:14px; font-weight:600; margin-bottom:4px;">People mentioned</div>
+                  <p style="font-size:14px; color:var(--text-secondary); margin-bottom:10px;">Maison (12x), OT (8x), Anna (6x)</p>
+                  <div style="font-size:14px; font-weight:600; margin-bottom:4px;">Recurring wins</div>
+                  <p style="font-size:14px; color:var(--text-secondary); margin-bottom:10px;">Staying calm (5x), Breathing (4x)</p>
+                  <div style="font-size:14px; font-weight:600; margin-bottom:4px;">Common triggers</div>
+                  <p style="font-size:14px; color:var(--text-secondary);">Schedule changes (4x), Transitions (3x)</p>
                 </div>
               </div>
               <!-- Rosebud themes -->
               <div class="card">
                 <div class="card-title">Rosebud themes this week</div>
                 <div style="margin-top:10px;">
-                  <div style="font-size:13px; font-weight:600; color:var(--rose); margin-bottom:4px;">🌹 Roses</div>
-                  <p style="font-size:13px; color:var(--text-secondary); margin-bottom:10px;">OT progress, calm responses, breathing technique</p>
-                  <div style="font-size:13px; font-weight:600; color:var(--bud); margin-bottom:4px;">🌱 Buds</div>
-                  <p style="font-size:13px; color:var(--text-secondary); margin-bottom:10px;">Speech therapy, respite Saturday, two-word phrases</p>
-                  <div style="font-size:13px; font-weight:600; color:var(--thorn); margin-bottom:4px;">🌵 Thorns</div>
-                  <p style="font-size:13px; color:var(--text-secondary);">Meltdowns, schedule changes, fatigue</p>
+                  <div style="font-size:14px; font-weight:600; color:var(--rose); margin-bottom:4px;">🌹 Roses</div>
+                  <p style="font-size:14px; color:var(--text-secondary); margin-bottom:10px;">OT progress, calm responses, breathing technique</p>
+                  <div style="font-size:14px; font-weight:600; color:var(--bud); margin-bottom:4px;">🌱 Buds</div>
+                  <p style="font-size:14px; color:var(--text-secondary); margin-bottom:10px;">Speech therapy, respite Saturday, two-word phrases</p>
+                  <div style="font-size:14px; font-weight:600; color:var(--thorn); margin-bottom:4px;">🌵 Thorns</div>
+                  <p style="font-size:14px; color:var(--text-secondary);">Meltdowns, schedule changes, fatigue</p>
                 </div>
               </div>
               <!-- Lia weekly reflection -->
@@ -1205,8 +1205,8 @@
                 <div style="display:flex; gap:10px; align-items:flex-start;">
                   <div class="avatar-circle" style="background:var(--accent); width:32px; height:32px; font-size:14px;">L</div>
                   <div>
-                    <div style="font-size:13px; font-weight:700; color:var(--accent); margin-bottom:4px;">Lia's weekly reflection</div>
-                    <p style="font-size:13px; color:var(--text-secondary); line-height:1.6;">Sarah, this week I noticed you're getting better at staying calm during tough moments. Your breathing technique is becoming a real strength. The schedule changes are still a pattern — let's talk about strategies for that.</p>
+                    <div style="font-size:14px; font-weight:700; color:var(--accent); margin-bottom:4px;">Lia's weekly reflection</div>
+                    <p style="font-size:14px; color:var(--text-secondary); line-height:1.6;">Sarah, this week I noticed you're getting better at staying calm during tough moments. Your breathing technique is becoming a real strength. The schedule changes are still a pattern — let's talk about strategies for that.</p>
                   </div>
                 </div>
               </div>
@@ -1217,24 +1217,24 @@
           <div class="screen" id="screen-11">
             <div class="screen-content">
               <div class="nav-header"><h1>Goals</h1></div>
-              <p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px;">NDIS Plan: Jul 2025 — Jun 2026</p>
+              <p style="font-size:14px; color:var(--text-secondary); margin-bottom:12px;">NDIS Plan: Jul 2025 — Jun 2026</p>
               <!-- Stats row -->
               <div style="display:flex; gap:8px; margin-bottom:16px;">
                 <div style="flex:1; text-align:center; padding:10px; background:var(--bg-elevated); border-radius:var(--r-md); border:1px solid var(--border-subtle);">
                   <div style="font-size:20px; font-weight:800; color:var(--accent);">4</div>
-                  <div style="font-size:11px; color:var(--text-secondary);">Active</div>
+                  <div style="font-size:14px; color:var(--text-secondary);">Active</div>
                 </div>
                 <div style="flex:1; text-align:center; padding:10px; background:var(--bg-elevated); border-radius:var(--r-md); border:1px solid var(--border-subtle);">
                   <div style="font-size:20px; font-weight:800; color:var(--success);">2</div>
-                  <div style="font-size:11px; color:var(--text-secondary);">On Track</div>
+                  <div style="font-size:14px; color:var(--text-secondary);">On Track</div>
                 </div>
                 <div style="flex:1; text-align:center; padding:10px; background:var(--bg-elevated); border-radius:var(--r-md); border:1px solid var(--border-subtle);">
                   <div style="font-size:20px; font-weight:800; color:var(--body-resistant);">1</div>
-                  <div style="font-size:11px; color:var(--text-secondary);">At Risk</div>
+                  <div style="font-size:14px; color:var(--text-secondary);">At Risk</div>
                 </div>
                 <div style="flex:1; text-align:center; padding:10px; background:var(--bg-elevated); border-radius:var(--r-md); border:1px solid var(--border-subtle);">
                   <div style="font-size:20px; font-weight:800; color:var(--text-tertiary);">1</div>
-                  <div style="font-size:11px; color:var(--text-secondary);">Done</div>
+                  <div style="font-size:14px; color:var(--text-secondary);">Done</div>
                 </div>
               </div>
               <!-- Goal Cards -->
@@ -1244,13 +1244,13 @@
                   <span class="badge-tag" style="background:var(--accent-light); color:var(--accent);">Capacity Building</span>
                 </div>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
-                  <span style="font-size:12px; color:var(--success); font-weight:600;">↑ Trending up</span>
+                  <span style="font-size:14px; color:var(--success); font-weight:600;">↑ Trending up</span>
                   <span style="font-size:14px; font-weight:700;">40%</span>
                 </div>
                 <div class="progress-bar-track"><div class="progress-bar-fill" style="width:40%; background:var(--accent);"></div></div>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
-                  <span style="font-size:12px; color:var(--text-tertiary);">Last session: 24 Mar</span>
-                  <button class="btn-outline" style="padding:4px 12px; font-size:11px;">Evidence</button>
+                  <span style="font-size:14px; color:var(--text-tertiary);">Last session: 24 Mar</span>
+                  <button class="btn-outline" style="padding:4px 12px; font-size:14px;">Evidence</button>
                 </div>
               </div>
               <div class="card">
@@ -1259,13 +1259,13 @@
                   <span class="badge-tag" style="background:var(--bud-light); color:var(--success);">Core</span>
                 </div>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
-                  <span style="font-size:12px; color:var(--success); font-weight:600;">On track</span>
+                  <span style="font-size:14px; color:var(--success); font-weight:600;">On track</span>
                   <span style="font-size:14px; font-weight:700;">65%</span>
                 </div>
                 <div class="progress-bar-track"><div class="progress-bar-fill" style="width:65%; background:var(--success);"></div></div>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
-                  <span style="font-size:12px; color:var(--text-tertiary);">Last session: 22 Mar</span>
-                  <button class="btn-outline" style="padding:4px 12px; font-size:11px;">Evidence</button>
+                  <span style="font-size:14px; color:var(--text-tertiary);">Last session: 22 Mar</span>
+                  <button class="btn-outline" style="padding:4px 12px; font-size:14px;">Evidence</button>
                 </div>
               </div>
               <div class="card" style="border-left:3px solid var(--body-resistant);">
@@ -1274,14 +1274,14 @@
                   <span class="badge-tag" style="background:var(--accent-light); color:var(--accent);">Capacity Building</span>
                 </div>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
-                  <span style="font-size:12px; color:var(--body-resistant); font-weight:600;">⚠ At risk</span>
+                  <span style="font-size:14px; color:var(--body-resistant); font-weight:600;">⚠ At risk</span>
                   <span style="font-size:14px; font-weight:700;">30%</span>
                 </div>
                 <div class="progress-bar-track"><div class="progress-bar-fill" style="width:30%; background:var(--body-resistant);"></div></div>
-                <div style="font-size:12px; color:var(--body-resistant); margin-top:4px; font-weight:500;">No sessions in 14 days</div>
+                <div style="font-size:14px; color:var(--body-resistant); margin-top:4px; font-weight:500;">No sessions in 14 days</div>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
-                  <span style="font-size:12px; color:var(--text-tertiary);">Last session: 12 Mar</span>
-                  <button class="btn-outline" style="padding:4px 12px; font-size:11px;">Evidence</button>
+                  <span style="font-size:14px; color:var(--text-tertiary);">Last session: 12 Mar</span>
+                  <button class="btn-outline" style="padding:4px 12px; font-size:14px;">Evidence</button>
                 </div>
               </div>
               <div class="card">
@@ -1290,13 +1290,13 @@
                   <span class="badge-tag" style="background:var(--bud-light); color:var(--success);">Core</span>
                 </div>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
-                  <span style="font-size:12px; color:var(--success); font-weight:600;">✓ Completed</span>
+                  <span style="font-size:14px; color:var(--success); font-weight:600;">✓ Completed</span>
                   <span style="font-size:14px; font-weight:700;">85%</span>
                 </div>
                 <div class="progress-bar-track"><div class="progress-bar-fill" style="width:85%; background:var(--success);"></div></div>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
-                  <span style="font-size:12px; color:var(--text-tertiary);">Last session: 25 Mar</span>
-                  <button class="btn-outline" style="padding:4px 12px; font-size:11px;">Evidence</button>
+                  <span style="font-size:14px; color:var(--text-tertiary);">Last session: 25 Mar</span>
+                  <button class="btn-outline" style="padding:4px 12px; font-size:14px;">Evidence</button>
                 </div>
               </div>
             </div>
@@ -1336,15 +1336,15 @@
                 <div class="card-title">Meal plan</div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px;">
                   <div>
-                    <div style="font-size:12px; font-weight:700; color:var(--accent); margin-bottom:6px;">Today</div>
-                    <div style="font-size:12px; color:var(--text-secondary); line-height:1.8;">
+                    <div style="font-size:14px; font-weight:700; color:var(--accent); margin-bottom:6px;">Today</div>
+                    <div style="font-size:14px; color:var(--text-secondary); line-height:1.8;">
                       🌅 Oats + banana<br>☀️ Rice + chicken<br>🌙 Pasta bolognese
                     </div>
-                    <div style="font-size:11px; color:var(--text-tertiary); margin-top:4px; font-style:italic;">No dairy · soft textures</div>
+                    <div style="font-size:14px; color:var(--text-tertiary); margin-top:4px; font-style:italic;">No dairy · soft textures</div>
                   </div>
                   <div>
-                    <div style="font-size:12px; font-weight:700; color:var(--text-secondary); margin-bottom:6px;">Tomorrow</div>
-                    <div style="font-size:12px; color:var(--text-secondary); line-height:1.8;">
+                    <div style="font-size:14px; font-weight:700; color:var(--text-secondary); margin-bottom:6px;">Tomorrow</div>
+                    <div style="font-size:14px; color:var(--text-secondary); line-height:1.8;">
                       🌅 Toast + eggs<br>☀️ Veggie wraps<br>🌙 Fish fingers + veg
                     </div>
                   </div>
@@ -1354,22 +1354,22 @@
               <div class="card">
                 <div class="card-title">Goals</div>
                 <div style="margin-top:8px;">
-                  <div style="display:flex; justify-content:space-between; font-size:13px;"><span>Independent transfers</span><span style="font-weight:600;">40%</span></div>
+                  <div style="display:flex; justify-content:space-between; font-size:14px;"><span>Independent transfers</span><span style="font-weight:600;">40%</span></div>
                   <div class="progress-bar-track"><div class="progress-bar-fill" style="width:40%; background:var(--accent);"></div></div>
                 </div>
                 <div style="margin-top:8px;">
-                  <div style="display:flex; justify-content:space-between; font-size:13px;"><span>Communication board use</span><span style="font-weight:600;">65%</span></div>
+                  <div style="display:flex; justify-content:space-between; font-size:14px;"><span>Communication board use</span><span style="font-weight:600;">65%</span></div>
                   <div class="progress-bar-track"><div class="progress-bar-fill" style="width:65%; background:var(--success);"></div></div>
                 </div>
                 <div style="margin-top:8px;">
-                  <div style="display:flex; justify-content:space-between; font-size:13px;"><span>Sensory regulation</span><span style="font-weight:600;">25%</span></div>
+                  <div style="display:flex; justify-content:space-between; font-size:14px;"><span>Sensory regulation</span><span style="font-weight:600;">25%</span></div>
                   <div class="progress-bar-track"><div class="progress-bar-fill" style="width:25%; background:var(--body-resistant);"></div></div>
                 </div>
               </div>
               <!-- NDIS Budget -->
               <div class="card">
                 <div class="card-title">NDIS Budget</div>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px; font-size:13px;">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px; font-size:14px;">
                   <div><span style="color:var(--text-tertiary);">Plan total</span><br><strong>$48,200</strong></div>
                   <div><span style="color:var(--text-tertiary);">Used</span><br><strong>$31,330</strong></div>
                   <div><span style="color:var(--text-tertiary);">Remaining</span><br><strong>$16,870</strong></div>
@@ -1389,11 +1389,11 @@
           <div class="screen" id="screen-13">
             <div class="screen-content">
               <div class="nav-header"><h1>Budget</h1></div>
-              <p style="font-size:13px; color:var(--text-secondary); margin-bottom:16px;">Plan period: 1 Jul 2025 – 30 Jun 2026</p>
+              <p style="font-size:14px; color:var(--text-secondary); margin-bottom:16px;">Plan period: 1 Jul 2025 – 30 Jun 2026</p>
               <!-- Summary -->
               <div class="card" style="text-align:center;">
                 <div style="font-size:22px; font-weight:800;">$32,000</div>
-                <div style="font-size:13px; color:var(--text-secondary);">Total NDIS Plan</div>
+                <div style="font-size:14px; color:var(--text-secondary);">Total NDIS Plan</div>
                 <!-- Ring chart -->
                 <div style="width:100px; height:100px; margin:16px auto; position:relative;">
                   <svg width="100" height="100" viewBox="0 0 100 100">
@@ -1402,25 +1402,25 @@
                   </svg>
                   <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:18px; font-weight:800; color:var(--accent);">57%</div>
                 </div>
-                <div style="font-size:13px; color:var(--text-secondary);">$18,400 spent · $13,600 remaining</div>
+                <div style="font-size:14px; color:var(--text-secondary);">$18,400 spent · $13,600 remaining</div>
               </div>
               <!-- Categories -->
               <div class="card">
                 <div class="card-title">Categories</div>
                 <div style="margin-top:10px;">
-                  <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:600;"><span>Core Supports</span><span>$14,200</span></div>
+                  <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:600;"><span>Core Supports</span><span>$14,200</span></div>
                   <div class="progress-bar-track"><div class="progress-bar-fill" style="width:57%; background:var(--accent);"></div></div>
-                  <div style="font-size:11px; color:var(--text-tertiary);">$8,100 spent / $6,100 remaining</div>
+                  <div style="font-size:14px; color:var(--text-tertiary);">$8,100 spent / $6,100 remaining</div>
                 </div>
                 <div style="margin-top:12px;">
-                  <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:600;"><span>Capacity Building</span><span>$12,800</span></div>
+                  <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:600;"><span>Capacity Building</span><span>$12,800</span></div>
                   <div class="progress-bar-track"><div class="progress-bar-fill" style="width:58%; background:var(--journal-purple);"></div></div>
-                  <div style="font-size:11px; color:var(--text-tertiary);">$7,400 spent / $5,400 remaining</div>
+                  <div style="font-size:14px; color:var(--text-tertiary);">$7,400 spent / $5,400 remaining</div>
                 </div>
                 <div style="margin-top:12px;">
-                  <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:600;"><span>Capital</span><span>$5,000</span></div>
+                  <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:600;"><span>Capital</span><span>$5,000</span></div>
                   <div class="progress-bar-track"><div class="progress-bar-fill" style="width:58%; background:var(--success);"></div></div>
-                  <div style="font-size:11px; color:var(--text-tertiary);">$2,900 spent / $2,100 remaining</div>
+                  <div style="font-size:14px; color:var(--text-tertiary);">$2,900 spent / $2,100 remaining</div>
                 </div>
               </div>
               <!-- Projection -->
@@ -1428,7 +1428,7 @@
                 <div style="font-size:14px; font-weight:600; color:var(--success);">On track — projected to use 94% by plan end</div>
               </div>
               <div class="card" style="background:var(--accent-light);">
-                <div style="font-size:13px; color:var(--text-secondary); line-height:1.5;">You have $3,200 unspent in Core. Consider booking additional therapy sessions for Maison.</div>
+                <div style="font-size:14px; color:var(--text-secondary); line-height:1.5;">You have $3,200 unspent in Core. Consider booking additional therapy sessions for Maison.</div>
               </div>
               <!-- Recent Invoices -->
               <div class="card">
@@ -1458,33 +1458,33 @@
               <div class="card">
                 <div class="card-title">Your mood this week</div>
                 <div style="display:flex; justify-content:space-between; margin-top:10px;">
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">Mon</div><div style="font-size:18px;">😊</div></div>
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">Tue</div><div style="font-size:18px;">😐</div></div>
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">Wed</div><div style="font-size:18px;">😔</div></div>
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">Thu</div><div style="font-size:18px;">😊</div></div>
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">Fri</div><div style="font-size:18px;">😄</div></div>
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">Sat</div><div style="font-size:18px;">😊</div></div>
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">Sun</div><div style="font-size:18px;">😐</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Mon</div><div style="font-size:18px;">😊</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Tue</div><div style="font-size:18px;">😐</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Wed</div><div style="font-size:18px;">😔</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Thu</div><div style="font-size:18px;">😊</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Fri</div><div style="font-size:18px;">😄</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Sat</div><div style="font-size:18px;">😊</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">Sun</div><div style="font-size:18px;">😐</div></div>
                 </div>
               </div>
               <!-- Walking streak -->
               <div class="card">
                 <div style="font-size:14px; font-weight:600; margin-bottom:8px;">You've walked 4 of the last 7 days</div>
                 <div style="display:flex; gap:6px;">
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">M</div><div class="streak-dot" style="background:var(--success); color:#fff; font-size:12px; margin-top:2px;">✓</div></div>
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">T</div><div class="streak-dot" style="background:var(--border-subtle); margin-top:2px;"></div></div>
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">W</div><div class="streak-dot" style="background:var(--success); color:#fff; font-size:12px; margin-top:2px;">✓</div></div>
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">T</div><div class="streak-dot" style="background:var(--success); color:#fff; font-size:12px; margin-top:2px;">✓</div></div>
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">F</div><div class="streak-dot" style="background:var(--border-subtle); margin-top:2px;"></div></div>
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">S</div><div class="streak-dot" style="background:var(--success); color:#fff; font-size:12px; margin-top:2px;">✓</div></div>
-                  <div style="text-align:center;"><div style="font-size:10px; color:var(--text-tertiary);">S</div><div class="streak-dot" style="background:var(--border-subtle); margin-top:2px;"></div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">M</div><div class="streak-dot" style="background:var(--success); color:#fff; font-size:14px; margin-top:2px;">✓</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">T</div><div class="streak-dot" style="background:var(--border-subtle); margin-top:2px;"></div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">W</div><div class="streak-dot" style="background:var(--success); color:#fff; font-size:14px; margin-top:2px;">✓</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">T</div><div class="streak-dot" style="background:var(--success); color:#fff; font-size:14px; margin-top:2px;">✓</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">F</div><div class="streak-dot" style="background:var(--border-subtle); margin-top:2px;"></div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">S</div><div class="streak-dot" style="background:var(--success); color:#fff; font-size:14px; margin-top:2px;">✓</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px; color:var(--text-tertiary);">S</div><div class="streak-dot" style="background:var(--border-subtle); margin-top:2px;"></div></div>
                 </div>
               </div>
               <!-- Respite -->
               <div class="card">
-                <div style="font-size:13px; color:var(--text-secondary);">Days since last break</div>
+                <div style="font-size:14px; color:var(--text-secondary);">Days since last break</div>
                 <div style="font-size:32px; font-weight:800; color:var(--body-resistant); margin:4px 0;">12 days</div>
-                <div style="font-size:13px; color:var(--text-secondary);">18 hrs respite remaining</div>
+                <div style="font-size:14px; color:var(--text-secondary);">18 hrs respite remaining</div>
               </div>
               <!-- Your Appointments -->
               <div class="card">
@@ -1539,7 +1539,7 @@
                   <div class="avatar-circle" style="background:#0891B2;">AC</div>
                   <div style="flex:1;">
                     <div style="font-size:14px; font-weight:600;">Anna Chen</div>
-                    <div style="font-size:12px; color:var(--text-secondary);">Support Worker · <span style="color:var(--success);">Active now</span></div>
+                    <div style="font-size:14px; color:var(--text-secondary);">Support Worker · <span style="color:var(--success);">Active now</span></div>
                   </div>
                   <span class="material-symbols-rounded" style="color:var(--accent); cursor:pointer;">chat</span>
                 </div>
@@ -1547,7 +1547,7 @@
                   <div class="avatar-circle" style="background:#7C3AED;">JL</div>
                   <div style="flex:1;">
                     <div style="font-size:14px; font-weight:600;">Dr. James Liu</div>
-                    <div style="font-size:12px; color:var(--text-secondary);">OT · Last seen 2 days ago</div>
+                    <div style="font-size:14px; color:var(--text-secondary);">OT · Last seen 2 days ago</div>
                   </div>
                   <span class="material-symbols-rounded" style="color:var(--accent); cursor:pointer;">chat</span>
                 </div>
@@ -1555,7 +1555,7 @@
                   <div class="avatar-circle" style="background:#059669;">SM</div>
                   <div style="flex:1;">
                     <div style="font-size:14px; font-weight:600;">Sarah Mitchell</div>
-                    <div style="font-size:12px; color:var(--text-secondary);">Physio · Last seen 1 week</div>
+                    <div style="font-size:14px; color:var(--text-secondary);">Physio · Last seen 1 week</div>
                   </div>
                   <span class="material-symbols-rounded" style="color:var(--accent); cursor:pointer;">chat</span>
                 </div>
@@ -1563,7 +1563,7 @@
                   <div class="avatar-circle" style="background:#F59E0B;">MT</div>
                   <div style="flex:1;">
                     <div style="font-size:14px; font-weight:600;">Mark Thompson</div>
-                    <div style="font-size:12px; color:var(--text-secondary);">Support Coordinator · Last seen 3 days</div>
+                    <div style="font-size:14px; color:var(--text-secondary);">Support Coordinator · Last seen 3 days</div>
                   </div>
                   <span class="material-symbols-rounded" style="color:var(--accent); cursor:pointer;">chat</span>
                 </div>
@@ -1571,7 +1571,7 @@
                   <div class="avatar-circle" style="background:#F43F5E;">LP</div>
                   <div style="flex:1;">
                     <div style="font-size:14px; font-weight:600;">Lisa Park</div>
-                    <div style="font-size:12px; color:var(--text-secondary);">Speech Therapist · <span style="color:var(--body-resistant);">Last seen 5 days</span></div>
+                    <div style="font-size:14px; color:var(--text-secondary);">Speech Therapist · <span style="color:var(--body-resistant);">Last seen 5 days</span></div>
                   </div>
                   <span class="material-symbols-rounded" style="color:var(--accent); cursor:pointer;">chat</span>
                 </div>
@@ -1579,21 +1579,21 @@
               <!-- Shift Schedule -->
               <div class="section-title">SHIFT SCHEDULE</div>
               <div class="card">
-                <div style="font-size:13px; font-weight:700; color:var(--accent); margin-bottom:8px;">Today</div>
-                <div style="font-size:13px; color:var(--text-secondary); margin-bottom:4px;">9AM – 1PM &nbsp; <strong>Anna C.</strong></div>
-                <div style="font-size:13px; color:var(--text-secondary);">2PM – 6PM &nbsp; <strong>Mark T.</strong></div>
-                <div style="font-size:13px; font-weight:700; color:var(--text-secondary); margin:10px 0 8px;">Tomorrow</div>
-                <div style="font-size:13px; color:var(--text-secondary); margin-bottom:4px;">10AM – 2PM &nbsp; <strong>Sarah M.</strong></div>
-                <div style="font-size:13px; color:var(--text-secondary);">3PM – 5PM &nbsp; <strong>James L.</strong></div>
+                <div style="font-size:14px; font-weight:700; color:var(--accent); margin-bottom:8px;">Today</div>
+                <div style="font-size:14px; color:var(--text-secondary); margin-bottom:4px;">9AM – 1PM &nbsp; <strong>Anna C.</strong></div>
+                <div style="font-size:14px; color:var(--text-secondary);">2PM – 6PM &nbsp; <strong>Mark T.</strong></div>
+                <div style="font-size:14px; font-weight:700; color:var(--text-secondary); margin:10px 0 8px;">Tomorrow</div>
+                <div style="font-size:14px; color:var(--text-secondary); margin-bottom:4px;">10AM – 2PM &nbsp; <strong>Sarah M.</strong></div>
+                <div style="font-size:14px; color:var(--text-secondary);">3PM – 5PM &nbsp; <strong>James L.</strong></div>
               </div>
               <!-- Handover Notes -->
               <div class="section-title">HANDOVER NOTES</div>
               <div class="card">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
                   <span style="font-size:14px; font-weight:600;">Anna → Evening shift</span>
-                  <span style="font-size:11px; color:var(--text-tertiary);">2h ago</span>
+                  <span style="font-size:14px; color:var(--text-tertiary);">2h ago</span>
                 </div>
-                <p style="font-size:13px; color:var(--text-secondary); line-height:1.5;">Maison had a good day. Completed all morning exercises. Ate well at lunch. Slight resistance during afternoon physio — see notes.</p>
+                <p style="font-size:14px; color:var(--text-secondary); line-height:1.5;">Maison had a good day. Completed all morning exercises. Ate well at lunch. Slight resistance during afternoon physio — see notes.</p>
               </div>
             </div>
             <div class="tab-bar">
@@ -1617,21 +1617,21 @@
               </div>
               <!-- Alert banner -->
               <div class="card" style="background:#FEF2F2; border-color:var(--crisis-red); border-left:3px solid var(--crisis-red);">
-                <p style="font-size:13px; font-weight:600; color:var(--crisis-red);">Pattern detected: 3 falls in 2 weeks — escalation recommended</p>
+                <p style="font-size:14px; font-weight:600; color:var(--crisis-red);">Pattern detected: 3 falls in 2 weeks — escalation recommended</p>
               </div>
               <!-- Stats -->
               <div style="display:flex; gap:8px; margin-bottom:16px;">
                 <div style="flex:1; text-align:center; padding:10px; background:var(--bg-elevated); border-radius:var(--r-md); border:1px solid var(--border-subtle);">
-                  <div style="font-size:20px; font-weight:800;">5</div><div style="font-size:11px; color:var(--text-secondary);">Total</div>
+                  <div style="font-size:20px; font-weight:800;">5</div><div style="font-size:14px; color:var(--text-secondary);">Total</div>
                 </div>
                 <div style="flex:1; text-align:center; padding:10px; background:var(--bg-elevated); border-radius:var(--r-md); border:1px solid var(--border-subtle);">
-                  <div style="font-size:20px; font-weight:800; color:var(--body-resistant);">2</div><div style="font-size:11px; color:var(--text-secondary);">Open</div>
+                  <div style="font-size:20px; font-weight:800; color:var(--body-resistant);">2</div><div style="font-size:14px; color:var(--text-secondary);">Open</div>
                 </div>
                 <div style="flex:1; text-align:center; padding:10px; background:var(--bg-elevated); border-radius:var(--r-md); border:1px solid var(--border-subtle);">
-                  <div style="font-size:20px; font-weight:800; color:var(--crisis-red);">1</div><div style="font-size:11px; color:var(--text-secondary);">Escalated</div>
+                  <div style="font-size:20px; font-weight:800; color:var(--crisis-red);">1</div><div style="font-size:14px; color:var(--text-secondary);">Escalated</div>
                 </div>
                 <div style="flex:1; text-align:center; padding:10px; background:var(--bg-elevated); border-radius:var(--r-md); border:1px solid var(--border-subtle);">
-                  <div style="font-size:20px; font-weight:800; color:var(--success);">2</div><div style="font-size:11px; color:var(--text-secondary);">Resolved</div>
+                  <div style="font-size:20px; font-weight:800; color:var(--success);">2</div><div style="font-size:14px; color:var(--text-secondary);">Resolved</div>
                 </div>
               </div>
               <!-- Incident Log -->
@@ -1641,42 +1641,42 @@
                   <span style="font-size:14px; font-weight:700;">Fall</span>
                   <span class="badge-tag" style="background:#FFFBEB; color:var(--body-resistant);">Unresolved</span>
                 </div>
-                <div style="font-size:12px; color:var(--text-tertiary); margin-bottom:6px;">Reported by Anna Chen · 2 days ago</div>
-                <p style="font-size:13px; color:var(--text-secondary); line-height:1.4;">Maison slipped while transferring from wheelchair. No visible injury but reported hip discomfort.</p>
+                <div style="font-size:14px; color:var(--text-tertiary); margin-bottom:6px;">Reported by Anna Chen · 2 days ago</div>
+                <p style="font-size:14px; color:var(--text-secondary); line-height:1.4;">Maison slipped while transferring from wheelchair. No visible injury but reported hip discomfort.</p>
               </div>
               <div class="incident-card" style="border-left-color:var(--success);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
                   <span style="font-size:14px; font-weight:700;">Medication Missed</span>
                   <span class="badge-tag" style="background:var(--bud-light); color:var(--success);">Resolved</span>
                 </div>
-                <div style="font-size:12px; color:var(--text-tertiary); margin-bottom:6px;">Reported by Mark Thompson · 5 days ago</div>
-                <p style="font-size:13px; color:var(--text-secondary); line-height:1.4;">Evening medication dose skipped due to support worker schedule change. Administered 2 hours late.</p>
+                <div style="font-size:14px; color:var(--text-tertiary); margin-bottom:6px;">Reported by Mark Thompson · 5 days ago</div>
+                <p style="font-size:14px; color:var(--text-secondary); line-height:1.4;">Evening medication dose skipped due to support worker schedule change. Administered 2 hours late.</p>
               </div>
               <div class="incident-card" style="border-left-color:var(--crisis-red);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
                   <span style="font-size:14px; font-weight:700;">Behavioural Episode</span>
                   <span class="badge-tag" style="background:#FEF2F2; color:var(--crisis-red);">Escalated</span>
                 </div>
-                <div style="font-size:12px; color:var(--text-tertiary); margin-bottom:6px;">Reported by Dr. James Liu · 1 week ago</div>
-                <p style="font-size:13px; color:var(--text-secondary); line-height:1.4;">Prolonged distress episode during OT session. Required de-escalation protocol. Referred to behaviour support.</p>
+                <div style="font-size:14px; color:var(--text-tertiary); margin-bottom:6px;">Reported by Dr. James Liu · 1 week ago</div>
+                <p style="font-size:14px; color:var(--text-secondary); line-height:1.4;">Prolonged distress episode during OT session. Required de-escalation protocol. Referred to behaviour support.</p>
               </div>
               <div class="incident-card" style="border-left-color:var(--success);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
                   <span style="font-size:14px; font-weight:700;">Minor Injury</span>
                   <span class="badge-tag" style="background:var(--bud-light); color:var(--success);">Resolved</span>
                 </div>
-                <div style="font-size:12px; color:var(--text-tertiary); margin-bottom:6px;">Reported by Sarah Mitchell · 2 weeks ago</div>
-                <p style="font-size:13px; color:var(--text-secondary); line-height:1.4;">Small bruise on forearm from bumping doorframe during transfer. Ice applied, no further treatment needed.</p>
+                <div style="font-size:14px; color:var(--text-tertiary); margin-bottom:6px;">Reported by Sarah Mitchell · 2 weeks ago</div>
+                <p style="font-size:14px; color:var(--text-secondary); line-height:1.4;">Small bruise on forearm from bumping doorframe during transfer. Ice applied, no further treatment needed.</p>
               </div>
               <!-- Behaviour Trends -->
               <div class="section-title">BEHAVIOUR TRENDS</div>
               <div style="display:flex; gap:8px;">
                 <div class="card" style="flex:1;">
-                  <div style="font-size:13px; font-weight:600;">Mood declining</div>
+                  <div style="font-size:14px; font-weight:600;">Mood declining</div>
                   <span class="badge-tag" style="background:#FFFBEB; color:var(--body-resistant); margin-top:6px;">Attention</span>
                 </div>
                 <div class="card" style="flex:1;">
-                  <div style="font-size:13px; font-weight:600;">Sleep disrupted</div>
+                  <div style="font-size:14px; font-weight:600;">Sleep disrupted</div>
                   <span class="badge-tag" style="background:#ECFEFF; color:var(--accent); margin-top:6px;">Monitor</span>
                 </div>
               </div>
@@ -1691,7 +1691,7 @@
                 <span class="material-symbols-rounded" style="font-size:32px; margin-bottom:8px;">emergency</span>
                 <h2 style="font-family:var(--serif); font-size:20px;">Crisis support active</h2>
                 <p style="font-size:14px; opacity:0.9; margin-top:6px;">You've been carrying a lot.</p>
-                <p style="font-size:13px; opacity:0.8; margin-top:4px;">Maison has had 3 difficult days in a row. Here is what is available right now.</p>
+                <p style="font-size:14px; opacity:0.8; margin-top:4px;">Maison has had 3 difficult days in a row. Here is what is available right now.</p>
               </div>
               <div style="padding:20px;">
                 <!-- Call CTA -->
@@ -1699,21 +1699,21 @@
                   <span class="material-symbols-rounded" style="font-size:36px; color:var(--crisis-red);">call</span>
                   <div style="font-size:18px; font-weight:700; margin-top:8px;">Call Carer Gateway</div>
                   <div style="font-size:20px; font-weight:800; color:var(--crisis-red); margin-top:4px;">1800 422 737</div>
-                  <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">Free 24/7 support line</div>
+                  <div style="font-size:14px; color:var(--text-secondary); margin-top:4px;">Free 24/7 support line</div>
                 </div>
                 <!-- Right now -->
                 <div class="section-title">Right now</div>
                 <div class="card">
                   <div style="font-size:14px; font-weight:600;">Emergency respite</div>
-                  <div style="font-size:13px; color:var(--text-secondary); margin-top:2px;">Available providers near you today</div>
+                  <div style="font-size:14px; color:var(--text-secondary); margin-top:2px;">Available providers near you today</div>
                 </div>
                 <div class="card">
                   <div style="font-size:14px; font-weight:600;">Mental health support</div>
-                  <div style="font-size:13px; color:var(--text-secondary); margin-top:2px;">Beyond Blue carer line: 1300 224 636</div>
+                  <div style="font-size:14px; color:var(--text-secondary); margin-top:2px;">Beyond Blue carer line: 1300 224 636</div>
                 </div>
                 <div class="card">
                   <div style="font-size:14px; font-weight:600;">Local carer group</div>
-                  <div style="font-size:13px; color:var(--text-secondary); margin-top:2px;">Westside Carers meet Thursday 10am</div>
+                  <div style="font-size:14px; color:var(--text-secondary); margin-top:2px;">Westside Carers meet Thursday 10am</div>
                 </div>
                 <div style="text-align:center; padding:20px 0;">
                   <p style="font-size:14px; color:var(--text-secondary); font-style:italic; margin-bottom:16px;">It is okay to ask for help. You are not alone in this.</p>
@@ -1739,7 +1739,7 @@
               </div>
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
                 <span style="font-size:14px; font-weight:600;">Near you</span>
-                <span style="font-size:12px; color:var(--text-tertiary);">12 providers</span>
+                <span style="font-size:14px; color:var(--text-tertiary);">12 providers</span>
               </div>
               <!-- Provider Cards -->
               <div class="provider-card">
@@ -1748,12 +1748,12 @@
                     <div style="font-size:15px; font-weight:700;">Westside Allied Health</div>
                     <span class="badge-tag" style="background:var(--accent-light); color:var(--accent); margin-top:4px;">NDIS</span>
                   </div>
-                  <span style="font-size:13px; color:var(--text-tertiary);">2.3 km</span>
+                  <span style="font-size:14px; color:var(--text-tertiary);">2.3 km</span>
                 </div>
-                <div style="font-size:13px; color:var(--text-secondary); margin-top:6px;">OT, Speech Pathology, Physiotherapy</div>
+                <div style="font-size:14px; color:var(--text-secondary); margin-top:6px;">OT, Speech Pathology, Physiotherapy</div>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-                  <span style="font-size:13px; color:var(--body-resistant);">★ 4.8</span>
-                  <span style="font-size:12px; color:var(--success);">Next: Tomorrow 10am</span>
+                  <span style="font-size:14px; color:var(--body-resistant);">★ 4.8</span>
+                  <span style="font-size:14px; color:var(--success);">Next: Tomorrow 10am</span>
                 </div>
               </div>
               <div class="provider-card">
@@ -1762,14 +1762,14 @@
                     <div style="font-size:15px; font-weight:700;">Bright Futures Therapy</div>
                     <span class="badge-tag" style="background:var(--accent-light); color:var(--accent); margin-top:4px;">NDIS</span>
                   </div>
-                  <span style="font-size:13px; color:var(--text-tertiary);">4.1 km</span>
+                  <span style="font-size:14px; color:var(--text-tertiary);">4.1 km</span>
                 </div>
-                <div style="font-size:13px; color:var(--text-secondary); margin-top:6px;">Behavioural Support, Psychology</div>
+                <div style="font-size:14px; color:var(--text-secondary); margin-top:6px;">Behavioural Support, Psychology</div>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-                  <span style="font-size:13px; color:var(--body-resistant);">★ 4.6</span>
-                  <span style="font-size:12px; color:var(--success);">Next: Wednesday 2pm</span>
+                  <span style="font-size:14px; color:var(--body-resistant);">★ 4.6</span>
+                  <span style="font-size:14px; color:var(--success);">Next: Wednesday 2pm</span>
                 </div>
-                <button style="margin-top:8px; padding:8px 16px; border-radius:var(--r-full); background:var(--accent); color:#fff; border:none; font-size:12px; font-weight:600; font-family:var(--sans); cursor:pointer;">Request Booking</button>
+                <button style="margin-top:8px; padding:8px 16px; border-radius:var(--r-full); background:var(--accent); color:#fff; border:none; font-size:14px; font-weight:600; font-family:var(--sans); cursor:pointer;">Request Booking</button>
               </div>
               <div class="provider-card">
                 <div style="display:flex; justify-content:space-between; align-items:flex-start;">
@@ -1777,12 +1777,12 @@
                     <div style="font-size:15px; font-weight:700;">Eastside Respite Care</div>
                     <span class="badge-tag" style="background:var(--accent-light); color:var(--accent); margin-top:4px;">NDIS</span>
                   </div>
-                  <span style="font-size:13px; color:var(--text-tertiary);">5.7 km</span>
+                  <span style="font-size:14px; color:var(--text-tertiary);">5.7 km</span>
                 </div>
-                <div style="font-size:13px; color:var(--text-secondary); margin-top:6px;">Short-term & Emergency Respite, In-home Support</div>
+                <div style="font-size:14px; color:var(--text-secondary); margin-top:6px;">Short-term & Emergency Respite, In-home Support</div>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-                  <span style="font-size:13px; color:var(--body-resistant);">★ 4.9</span>
-                  <span style="font-size:12px; color:var(--success); font-weight:600;">Available today</span>
+                  <span style="font-size:14px; color:var(--body-resistant);">★ 4.9</span>
+                  <span style="font-size:14px; color:var(--success); font-weight:600;">Available today</span>
                 </div>
               </div>
               <div class="provider-card">
@@ -1790,18 +1790,18 @@
                   <div>
                     <div style="font-size:15px; font-weight:700;">Harmony Support Workers</div>
                   </div>
-                  <span style="font-size:13px; color:var(--text-tertiary);">7.2 km</span>
+                  <span style="font-size:14px; color:var(--text-tertiary);">7.2 km</span>
                 </div>
-                <div style="font-size:13px; color:var(--text-secondary); margin-top:6px;">Personal Care, Community Access, Meal Preparation</div>
+                <div style="font-size:14px; color:var(--text-secondary); margin-top:6px;">Personal Care, Community Access, Meal Preparation</div>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-                  <span style="font-size:13px; color:var(--body-resistant);">★ 4.3</span>
-                  <span style="font-size:12px; color:var(--text-secondary);">Next: Friday 9am</span>
+                  <span style="font-size:14px; color:var(--body-resistant);">★ 4.3</span>
+                  <span style="font-size:14px; color:var(--text-secondary);">Next: Friday 9am</span>
                 </div>
               </div>
               <!-- Ask Lia -->
               <div class="card" style="background:var(--accent-light); text-align:center;">
                 <div style="font-size:14px; font-weight:600; color:var(--accent);">Ask Lia to find services</div>
-                <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">Tell Lia what you need and she'll search for you</div>
+                <div style="font-size:14px; color:var(--text-secondary); margin-top:4px;">Tell Lia what you need and she'll search for you</div>
               </div>
             </div>
           </div>
@@ -1813,12 +1813,12 @@
               <!-- Ready for review -->
               <div class="card" style="border-left:3px solid var(--success);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                  <span style="font-size:13px; color:var(--text-secondary);">Ready for review</span>
+                  <span style="font-size:14px; color:var(--text-secondary);">Ready for review</span>
                   <span class="badge-tag" style="background:var(--bud-light); color:var(--success);">READY</span>
                 </div>
                 <div style="font-size:16px; font-weight:700; margin-bottom:4px;">NDIS Plan Review Letter</div>
-                <p style="font-size:13px; color:var(--text-secondary); line-height:1.4;">Auto-generated from 3 months of body state data + therapy progress</p>
-                <div style="font-size:12px; color:var(--text-tertiary); margin:8px 0;">Generated 25 Mar 2026</div>
+                <p style="font-size:14px; color:var(--text-secondary); line-height:1.4;">Auto-generated from 3 months of body state data + therapy progress</p>
+                <div style="font-size:14px; color:var(--text-tertiary); margin:8px 0;">Generated 25 Mar 2026</div>
                 <div style="display:flex; gap:8px;">
                   <button class="btn-outline" style="flex:1;">Preview</button>
                   <button class="btn-primary" style="flex:1;">Download PDF</button>
@@ -1828,37 +1828,37 @@
               <div class="section-title">Generate new</div>
               <div class="doc-option">
                 <span class="material-symbols-rounded" style="color:var(--accent);">description</span>
-                <div><div style="font-size:14px; font-weight:600;">Plan Review Letter</div><div style="font-size:12px; color:var(--text-secondary);">Pre-filled from tracked data</div></div>
+                <div><div style="font-size:14px; font-weight:600;">Plan Review Letter</div><div style="font-size:14px; color:var(--text-secondary);">Pre-filled from tracked data</div></div>
               </div>
               <div class="doc-option">
                 <span class="material-symbols-rounded" style="color:var(--journal-purple);">school</span>
-                <div><div style="font-size:14px; font-weight:600;">School Meeting Points</div><div style="font-size:12px; color:var(--text-secondary);">Talking points + evidence</div></div>
+                <div><div style="font-size:14px; font-weight:600;">School Meeting Points</div><div style="font-size:14px; color:var(--text-secondary);">Talking points + evidence</div></div>
               </div>
               <div class="doc-option">
                 <span class="material-symbols-rounded" style="color:var(--success);">medical_information</span>
-                <div><div style="font-size:14px; font-weight:600;">OT Assessment Pack</div><div style="font-size:12px; color:var(--text-secondary);">Supporting evidence bundle</div></div>
+                <div><div style="font-size:14px; font-weight:600;">OT Assessment Pack</div><div style="font-size:14px; color:var(--text-secondary);">Supporting evidence bundle</div></div>
               </div>
               <div class="doc-option">
                 <span class="material-symbols-rounded" style="color:var(--body-resistant);">summarize</span>
-                <div><div style="font-size:14px; font-weight:600;">Weekly Care Summary</div><div style="font-size:12px; color:var(--text-secondary);">For the care team</div></div>
+                <div><div style="font-size:14px; font-weight:600;">Weekly Care Summary</div><div style="font-size:14px; color:var(--text-secondary);">For the care team</div></div>
               </div>
               <!-- Recent documents -->
               <div class="section-title">Recent documents</div>
               <div class="card" style="padding:10px 16px;">
                 <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--border-subtle);">
-                  <div><div style="font-size:13px; font-weight:600;">Weekly Care Summary</div><div style="font-size:11px; color:var(--text-tertiary);">18 Mar 2026</div></div>
+                  <div><div style="font-size:14px; font-weight:600;">Weekly Care Summary</div><div style="font-size:14px; color:var(--text-tertiary);">18 Mar 2026</div></div>
                   <span class="badge-tag" style="background:var(--bud-light); color:var(--success);">SENT</span>
                 </div>
                 <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--border-subtle);">
-                  <div><div style="font-size:13px; font-weight:600;">Plan Review Letter</div><div style="font-size:11px; color:var(--text-tertiary);">10 Mar 2026</div></div>
+                  <div><div style="font-size:14px; font-weight:600;">Plan Review Letter</div><div style="font-size:14px; color:var(--text-tertiary);">10 Mar 2026</div></div>
                   <span class="badge-tag" style="background:var(--bud-light); color:var(--success);">SENT</span>
                 </div>
                 <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0;">
-                  <div><div style="font-size:13px; font-weight:600;">School Meeting Points</div><div style="font-size:11px; color:var(--text-tertiary);">4 Mar 2026</div></div>
+                  <div><div style="font-size:14px; font-weight:600;">School Meeting Points</div><div style="font-size:14px; color:var(--text-tertiary);">4 Mar 2026</div></div>
                   <span class="badge-tag" style="background:#FFFBEB; color:var(--body-resistant);">DRAFT</span>
                 </div>
               </div>
-              <p style="font-size:12px; color:var(--text-tertiary); text-align:center; margin-top:12px;">Documents are generated from your tracked data and can be edited before sending</p>
+              <p style="font-size:14px; color:var(--text-tertiary); text-align:center; margin-top:12px;">Documents are generated from your tracked data and can be edited before sending</p>
             </div>
             <div class="tab-bar">
               <button class="tab-item"><span class="material-symbols-rounded">home</span>HOME</button>
@@ -1877,7 +1877,7 @@
               </div>
               <!-- Countdown -->
               <div class="card" style="text-align:center;">
-                <div style="font-size:13px; color:var(--text-secondary);">Next review in</div>
+                <div style="font-size:14px; color:var(--text-secondary);">Next review in</div>
                 <!-- Ring -->
                 <div style="width:100px; height:100px; margin:12px auto; position:relative;">
                   <svg width="100" height="100" viewBox="0 0 100 100">
@@ -1886,7 +1886,7 @@
                   </svg>
                   <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);">
                     <div style="font-size:28px; font-weight:800; color:var(--accent);">47</div>
-                    <div style="font-size:10px; color:var(--text-tertiary);">days</div>
+                    <div style="font-size:14px; color:var(--text-tertiary);">days</div>
                   </div>
                 </div>
                 <div style="font-size:14px; font-weight:600;">May 12, 2026</div>
@@ -1895,7 +1895,7 @@
               <div class="card">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                   <div class="card-title">Review Readiness</div>
-                  <span style="font-size:13px; font-weight:600; color:var(--accent);">3/5 complete</span>
+                  <span style="font-size:14px; font-weight:600; color:var(--accent);">3/5 complete</span>
                 </div>
                 <div class="checklist-item"><span class="material-symbols-rounded check-done">check_circle</span> Assessments booked</div>
                 <div class="checklist-item"><span class="material-symbols-rounded check-done">check_circle</span> OT report collected</div>
@@ -1908,35 +1908,35 @@
                 <div class="card-title">Auto-Compiled Evidence Pack</div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px;">
                   <div style="padding:12px; background:var(--bg-card); border-radius:var(--r-md); text-align:center;">
-                    <div style="font-size:13px; font-weight:600;">Progress Notes</div>
+                    <div style="font-size:14px; font-weight:600;">Progress Notes</div>
                     <div style="font-size:20px; font-weight:800; color:var(--accent); margin:4px 0;">142</div>
-                    <div style="font-size:11px; color:var(--text-tertiary);">entries</div>
-                    <span style="font-size:12px; color:var(--accent); cursor:pointer; font-weight:600;">View</span>
+                    <div style="font-size:14px; color:var(--text-tertiary);">entries</div>
+                    <span style="font-size:14px; color:var(--accent); cursor:pointer; font-weight:600;">View</span>
                   </div>
                   <div style="padding:12px; background:var(--bg-card); border-radius:var(--r-md); text-align:center;">
-                    <div style="font-size:13px; font-weight:600;">Goal Data</div>
+                    <div style="font-size:14px; font-weight:600;">Goal Data</div>
                     <div style="font-size:20px; font-weight:800; color:var(--accent); margin:4px 0;">4</div>
-                    <div style="font-size:11px; color:var(--text-tertiary);">goals tracked</div>
-                    <span style="font-size:12px; color:var(--accent); cursor:pointer; font-weight:600;">View</span>
+                    <div style="font-size:14px; color:var(--text-tertiary);">goals tracked</div>
+                    <span style="font-size:14px; color:var(--accent); cursor:pointer; font-weight:600;">View</span>
                   </div>
                   <div style="padding:12px; background:var(--bg-card); border-radius:var(--r-md); text-align:center;">
-                    <div style="font-size:13px; font-weight:600;">Incident Reports</div>
+                    <div style="font-size:14px; font-weight:600;">Incident Reports</div>
                     <div style="font-size:20px; font-weight:800; color:var(--accent); margin:4px 0;">5</div>
-                    <div style="font-size:11px; color:var(--text-tertiary);">reports</div>
-                    <span style="font-size:12px; color:var(--accent); cursor:pointer; font-weight:600;">View</span>
+                    <div style="font-size:14px; color:var(--text-tertiary);">reports</div>
+                    <span style="font-size:14px; color:var(--accent); cursor:pointer; font-weight:600;">View</span>
                   </div>
                   <div style="padding:12px; background:var(--bg-card); border-radius:var(--r-md); text-align:center;">
-                    <div style="font-size:13px; font-weight:600;">Therapy Summaries</div>
+                    <div style="font-size:14px; font-weight:600;">Therapy Summaries</div>
                     <div style="font-size:20px; font-weight:800; color:var(--accent); margin:4px 0;">12</div>
-                    <div style="font-size:11px; color:var(--text-tertiary);">sessions</div>
-                    <span style="font-size:12px; color:var(--accent); cursor:pointer; font-weight:600;">View</span>
+                    <div style="font-size:14px; color:var(--text-tertiary);">sessions</div>
+                    <span style="font-size:14px; color:var(--accent); cursor:pointer; font-weight:600;">View</span>
                   </div>
                 </div>
               </div>
               <!-- Draft Review Submission -->
               <div class="card">
                 <div class="card-title">Draft Review Submission</div>
-                <p style="font-size:13px; color:var(--text-secondary); margin:6px 0 12px;">Auto-generated from your data</p>
+                <p style="font-size:14px; color:var(--text-secondary); margin:6px 0 12px;">Auto-generated from your data</p>
                 <button class="btn-primary">Review Draft</button>
               </div>
               <!-- This Plan vs Last Plan -->
@@ -1980,18 +1980,18 @@
                 <div class="onboard-dot" style="background:var(--border-subtle);"></div>
                 <div class="onboard-dot" style="background:var(--border-subtle);"></div>
               </div>
-              <p style="font-size:13px; color:var(--text-tertiary); margin-bottom:24px;">Step 1 of 6</p>
+              <p style="font-size:14px; color:var(--text-tertiary); margin-bottom:24px;">Step 1 of 6</p>
               <div style="text-align:left;">
-                <div class="onboard-step active-step"><div class="step-num">1</div><div><div style="font-size:14px; font-weight:600;">Add Participant</div><div style="font-size:12px; color:var(--text-secondary);">Name, NDIS number, plan dates</div></div></div>
-                <div class="onboard-step"><div class="step-num">2</div><div><div style="font-size:14px; font-weight:600;">Import Goals</div><div style="font-size:12px; color:var(--text-secondary);">Set up NDIS plan goals</div></div></div>
-                <div class="onboard-step"><div class="step-num">3</div><div><div style="font-size:14px; font-weight:600;">Add Support Team</div><div style="font-size:12px; color:var(--text-secondary);">OT, physio, support workers</div></div></div>
-                <div class="onboard-step"><div class="step-num">4</div><div><div style="font-size:14px; font-weight:600;">Connect WhatsApp</div><div style="font-size:12px; color:var(--text-secondary);">Link Lia to your conversations</div></div></div>
-                <div class="onboard-step"><div class="step-num">5</div><div><div style="font-size:14px; font-weight:600;">Carer Profile</div><div style="font-size:12px; color:var(--text-secondary);">Your details & health needs</div></div></div>
-                <div class="onboard-step"><div class="step-num">6</div><div><div style="font-size:14px; font-weight:600;">Notifications</div><div style="font-size:12px; color:var(--text-secondary);">Choose what alerts you receive</div></div></div>
+                <div class="onboard-step active-step"><div class="step-num">1</div><div><div style="font-size:14px; font-weight:600;">Add Participant</div><div style="font-size:14px; color:var(--text-secondary);">Name, NDIS number, plan dates</div></div></div>
+                <div class="onboard-step"><div class="step-num">2</div><div><div style="font-size:14px; font-weight:600;">Import Goals</div><div style="font-size:14px; color:var(--text-secondary);">Set up NDIS plan goals</div></div></div>
+                <div class="onboard-step"><div class="step-num">3</div><div><div style="font-size:14px; font-weight:600;">Add Support Team</div><div style="font-size:14px; color:var(--text-secondary);">OT, physio, support workers</div></div></div>
+                <div class="onboard-step"><div class="step-num">4</div><div><div style="font-size:14px; font-weight:600;">Connect WhatsApp</div><div style="font-size:14px; color:var(--text-secondary);">Link Lia to your conversations</div></div></div>
+                <div class="onboard-step"><div class="step-num">5</div><div><div style="font-size:14px; font-weight:600;">Carer Profile</div><div style="font-size:14px; color:var(--text-secondary);">Your details & health needs</div></div></div>
+                <div class="onboard-step"><div class="step-num">6</div><div><div style="font-size:14px; font-weight:600;">Notifications</div><div style="font-size:14px; color:var(--text-secondary);">Choose what alerts you receive</div></div></div>
               </div>
               <div style="margin-top:24px;">
                 <button class="btn-primary" style="max-width:300px; margin:0 auto;">Get Started</button>
-                <p style="font-size:13px; color:var(--text-tertiary); margin-top:12px; cursor:pointer;">I'll set up later</p>
+                <p style="font-size:14px; color:var(--text-tertiary); margin-top:12px; cursor:pointer;">I'll set up later</p>
               </div>
             </div>
           </div>
@@ -2020,7 +2020,7 @@
             <div class="web-card">
               <div style="display:flex; justify-content:space-between; margin-bottom:8px;"><h3 style="font-family:var(--serif);">NDIS Plan Budget</h3><span style="font-weight:700; color:var(--accent);">57% used</span></div>
               <div class="progress-bar-track"><div class="progress-bar-fill" style="width:57%; background:var(--accent);"></div></div>
-              <div style="display:flex; justify-content:space-between; font-size:13px; color:var(--text-secondary); margin-top:6px;"><span>$18,400 used</span><span>$32,000 total</span></div>
+              <div style="display:flex; justify-content:space-between; font-size:14px; color:var(--text-secondary); margin-top:6px;"><span>$18,400 used</span><span>$32,000 total</span></div>
               <div style="display:flex; gap:12px; margin-top:16px;">
                 <button class="quick-action"><span class="material-symbols-rounded">report</span>Log Incident</button>
                 <button class="quick-action"><span class="material-symbols-rounded">chat</span>Message Worker</button>

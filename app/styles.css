@@ -25,7 +25,7 @@
   --dark:         #1a1a1a;
   --warm-gray:    #4a4a48;
   --mid-gray:     #6b6b68;
-  --text-muted:   #9b9b98;
+  --text-muted:   #7a7a77;
   --border:       #e0dfda;
   --border-light: #edece8;
 
@@ -102,8 +102,8 @@ h2 { font-size: clamp(1.4rem, 2.5vw, 1.8rem); }
 h3 { font-size: 1.15rem; }
 h4 { font-size: 1rem; }
 
-.text-sm    { font-size: 0.85rem; }
-.text-xs    { font-size: 0.75rem; }
+.text-sm    { font-size: 0.9rem; line-height: 1.5; }
+.text-xs    { font-size: 0.8rem; line-height: 1.5; }
 .text-muted { color: var(--mid-gray); }
 .text-teal  { color: var(--teal); }
 
@@ -135,7 +135,7 @@ h4 { font-size: 1rem; }
 .card {
   background: var(--bg-card);
   border-radius: var(--r-lg);
-  padding: var(--sp-6);
+  padding: var(--sp-6) var(--sp-6) var(--sp-8);
   box-shadow: var(--shadow-lg);
 }
 .card-flat {
@@ -238,7 +238,7 @@ h4 { font-size: 1rem; }
   gap: var(--sp-1);
   padding: 3px 10px;
   border-radius: var(--r-full);
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -259,7 +259,7 @@ h4 { font-size: 1rem; }
 
 /* ── EYEBROW (section label) ── */
 .eyebrow {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -283,9 +283,9 @@ h4 { font-size: 1rem; }
   line-height: 1;
 }
 .metric-label {
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   color: var(--mid-gray);
-  margin-top: var(--sp-1);
+  margin-top: var(--sp-2);
 }
 
 /* ── DIVIDER ── */

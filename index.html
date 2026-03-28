@@ -762,16 +762,8 @@
       section { padding: 4rem 1.5rem; }
     }
 
-    /* ── ANIMATIONS ── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    /* ── ANIMATIONS (GSAP handles these) ── */
+    .gsap-hidden { opacity: 0; }
   </style>
 </head>
 <body>
@@ -866,7 +858,7 @@
 
 <!-- THE REALITY -->
 <section class="problem" id="reality">
-  <div class="section-inner fade-up">
+  <div class="section-inner">
     <div class="problem-grid">
       <div>
         <div class="section-eyebrow">The reality</div>
@@ -903,7 +895,7 @@
 
 <!-- THE JOURNAL -->
 <section class="solution" id="journal">
-  <div class="section-inner fade-up">
+  <div class="section-inner">
     <div class="section-eyebrow">The journal</div>
     <h2 class="section-title">Talk about your day. Get something back that actually sees you.</h2>
     <p class="section-subtitle">The AI Carer Journal is the starting point. Voice or text — just talk about what happened. The system listens, reflects, and starts capturing the knowledge that currently lives only in your head.</p>
@@ -944,7 +936,7 @@
 
 <!-- WHAT IT GIVES BACK -->
 <section class="how" id="how">
-  <div class="section-inner fade-up">
+  <div class="section-inner">
     <div class="section-eyebrow">What it gives back</div>
     <h2 class="section-title">You talk. The system builds.</h2>
     <p class="section-subtitle">Every journal entry captures knowledge that used to live only in your head. Over time, the system starts working alongside you.</p>
@@ -976,7 +968,7 @@
 
 <!-- THE VISION: TO-DONE -->
 <section class="agents" id="vision">
-  <div class="section-inner fade-up">
+  <div class="section-inner">
     <div class="section-eyebrow">The vision</div>
     <h2 class="section-title">From journal to To-Done.</h2>
     <p class="section-subtitle">You talk about your day. The AI listens — and quietly captures everything a support worker would need to help. Sleep patterns, meal constraints, therapy notes, body state, ideas. Then it turns those into a ready-made task list. Hand it to a support agent, and watch to-dos become to-dones.</p>
@@ -1072,7 +1064,7 @@
 
 <!-- TRUST / NDIS -->
 <section class="trust" id="ndis">
-  <div class="section-inner fade-up">
+  <div class="section-inner">
     <div class="trust-grid">
       <div>
         <div class="section-eyebrow">NDIS aligned</div>
@@ -1127,7 +1119,7 @@
 
 <!-- CTA -->
 <section class="cta-section" id="cta">
-  <div class="cta-inner fade-up">
+  <div class="cta-inner">
     <h2>You've been carrying this alone<br>long enough.</h2>
     <p>Take the Carer Check-In. Six honest questions about how you're really doing. Get a personalised action plan with the resources and next steps that match your situation.</p>
     <a href="assessment.html" class="btn-white">
@@ -1152,23 +1144,19 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
 <script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Ensure animations complete even in background/throttled tabs
+  gsap.ticker.lagSmoothing(0);
+
   // Nav shadow on scroll
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 20);
   });
-
-  // Fade-up on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
   // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -1179,6 +1167,173 @@
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
+  });
+
+  // ── HERO ──
+  // On load, not scroll-triggered
+  const heroTL = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+  heroTL
+    .from('.hero-eyebrow', { y: 20, opacity: 0, duration: 0.6 })
+    .from('.hero h1', { y: 30, opacity: 0, duration: 0.7 }, '-=0.3')
+    .from('.hero-sub', { y: 20, opacity: 0, duration: 0.5, stagger: 0.15 }, '-=0.3')
+    .from('.hero-actions', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
+    .from('.hero-proof', { y: 10, opacity: 0, duration: 0.4 }, '-=0.1')
+    .from('.hero-card', { y: 60, opacity: 0, scale: 0.97, duration: 0.8, ease: 'power2.out' }, '-=0.6')
+    .from('.hero-card-item', { y: 20, opacity: 0, duration: 0.4, stagger: 0.12 }, '-=0.3')
+    .from('.floating-badge', { y: 16, opacity: 0, scale: 0.9, duration: 0.5, stagger: 0.2, ease: 'back.out(1.4)' }, '-=0.2');
+
+
+  // ── PROBLEM / REALITY ──
+  const problemTL = gsap.timeline({
+    scrollTrigger: { trigger: '#reality', start: 'top 75%', once: true }
+  });
+
+  problemTL
+    .from('#reality .section-eyebrow', { y: 20, opacity: 0, duration: 0.5 })
+    .from('#reality .section-title', { y: 30, opacity: 0, duration: 0.6 }, '-=0.2')
+    .from('#reality .section-subtitle', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
+    .from('.problem-quote', { y: 20, opacity: 0, duration: 0.5 }, '-=0.1')
+    .from('.problem-stat', {
+      y: 30, opacity: 0, scale: 0.95,
+      duration: 0.5, stagger: 0.1, ease: 'back.out(1.2)'
+    }, '-=0.4');
+
+  // Counter animation for stat numbers
+  ScrollTrigger.create({
+    trigger: '#reality',
+    start: 'top 75%',
+    once: true,
+    onEnter: () => {
+      const counters = [
+        { el: document.querySelectorAll('.problem-stat-number')[0], target: 2.65, suffix: 'M', decimals: 2 },
+        { el: document.querySelectorAll('.problem-stat-number')[2], target: 40, suffix: 'hrs+', decimals: 0 },
+        { el: document.querySelectorAll('.problem-stat-number')[3], target: 72, suffix: '%', decimals: 0 },
+      ];
+      counters.forEach(c => {
+        gsap.fromTo(c.el, { innerText: 0 }, {
+          innerText: c.target, duration: 1.8, ease: 'power2.out',
+          snap: { innerText: c.decimals === 0 ? 1 : 0.01 },
+          onUpdate() {
+            const val = parseFloat(this.targets()[0].innerText);
+            c.el.innerText = c.decimals > 0 ? val.toFixed(c.decimals) + c.suffix : Math.round(val) + c.suffix;
+          }
+        });
+      });
+    }
+  });
+
+
+  // ── SOLUTION / JOURNAL ──
+  const journalTL = gsap.timeline({
+    scrollTrigger: { trigger: '#journal', start: 'top 75%', once: true }
+  });
+
+  journalTL
+    .from('#journal .section-eyebrow', { y: 20, opacity: 0, duration: 0.5 })
+    .from('#journal .section-title', { y: 30, opacity: 0, duration: 0.6 }, '-=0.2')
+    .from('#journal .section-subtitle', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2');
+
+  // Solution cards get their own trigger (they're far below the section header)
+  gsap.from('.solution-card', {
+    y: 40, opacity: 0, duration: 0.6, immediateRender: false,
+    stagger: 0.15, ease: 'power2.out',
+    scrollTrigger: { trigger: '.solution-cards', start: 'top 85%', once: true }
+  });
+  gsap.from('#journal .btn-primary', {
+    y: 20, opacity: 0, scale: 0.95, duration: 0.5, ease: 'back.out(1.3)', immediateRender: false,
+    scrollTrigger: { trigger: '#journal .btn-primary', start: 'top 90%', once: true }
+  });
+
+
+  // ── HOW IT WORKS ──
+  const howTL = gsap.timeline({
+    scrollTrigger: { trigger: '#how', start: 'top 75%', once: true }
+  });
+
+  howTL
+    .from('#how .section-eyebrow', { y: 20, opacity: 0, duration: 0.5 })
+    .from('#how .section-title', { y: 30, opacity: 0, duration: 0.6 }, '-=0.2')
+    .from('#how .section-subtitle', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2');
+
+  // Steps get their own trigger
+  const howStepsTL = gsap.timeline({
+    scrollTrigger: { trigger: '.how-steps', start: 'top 80%', once: true }
+  });
+  howStepsTL
+    .from('.how-step', { y: 30, opacity: 0, duration: 0.5, stagger: 0.18 })
+    .from('.how-step-num', { scale: 0, duration: 0.4, stagger: 0.18, ease: 'back.out(2)' }, '-=1.2');
+
+
+  // ── VISION / TO-DONE ──
+  const visionTL = gsap.timeline({
+    scrollTrigger: { trigger: '#vision', start: 'top 75%', once: true }
+  });
+
+  visionTL
+    .from('#vision .section-eyebrow', { y: 20, opacity: 0, duration: 0.5 })
+    .from('#vision .section-title', { y: 30, opacity: 0, duration: 0.6 }, '-=0.2')
+    .from('#vision .section-subtitle', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2');
+
+  // Flow steps get their own trigger
+  gsap.from('.todone-flow-step', {
+    x: -30, opacity: 0, duration: 0.5, stagger: 0.2, immediateRender: false,
+    scrollTrigger: { trigger: '.todone-flow', start: 'top 85%', once: true }
+  });
+  gsap.from('.todone-flow-arrow', {
+    x: -10, opacity: 0, scale: 0.5, duration: 0.3, stagger: 0.2, immediateRender: false,
+    scrollTrigger: { trigger: '.todone-flow', start: 'top 85%', once: true }
+  });
+
+  // Agent cards get their own trigger
+  gsap.from('.agent-card', {
+    y: 40, opacity: 0, duration: 0.5, immediateRender: false,
+    stagger: { amount: 0.6, grid: [2, 3], from: 'start' },
+    scrollTrigger: { trigger: '.agents-grid', start: 'top 85%', once: true }
+  });
+
+
+  // ── NDIS / TRUST ──
+  const trustTL = gsap.timeline({
+    scrollTrigger: { trigger: '#ndis', start: 'top 75%', once: true }
+  });
+
+  trustTL
+    .from('#ndis .section-eyebrow', { y: 20, opacity: 0, duration: 0.5 })
+    .from('#ndis .section-title', { y: 30, opacity: 0, duration: 0.6 }, '-=0.2')
+    .from('#ndis .section-subtitle', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
+    .from('.trust-badge', {
+      y: 10, opacity: 0, scale: 0.9, duration: 0.4,
+      stagger: 0.1, ease: 'back.out(1.3)'
+    }, '-=0.1');
+
+  // Feature list gets its own trigger
+  const trustFeatureTL = gsap.timeline({
+    scrollTrigger: { trigger: '.trust-feature-list', start: 'top 85%', once: true }
+  });
+  trustFeatureTL
+    .from('.trust-feature-list li', { x: 30, opacity: 0, duration: 0.45, stagger: 0.12 })
+    .from('.trust-check', { scale: 0, duration: 0.3, stagger: 0.12, ease: 'back.out(2.5)' }, '-=0.8');
+
+
+  // ── CTA ──
+  const ctaTL = gsap.timeline({
+    scrollTrigger: { trigger: '#cta', start: 'top 80%', once: true }
+  });
+
+  ctaTL
+    .from('.cta-section h2', { y: 30, opacity: 0, duration: 0.6 })
+    .from('.cta-section p', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
+    .from('.btn-white', {
+      y: 20, opacity: 0, scale: 0.9, duration: 0.5,
+      ease: 'back.out(1.4)'
+    }, '-=0.1')
+    .from('.cta-note', { opacity: 0, duration: 0.4 }, '-=0.1');
+
+  // Subtle pulse on CTA button after entrance
+  ctaTL.to('.btn-white', {
+    scale: 1.03, duration: 0.6, repeat: -1, yoyo: true,
+    ease: 'sine.inOut', delay: 0.5
   });
 </script>
 

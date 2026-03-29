@@ -1878,11 +1878,11 @@ document.addEventListener('DOMContentLoaded', function() {
   journalTL
     .from('.journal-phone .phone-input-bar', { y: 10, opacity: 0, duration: 0.3 }, '+=0.2');
 
-  // Text content reveals alongside (staggered with the phone)
+  // Text content reveals at the same time as the phone (absolute position 0)
   journalTL
-    .from('#journal .section-eyebrow', { y: 20, opacity: 0, duration: 0.5 }, 1.0)
-    .from('#journal .section-title', { y: 30, opacity: 0, duration: 0.6 }, '-=0.2')
-    .from('#journal .section-subtitle', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2');
+    .from('#journal .section-eyebrow', { y: 20, opacity: 0, duration: 0.5 }, 0)
+    .from('#journal .section-title', { y: 30, opacity: 0, duration: 0.6 }, 0.15)
+    .from('#journal .section-subtitle', { y: 20, opacity: 0, duration: 0.5 }, 0.35);
 
   gsap.from('.solution-card', {
     y: 40, opacity: 0, duration: 0.6, immediateRender: false,

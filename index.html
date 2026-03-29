@@ -1904,9 +1904,9 @@ document.addEventListener('DOMContentLoaded', function() {
     .from('#how .section-title', { y: 30, opacity: 0, duration: 0.6 }, '-=0.2')
     .from('#how .section-subtitle', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2');
 
-  // Steps — simple fade up, no stagger jank
+  // Steps — all appear together, no stagger
   gsap.from('.how-step', {
-    y: 15, opacity: 0, duration: 0.4, stagger: 0.08, ease: 'power2.out', immediateRender: false,
+    y: 8, opacity: 0, duration: 0.5, ease: 'power2.out', immediateRender: false,
     scrollTrigger: { trigger: '.how-steps', start: 'top 85%', once: true }
   });
 

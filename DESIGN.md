@@ -322,6 +322,19 @@ Budget, Medications, Schedule, Notifications, Settings, Documents, Service Searc
 - Left element: icon (24px) or avatar (40px)
 - Chevron on right for navigable rows: `chevron-right` lucide, `$text-tertiary`
 
+### Floating Action Button (FAB)
+
+Used on screens where the primary action should be always accessible while scrolling.
+
+- Size: 56×56 (icon-only) or auto-width with padding `[14, 20]` (icon + label)
+- Fill: `$accent`
+- Corner radius: 28px (circular)
+- Shadow: `#0891B240`, blur 12, offset y:4
+- Position: absolute, bottom-right (above tab bar)
+- Icon: lucide 24×24, `$text-on-accent`
+
+**Used on:** Incidents & Alerts (icon-only), Medication Tracker (icon + label)
+
 ---
 
 ## UI Patterns
@@ -371,43 +384,64 @@ Each journal entry contains:
 
 ## Screen Inventory
 
-### Mobile Screens (393×852)
+### Mobile Screens (26 screens, 393×852)
 
-**Tab screens (5):**
-| Screen | Active Tab | Purpose |
-|--------|-----------|---------|
-| Home Dashboard | HOME | Daily overview, hero stats, quick actions |
-| Daily Log / Timeline | TIMELINE | Chronological care log |
-| Journal | GOALS | Journal feed + entry creation |
-| Goals | GOALS | Goal tracking and care plan |
-| Team | TEAM | Support team and shift handover |
+| # | Node ID | Name | Has Tab Bar | Active Tab | Notes |
+|---|---------|------|-------------|-----------|-------|
+| 1 | `VAE5t` | Onboarding | No | — | Welcome flow, no nav needed |
+| 2 | `FXIaQ` | Home Dashboard | Yes | HOME | Main hub, hero stats, quick actions |
+| 3 | `V233w` | My Day (Context) | Yes | HOME | Detailed daily view |
+| 4 | `qLkBF` | Participant Profile | No | — | Uses inline Nav Bar instead of tab bar |
+| 5 | `Nio3V` | Body State Tracker | Yes | TIMELINE | Mood and body state logging |
+| 6 | `EZKi1` | Daily Log | Yes | TIMELINE | Chronological care log |
+| 7 | `KY4wL` | Journal Chat | No | — | Lia conversation with input bar, no tab bar |
+| 8 | `fXCUe` | Journal Entry (Rosebud) | No | — | Full entry view with RBT cards, no tab bar |
+| 9 | `BnORF` | Journal Feed | Yes | GOALS | Past journal entries list |
+| 10 | `fIghF` | Journal Insights | Yes | GOALS | Patterns from journal data |
+| 11 | `ucBrj` | Goals Tracker | Yes | GOALS | Goal tracking |
+| 12 | `AWNyq` | Care Plan View | Yes | GOALS | NDIS care plan management |
+| 13 | `PUQiA` | Budget & Funding | Yes | HOME | NDIS budget tracking |
+| 14 | `MVTIX` | Carer Wellness | Yes | WELLNESS | Carer self-care |
+| 15 | `w957d` | Team & Communication | Yes | TEAM | Support team overview |
+| 16 | `jn5yI` | Incidents & Alerts | Yes | TIMELINE | Incident reporting; has FAB |
+| 17 | `hHBXF` | Crisis Mode | No | — | Full-screen crisis state, `$crisis-bg` bg |
+| 18 | `7mRF3` | Service Search | Yes | HOME | Find NDIS services |
+| 19 | `wdfy3` | Document Generator | Yes | HOME | Document creation |
+| 20 | `1Zqp2` | Plan Review Prep | Yes | GOALS | NDIS plan review preparation |
+| 21 | `GW8gn` | Settings & Account | Yes | HOME | User preferences |
+| 22 | `OZeSd` | Notifications Center | Yes | HOME | Alert center; has filter tabs |
+| 23 | `ABbwF` | Shift Handover | No | — | Shift notes; uses Button Area instead |
+| 24 | `zJsPh` | Medication Tracker | Yes | TIMELINE | Medication schedule; has FAB |
+| 25 | `QaY9R` | Appointment Schedule | Yes | TIMELINE | Appointment management |
+| 26 | `2BMbh` | Evidence & Photo Capture | No | — | Photo/video evidence for NDIS |
 
-**Sub-screens (accessed contextually):**
-| Screen | Accessed From | Purpose |
-|--------|--------------|---------|
-| My Day | HOME | Detailed daily view |
-| Participant Profile | HOME | Care recipient details |
-| Body State Tracker | TIMELINE | Mood and body state logging |
-| Care Plan | GOALS | NDIS care plan management |
-| Budget | HOME | NDIS budget tracking |
-| Wellness | WELLNESS | Carer self-care tracking |
-| Medications | HOME | Medication schedule and logging |
-| Schedule | HOME | Appointment management |
-| Notifications | Header icon | Alert center |
-| Documents | HOME | Document storage |
-| Service Search | HOME | Find NDIS services |
-| Incidents | TIMELINE | Incident reporting and history |
-| Plan Review | GOALS | NDIS plan review preparation |
-| Evidence Capture | GOALS | Photo/video evidence for NDIS |
-| Shift Handover | TEAM | Shift notes between carers |
-| Journal Feed | GOALS | Past journal entries list |
-| Journal Insights | GOALS | Patterns from journal data |
-| Journal Entry Detail | GOALS | Full entry with RBT and insights |
-| Crisis Mode | N/A (full-screen) | Emergency response — no tab bar |
+**Screens without tab bars (by design):**
+- **Onboarding** — pre-auth, no navigation needed
+- **Crisis Mode** — full-screen emergency, documented exception
+- **Journal Chat** — conversation interface with input bar at bottom
+- **Journal Entry (Rosebud)** — detail view, back navigation only
+- **Participant Profile** — uses inline nav bar for profile sections
+- **Shift Handover** — uses bottom button area for primary action
+- **Evidence Capture** — camera/capture interface
 
-### Desktop Screens (1440×900)
+### Desktop Screens (12 screens, 1440×900)
 
-Mirror mobile functionality with sidebar navigation replacing bottom tabs. Sidebar contains the same 5 sections (Home, Timeline, Goals, Wellness, Team) plus user profile.
+All desktop screens use a sidebar (240px, `$bg-elevated`, right border 1px `$border-subtle`) replacing the mobile bottom tabs. Main content area uses 40px padding.
+
+| Node ID | Name | Mobile Equivalent |
+|---------|------|------------------|
+| `zCn3M` | W1. Onboarding | Onboarding |
+| `g5lcj` | W2. Home Dashboard | Home Dashboard |
+| `we2DN` | W3. Participant Profile | Participant Profile |
+| `rPU3b` | W4. Daily Log | Daily Log |
+| `sZbKH` | W5. Journal Dashboard | Journal Feed + Insights |
+| `0xrNT` | W6. Journal Entry Detail | Journal Entry (Rosebud) |
+| `uD6Bo` | W7. Goals Tracker | Goals Tracker |
+| `5ANdq` | W8. Budget & Funding | Budget & Funding |
+| `wz6ep` | W9. Carer Wellness | Carer Wellness |
+| `E7iTq` | W10. Team & Communication | Team & Communication |
+| `Pvg6m` | W11. Incidents & Alerts | Incidents & Alerts |
+| `K8WRQ` | W12. Plan Review Prep | Plan Review Prep |
 
 ---
 
@@ -480,8 +514,20 @@ U(tag+"/tagLabel", {content:"Looking Forward", fill:"$bud"})
 
 ---
 
+## Known Inconsistencies
+
+Remaining items to resolve in future passes:
+
+| Issue | Screens Affected | Expected |
+|-------|-----------------|----------|
+| Body state emoji (33 nodes) used as mood selectors | Body State Tracker, Journal entries | Consider replacing with custom icons |
+| Existing screen tab bars are not component instances | All screens with tab bars | Replace inline tab bars with refs to `ehx4Z` |
+
+---
+
 ## Audit History
 
 | Date | Action |
 |------|--------|
 | 2026-03-27 | Initial design system audit. Deleted 7 legacy screens, fixed 6 frame sizes (402×874 → 393×852), standardized 13 tab bars to 5-tab HOME/TIMELINE/GOALS/WELLNESS/TEAM, converted 112 Space Grotesk nodes to DM Sans/Inter, fixed 4 cornerRadius violations, stripped emoji from 27 text labels, replaced 17 standalone emoji with lucide icons, created 13 reusable components, wrote DESIGN.md. |
+| 2026-03-27 | Consistency pass. Fixed status bar padding on 2 screens, content padding on Onboarding, standardized 6 tab bar names to "Tab Bar Container", standardized 5 desktop sidebar names to "Sidebar", fixed desktop Plan Review content padding (32→40px), verified zero Space Grotesk remaining across all screens. Updated screen inventory to full 26 mobile + 12 desktop with node IDs. Added FAB pattern documentation. |

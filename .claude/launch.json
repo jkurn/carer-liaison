@@ -18,6 +18,13 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["serve", "demo2", "-l", "3458", "--no-clipboard"],
       "port": 3458
+    },
+    {
+      "name": "remotion",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["remotion", "studio", "--port", "3123"],
+      "port": 3123,
+      "cwd": "video"
     }
   ]
 }

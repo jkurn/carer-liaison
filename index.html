@@ -1762,52 +1762,47 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // ── HERO — Product demo: AI generates a journal reflection ──
-  const heroTL = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  // Motion philosophy: everything fades up with power2.out, no bounce, consistent rhythm
+  const heroTL = gsap.timeline({ defaults: { ease: 'power2.out' } });
 
   // 1. Text intro
   heroTL
-    .from('.hero-eyebrow', { y: 20, opacity: 0, duration: 0.6 })
-    .from('.hero h1', { y: 30, opacity: 0, duration: 0.7 }, '-=0.3')
-    .from('.hero-sub', { y: 20, opacity: 0, duration: 0.5, stagger: 0.15 }, '-=0.3')
-    .from('.hero-actions', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
-    .from('.hero-proof', { y: 10, opacity: 0, duration: 0.4 }, '-=0.1');
+    .from('.hero-eyebrow', { y: 15, opacity: 0, duration: 0.5 })
+    .from('.hero h1', { y: 20, opacity: 0, duration: 0.6 }, '-=0.3')
+    .from('.hero-sub', { y: 15, opacity: 0, duration: 0.5 }, '-=0.3')
+    .from('.hero-actions', { y: 15, opacity: 0, duration: 0.4 }, '-=0.2')
+    .from('.hero-proof', { y: 8, opacity: 0, duration: 0.3 }, '-=0.1');
 
-  // 2. Phone enters — screen is "empty" (content hidden), then AI "generates" cards
+  // 2. Phone enters — cards appear like AI generating content
   heroTL
-    .from('.hero-phone', { y: 80, opacity: 0, scale: 0.95, duration: 0.6, ease: 'power2.out' }, '-=0.5')
-    .from('.hero-phone .phone-header', { y: 10, opacity: 0, duration: 0.2 }, '-=0.2')
-    // Rose card — AI writing the first reflection
+    .from('.hero-phone', { y: 40, opacity: 0, duration: 0.6 }, '-=0.4')
+    .from('.hero-phone .phone-header', { y: 8, opacity: 0, duration: 0.2 }, '-=0.2')
+    // RBT cards — fade up in sequence with consistent timing
     .from('.hero-phone .phone-rbt-card.rose', {
-      y: 15, opacity: 0, scaleY: 0.9, transformOrigin: 'top',
-      duration: 0.3, ease: 'power2.out'
-    }, '+=0.15')
-    // Bud card — second reflection appears
-    .from('.hero-phone .phone-rbt-card.bud', {
-      y: 15, opacity: 0, scaleY: 0.9, transformOrigin: 'top',
-      duration: 0.3, ease: 'power2.out'
-    }, '+=0.12')
-    // Thorn card — third reflection
-    .from('.hero-phone .phone-rbt-card.thorn', {
-      y: 15, opacity: 0, scaleY: 0.9, transformOrigin: 'top',
-      duration: 0.3, ease: 'power2.out'
-    }, '+=0.12')
-    // Entity tags extracted — pop in
-    .from('.hero-phone .phone-entity-tag', {
-      scale: 0, opacity: 0, duration: 0.15, stagger: 0.05,
-      ease: 'power2.out'
+      y: 10, opacity: 0, duration: 0.3
     }, '+=0.1')
-    // Lia's reflection — the AI speaking last
-    .from('.hero-phone .phone-lia', {
-      x: -15, opacity: 0, duration: 0.3, ease: 'power2.out'
+    .from('.hero-phone .phone-rbt-card.bud', {
+      y: 10, opacity: 0, duration: 0.3
     }, '+=0.08')
-    // Subtle glow pulse on the whole phone to say "done"
+    .from('.hero-phone .phone-rbt-card.thorn', {
+      y: 10, opacity: 0, duration: 0.3
+    }, '+=0.08')
+    // Entity tags — fade in together, no scale-from-zero
+    .from('.hero-phone .phone-entity-tag', {
+      y: 5, opacity: 0, duration: 0.25
+    }, '+=0.08')
+    // Lia's reflection — fade up, no sideways slide
+    .from('.hero-phone .phone-lia', {
+      y: 8, opacity: 0, duration: 0.3
+    }, '+=0.06')
+    // Subtle glow pulse to say "done"
     .to('.hero-phone', {
-      boxShadow: '0 20px 60px rgba(8,145,178,0.2), 0 4px 16px rgba(0,0,0,0.08)',
+      boxShadow: '0 20px 60px rgba(8,145,178,0.15), 0 4px 16px rgba(0,0,0,0.06)',
       duration: 0.4, ease: 'power2.inOut'
     })
     .to('.hero-phone', {
-      boxShadow: '0 20px 60px rgba(0,0,0,0.15), 0 4px 16px rgba(0,0,0,0.08)',
-      duration: 0.5, ease: 'power2.out'
+      boxShadow: '0 20px 60px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06)',
+      duration: 0.4
     });
 
 
@@ -1816,14 +1811,13 @@ document.addEventListener('DOMContentLoaded', function() {
     scrollTrigger: { trigger: '#reality', start: 'top 75%', once: true }
   });
   problemTL
-    .from('#reality .section-eyebrow', { y: 20, opacity: 0, duration: 0.5 })
-    .from('#reality .section-title', { y: 30, opacity: 0, duration: 0.6 }, '-=0.2')
-    .from('#reality .section-subtitle', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
-    .from('.problem-quote', { y: 20, opacity: 0, duration: 0.5 }, '-=0.1')
+    .from('#reality .section-eyebrow', { y: 12, opacity: 0, duration: 0.4, ease: 'power2.out' })
+    .from('#reality .section-title', { y: 15, opacity: 0, duration: 0.5, ease: 'power2.out' }, '-=0.2')
+    .from('#reality .section-subtitle', { y: 12, opacity: 0, duration: 0.4, ease: 'power2.out' }, '-=0.15')
+    .from('.problem-quote', { y: 10, opacity: 0, duration: 0.4, ease: 'power2.out' }, '-=0.1')
     .from('.problem-stat', {
-      y: 30, opacity: 0, scale: 0.95,
-      duration: 0.5, stagger: 0.1, ease: 'back.out(1.2)'
-    }, '-=0.4');
+      y: 15, opacity: 0, duration: 0.4, ease: 'power2.out'
+    }, '-=0.3');
 
   // Counter animation for stat numbers
   ScrollTrigger.create({
@@ -1838,7 +1832,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ];
       counters.forEach(c => {
         gsap.fromTo(c.el, { innerText: 0 }, {
-          innerText: c.target, duration: 1.8, ease: 'power2.out',
+          innerText: c.target, duration: 1.0, ease: 'power2.out',
           snap: { innerText: c.decimals === 0 ? 1 : 0.01 },
           onUpdate() {
             const val = parseFloat(this.targets()[0].innerText);
@@ -1857,40 +1851,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Phone enters with empty chat
   journalTL
-    .from('.journal-phone', { y: 80, opacity: 0, scale: 0.95, duration: 0.9, ease: 'power2.out' })
-    .from('.journal-phone .phone-header', { y: 10, opacity: 0, duration: 0.3 }, '-=0.3');
+    .from('.journal-phone', { y: 40, opacity: 0, duration: 0.6, ease: 'power2.out' })
+    .from('.journal-phone .phone-header', { y: 8, opacity: 0, duration: 0.2 }, '-=0.2');
 
-  // Chat messages appear like a real conversation — alternating with pauses
+  // Chat messages fade up in sequence — no sideways sliding
   const msgs = document.querySelectorAll('.journal-phone .phone-chat-msg');
   msgs.forEach((msg, i) => {
-    const isIncoming = msg.classList.contains('incoming');
     journalTL.from(msg, {
-      x: isIncoming ? -30 : 30,
       y: 10,
       opacity: 0,
-      scale: 0.95,
-      duration: 0.4,
-      ease: 'back.out(1.3)'
-    }, i === 0 ? '+=0.2' : '+=0.35'); // realistic pause between messages
+      duration: 0.3,
+      ease: 'power2.out'
+    }, i === 0 ? '+=0.15' : '+=0.2');
   });
 
-  // Input bar appears last — ready to type
+  // Input bar appears last
   journalTL
-    .from('.journal-phone .phone-input-bar', { y: 10, opacity: 0, duration: 0.3 }, '+=0.2');
+    .from('.journal-phone .phone-input-bar', { y: 8, opacity: 0, duration: 0.25 }, '+=0.1');
 
   // Text content reveals at the same time as the phone (absolute position 0)
   journalTL
-    .from('#journal .section-eyebrow', { y: 20, opacity: 0, duration: 0.5 }, 0)
-    .from('#journal .section-title', { y: 30, opacity: 0, duration: 0.6 }, 0.15)
-    .from('#journal .section-subtitle', { y: 20, opacity: 0, duration: 0.5 }, 0.35);
+    .from('#journal .section-eyebrow', { y: 12, opacity: 0, duration: 0.4, ease: 'power2.out' }, 0)
+    .from('#journal .section-title', { y: 15, opacity: 0, duration: 0.5, ease: 'power2.out' }, 0.1)
+    .from('#journal .section-subtitle', { y: 12, opacity: 0, duration: 0.4, ease: 'power2.out' }, 0.2);
 
   gsap.from('.solution-card', {
-    y: 40, opacity: 0, duration: 0.6, immediateRender: false,
-    stagger: 0.15, ease: 'power2.out',
+    y: 12, opacity: 0, duration: 0.5, immediateRender: false,
+    ease: 'power2.out',
     scrollTrigger: { trigger: '.solution-cards', start: 'top 85%', once: true }
   });
   gsap.from('#journal .btn-primary', {
-    y: 20, opacity: 0, scale: 0.95, duration: 0.5, ease: 'back.out(1.3)', immediateRender: false,
+    y: 12, opacity: 0, duration: 0.4, ease: 'power2.out', immediateRender: false,
     scrollTrigger: { trigger: '#journal .btn-primary', start: 'top 90%', once: true }
   });
 
@@ -1900,9 +1891,9 @@ document.addEventListener('DOMContentLoaded', function() {
     scrollTrigger: { trigger: '#how', start: 'top 75%', once: true }
   });
   howTL
-    .from('#how .section-eyebrow', { y: 20, opacity: 0, duration: 0.5 })
-    .from('#how .section-title', { y: 30, opacity: 0, duration: 0.6 }, '-=0.2')
-    .from('#how .section-subtitle', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2');
+    .from('#how .section-eyebrow', { y: 12, opacity: 0, duration: 0.4, ease: 'power2.out' })
+    .from('#how .section-title', { y: 15, opacity: 0, duration: 0.5, ease: 'power2.out' }, '-=0.2')
+    .from('#how .section-subtitle', { y: 12, opacity: 0, duration: 0.4, ease: 'power2.out' }, '-=0.15');
 
   // Steps — all appear together, no stagger
   gsap.from('.how-step', {
@@ -1915,27 +1906,31 @@ document.addEventListener('DOMContentLoaded', function() {
     scrollTrigger: { trigger: '.insights-phone', start: 'top 85%', once: true }
   });
 
+  const moodCards = document.querySelectorAll('.insights-phone .phone-mood-card');
   insightsTL
-    .from('.insights-phone', { y: 80, opacity: 0, scale: 0.95, duration: 0.9, ease: 'power2.out' })
-    .from('.insights-phone .phone-header', { y: 10, opacity: 0, duration: 0.3 }, '-=0.3')
-    // Time pills slide in
-    .from('.phone-pill', { x: -15, opacity: 0, duration: 0.3, stagger: 0.08 }, '-=0.1')
-    // Mood card appears
-    .from('.phone-mood-card:first-child', { y: 15, opacity: 0, duration: 0.4 }, '+=0.15')
-    // Each day's mood fills in across the week — like data loading
+    .from('.insights-phone', { y: 40, opacity: 0, duration: 0.6, ease: 'power2.out' })
+    .from('.insights-phone .phone-header', { y: 8, opacity: 0, duration: 0.2 }, '-=0.2')
+    // Time pills fade in
+    .from('.phone-pill', { y: 5, opacity: 0, duration: 0.25 }, '-=0.05');
+  // Mood card appears
+  if (moodCards[0]) {
+    insightsTL.from(moodCards[0], { y: 10, opacity: 0, duration: 0.35 }, '+=0.1');
+  }
+  insightsTL
+    // Each day's mood fades in
     .from('.phone-mood-day', {
-      scale: 0, opacity: 0, duration: 0.3, stagger: 0.1,
-      ease: 'back.out(2.5)'
-    }, '+=0.1')
-    // Top Patterns card slides up
-    .from('.phone-mood-card:nth-child(2)', {
-      y: 20, opacity: 0, duration: 0.5, ease: 'power2.out'
-    }, '+=0.2')
-    // Stats tags pop
+      opacity: 0, duration: 0.3, stagger: 0.06,
+      ease: 'power2.out'
+    }, '+=0.08');
+  // Top Patterns card
+  if (moodCards[1]) {
+    insightsTL.from(moodCards[1], { y: 12, opacity: 0, duration: 0.4, ease: 'power2.out' }, '+=0.12');
+  }
+  insightsTL
+    // Tags fade in together
     .from('.insights-phone .phone-entity-tag', {
-      scale: 0, opacity: 0, duration: 0.25, stagger: 0.1,
-      ease: 'back.out(2)'
-    }, '+=0.15');
+      y: 5, opacity: 0, duration: 0.25, ease: 'power2.out'
+    }, '+=0.1');
 
 
   // ── VISION / TO-DONE ──
@@ -1943,16 +1938,16 @@ document.addEventListener('DOMContentLoaded', function() {
     scrollTrigger: { trigger: '#vision', start: 'top 75%', once: true }
   });
   visionTL
-    .from('#vision .section-eyebrow', { y: 20, opacity: 0, duration: 0.5, immediateRender: false })
-    .from('#vision .section-title', { y: 30, opacity: 0, duration: 0.6, immediateRender: false }, '-=0.2')
-    .from('#vision .section-subtitle', { y: 20, opacity: 0, duration: 0.5, immediateRender: false }, '-=0.2');
+    .from('#vision .section-eyebrow', { y: 12, opacity: 0, duration: 0.4, ease: 'power2.out', immediateRender: false })
+    .from('#vision .section-title', { y: 15, opacity: 0, duration: 0.5, ease: 'power2.out', immediateRender: false }, '-=0.2')
+    .from('#vision .section-subtitle', { y: 12, opacity: 0, duration: 0.4, ease: 'power2.out', immediateRender: false }, '-=0.15');
 
   gsap.from('.todone-flow-step', {
-    y: 15, opacity: 0, duration: 0.4, stagger: 0.08, ease: 'power2.out', immediateRender: false,
+    y: 8, opacity: 0, duration: 0.5, ease: 'power2.out', immediateRender: false,
     scrollTrigger: { trigger: '.todone-flow', start: 'top 85%', once: true }
   });
   gsap.from('.todone-flow-arrow', {
-    opacity: 0, duration: 0.3, stagger: 0.08, ease: 'power2.out', immediateRender: false,
+    opacity: 0, duration: 0.4, ease: 'power2.out', immediateRender: false,
     scrollTrigger: { trigger: '.todone-flow', start: 'top 85%', once: true }
   });
 
@@ -1962,23 +1957,22 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   handoverTL
-    .from('.handover-phone', { x: -60, opacity: 0, scale: 0.95, duration: 0.9, ease: 'power2.out' })
-    .from('.handover-phone .phone-header', { y: 10, opacity: 0, duration: 0.3 }, '-=0.3');
+    .from('.handover-phone', { y: 40, opacity: 0, duration: 0.6, ease: 'power2.out' })
+    .from('.handover-phone .phone-header', { y: 8, opacity: 0, duration: 0.2 }, '-=0.2');
 
-  // Each handover card builds in sequence — like the AI assembling a brief
+  // Handover cards fade up in sequence
   const handoverCards = document.querySelectorAll('.phone-handover-card');
   handoverCards.forEach((card, i) => {
     handoverTL
       .from(card, {
-        y: 25, opacity: 0, scaleY: 0.9, transformOrigin: 'top',
-        duration: 0.45, ease: 'back.out(1.2)'
-      }, i === 0 ? '+=0.2' : '+=0.2');
+        y: 10, opacity: 0, duration: 0.3, ease: 'power2.out'
+      }, i === 0 ? '+=0.12' : '+=0.1');
   });
 
   // Agent cards on the right
   gsap.from('.agent-card', {
-    y: 40, opacity: 0, duration: 0.5, immediateRender: false,
-    stagger: 0.15,
+    y: 12, opacity: 0, duration: 0.5, immediateRender: false,
+    ease: 'power2.out',
     scrollTrigger: { trigger: '.agents-grid', start: 'top 85%', once: true }
   });
 
@@ -1988,27 +1982,26 @@ document.addEventListener('DOMContentLoaded', function() {
     scrollTrigger: { trigger: '#ndis', start: 'top 75%', once: true }
   });
   trustTL
-    .from('#ndis .section-eyebrow', { y: 20, opacity: 0, duration: 0.5 })
-    .from('#ndis .section-title', { y: 30, opacity: 0, duration: 0.6 }, '-=0.2')
-    .from('#ndis .section-subtitle', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
+    .from('#ndis .section-eyebrow', { y: 12, opacity: 0, duration: 0.4, ease: 'power2.out' })
+    .from('#ndis .section-title', { y: 15, opacity: 0, duration: 0.5, ease: 'power2.out' }, '-=0.2')
+    .from('#ndis .section-subtitle', { y: 12, opacity: 0, duration: 0.4, ease: 'power2.out' }, '-=0.15')
     .from('.trust-badge', {
-      y: 10, opacity: 0, scale: 0.9, duration: 0.4,
-      stagger: 0.1, ease: 'back.out(1.3)'
+      y: 8, opacity: 0, duration: 0.4, ease: 'power2.out'
     }, '-=0.1');
 
   const trustFeatureTL = gsap.timeline({
     scrollTrigger: { trigger: '.trust-feature-list', start: 'top 85%', once: true }
   });
   trustFeatureTL
-    .from('.trust-feature-list li', { x: 30, opacity: 0, duration: 0.45, stagger: 0.12 })
-    .from('.trust-check', { scale: 0, duration: 0.3, stagger: 0.12, ease: 'back.out(2.5)' }, '-=0.8');
+    .from('.trust-feature-list li', { y: 10, opacity: 0, duration: 0.4, ease: 'power2.out' })
+    .from('.trust-check', { opacity: 0, duration: 0.3, ease: 'power2.out' }, '-=0.3');
 
 
   // ── CTA ── (no entrance animation — conversion element should always be visible)
-  gsap.to('.btn-white', {
-    scale: 1.03, duration: 0.6, repeat: -1, yoyo: true,
-    ease: 'sine.inOut',
-    scrollTrigger: { trigger: '#cta', start: 'top 80%' }
+  // CTA — no infinite pulse; just a clean entrance
+  gsap.from('.btn-white', {
+    y: 10, opacity: 0, duration: 0.5, ease: 'power2.out', immediateRender: false,
+    scrollTrigger: { trigger: '#cta', start: 'top 80%', once: true }
   });
 
 

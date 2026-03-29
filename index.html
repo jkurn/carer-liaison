@@ -2111,7 +2111,7 @@ document.addEventListener('DOMContentLoaded', function() {
       patternItems.forEach((item, i) => {
         ptl
           .to(item, { color: '#0891B2', fontWeight: 600, duration: 0.15 }, i === 0 ? '+=0' : '+=0.15')
-          .to({}, { duration: 0.75 })
+          .to({}, { duration: 1.5 })
           .to(item, { color: '#0F172A', fontWeight: 400, duration: 0.1 });
       });
     }
@@ -2134,7 +2134,7 @@ document.addEventListener('DOMContentLoaded', function() {
       hl
         .to(card, { boxShadow: '0 0 0 1.5px #0891B2', duration: 0.15 }, offset)
         .to(tip, { opacity: 1, duration: 0.1 }, '-=0.05')
-        .to({}, { duration: 0.6 })
+        .to({}, { duration: 1.2 })
         .to(tip, { opacity: 0, duration: 0.1 })
         .to(card, { boxShadow: '0 0 0 0px transparent', duration: 0.1 }, '-=0.05');
     });

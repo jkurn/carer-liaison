@@ -1774,40 +1774,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // 2. Phone enters — screen is "empty" (content hidden), then AI "generates" cards
   heroTL
-    .from('.hero-phone', { y: 80, opacity: 0, scale: 0.95, duration: 1, ease: 'power2.out' }, '-=0.5')
-    .from('.hero-phone .phone-header', { y: 10, opacity: 0, duration: 0.4 }, '-=0.3')
+    .from('.hero-phone', { y: 80, opacity: 0, scale: 0.95, duration: 0.6, ease: 'power2.out' }, '-=0.5')
+    .from('.hero-phone .phone-header', { y: 10, opacity: 0, duration: 0.2 }, '-=0.2')
     // Rose card — AI writing the first reflection
     .from('.hero-phone .phone-rbt-card.rose', {
-      y: 20, opacity: 0, scaleY: 0.8, transformOrigin: 'top',
-      duration: 0.5, ease: 'back.out(1.2)'
-    }, '+=0.3')
+      y: 15, opacity: 0, scaleY: 0.9, transformOrigin: 'top',
+      duration: 0.3, ease: 'power2.out'
+    }, '+=0.15')
     // Bud card — second reflection appears
     .from('.hero-phone .phone-rbt-card.bud', {
-      y: 20, opacity: 0, scaleY: 0.8, transformOrigin: 'top',
-      duration: 0.5, ease: 'back.out(1.2)'
-    }, '+=0.25')
+      y: 15, opacity: 0, scaleY: 0.9, transformOrigin: 'top',
+      duration: 0.3, ease: 'power2.out'
+    }, '+=0.12')
     // Thorn card — third reflection
     .from('.hero-phone .phone-rbt-card.thorn', {
-      y: 20, opacity: 0, scaleY: 0.8, transformOrigin: 'top',
-      duration: 0.5, ease: 'back.out(1.2)'
-    }, '+=0.25')
-    // Entity tags extracted — pop in like the AI spotted them
+      y: 15, opacity: 0, scaleY: 0.9, transformOrigin: 'top',
+      duration: 0.3, ease: 'power2.out'
+    }, '+=0.12')
+    // Entity tags extracted — pop in
     .from('.hero-phone .phone-entity-tag', {
-      scale: 0, opacity: 0, duration: 0.25, stagger: 0.08,
-      ease: 'back.out(2)'
-    }, '+=0.2')
+      scale: 0, opacity: 0, duration: 0.15, stagger: 0.05,
+      ease: 'power2.out'
+    }, '+=0.1')
     // Lia's reflection — the AI speaking last
     .from('.hero-phone .phone-lia', {
-      x: -20, opacity: 0, duration: 0.5, ease: 'power2.out'
-    }, '+=0.15')
+      x: -15, opacity: 0, duration: 0.3, ease: 'power2.out'
+    }, '+=0.08')
     // Subtle glow pulse on the whole phone to say "done"
     .to('.hero-phone', {
       boxShadow: '0 20px 60px rgba(8,145,178,0.2), 0 4px 16px rgba(0,0,0,0.08)',
-      duration: 0.6, ease: 'power2.inOut'
+      duration: 0.4, ease: 'power2.inOut'
     })
     .to('.hero-phone', {
       boxShadow: '0 20px 60px rgba(0,0,0,0.15), 0 4px 16px rgba(0,0,0,0.08)',
-      duration: 0.8, ease: 'power2.out'
+      duration: 0.5, ease: 'power2.out'
     });
 
 
@@ -2032,7 +2032,7 @@ document.addEventListener('DOMContentLoaded', function() {
       hl
         .to(c.sel, { boxShadow: '0 0 0 1.5px ' + c.color, duration: 0.15 }, offset)
         .to(c.sel + ' .phone-feature-tip', { opacity: 1, duration: 0.1 }, '-=0.05')
-        .to({}, { duration: 0.45 })
+        .to({}, { duration: 0.9 })
         .to(c.sel + ' .phone-feature-tip', { opacity: 0, duration: 0.1 })
         .to(c.sel, { boxShadow: '0 0 0 0px transparent', duration: 0.1 }, '-=0.05');
     });
@@ -2043,7 +2043,7 @@ document.addEventListener('DOMContentLoaded', function() {
         boxShadow: '0 0 0 1.5px #0891B2', borderRadius: '8px', duration: 0.15
       }, '+=0.2')
       .to('.hero-phone .phone-entities .phone-feature-tip', { opacity: 1, duration: 0.1 }, '-=0.05')
-      .to({}, { duration: 0.45 })
+      .to({}, { duration: 0.9 })
       .to('.hero-phone .phone-entities .phone-feature-tip', { opacity: 0, duration: 0.1 })
       .to('.hero-phone .phone-entities', {
         boxShadow: '0 0 0 0px transparent', duration: 0.1

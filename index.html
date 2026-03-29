@@ -1589,20 +1589,54 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // ── HERO ──
+  // ── HERO — Product demo: AI generates a journal reflection ──
   const heroTL = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+  // 1. Text intro
   heroTL
     .from('.hero-eyebrow', { y: 20, opacity: 0, duration: 0.6 })
     .from('.hero h1', { y: 30, opacity: 0, duration: 0.7 }, '-=0.3')
     .from('.hero-sub', { y: 20, opacity: 0, duration: 0.5, stagger: 0.15 }, '-=0.3')
     .from('.hero-actions', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
-    .from('.hero-proof', { y: 10, opacity: 0, duration: 0.4 }, '-=0.1')
-    // Phone enters from below with subtle scale
-    .from('.hero-phone', { y: 60, opacity: 0, scale: 0.97, duration: 0.9, ease: 'power2.out' }, '-=0.6')
-    // Then screen content cascades in
-    .from('.hero-phone .phone-rbt-card', { y: 20, opacity: 0, duration: 0.4, stagger: 0.12 }, '-=0.3')
-    .from('.hero-phone .phone-entities .phone-entity-tag', { y: 8, opacity: 0, scale: 0.9, duration: 0.3, stagger: 0.06 }, '-=0.1')
-    .from('.hero-phone .phone-lia', { y: 12, opacity: 0, duration: 0.4 }, '-=0.1');
+    .from('.hero-proof', { y: 10, opacity: 0, duration: 0.4 }, '-=0.1');
+
+  // 2. Phone enters — screen is "empty" (content hidden), then AI "generates" cards
+  heroTL
+    .from('.hero-phone', { y: 80, opacity: 0, scale: 0.95, duration: 1, ease: 'power2.out' }, '-=0.5')
+    .from('.hero-phone .phone-header', { y: 10, opacity: 0, duration: 0.4 }, '-=0.3')
+    // Rose card — AI writing the first reflection
+    .from('.hero-phone .phone-rbt-card.rose', {
+      y: 20, opacity: 0, scaleY: 0.8, transformOrigin: 'top',
+      duration: 0.5, ease: 'back.out(1.2)'
+    }, '+=0.3')
+    // Bud card — second reflection appears
+    .from('.hero-phone .phone-rbt-card.bud', {
+      y: 20, opacity: 0, scaleY: 0.8, transformOrigin: 'top',
+      duration: 0.5, ease: 'back.out(1.2)'
+    }, '+=0.25')
+    // Thorn card — third reflection
+    .from('.hero-phone .phone-rbt-card.thorn', {
+      y: 20, opacity: 0, scaleY: 0.8, transformOrigin: 'top',
+      duration: 0.5, ease: 'back.out(1.2)'
+    }, '+=0.25')
+    // Entity tags extracted — pop in like the AI spotted them
+    .from('.hero-phone .phone-entity-tag', {
+      scale: 0, opacity: 0, duration: 0.25, stagger: 0.08,
+      ease: 'back.out(2)'
+    }, '+=0.2')
+    // Lia's reflection — the AI speaking last
+    .from('.hero-phone .phone-lia', {
+      x: -20, opacity: 0, duration: 0.5, ease: 'power2.out'
+    }, '+=0.15')
+    // Subtle glow pulse on the whole phone to say "done"
+    .to('.hero-phone', {
+      boxShadow: '0 20px 60px rgba(8,145,178,0.2), 0 4px 16px rgba(0,0,0,0.08)',
+      duration: 0.6, ease: 'power2.inOut'
+    })
+    .to('.hero-phone', {
+      boxShadow: '0 20px 60px rgba(0,0,0,0.15), 0 4px 16px rgba(0,0,0,0.08)',
+      duration: 0.8, ease: 'power2.out'
+    });
 
 
   // ── PROBLEM / REALITY ──
@@ -1644,18 +1678,37 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 
-  // ── JOURNAL ── (phone left, text right)
+  // ── JOURNAL — Product demo: a real conversation with Lia ──
   const journalTL = gsap.timeline({
     scrollTrigger: { trigger: '#journal', start: 'top 75%', once: true }
   });
+
+  // Phone enters with empty chat
   journalTL
-    // Phone slides up first
-    .from('.journal-phone', { y: 60, opacity: 0, scale: 0.97, duration: 0.8, ease: 'power2.out' })
-    // Chat messages cascade in
-    .from('.journal-phone .phone-chat-msg', { y: 15, opacity: 0, duration: 0.35, stagger: 0.12 }, '-=0.3')
-    .from('.journal-phone .phone-input-bar', { y: 10, opacity: 0, duration: 0.3 }, '-=0.1')
-    // Then text content reveals
-    .from('#journal .section-eyebrow', { y: 20, opacity: 0, duration: 0.5 }, '-=0.4')
+    .from('.journal-phone', { y: 80, opacity: 0, scale: 0.95, duration: 0.9, ease: 'power2.out' })
+    .from('.journal-phone .phone-header', { y: 10, opacity: 0, duration: 0.3 }, '-=0.3');
+
+  // Chat messages appear like a real conversation — alternating with pauses
+  const msgs = document.querySelectorAll('.journal-phone .phone-chat-msg');
+  msgs.forEach((msg, i) => {
+    const isIncoming = msg.classList.contains('incoming');
+    journalTL.from(msg, {
+      x: isIncoming ? -30 : 30,
+      y: 10,
+      opacity: 0,
+      scale: 0.95,
+      duration: 0.4,
+      ease: 'back.out(1.3)'
+    }, i === 0 ? '+=0.2' : '+=0.35'); // realistic pause between messages
+  });
+
+  // Input bar appears last — ready to type
+  journalTL
+    .from('.journal-phone .phone-input-bar', { y: 10, opacity: 0, duration: 0.3 }, '+=0.2');
+
+  // Text content reveals alongside (staggered with the phone)
+  journalTL
+    .from('#journal .section-eyebrow', { y: 20, opacity: 0, duration: 0.5 }, 1.0)
     .from('#journal .section-title', { y: 30, opacity: 0, duration: 0.6 }, '-=0.2')
     .from('#journal .section-subtitle', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2');
 
@@ -1684,16 +1737,33 @@ document.addEventListener('DOMContentLoaded', function() {
     y: 30, opacity: 0, duration: 0.5, stagger: 0.18, immediateRender: false,
     scrollTrigger: { trigger: '.how-steps', start: 'top 85%', once: true }
   });
-  // Insights phone enters
-  gsap.from('.insights-phone', {
-    y: 60, opacity: 0, scale: 0.97, duration: 0.8, ease: 'power2.out', immediateRender: false,
+
+  // ── INSIGHTS PHONE — Product demo: a week of mood data loading in ──
+  const insightsTL = gsap.timeline({
     scrollTrigger: { trigger: '.insights-phone', start: 'top 85%', once: true }
   });
-  // Mood dots pop in
-  gsap.from('.phone-mood-day', {
-    y: 10, opacity: 0, scale: 0.8, duration: 0.3, stagger: 0.06, ease: 'back.out(1.5)', immediateRender: false,
-    scrollTrigger: { trigger: '.insights-phone', start: 'top 80%', once: true }
-  });
+
+  insightsTL
+    .from('.insights-phone', { y: 80, opacity: 0, scale: 0.95, duration: 0.9, ease: 'power2.out' })
+    .from('.insights-phone .phone-header', { y: 10, opacity: 0, duration: 0.3 }, '-=0.3')
+    // Time pills slide in
+    .from('.phone-pill', { x: -15, opacity: 0, duration: 0.3, stagger: 0.08 }, '-=0.1')
+    // Mood card appears
+    .from('.phone-mood-card:first-child', { y: 15, opacity: 0, duration: 0.4 }, '+=0.15')
+    // Each day's mood fills in across the week — like data loading
+    .from('.phone-mood-day', {
+      scale: 0, opacity: 0, duration: 0.3, stagger: 0.1,
+      ease: 'back.out(2.5)'
+    }, '+=0.1')
+    // Top Patterns card slides up
+    .from('.phone-mood-card:nth-child(2)', {
+      y: 20, opacity: 0, duration: 0.5, ease: 'power2.out'
+    }, '+=0.2')
+    // Stats tags pop
+    .from('.insights-phone .phone-entity-tag', {
+      scale: 0, opacity: 0, duration: 0.25, stagger: 0.1,
+      ease: 'back.out(2)'
+    }, '+=0.15');
 
 
   // ── VISION / TO-DONE ──
@@ -1714,17 +1784,26 @@ document.addEventListener('DOMContentLoaded', function() {
     scrollTrigger: { trigger: '.todone-flow', start: 'top 85%', once: true }
   });
 
-  // Handover phone enters from left
-  gsap.from('.handover-phone', {
-    x: -40, opacity: 0, scale: 0.97, duration: 0.8, ease: 'power2.out', immediateRender: false,
+  // ── HANDOVER PHONE — Product demo: shift handover building from journal data ──
+  const handoverTL = gsap.timeline({
     scrollTrigger: { trigger: '.handover-phone', start: 'top 85%', once: true }
   });
-  // Handover cards cascade
-  gsap.from('.phone-handover-card', {
-    y: 15, opacity: 0, duration: 0.4, stagger: 0.1, immediateRender: false,
-    scrollTrigger: { trigger: '.handover-phone', start: 'top 80%', once: true }
+
+  handoverTL
+    .from('.handover-phone', { x: -60, opacity: 0, scale: 0.95, duration: 0.9, ease: 'power2.out' })
+    .from('.handover-phone .phone-header', { y: 10, opacity: 0, duration: 0.3 }, '-=0.3');
+
+  // Each handover card builds in sequence — like the AI assembling a brief
+  const handoverCards = document.querySelectorAll('.phone-handover-card');
+  handoverCards.forEach((card, i) => {
+    handoverTL
+      .from(card, {
+        y: 25, opacity: 0, scaleY: 0.9, transformOrigin: 'top',
+        duration: 0.45, ease: 'back.out(1.2)'
+      }, i === 0 ? '+=0.2' : '+=0.2');
   });
-  // Agent cards
+
+  // Agent cards on the right
   gsap.from('.agent-card', {
     y: 40, opacity: 0, duration: 0.5, immediateRender: false,
     stagger: 0.15,

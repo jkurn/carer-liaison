@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carer Liaison — Caring was never meant to be done alone</title>
   <meta name="description" content="An AI companion for unpaid family carers. Talk about your day — by voice or text — and get back a reflection that sees what you do, names what you're feeling, and starts building the system your family deserves. Free. NDIS-aligned.">
+  <meta property="og:title" content="Carer Liaison — Caring was never meant to be done alone">
+  <meta property="og:description" content="An AI companion for unpaid family carers. Talk about your day and get back a reflection that sees what you do. Free. NDIS-aligned.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://carerliaison.com">
+  <meta property="og:image" content="https://carerliaison.com/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Carer Liaison — Caring was never meant to be done alone">
+  <meta name="twitter:description" content="An AI companion for unpaid family carers. Free. NDIS-aligned.">
+  <meta name="twitter:image" content="https://carerliaison.com/images/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -80,6 +91,10 @@
       font-size: 0.9rem;
       font-weight: 400;
       transition: color 0.2s;
+      padding: 0.5rem 0;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
     }
     .nav-links a:hover { color: var(--teal); }
     .nav-cta {
@@ -449,7 +464,7 @@
       border-radius: 16px;
       padding: 2rem;
       border: 1px solid var(--light-border);
-      transition: all 0.3s ease;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
       position: relative;
       overflow: hidden;
     }
@@ -502,9 +517,12 @@
       margin-top: 3rem;
     }
     .how-step {
-      text-align: center;
+      text-align: left;
       padding: 1.5rem;
       position: relative;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
     }
     .how-step:not(:last-child)::after {
       content: '→';
@@ -519,6 +537,7 @@
     .how-step-num {
       width: 48px;
       height: 48px;
+      min-width: 48px;
       border-radius: 50%;
       background: var(--teal);
       color: white;
@@ -527,8 +546,8 @@
       justify-content: center;
       font-family: 'DM Serif Display', serif;
       font-size: 1.2rem;
-      margin: 0 auto 1rem;
     }
+    .how-step-text { flex: 1; }
     .how-step h4 {
       font-weight: 600;
       color: var(--dark);
@@ -552,7 +571,7 @@
       border: 1px solid var(--light-border);
       border-radius: 16px;
       padding: 1.8rem;
-      transition: all 0.3s ease;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
     .agent-card:hover {
       border-color: var(--teal);
@@ -653,7 +672,7 @@
       flex-wrap: wrap;
     }
     .trust-badge {
-      padding: 0.6rem 1rem;
+      padding: 0.7rem 1rem;
       border-radius: 8px;
       border: 1px solid var(--light-border);
       font-size: 0.82rem;
@@ -662,6 +681,7 @@
       display: flex;
       align-items: center;
       gap: 0.4rem;
+      min-height: 44px;
     }
     .trust-feature-list {
       list-style: none;
@@ -749,7 +769,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      transition: all 0.25s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
       font-family: inherit;
     }
     .btn-white:hover {
@@ -785,6 +805,10 @@
       color: var(--mid-gray);
       text-decoration: none;
       transition: color 0.2s;
+      padding: 0.5rem 0;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
     }
     .footer-links a:hover { color: var(--teal); }
     .footer-copy {
@@ -804,7 +828,7 @@
       .agents-grid { grid-template-columns: 1fr; }
       .trust-grid { grid-template-columns: 1fr; gap: 3rem; }
       .footer-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
-      .nav-links a:not(.nav-cta) { display: none; }
+      /* nav links handled by hamburger at 768px */
       .floating-badge { display: none; }
     }
     @media (max-width: 640px) {
@@ -1343,23 +1367,31 @@
         <div class="how-steps" style="grid-template-columns: 1fr;">
           <div class="how-step">
             <div class="how-step-num">1</div>
-            <h4>Talk about your day</h4>
-            <p>Voice or text. While you're making dinner, waiting at therapy, or lying in bed.</p>
+            <div class="how-step-text">
+              <h4>Talk about your day</h4>
+              <p>Voice or text. While you're making dinner, waiting at therapy, or lying in bed.</p>
+            </div>
           </div>
           <div class="how-step">
             <div class="how-step-num">2</div>
-            <h4>Get a reflection back</h4>
-            <p>Rose, Bud, Thorn — what went well, what's growing, what's hard. Plus a psychology insight.</p>
+            <div class="how-step-text">
+              <h4>Get a reflection back</h4>
+              <p>Rose, Bud, Thorn — what went well, what's growing, what's hard. Plus a psychology insight.</p>
+            </div>
           </div>
           <div class="how-step">
             <div class="how-step-num">3</div>
-            <h4>Patterns become visible</h4>
-            <p>Sleep, meals, body state, what works. The system spots what you've been tracking in your head.</p>
+            <div class="how-step-text">
+              <h4>Patterns become visible</h4>
+              <p>Sleep, meals, body state, what works. The system spots what you've been tracking in your head.</p>
+            </div>
           </div>
           <div class="how-step">
             <div class="how-step-num">4</div>
-            <h4>Knowledge grows into a system</h4>
-            <p>From journal to plans. The reflection becomes the foundation for everything that comes next.</p>
+            <div class="how-step-text">
+              <h4>Knowledge grows into a system</h4>
+              <p>From journal to plans. The reflection becomes the foundation for everything that comes next.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -1608,9 +1640,9 @@
   <div class="footer-inner">
     <div class="footer-brand">Carer Liaison</div>
     <div class="footer-links">
-      <a href="#">About</a>
-      <a href="#">Privacy</a>
-      <a href="#">Contact</a>
+      <a href="#reality">About</a>
+      <a href="#ndis">NDIS Funding</a>
+      <a href="mailto:hello@carerliaison.com">Contact</a>
       <a href="mailto:hello@carerliaison.com">hello@carerliaison.com</a>
     </div>
     <div class="footer-copy">&copy; 2026 Carer Liaison. All rights reserved.</div>
@@ -1844,9 +1876,9 @@ document.addEventListener('DOMContentLoaded', function() {
     scrollTrigger: { trigger: '#vision', start: 'top 75%', once: true }
   });
   visionTL
-    .from('#vision .section-eyebrow', { y: 20, opacity: 0, duration: 0.5 })
-    .from('#vision .section-title', { y: 30, opacity: 0, duration: 0.6 }, '-=0.2')
-    .from('#vision .section-subtitle', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2');
+    .from('#vision .section-eyebrow', { y: 20, opacity: 0, duration: 0.5, immediateRender: false })
+    .from('#vision .section-title', { y: 30, opacity: 0, duration: 0.6, immediateRender: false }, '-=0.2')
+    .from('#vision .section-subtitle', { y: 20, opacity: 0, duration: 0.5, immediateRender: false }, '-=0.2');
 
   gsap.from('.todone-flow-step', {
     x: -30, opacity: 0, duration: 0.5, stagger: 0.2, immediateRender: false,

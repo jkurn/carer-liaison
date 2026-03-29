@@ -25,6 +25,13 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    *:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+    }
+    .btn-white:focus-visible {
+      outline-color: white;
+    }
 
     html { scroll-behavior: smooth; font-size: 16px; }
 
@@ -84,6 +91,50 @@
       transition: background 0.2s !important;
     }
     .nav-cta:hover { background: var(--teal-dark) !important; }
+
+    /* Hamburger */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 101;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--warm-gray);
+      margin: 5px 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      border-radius: 1px;
+    }
+    .nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    @media (max-width: 768px) {
+      .nav-hamburger { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(246, 245, 239, 0.98);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        flex-direction: column;
+        padding: 1.5rem 2rem 2rem;
+        gap: 1rem;
+        border-bottom: 1px solid var(--light-border);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 1rem; padding: 0.5rem 0; }
+      .nav-cta { text-align: center; margin-top: 0.5rem; }
+    }
 
     /* ── HERO ── */
     .hero {
@@ -674,7 +725,7 @@
     }
     .cta-section h2 {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
       color: white;
       line-height: 1.2;
       margin-bottom: 1rem;
@@ -1085,6 +1136,9 @@
 <nav id="nav">
   <div class="nav-inner">
     <a href="#" class="nav-brand">Carer Liaison</a>
+    <button class="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <div class="nav-links">
       <a href="#reality">The Reality</a>
       <a href="#journal">The Journal</a>
@@ -1446,7 +1500,7 @@
         </div>
       </div>
       <div>
-        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--dark); margin-bottom: 1rem;">What the system captures from your journal</h3>
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--dark); margin-bottom: 1rem;">What the system captures from your journal</h3>
         <div class="agents-grid" style="grid-template-columns: 1fr;">
           <div class="agent-card">
             <div class="agent-phase">Captured</div>
@@ -1577,6 +1631,25 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 20);
   }, { passive: true });
+
+  // Mobile hamburger toggle
+  const hamburger = document.querySelector('.nav-hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      hamburger.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+    // Close nav when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
 
   // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -1832,22 +1905,11 @@ document.addEventListener('DOMContentLoaded', function() {
     .from('.trust-check', { scale: 0, duration: 0.3, stagger: 0.12, ease: 'back.out(2.5)' }, '-=0.8');
 
 
-  // ── CTA ──
-  const ctaTL = gsap.timeline({
-    scrollTrigger: { trigger: '#cta', start: 'top 80%', once: true }
-  });
-  ctaTL
-    .from('.cta-section h2', { y: 30, opacity: 0, duration: 0.6, immediateRender: false })
-    .from('.cta-section p:not(.cta-note)', { y: 20, opacity: 0, duration: 0.5, immediateRender: false }, '-=0.2')
-    .from('.btn-white', {
-      y: 20, opacity: 0, scale: 0.9, duration: 0.5,
-      ease: 'back.out(1.4)', immediateRender: false
-    }, '-=0.1')
-    .from('.cta-note', { opacity: 0, duration: 0.4, immediateRender: false }, '-=0.1');
-
-  ctaTL.to('.btn-white', {
+  // ── CTA ── (no entrance animation — conversion element should always be visible)
+  gsap.to('.btn-white', {
     scale: 1.03, duration: 0.6, repeat: -1, yoyo: true,
-    ease: 'sine.inOut', delay: 0.5
+    ease: 'sine.inOut',
+    scrollTrigger: { trigger: '#cta', start: 'top 80%' }
   });
 
   // Disable GSAP animations for users who prefer reduced motion

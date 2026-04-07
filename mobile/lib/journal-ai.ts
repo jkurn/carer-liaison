@@ -172,7 +172,7 @@ export async function extractReflection(
 
   // Extract JSON from response (may have markdown fences)
   let jsonStr = text.trim();
-  jsonStr = jsonStr.replace(/^```json?\s*/i, '').replace(/\s*```$/i, '');
+  jsonStr = jsonStr.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/i, '');
 
   return JSON.parse(jsonStr) as RBTReflection;
 }

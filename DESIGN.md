@@ -87,23 +87,25 @@ Use variables — never hardcode hex values in screens.
 
 | Font | Role | Usage |
 |------|------|-------|
-| **DM Sans** | Display | Page titles, hero headings, stat numbers, tab bar labels |
-| **Inter** | UI | Section headings, card titles, body text, captions, buttons, labels |
+| **DM Serif Display** | Brand | Brand wordmark, page titles (28px+) |
+| **DM Sans** | Primary | Everything: headings, body, captions, buttons, labels, stats, tab bar |
 | **JetBrains Mono** | Monospace | Metric values where tabular alignment matters |
 
-No Space Grotesk, no system fonts. DM Sans and Inter are the only two text fonts.
+No Inter, no Space Grotesk, no system fonts. DM Serif Display is used sparingly for brand presence; DM Sans is the workhorse.
+
+**Why DM Sans only (consolidated 2026-04-05):** DM Sans and Inter are visually near-identical at UI sizes (14-16px). Two similar fonts add bundle size without visual distinction. DM Sans was kept because it's the brand font paired with DM Serif Display.
 
 **Type scale:**
 
 | Role | Font | Size | Weight | Line Height | Usage |
 |------|------|------|--------|-------------|-------|
-| Page Title | DM Sans | 28px | Bold (700) | 1.2 | Screen titles ("Goals", "Budget") |
-| Desktop Title | DM Sans | 32px | Bold (700) | 1.2 | Desktop page titles |
-| Section Heading | Inter | 18px | Semibold (600) | 1.3 | Section headers ("Today's Schedule") |
-| Card Title | Inter | 16px | Semibold (600) | 1.4 | Card headings, list item titles |
-| Body | Inter | 14px | Regular (400) | 1.5 | Descriptions, paragraph text |
-| Caption | Inter | 12px | Regular (400) | 1.4 | Timestamps, metadata, labels |
-| Overline | Inter | 11px | Medium (500) | 1.3 | Category labels, all-caps tags |
+| Page Title | DM Serif Display | 28px | Regular (400) | 1.2 | Screen titles ("Home", "History") |
+| Desktop Title | DM Serif Display | 32px | Regular (400) | 1.2 | Desktop page titles |
+| Section Heading | DM Sans | 18px | Semibold (600) | 1.3 | Section headers ("Today's Schedule") |
+| Card Title | DM Sans | 16px | Semibold (600) | 1.4 | Card headings, list item titles |
+| Body | DM Sans | 14px | Regular (400) | 1.5 | Descriptions, paragraph text |
+| Caption | DM Sans | 12px | Regular (400) | 1.4 | Timestamps, metadata, labels |
+| Overline | DM Sans | 11px | Medium (500) | 1.3 | Category labels, all-caps tags |
 | Tab Label | DM Sans | 10px | Medium/Semi (500–600) | 1.3 | Bottom nav tab labels |
 | Stat Number | DM Sans | 24–64px | Bold (700) | 0.85–1.0 | Hero card metrics, counters |
 
@@ -211,7 +213,7 @@ No icons prefixed to titles (no gear icon before "Settings", no heart before "We
 
 ### Bottom Navigation Bar (Mobile)
 
-**Standard configuration — 5 tabs:**
+**Full configuration — 5 tabs (future):**
 
 | Tab | Icon (lucide) | Screens |
 |-----|---------------|---------|
@@ -221,19 +223,35 @@ No icons prefixed to titles (no gear icon before "Settings", no heart before "We
 | WELLNESS | `heart` | Carer Wellness |
 | TEAM | `users` | Team, Shift Handover |
 
-**Tab bar structure:**
+**V1 Mobile App — 3 tabs + center FAB:**
+
+| Tab | Icon (lucide) | Screens |
+|-----|---------------|---------|
+| HOME | `house` | Home / Today |
+| _(center)_ | `plus` | **FAB** — opens Journal Chat as modal |
+| HISTORY | `book-open` | Entry History |
+| PROFILE | `user` | Profile / Settings stub |
+
+**V1 tab bar structure (flat, not pill):**
+- Container: `$bg-elevated`, border-top 1px `$border-subtle`, padding `[8, 12, 28, 12]`
+- Each tab: vertical layout, icon (18×18) + label (10px DM Sans Medium)
+- Active tab: icon/label `$accent`, fontWeight 600
+- Inactive tab: icon/label `$text-tertiary`, fontWeight 500
+- FAB: 56×56, `$accent` fill, cornerRadius 28, centered, floats above tab bar
+- FAB shadow: `$accent` at 25% opacity, blur 12, offset y:4
+
+**Pill tab bar (for full 5-tab version, future):**
 - Container: frame, padding `[12, 21, 21, 21]`, width `fill_container`
 - Pill: frame, cornerRadius 36, fill `$bg-elevated`, height 62, stroke 1px `$border-subtle`, padding 4
 - Each tab: frame, cornerRadius 26, layout vertical, gap 4, `fill_container` width/height, centered
 - Active tab: fill `$accent`, icon/label `$text-on-accent`, fontWeight 600
 - Inactive tab: no fill, icon/label `$text-tertiary`, fontWeight 500
-- Font: DM Sans, 10px, letterSpacing 0.5
-- Icons: lucide, 18×18
 
 **Rules:**
-- Same 5 tabs on every screen. No per-screen tab switching.
-- Only the active tab for the current section gets the accent fill.
+- Same tabs on every screen. No per-screen tab switching.
+- Only the active tab for the current section gets the accent color.
 - Crisis Mode is the only exception — no tab bar (full-screen crisis state).
+- Journal Chat is a full-screen modal (no tab bar visible).
 
 **Screens accessed via in-page navigation (not tabs):**
 Budget, Medications, Schedule, Notifications, Settings, Documents, Service Search, Incidents, Plan Review, Evidence Capture — accessed from Home cards, profile menus, or contextual navigation within tab sections.
@@ -531,3 +549,4 @@ Remaining items to resolve in future passes:
 |------|--------|
 | 2026-03-27 | Initial design system audit. Deleted 7 legacy screens, fixed 6 frame sizes (402×874 → 393×852), standardized 13 tab bars to 5-tab HOME/TIMELINE/GOALS/WELLNESS/TEAM, converted 112 Space Grotesk nodes to DM Sans/Inter, fixed 4 cornerRadius violations, stripped emoji from 27 text labels, replaced 17 standalone emoji with lucide icons, created 13 reusable components, wrote DESIGN.md. |
 | 2026-03-27 | Consistency pass. Fixed status bar padding on 2 screens, content padding on Onboarding, standardized 6 tab bar names to "Tab Bar Container", standardized 5 desktop sidebar names to "Sidebar", fixed desktop Plan Review content padding (32→40px), verified zero Space Grotesk remaining across all screens. Updated screen inventory to full 26 mobile + 12 desktop with node IDs. Added FAB pattern documentation. |
+| 2026-04-05 | Mobile app build prep. Consolidated fonts: removed Inter, DM Sans is now sole sans-serif (DM Sans and Inter were visually identical at UI sizes). Added DM Serif Display formally for brand/page titles. Updated type scale to use DM Sans for all non-title roles. Added V1 mobile app tab bar spec (3 tabs + center FAB, flat style instead of pill). Documented both V1 and future 5-tab configurations. |

@@ -47,6 +47,29 @@ Items deferred during eng review (2026-03-19) and ongoing sessions. Pick up when
 - **What:** The Edge Function sends a fire-and-forget admin notification to `hello@carerliaison.com` on each submission. Verify this works once domain is verified.
 - **Why:** Jonathan needs to see leads as they come in.
 
+## Mobile App (Pre-Launch)
+
+### 11. Deep Link Redirect for Auth Emails
+- **What:** Add `carer-liaison://` to Supabase allowed redirect URLs (Authentication → URL Configuration → Redirect URLs). Update email templates to use the deep link. Re-enable "Confirm email" once configured.
+- **Why:** Supabase email confirmation links currently point to `localhost`, which doesn't open on mobile. The app's URL scheme (`carer-liaison://`, defined in `mobile/app.json`) needs to be registered as an allowed redirect so confirmation links open the app directly.
+- **Status:** Email confirmation is disabled for dev. Needs to be re-enabled before public launch.
+- **Depends on:** App deployed to TestFlight/Play Store (deep links only work with installed apps, not Expo Go)
+- **Priority:** P1 — must be done before public launch
+
+## Mobile App (Phase 2)
+
+### 13. Voice Input (On-Device STT)
+- **What:** Add voice journaling via `expo-speech-recognition` (wraps iOS/Android native speech APIs).
+- **Why:** Key differentiator for carers who can't type — holding a child, driving, hands occupied. Audio stays on-device for privacy.
+- **Depends on:** Mobile app V1 (journal chat screen)
+- **Priority:** P1 — first Phase 2 feature
+
+### 14. Client-Side Crisis Keyword Filter
+- **What:** Scan journal text for self-harm/suicide keywords before AI call. Show crisis resources banner immediately (Lifeline 13 11 14, Beyond Blue 1300 22 4636). Belt-and-suspenders with the system prompt detection already in V1.
+- **Why:** V1 relies solely on the AI system prompt to detect distress. A client-side keyword scan catches cases the AI misses. False positives ("I could kill for a coffee") are acceptable — better to over-surface resources than under-surface.
+- **Depends on:** Mobile app V1 (crisis banner component)
+- **Priority:** P1 — safety improvement
+
 ## Features (Phase 2)
 
 ### 5. Dual-User Login (Participant Access)

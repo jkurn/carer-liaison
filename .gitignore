@@ -1,1 +1,13 @@
 .claude/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# video/ is a standalone Next.js project with node_modules — too large for git
+video/node_modules/
+video/.next/
+video/out/
+
+# Competitor reference screenshots — binary, not useful in git history
+reference/

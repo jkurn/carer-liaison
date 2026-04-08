@@ -98,6 +98,49 @@ These 5 items gate the validation plan in PD-4. Nothing else matters until these
 
 ---
 
+## Code Quality (see PROJECT-HEALTH.md Section 4 for full audit)
+
+### Q1. Extract useJournalChat Hook from chat.tsx
+- **What:** `chat.tsx` (557 lines) handles state management, AI communication, draft persistence, crisis detection, and all UI rendering. Extract a `useJournalChat()` custom hook that owns: send, finish, dismiss, draft save, and phase management. Move styles to `chat.styles.ts`.
+- **Why:** SRP violation — 4 reasons to change in one file. The core loop logic is untestable in isolation because it's tangled with UI rendering.
+- **Effort:** 2-3 hours
+- **Priority:** P1
+- **Ref:** PROJECT-HEALTH.md Section 4 (SRP)
+
+### Q2. Add Error Handling to database.ts
+- **What:** Every CRUD function in `database.ts` can throw on SQLite errors with no try-catch. Add try-catch with named errors (`EntryNotFoundError`, `DatabaseWriteError`) so callers can handle failures explicitly.
+- **Why:** Fail Fast principle. Currently errors propagate silently to random catch blocks or crash the app. For a health data app, data corruption failures must be loud and specific.
+- **Effort:** 1-2 hours
+- **Priority:** P1
+- **Ref:** PROJECT-HEALTH.md Section 4 (Fail Fast)
+
+### Q3. Consolidate Crisis Phone Numbers
+- **What:** Lifeline 13 11 14 and Beyond Blue 1300 22 4636 are hardcoded in 3 places: `CrisisBanner.tsx`, `journal-ai.ts` system prompt, and `assessment.html`. Create a single `CRISIS_RESOURCES` constant and reference it everywhere.
+- **Why:** DRY. Safety-critical data scattered across files = one will get missed when updating.
+- **Effort:** 30 min
+- **Priority:** P1
+- **Ref:** PROJECT-HEALTH.md Section 4 (DRY)
+
+### Q4. Deduplicate Login/Signup Auth Forms
+- **What:** `login.tsx` (175 lines) and `signup.tsx` (209 lines) share ~70% structure. Extract shared `AuthForm` component or shared auth styles.
+- **Why:** DRY — if auth form styling changes, both files need updating.
+- **Effort:** 1-2 hours
+- **Priority:** P2
+
+### Q5. Move Hardcoded Colours to Theme
+- **What:** `CrisisBanner.tsx` (#FECACA), `BodyStateSelector.tsx` (stateColors config), `[id].tsx` (#F8F6FF, #E0D8F0) have colours outside theme.ts.
+- **Why:** DRY — theme changes miss these files.
+- **Effort:** 30 min
+- **Priority:** P2
+
+### Q6. Remove Dead isStreaming Prop from ChatBubble
+- **What:** `ChatBubble.tsx` accepts `isStreaming` prop with cursor animation. SSE streaming was removed. Dead code.
+- **Why:** YAGNI — dead feature adds confusion.
+- **Effort:** 15 min
+- **Priority:** P2
+
+---
+
 ## Testing (see TESTING-STRATEGY.md for full plan)
 
 ### T1. Unit Tests: database.ts

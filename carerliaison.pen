@@ -176,15 +176,16 @@
                   "layout": "none",
                   "children": [
                     {
-                      "type": "text",
-                      "id": "p0TwM",
-                      "x": 8,
-                      "y": 8,
-                      "name": "emojiText",
-                      "content": "🔴",
-                      "fontFamily": "Inter",
-                      "fontSize": 18,
-                      "fontWeight": "normal"
+                      "type": "icon_font",
+                      "id": "WesXD",
+                      "x": 0,
+                      "y": 0,
+                      "name": "alertDot",
+                      "width": 12,
+                      "height": 12,
+                      "iconFontName": "circle",
+                      "iconFontFamily": "lucide",
+                      "fill": "$crisis-red"
                     }
                   ]
                 },
@@ -8948,7 +8949,7 @@
                           "id": "p4kqG",
                           "name": "tt5",
                           "fill": "$text-primary",
-                          "content": "Calm 😌",
+                          "content": "Calm",
                           "fontFamily": "Inter",
                           "fontSize": 15,
                           "fontWeight": "600"
@@ -9196,7 +9197,7 @@
         {
           "type": "frame",
           "id": "rUHpN",
-          "name": "Tab Bar",
+          "name": "Tab Bar Container",
           "width": "fill_container",
           "padding": [
             12,
@@ -10526,7 +10527,7 @@
         {
           "type": "frame",
           "id": "pzP96",
-          "name": "Tab Bar",
+          "name": "Tab Bar Container",
           "width": "fill_container",
           "padding": [
             12,
@@ -12753,7 +12754,7 @@
                   }
                 ]
               },
-              "cornerRadius": 14,
+              "cornerRadius": 16,
               "gap": 12,
               "padding": 16,
               "alignItems": "center",
@@ -13939,7 +13940,7 @@
         {
           "type": "frame",
           "id": "ix8hN",
-          "name": "Tab Bar",
+          "name": "Tab Bar Container",
           "width": "fill_container",
           "padding": [
             12,
@@ -16832,7 +16833,7 @@
           "padding": [
             0,
             20,
-            20,
+            24,
             20
           ],
           "children": [
@@ -17514,7 +17515,7 @@
                   }
                 ]
               },
-              "cornerRadius": 14,
+              "cornerRadius": 16,
               "gap": 8,
               "justifyContent": "center",
               "alignItems": "center",
@@ -17560,7 +17561,7 @@
       "type": "frame",
       "id": "g5lcj",
       "x": 1540,
-      "y": 4850,
+      "y": 5700,
       "name": "W2. Home Dashboard",
       "clip": true,
       "width": 1440,
@@ -18140,7 +18141,7 @@
                                       "id": "Ajpyp",
                                       "name": "moodValue",
                                       "fill": "$text-on-accent",
-                                      "content": "Calm 😊",
+                                      "content": "Calm",
                                       "fontFamily": "Inter",
                                       "fontSize": 14,
                                       "fontWeight": "600"
@@ -19142,7 +19143,7 @@
       "type": "frame",
       "id": "we2DN",
       "x": 0,
-      "y": 5850,
+      "y": 6700,
       "name": "W3. Participant Profile",
       "clip": true,
       "width": 1440,
@@ -20824,7 +20825,7 @@
       "type": "frame",
       "id": "rPU3b",
       "x": 1540,
-      "y": 5850,
+      "y": 6700,
       "name": "W4. Daily Log",
       "clip": true,
       "width": 1440,
@@ -22866,7 +22867,7 @@
       "type": "frame",
       "id": "uD6Bo",
       "x": 0,
-      "y": 7850,
+      "y": 8700,
       "name": "W7. Goals Tracker",
       "clip": true,
       "width": 1440,
@@ -24491,7 +24492,7 @@
       "type": "frame",
       "id": "5ANdq",
       "x": 1540,
-      "y": 7850,
+      "y": 8700,
       "name": "W8. Budget & Funding",
       "clip": true,
       "width": 1440,
@@ -24501,7 +24502,7 @@
         {
           "type": "frame",
           "id": "eXqo0",
-          "name": "sidebar1",
+          "name": "Sidebar",
           "width": 240,
           "height": "fill_container",
           "fill": "$bg-elevated",
@@ -26284,7 +26285,7 @@
       "type": "frame",
       "id": "wz6ep",
       "x": 0,
-      "y": 8850,
+      "y": 9700,
       "name": "W9. Carer Wellness",
       "clip": true,
       "width": 1440,
@@ -26294,7 +26295,7 @@
         {
           "type": "frame",
           "id": "nIVpx",
-          "name": "sidebar2",
+          "name": "Sidebar",
           "width": 240,
           "height": "fill_container",
           "fill": "$bg-elevated",
@@ -27826,7 +27827,7 @@
       "type": "frame",
       "id": "E7iTq",
       "x": 1540,
-      "y": 8850,
+      "y": 9700,
       "name": "W10. Team & Communication",
       "clip": true,
       "width": 1440,
@@ -27836,7 +27837,7 @@
         {
           "type": "frame",
           "id": "ukFe3",
-          "name": "sidebar1",
+          "name": "Sidebar",
           "width": 240,
           "height": "fill_container",
           "fill": "$bg-elevated",
@@ -29849,7 +29850,7 @@
       "type": "frame",
       "id": "Pvg6m",
       "x": 0,
-      "y": 9850,
+      "y": 10700,
       "name": "W11. Incidents & Alerts",
       "clip": true,
       "width": 1440,
@@ -29859,7 +29860,7 @@
         {
           "type": "frame",
           "id": "7Wmrn",
-          "name": "sidebar2",
+          "name": "Sidebar",
           "width": 240,
           "height": "fill_container",
           "fill": "$bg-elevated",
@@ -31446,7 +31447,7 @@
       "type": "frame",
       "id": "K8WRQ",
       "x": 1540,
-      "y": 9850,
+      "y": 10700,
       "name": "W12. Plan Review Prep",
       "clip": true,
       "width": 1440,
@@ -31456,7 +31457,7 @@
         {
           "type": "frame",
           "id": "8BZEb",
-          "name": "sidebar",
+          "name": "Sidebar",
           "width": 240,
           "height": "fill_container",
           "fill": "$bg-elevated",
@@ -31908,7 +31909,7 @@
           "height": "fill_container",
           "layout": "vertical",
           "gap": 20,
-          "padding": 32,
+          "padding": 40,
           "children": [
             {
               "type": "frame",
@@ -33277,7 +33278,7 @@
       "type": "frame",
       "id": "zCn3M",
       "x": 0,
-      "y": 4850,
+      "y": 5700,
       "name": "W1. Onboarding",
       "clip": true,
       "width": 1440,
@@ -33862,7 +33863,7 @@
                       }
                     ]
                   },
-                  "cornerRadius": 10,
+                  "cornerRadius": 8,
                   "gap": 8,
                   "padding": [
                     0,
@@ -34272,7 +34273,7 @@
                       "fill": "$text-primary",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "Hey Sarah 💛 How was your day with Maison today?",
+                      "content": "Hey Sarah, how was your day with Maison today?",
                       "lineHeight": 1.5,
                       "fontFamily": "Inter",
                       "fontSize": 15
@@ -34500,7 +34501,7 @@
                               "id": "9cjwA",
                               "name": "roseText",
                               "fill": "$rose",
-                              "content": "🌹 Rose",
+                              "content": "Rose",
                               "fontFamily": "Inter",
                               "fontSize": 12,
                               "fontWeight": "600"
@@ -34525,7 +34526,7 @@
                               "id": "8uPKP",
                               "name": "budText",
                               "fill": "$bud",
-                              "content": "🌱 Bud",
+                              "content": "Bud",
                               "fontFamily": "Inter",
                               "fontSize": 12,
                               "fontWeight": "600"
@@ -34550,7 +34551,7 @@
                               "id": "jrYvZ",
                               "name": "thornText",
                               "fill": "$thorn",
-                              "content": "🌵 Thorn",
+                              "content": "Thorn",
                               "fontFamily": "Inter",
                               "fontSize": 12,
                               "fontWeight": "600"
@@ -34649,7 +34650,7 @@
                           "id": "eMSe8",
                           "name": "tag1Text",
                           "fill": "$text-secondary",
-                          "content": "😊 Tired but proud",
+                          "content": "Tired but proud",
                           "fontFamily": "Inter",
                           "fontSize": 11,
                           "fontWeight": "500"
@@ -34677,7 +34678,7 @@
                           "id": "Pem8q",
                           "name": "tag2Text",
                           "fill": "$text-secondary",
-                          "content": "👤 Maison, OT",
+                          "content": "Maison, OT",
                           "fontFamily": "Inter",
                           "fontSize": 11,
                           "fontWeight": "500"
@@ -34714,7 +34715,7 @@
                           "id": "PdomY",
                           "name": "tag3Text",
                           "fill": "$text-secondary",
-                          "content": "⚡ Meltdown after lunch",
+                          "content": "Meltdown after lunch",
                           "fontFamily": "Inter",
                           "fontSize": 11,
                           "fontWeight": "500"
@@ -34742,7 +34743,7 @@
                           "id": "1wZbl",
                           "name": "tag4Text",
                           "fill": "$text-secondary",
-                          "content": "🏆 Stayed calm",
+                          "content": "Stayed calm",
                           "fontFamily": "Inter",
                           "fontSize": 11,
                           "fontWeight": "500"
@@ -34898,22 +34899,24 @@
               "alignItems": "center",
               "children": [
                 {
-                  "type": "text",
-                  "id": "ReDhp",
+                  "type": "icon_font",
+                  "id": "VQjyY",
                   "name": "signal",
-                  "content": "📶",
-                  "fontFamily": "Inter",
-                  "fontSize": 12,
-                  "fontWeight": "normal"
+                  "width": 16,
+                  "height": 16,
+                  "iconFontName": "signal",
+                  "iconFontFamily": "lucide",
+                  "fill": "#0F172A"
                 },
                 {
-                  "type": "text",
-                  "id": "Ts7ha",
+                  "type": "icon_font",
+                  "id": "5EeZy",
                   "name": "battery",
-                  "content": "🔋",
-                  "fontFamily": "Inter",
-                  "fontSize": 12,
-                  "fontWeight": "normal"
+                  "width": 16,
+                  "height": 16,
+                  "iconFontName": "battery-full",
+                  "iconFontFamily": "lucide",
+                  "fill": "#0F172A"
                 }
               ]
             }
@@ -34998,7 +35001,7 @@
                   "id": "FYZ32",
                   "name": "moodText",
                   "fill": "$text-secondary",
-                  "content": "😌 Tired but proud",
+                  "content": "Tired but proud",
                   "fontFamily": "Inter",
                   "fontSize": 13,
                   "fontWeight": "500"
@@ -35049,7 +35052,7 @@
                   "id": "inA1B",
                   "name": "roseTitle",
                   "fill": "$rose",
-                  "content": "🌹 Rose — What went well",
+                  "content": "Rose — What went well",
                   "fontFamily": "Inter",
                   "fontSize": 14,
                   "fontWeight": "600"
@@ -35094,7 +35097,7 @@
                   "id": "EIEBG",
                   "name": "budTitle",
                   "fill": "$bud",
-                  "content": "🌱 Bud — Looking forward to",
+                  "content": "Bud — Looking forward to",
                   "fontFamily": "Inter",
                   "fontSize": 14,
                   "fontWeight": "600"
@@ -35139,7 +35142,7 @@
                   "id": "il0qe",
                   "name": "thornTitle",
                   "fill": "$thorn",
-                  "content": "🌵 Thorn — What was challenging",
+                  "content": "Thorn — What was challenging",
                   "fontFamily": "Inter",
                   "fontSize": 14,
                   "fontWeight": "600"
@@ -35190,7 +35193,7 @@
                       "id": "LhvL3",
                       "name": "pLabel",
                       "fill": "$text-secondary",
-                      "content": "👤 People",
+                      "content": "People",
                       "fontFamily": "Inter",
                       "fontSize": 12,
                       "fontWeight": "600"
@@ -35303,7 +35306,7 @@
                       "id": "sEaxA",
                       "name": "wLabel",
                       "fill": "$text-secondary",
-                      "content": "💪 Wins",
+                      "content": "Wins",
                       "fontFamily": "Inter",
                       "fontSize": 12,
                       "fontWeight": "600"
@@ -35388,7 +35391,7 @@
                       "id": "BGlO8",
                       "name": "tLabel",
                       "fill": "$text-secondary",
-                      "content": "⚡ Triggers",
+                      "content": "Triggers",
                       "fontFamily": "Inter",
                       "fontSize": 12,
                       "fontWeight": "600"
@@ -35473,7 +35476,7 @@
                       "id": "f7130",
                       "name": "gLabel",
                       "fill": "$text-secondary",
-                      "content": "🎯 Goals",
+                      "content": "Goals",
                       "fontFamily": "Inter",
                       "fontSize": 12,
                       "fontWeight": "600"
@@ -35558,7 +35561,7 @@
                       "id": "Tn3ls",
                       "name": "sLabel",
                       "fill": "$text-secondary",
-                      "content": "🏥 Services",
+                      "content": "Services",
                       "fontFamily": "Inter",
                       "fontSize": 12,
                       "fontWeight": "600"
@@ -35969,7 +35972,7 @@
                   "id": "ZRvW9",
                   "name": "streakLabel",
                   "fill": "$text-primary",
-                  "content": "5 day streak 🔥",
+                  "content": "5 day streak",
                   "fontFamily": "Inter",
                   "fontSize": 13,
                   "fontWeight": "600"
@@ -36575,7 +36578,7 @@
                                   "id": "7rHkh",
                                   "name": "c3SevT",
                                   "fill": "$crisis-red",
-                                  "content": "⚠ Difficult",
+                                  "content": "Difficult",
                                   "fontFamily": "Inter",
                                   "fontSize": 10,
                                   "fontWeight": "600"
@@ -36911,7 +36914,7 @@
         {
           "type": "frame",
           "id": "EYiPu",
-          "name": "Bottom Tab Bar",
+          "name": "Tab Bar Container",
           "width": "fill_container",
           "padding": [
             12,
@@ -37422,7 +37425,7 @@
                           "id": "VKjhI",
                           "name": "streakText",
                           "fill": "$bud",
-                          "content": "5 day streak 🔥",
+                          "content": "5 day streak",
                           "fontFamily": "Inter",
                           "fontSize": 11,
                           "fontWeight": "600"
@@ -38174,14 +38177,14 @@
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "text",
-                              "id": "gtH4f",
-                              "name": "roseEmoji",
-                              "fill": "$text-primary",
-                              "content": "🌹",
-                              "fontFamily": "Inter",
-                              "fontSize": 13,
-                              "fontWeight": "normal"
+                              "type": "icon_font",
+                              "id": "vHg9e",
+                              "name": "roseIcon",
+                              "width": 16,
+                              "height": 16,
+                              "iconFontName": "flower-2",
+                              "iconFontFamily": "lucide",
+                              "fill": "$rose"
                             }
                           ]
                         },
@@ -38237,14 +38240,14 @@
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "text",
-                              "id": "Y4c8d",
-                              "name": "budEmoji",
-                              "fill": "$text-primary",
-                              "content": "🌱",
-                              "fontFamily": "Inter",
-                              "fontSize": 13,
-                              "fontWeight": "normal"
+                              "type": "icon_font",
+                              "id": "TvwPI",
+                              "name": "budIcon",
+                              "width": 16,
+                              "height": 16,
+                              "iconFontName": "sprout",
+                              "iconFontFamily": "lucide",
+                              "fill": "$bud"
                             }
                           ]
                         },
@@ -38300,14 +38303,14 @@
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "text",
-                              "id": "IOe21",
-                              "name": "thornEmoji",
-                              "fill": "$text-primary",
-                              "content": "🌵",
-                              "fontFamily": "Inter",
-                              "fontSize": 13,
-                              "fontWeight": "normal"
+                              "type": "icon_font",
+                              "id": "j2HmV",
+                              "name": "thornIcon",
+                              "width": 16,
+                              "height": 16,
+                              "iconFontName": "thorn",
+                              "iconFontFamily": "lucide",
+                              "fill": "$thorn"
                             }
                           ]
                         },
@@ -38442,7 +38445,7 @@
         {
           "type": "frame",
           "id": "gnr5g",
-          "name": "Tab Bar",
+          "name": "Tab Bar Container",
           "width": "fill_container",
           "padding": [
             12,
@@ -38653,7 +38656,7 @@
       "type": "frame",
       "id": "sZbKH",
       "x": 0,
-      "y": 6850,
+      "y": 7700,
       "name": "W5. Journal Dashboard",
       "clip": true,
       "width": 1440,
@@ -39578,7 +39581,7 @@
                                       "fill": "$text-primary",
                                       "textGrowth": "fixed-width",
                                       "width": "fill_container",
-                                      "content": "Hey Sarah 💛 How was your day with Maison today?",
+                                      "content": "Hey Sarah, how was your day with Maison today?",
                                       "lineHeight": 1.5,
                                       "fontFamily": "Inter",
                                       "fontSize": 14,
@@ -39829,14 +39832,14 @@
                                   "alignItems": "center",
                                   "children": [
                                     {
-                                      "type": "text",
-                                      "id": "6QwAW",
+                                      "type": "icon_font",
+                                      "id": "wmhg7",
                                       "name": "roseIcon",
-                                      "fill": "$rose",
-                                      "content": "🌹",
-                                      "fontFamily": "Inter",
-                                      "fontSize": 14,
-                                      "fontWeight": "normal"
+                                      "width": 16,
+                                      "height": 16,
+                                      "iconFontName": "flower-2",
+                                      "iconFontFamily": "lucide",
+                                      "fill": "$rose"
                                     },
                                     {
                                       "type": "text",
@@ -39870,14 +39873,14 @@
                                   "alignItems": "center",
                                   "children": [
                                     {
-                                      "type": "text",
-                                      "id": "7dLyI",
+                                      "type": "icon_font",
+                                      "id": "4JT2F",
                                       "name": "budIcon",
-                                      "fill": "$bud",
-                                      "content": "🌱",
-                                      "fontFamily": "Inter",
-                                      "fontSize": 14,
-                                      "fontWeight": "normal"
+                                      "width": 16,
+                                      "height": 16,
+                                      "iconFontName": "sprout",
+                                      "iconFontFamily": "lucide",
+                                      "fill": "$bud"
                                     },
                                     {
                                       "type": "text",
@@ -39911,14 +39914,14 @@
                                   "alignItems": "center",
                                   "children": [
                                     {
-                                      "type": "text",
-                                      "id": "0OJj5",
+                                      "type": "icon_font",
+                                      "id": "RyZnK",
                                       "name": "thornIcon",
-                                      "fill": "$thorn",
-                                      "content": "🌿",
-                                      "fontFamily": "Inter",
-                                      "fontSize": 14,
-                                      "fontWeight": "normal"
+                                      "width": 16,
+                                      "height": 16,
+                                      "iconFontName": "leaf",
+                                      "iconFontFamily": "lucide",
+                                      "fill": "$thorn"
                                     },
                                     {
                                       "type": "text",
@@ -41003,7 +41006,7 @@
       "type": "frame",
       "id": "0xrNT",
       "x": 1540,
-      "y": 6850,
+      "y": 7700,
       "name": "W6. Journal Entry Detail",
       "clip": true,
       "width": 1440,
@@ -41720,7 +41723,7 @@
                                   "fill": "$text-primary",
                                   "textGrowth": "fixed-width",
                                   "width": "fill_container",
-                                  "content": "Hey Sarah! How was your day with Maison? I'd love to hear about it 💛",
+                                  "content": "Hey Sarah! How was your day with Maison? I'd love to hear about it.",
                                   "fontFamily": "Inter",
                                   "fontSize": 13,
                                   "fontWeight": "normal"
@@ -41849,7 +41852,7 @@
                                   "fill": "$text-primary",
                                   "textGrowth": "fixed-width",
                                   "width": "fill_container",
-                                  "content": "That's amazing progress with the utensils! 🎉 And a visual schedule — what a smart strategy. Was there anything tough today?",
+                                  "content": "That's amazing progress with the utensils! And a visual schedule — that's a great strategy.",
                                   "fontFamily": "Inter",
                                   "fontSize": 13,
                                   "fontWeight": "normal"
@@ -42078,14 +42081,14 @@
                           "padding": 16,
                           "children": [
                             {
-                              "type": "text",
-                              "id": "2PTdl",
-                              "name": "roseEmoji",
-                              "fill": "$text-primary",
-                              "content": "🌹",
-                              "fontFamily": "Inter",
-                              "fontSize": 18,
-                              "fontWeight": "normal"
+                              "type": "icon_font",
+                              "id": "LkxQd",
+                              "name": "roseIcon",
+                              "width": 16,
+                              "height": 16,
+                              "iconFontName": "flower-2",
+                              "iconFontFamily": "lucide",
+                              "fill": "$rose"
                             },
                             {
                               "type": "frame",
@@ -42139,14 +42142,14 @@
                           "padding": 16,
                           "children": [
                             {
-                              "type": "text",
-                              "id": "oO3S1",
-                              "name": "budEmoji",
-                              "fill": "$text-primary",
-                              "content": "🌱",
-                              "fontFamily": "Inter",
-                              "fontSize": 18,
-                              "fontWeight": "normal"
+                              "type": "icon_font",
+                              "id": "iiE8i",
+                              "name": "budIcon",
+                              "width": 16,
+                              "height": 16,
+                              "iconFontName": "sprout",
+                              "iconFontFamily": "lucide",
+                              "fill": "$bud"
                             },
                             {
                               "type": "frame",
@@ -42200,14 +42203,14 @@
                           "padding": 16,
                           "children": [
                             {
-                              "type": "text",
-                              "id": "qHmJy",
-                              "name": "thornEmoji",
-                              "fill": "$text-primary",
-                              "content": "🌵",
-                              "fontFamily": "Inter",
-                              "fontSize": 18,
-                              "fontWeight": "normal"
+                              "type": "icon_font",
+                              "id": "mMXMR",
+                              "name": "thornIcon",
+                              "width": 16,
+                              "height": 16,
+                              "iconFontName": "leaf",
+                              "iconFontFamily": "lucide",
+                              "fill": "$thorn"
                             },
                             {
                               "type": "frame",
@@ -42373,14 +42376,14 @@
                               "alignItems": "center",
                               "children": [
                                 {
-                                  "type": "text",
-                                  "id": "zcy6z",
-                                  "name": "peopleEmoji",
-                                  "fill": "$text-primary",
-                                  "content": "👤",
-                                  "fontFamily": "Inter",
-                                  "fontSize": 14,
-                                  "fontWeight": "normal"
+                                  "type": "icon_font",
+                                  "id": "F5Izd",
+                                  "name": "peopleIcon",
+                                  "width": 16,
+                                  "height": 16,
+                                  "iconFontName": "user",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$text-secondary"
                                 },
                                 {
                                   "type": "text",
@@ -42515,14 +42518,14 @@
                               "alignItems": "center",
                               "children": [
                                 {
-                                  "type": "text",
-                                  "id": "qFJtL",
-                                  "name": "winsEmoji",
-                                  "fill": "$text-primary",
-                                  "content": "💪",
-                                  "fontFamily": "Inter",
-                                  "fontSize": 14,
-                                  "fontWeight": "normal"
+                                  "type": "icon_font",
+                                  "id": "tID5o",
+                                  "name": "winsIcon",
+                                  "width": 16,
+                                  "height": 16,
+                                  "iconFontName": "trophy",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$text-secondary"
                                 },
                                 {
                                   "type": "text",
@@ -42630,14 +42633,14 @@
                               "alignItems": "center",
                               "children": [
                                 {
-                                  "type": "text",
-                                  "id": "fCqz7",
-                                  "name": "trigEmoji",
-                                  "fill": "$text-primary",
-                                  "content": "⚡",
-                                  "fontFamily": "Inter",
-                                  "fontSize": 14,
-                                  "fontWeight": "normal"
+                                  "type": "icon_font",
+                                  "id": "8t8UR",
+                                  "name": "triggersIcon",
+                                  "width": 16,
+                                  "height": 16,
+                                  "iconFontName": "zap",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$text-secondary"
                                 },
                                 {
                                   "type": "text",
@@ -42745,14 +42748,14 @@
                               "alignItems": "center",
                               "children": [
                                 {
-                                  "type": "text",
-                                  "id": "gItHu",
-                                  "name": "goalsEmoji",
-                                  "fill": "$text-primary",
-                                  "content": "🎯",
-                                  "fontFamily": "Inter",
-                                  "fontSize": 14,
-                                  "fontWeight": "normal"
+                                  "type": "icon_font",
+                                  "id": "do03l",
+                                  "name": "goalsIcon",
+                                  "width": 16,
+                                  "height": 16,
+                                  "iconFontName": "target",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$text-secondary"
                                 },
                                 {
                                   "type": "text",
@@ -42885,14 +42888,14 @@
                               "alignItems": "center",
                               "children": [
                                 {
-                                  "type": "text",
-                                  "id": "PVmkG",
-                                  "name": "svcEmoji",
-                                  "fill": "$text-primary",
-                                  "content": "🏥",
-                                  "fontFamily": "Inter",
-                                  "fontSize": 14,
-                                  "fontWeight": "normal"
+                                  "type": "icon_font",
+                                  "id": "jN5na",
+                                  "name": "servicesIcon",
+                                  "width": 16,
+                                  "height": 16,
+                                  "iconFontName": "building-2",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$text-secondary"
                                 },
                                 {
                                   "type": "text",
@@ -43101,7 +43104,7 @@
                                   }
                                 ]
                               },
-                              "cornerRadius": 4
+                              "cornerRadius": 8
                             },
                             {
                               "type": "text",
@@ -43217,7 +43220,7 @@
                                   "id": "o84xk",
                                   "name": "sim1Mood",
                                   "fill": "$text-secondary",
-                                  "content": "😊 Hopeful",
+                                  "content": "Hopeful",
                                   "fontFamily": "Inter",
                                   "fontSize": 11,
                                   "fontWeight": "normal"
@@ -43317,7 +43320,7 @@
                                   "id": "yrI8r",
                                   "name": "sim2Mood",
                                   "fill": "$text-secondary",
-                                  "content": "😤 Frustrated",
+                                  "content": "Frustrated",
                                   "fontFamily": "Inter",
                                   "fontSize": 11,
                                   "fontWeight": "normal"
@@ -43406,7 +43409,7 @@
       "type": "text",
       "id": "vvl7A",
       "x": 0,
-      "y": 4790,
+      "y": 5640,
       "name": "webLabel",
       "fill": "$text-primary",
       "content": "WEB — User Journey",
@@ -43415,22 +43418,10 @@
       "fontWeight": "700"
     },
     {
-      "type": "text",
-      "id": "ddBKq",
-      "x": 0,
-      "y": 11894,
-      "name": "label1",
-      "fill": "$text-primary",
-      "content": "MOBILE — Missing Screens",
-      "fontFamily": "DM Sans",
-      "fontSize": 32,
-      "fontWeight": "700"
-    },
-    {
       "type": "frame",
       "id": "GW8gn",
-      "x": 0,
-      "y": 11964,
+      "x": 453,
+      "y": 3788,
       "name": "21. Settings & Account",
       "clip": true,
       "width": 393,
@@ -44821,8 +44812,8 @@
     {
       "type": "frame",
       "id": "OZeSd",
-      "x": 453,
-      "y": 11964,
+      "x": 906,
+      "y": 3788,
       "name": "22. Notifications Center",
       "clip": true,
       "width": 393,
@@ -44837,8 +44828,6 @@
           "width": "fill_container",
           "height": 62,
           "padding": [
-            21,
-            24,
             0,
             24
           ],
@@ -45750,8 +45739,8 @@
     {
       "type": "frame",
       "id": "ABbwF",
-      "x": 906,
-      "y": 11964,
+      "x": 1359,
+      "y": 3788,
       "name": "23. Shift Handover",
       "clip": true,
       "width": 393,
@@ -46496,8 +46485,8 @@
     {
       "type": "frame",
       "id": "zJsPh",
-      "x": 1359,
-      "y": 11964,
+      "x": 1812,
+      "y": 3788,
       "name": "24. Medication Tracker",
       "clip": true,
       "width": 393,
@@ -46512,8 +46501,6 @@
           "width": "fill_container",
           "height": 62,
           "padding": [
-            21,
-            24,
             0,
             24
           ],
@@ -47740,7 +47727,7 @@
         {
           "type": "frame",
           "id": "0ifQq",
-          "name": "Tab Bar",
+          "name": "Tab Bar Container",
           "width": "fill_container",
           "layout": "vertical",
           "padding": [
@@ -47961,8 +47948,8 @@
     {
       "type": "frame",
       "id": "QaY9R",
-      "x": 1812,
-      "y": 11964,
+      "x": 0,
+      "y": 4720,
       "name": "25. Appointment Schedule",
       "clip": true,
       "width": 393,
@@ -49338,8 +49325,8 @@
     {
       "type": "frame",
       "id": "2BMbh",
-      "x": 2265,
-      "y": 11964,
+      "x": 453,
+      "y": 4720,
       "name": "26. Evidence & Photo Capture",
       "clip": true,
       "width": 393,
@@ -50289,8 +50276,8 @@
     {
       "type": "frame",
       "id": "oAi5g",
-      "x": 0,
-      "y": 0,
+      "x": 2600,
+      "y": 60,
       "name": "Design System — Components",
       "width": 2400,
       "height": 2000,

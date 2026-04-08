@@ -383,6 +383,12 @@
     /* FOCUS */
     :focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
   </style>
+
+  <!-- PostHog analytics -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+" (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId setPersonPropertiesForFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])})}(document,window.posthog||[]);
+    posthog.init('REPLACE_WITH_YOUR_POSTHOG_KEY', { api_host: 'https://us.i.posthog.com' });
+  </script>
 </head>
 <body>
 
@@ -639,6 +645,9 @@ const optionTexts = [
   ['Yes, a strong team','A little bit of help','Very little support','Completely alone']
 ];
 
+// PostHog: assessment started
+posthog.capture('assessment_started');
+
 // Wire up option buttons
 document.querySelectorAll('.opt').forEach(btn => {
   btn.addEventListener('click', function() {
@@ -646,6 +655,7 @@ document.querySelectorAll('.opt').forEach(btn => {
     const i = parseInt(this.dataset.i);
     const score = parseInt(this.dataset.score);
     answers[q] = { i, score, text: optionTexts[q][i] };
+    posthog.capture('assessment_question_answered', { question: q + 1, answer_score: score });
 
     // Update visual selection
     document.querySelectorAll(`[data-q="${q}"]`).forEach(b => b.classList.remove('selected'));
@@ -873,6 +883,7 @@ function renderBreakdown(rawScores) {
 function showGate() {
   const score = calcScore();
   const tier = getTier(score);
+  posthog.capture('assessment_gate_reached', { score, tier: tier.name });
   const scores = answers.map(a => a ? a.score : 0);
 
   // Tier badge
@@ -932,6 +943,7 @@ document.getElementById('gateForm').addEventListener('submit', async function(e)
 
   btn.classList.add('loading');
   btn.disabled = true;
+  posthog.capture('assessment_submitted', { score, tier: tier.name });
 
   const payload = {
     email,
@@ -953,6 +965,7 @@ document.getElementById('gateForm').addEventListener('submit', async function(e)
     });
 
     if (res.ok) {
+      posthog.capture('assessment_completed', { score, tier: tier.name });
       transition('sGate', 'sSuccess');
     } else {
       const data = await res.json().catch(() => ({}));

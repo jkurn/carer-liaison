@@ -9,5 +9,4 @@ video/node_modules/
 video/.next/
 video/out/
 
-# Competitor reference screenshots — binary, not useful in git history
-reference/
+# reference/ — now tracked via Git LFS

@@ -19,7 +19,9 @@
       "./__tests__/setup.ts"
     ],
     "testPathIgnorePatterns": [
-      "__tests__/setup.ts"
+      "__tests__/setup.ts",
+      "__tests__/factories.ts",
+      "__tests__/helpers.ts"
     ],
     "moduleFileExtensions": [
       "ts",

@@ -63,7 +63,8 @@ function generateId(): string {
   });
 }
 
-function parseJSON<T>(json: string | null): T | null {
+/** @internal Exported for testing. */
+export function parseJSON<T>(json: string | null): T | null {
   if (!json) return null;
   try {
     return JSON.parse(json) as T;
@@ -72,7 +73,8 @@ function parseJSON<T>(json: string | null): T | null {
   }
 }
 
-function rowToEntry(row: typeof schema.entries.$inferSelect): JournalEntry {
+/** @internal Exported for testing. */
+export function rowToEntry(row: typeof schema.entries.$inferSelect): JournalEntry {
   return {
     id: row.id,
     userId: row.userId,

@@ -18,11 +18,14 @@ describe('BODY_STATES', () => {
     ]);
   });
 
-  it('each state has key, emoji, and label', () => {
+  it('each state has key, emoji, and label as non-empty strings', () => {
     for (const state of BODY_STATES) {
-      expect(state.key).toBeTruthy();
-      expect(state.emoji).toBeTruthy();
-      expect(state.label).toBeTruthy();
+      expect(typeof state.key).toBe('string');
+      expect(state.key.length).toBeGreaterThan(0);
+      expect(typeof state.emoji).toBe('string');
+      expect(state.emoji.length).toBeGreaterThan(0);
+      expect(typeof state.label).toBe('string');
+      expect(state.label.length).toBeGreaterThan(0);
     }
   });
 });

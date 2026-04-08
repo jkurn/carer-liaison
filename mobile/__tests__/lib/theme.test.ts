@@ -4,33 +4,34 @@
  * Ensures tokens match DESIGN.md and won't silently break styling.
  */
 import { colors, fonts, type, spacing, radius } from '../../lib/theme';
+import { expectHexColor } from '../helpers';
 
 describe('color tokens', () => {
   it('accent matches DESIGN.md (#0891B2)', () => {
     expect(colors.accent).toBe('#0891B2');
   });
 
-  it('has all surface colors', () => {
-    expect(colors.bgPage).toBeDefined();
-    expect(colors.bgCard).toBeDefined();
-    expect(colors.bgElevated).toBeDefined();
+  it('all surface colors are valid hex codes', () => {
+    expectHexColor(colors.bgPage);
+    expectHexColor(colors.bgCard);
+    expectHexColor(colors.bgElevated);
   });
 
-  it('has all 5 body state colors', () => {
-    expect(colors.bodyGreat).toBeDefined();
-    expect(colors.bodyCalm).toBeDefined();
-    expect(colors.bodyNeutral).toBeDefined();
-    expect(colors.bodyResistant).toBeDefined();
-    expect(colors.bodyDifficult).toBeDefined();
+  it('all 5 body state colors are valid hex codes', () => {
+    expectHexColor(colors.bodyGreat);
+    expectHexColor(colors.bodyCalm);
+    expectHexColor(colors.bodyNeutral);
+    expectHexColor(colors.bodyResistant);
+    expectHexColor(colors.bodyDifficult);
   });
 
-  it('has all RBT semantic colors', () => {
-    expect(colors.rose).toBeDefined();
-    expect(colors.roseLight).toBeDefined();
-    expect(colors.bud).toBeDefined();
-    expect(colors.budLight).toBeDefined();
-    expect(colors.thorn).toBeDefined();
-    expect(colors.thornLight).toBeDefined();
+  it('all RBT semantic colors are valid hex codes', () => {
+    expectHexColor(colors.rose);
+    expectHexColor(colors.roseLight);
+    expectHexColor(colors.bud);
+    expectHexColor(colors.budLight);
+    expectHexColor(colors.thorn);
+    expectHexColor(colors.thornLight);
   });
 
   it('crisis red is actual red', () => {

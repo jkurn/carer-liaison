@@ -1,0 +1,28 @@
+{
+  "date": "2026-04-07",
+  "window": "7d",
+  "metrics": {
+    "commits": 1,
+    "contributors": 1,
+    "prs_merged": 0,
+    "insertions": 3435,
+    "deletions": 16,
+    "net_loc": 3419,
+    "test_loc": 0,
+    "test_ratio": 0,
+    "active_days": 1,
+    "sessions": 1,
+    "ai_assisted_pct": 100
+  },
+  "authors": {
+    "Jonathan Kurniawan": {
+      "commits": 1,
+      "insertions": 3435,
+      "deletions": 16,
+      "top_area": "mobile/"
+    }
+  },
+  "version_range": "d99e01f..7a25e8f",
+  "streak_days": 1,
+  "tweetable": "Shipped a full Expo mobile app in one session — 3,400 LOC across 40 files. Journal chat, offline-first sync, AI streaming, auth. From plan to running on a phone in a single day."
+}

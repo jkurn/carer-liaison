@@ -64,18 +64,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: spacing.xs,
     paddingVertical: spacing.sm,
-    paddingHorizontal: spacing.xs,
+    paddingHorizontal: 2,
     borderRadius: radius.sm,
     borderWidth: 1.5,
     borderColor: colors.borderSubtle,
     backgroundColor: colors.bgElevated,
+    minWidth: 0,
   },
   emoji: {
     fontSize: 22,
   },
   label: {
     fontFamily: 'DMSans-Medium',
-    fontSize: 11,
+    fontSize: 10,
     color: colors.textSecondary,
+    textAlign: 'center',
   },
 });

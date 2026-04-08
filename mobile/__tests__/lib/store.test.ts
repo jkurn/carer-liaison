@@ -1,14 +1,8 @@
 /**
  * Tests for Zustand store — UI state management.
- *
- * Critical flows:
- * - Journal conversation state (add message, streaming, reset)
- * - Auth state transitions
- * - Body state selection
  */
 import { useStore } from '../../lib/store';
 
-// Reset store between tests
 beforeEach(() => {
   useStore.setState({
     session: null,
@@ -16,8 +10,6 @@ beforeEach(() => {
     authLoading: true,
     activeEntryId: null,
     conversation: [],
-    isStreaming: false,
-    streamingText: '',
     bodyState: null,
     isOnline: true,
   });
@@ -47,7 +39,6 @@ describe('auth state', () => {
   it('clears user when session is null', () => {
     useStore.getState().setSession({ user: { id: '1' } } as any);
     useStore.getState().setSession(null);
-
     expect(useStore.getState().user).toBeNull();
   });
 });
@@ -83,22 +74,10 @@ describe('journal conversation state', () => {
     expect(useStore.getState().conversation[1].role).toBe('assistant');
   });
 
-  it('manages streaming text', () => {
-    useStore.getState().setStreaming(true);
-    useStore.getState().setStreamingText('');
-    useStore.getState().appendStreamingText('Hello');
-    useStore.getState().appendStreamingText(' world');
-
-    expect(useStore.getState().isStreaming).toBe(true);
-    expect(useStore.getState().streamingText).toBe('Hello world');
-  });
-
   it('resets journal state completely', () => {
     useStore.getState().setActiveEntry('entry-1', [
       { role: 'user', content: 'Hi', timestamp: '2026-04-07T00:00:00Z' },
     ]);
-    useStore.getState().setStreaming(true);
-    useStore.getState().setStreamingText('partial');
     useStore.getState().setBodyState('calm');
 
     useStore.getState().resetJournal();
@@ -106,8 +85,6 @@ describe('journal conversation state', () => {
 
     expect(state.activeEntryId).toBeNull();
     expect(state.conversation).toHaveLength(0);
-    expect(state.isStreaming).toBe(false);
-    expect(state.streamingText).toBe('');
     expect(state.bodyState).toBeNull();
   });
 });

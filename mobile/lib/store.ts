@@ -3,12 +3,11 @@
  *
  * What lives HERE (in-memory, temporary):
  * - Current conversation draft
- * - Loading/error states
- * - Network connectivity
  * - Auth session (mirrored from SecureStore)
+ * - Network connectivity
  *
  * What lives in SQLite (persisted, source of truth):
- * - Saved entries, body states, user profile
+ * - Saved entries, body states
  */
 import { create } from 'zustand';
 import type { ChatMessage, BodyState } from './types';
@@ -25,14 +24,9 @@ interface AppState {
   // Journal chat (current draft in progress)
   activeEntryId: string | null;
   conversation: ChatMessage[];
-  isStreaming: boolean;
-  streamingText: string;
   bodyState: BodyState | null;
   setActiveEntry: (id: string | null, conversation?: ChatMessage[]) => void;
   addMessage: (message: ChatMessage) => void;
-  setStreaming: (streaming: boolean) => void;
-  setStreamingText: (text: string) => void;
-  appendStreamingText: (chunk: string) => void;
   setBodyState: (state: BodyState | null) => void;
   resetJournal: () => void;
 
@@ -53,24 +47,16 @@ export const useStore = create<AppState>((set) => ({
   // Journal
   activeEntryId: null,
   conversation: [],
-  isStreaming: false,
-  streamingText: '',
   bodyState: null,
   setActiveEntry: (id, conversation = []) =>
     set({ activeEntryId: id, conversation }),
   addMessage: (message) =>
     set((s) => ({ conversation: [...s.conversation, message] })),
-  setStreaming: (isStreaming) => set({ isStreaming }),
-  setStreamingText: (streamingText) => set({ streamingText }),
-  appendStreamingText: (chunk) =>
-    set((s) => ({ streamingText: s.streamingText + chunk })),
   setBodyState: (bodyState) => set({ bodyState }),
   resetJournal: () =>
     set({
       activeEntryId: null,
       conversation: [],
-      isStreaming: false,
-      streamingText: '',
       bodyState: null,
     }),
 

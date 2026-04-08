@@ -1,0 +1,28 @@
+{
+  "date": "2026-04-08",
+  "window": "7d",
+  "metrics": {
+    "commits": 5,
+    "contributors": 1,
+    "prs_merged": 0,
+    "insertions": 4649,
+    "deletions": 202,
+    "net_loc": 4447,
+    "test_loc": 424,
+    "test_ratio": 9.1,
+    "active_days": 2,
+    "sessions": 3,
+    "ai_assisted_pct": 100
+  },
+  "authors": {
+    "Jonathan Kurniawan": {
+      "commits": 5,
+      "insertions": 4649,
+      "deletions": 202,
+      "top_area": "mobile/"
+    }
+  },
+  "version_range": "be9af12..f8bd7d4",
+  "streak_days": 2,
+  "tweetable": "Built the app, broke it on the phone, wrote product strategy from scratch, stress-tested it against lived experience, rewrote the AI approach. The messy middle of turning a prototype into a product."
+}

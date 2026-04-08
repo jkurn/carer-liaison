@@ -73,21 +73,7 @@ export default function EntryDetailScreen() {
           </View>
         )}
 
-        {/* Conversation */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Conversation</Text>
-          {entry.conversation
-            .filter((m) => m.role !== 'system')
-            .map((msg, i) => (
-              <ChatBubble
-                key={i}
-                role={msg.role as 'user' | 'assistant'}
-                content={msg.content}
-              />
-            ))}
-        </View>
-
-        {/* RBT Cards */}
+        {/* RBT Cards — the emotional payoff, shown first */}
         {(entry.rose || entry.bud || entry.thorn) && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Reflection</Text>
@@ -133,18 +119,19 @@ export default function EntryDetailScreen() {
           </View>
         )}
 
-        {/* Actions */}
-        {entry.insights?.actions && entry.insights.actions.length > 0 && (
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Next steps</Text>
-            {entry.insights.actions.map((a, i) => (
-              <View key={i} style={styles.actionItem}>
-                <View style={styles.actionCheck} />
-                <Text style={styles.actionText}>{a.text}</Text>
-              </View>
+        {/* Conversation — record of what was said, below the reflection */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Conversation</Text>
+          {entry.conversation
+            .filter((m) => m.role !== 'system')
+            .map((msg, i) => (
+              <ChatBubble
+                key={i}
+                role={msg.role as 'user' | 'assistant'}
+                content={msg.content}
+              />
             ))}
-          </View>
-        )}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -211,20 +198,5 @@ const styles = StyleSheet.create({
     padding: spacing.base,
   },
   journeyText: { ...typeStyles.body, color: colors.accentEnd, fontStyle: 'italic', lineHeight: 22 },
-  actionItem: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: spacing.sm,
-    paddingVertical: spacing.xs,
-  },
-  actionCheck: {
-    width: 18,
-    height: 18,
-    borderRadius: 4,
-    borderWidth: 1.5,
-    borderColor: colors.accent,
-    marginTop: 2,
-  },
-  actionText: { ...typeStyles.body, flex: 1, color: colors.textSecondary },
   emptyText: { ...typeStyles.body, color: colors.textTertiary, textAlign: 'center', marginTop: 100 },
 });

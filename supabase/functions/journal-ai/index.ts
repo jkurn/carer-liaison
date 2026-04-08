@@ -13,7 +13,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const GROQ_MODEL = "llama-3.3-70b-versatile";
-const OPENROUTER_MODEL = "qwen/qwen-2.5-72b-instruct:free";
+const OPENROUTER_MODEL = "google/gemma-4-26b-a4b-it:free";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",

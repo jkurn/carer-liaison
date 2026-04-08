@@ -17,6 +17,57 @@ jest.mock('expo-sqlite', () => ({
   }),
 }));
 
+// Mock lucide-react-native icons (SVG components not available in test env)
+jest.mock('lucide-react-native', () => {
+  const React = require('react');
+  const { View } = require('react-native');
+  const createMockIcon = (name: string) => {
+    const MockIcon = (props: Record<string, unknown>) =>
+      React.createElement(View, { testID: `icon-${name}`, ...props });
+    MockIcon.displayName = name;
+    return MockIcon;
+  };
+  return {
+    AlertTriangle: createMockIcon('AlertTriangle'),
+    ArrowLeft: createMockIcon('ArrowLeft'),
+    ChevronRight: createMockIcon('ChevronRight'),
+    Phone: createMockIcon('Phone'),
+    Send: createMockIcon('Send'),
+    Sparkles: createMockIcon('Sparkles'),
+    X: createMockIcon('X'),
+    Home: createMockIcon('Home'),
+    Clock: createMockIcon('Clock'),
+    User: createMockIcon('User'),
+    Plus: createMockIcon('Plus'),
+  };
+});
+
+// Mock react-native-safe-area-context
+jest.mock('react-native-safe-area-context', () => {
+  const React = require('react');
+  const { View } = require('react-native');
+  return {
+    SafeAreaView: ({ children, ...props }: { children: React.ReactNode }) =>
+      React.createElement(View, props, children),
+    SafeAreaProvider: ({ children }: { children: React.ReactNode }) => children,
+    useSafeAreaInsets: () => ({ top: 0, bottom: 0, left: 0, right: 0 }),
+  };
+});
+
+// Mock expo-router
+jest.mock('expo-router', () => ({
+  useRouter: jest.fn().mockReturnValue({
+    push: jest.fn(),
+    replace: jest.fn(),
+    back: jest.fn(),
+  }),
+  useLocalSearchParams: jest.fn().mockReturnValue({}),
+  Link: ({ children }: { children: React.ReactNode }) => children,
+  Tabs: ({ children }: { children: React.ReactNode }) => children,
+  Stack: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+
 // Mock the supabase client to prevent auto-refresh timer in tests
 jest.mock('../lib/supabase', () => ({
   supabase: {
